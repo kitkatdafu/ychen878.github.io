@@ -9,7 +9,7 @@
 <meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <title> Notes on The Rust Programming Language | XIAOYIJ</title>
-<link rel=canonical href=https://ychen878.github.io/posts/trpl/>
+<link rel=canonical href=https://www.mrr1vfe.io/posts/trpl/>
 <meta name=description content="This is my website">
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="all,follow">
@@ -21,7 +21,7 @@
   Declare constants with const keyword, and the type must be annotated.
   Constant can only be set to constant expression, not value computed during runtime.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://ychen878.github.io/posts/trpl/"><meta property="article:section" content="posts">
+<meta property="og:url" content="https://www.mrr1vfe.io/posts/trpl/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2020-04-30T00:00:00+00:00">
 <meta property="article:modified_time" content="2020-04-30T00:00:00+00:00">
 <meta name=twitter:card content="summary">
@@ -31,9 +31,9 @@
   Differences Between Variables and Constants    mut cannot be used with constants.
   Declare constants with const keyword, and the type must be annotated.
   Constant can only be set to constant expression, not value computed during runtime.">
-<link rel=stylesheet href=https://ychen878.github.io/css/styles.4c2b9aa1d874d6766f554b2d404e8fd62ab4761f51ee9b3f358d12e81e7fa43a1b4378db995bc1926bbe5ed98c060be5e7bd4f2470504cf94f22b4b3a74e62b6.css integrity="sha512-TCuaodh01nZvVUstQE6P1iq0dh9R7ps/NY0S6B5/pDobQ3jbmVvBkmu+XtmMBgvl571PJHBQTPlPIrSzp05itg=="><!--[if lt IE 9]><script src=https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script>
+<link rel=stylesheet href=https://www.mrr1vfe.io/css/styles.4c2b9aa1d874d6766f554b2d404e8fd62ab4761f51ee9b3f358d12e81e7fa43a1b4378db995bc1926bbe5ed98c060be5e7bd4f2470504cf94f22b4b3a74e62b6.css integrity="sha512-TCuaodh01nZvVUstQE6P1iq0dh9R7ps/NY0S6B5/pDobQ3jbmVvBkmu+XtmMBgvl571PJHBQTPlPIrSzp05itg=="><!--[if lt IE 9]><script src=https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script>
 <script src=https://oss.maxcdn.com/respond/1.4.2/respond.min.js></script><![endif]-->
-<link rel=icon type=image/png href=https://ychen878.github.io/images/favicon.ico>
+<link rel=icon type=image/png href=https://www.mrr1vfe.io/images/favicon.ico>
 </head>
 <body class="max-width mx-auto px3 ltr">
 <div class="content index py4">
@@ -46,21 +46,21 @@
 <ul>
 <li><a href=/>Home</a></li>
 <li><a href=/posts>Writings</a></li>
-<li><a href=https://archive.casouri.cat>BHL0388</a></li>
 <li><a href=/tags>Tags</a></li>
 <li><a href=/about>About</a></li>
+<li><a href=https://archive.casouri.cat>BHL0388</a></li>
 </ul>
 </span>
 <br>
 <span id=actions>
 <ul>
 <li>
-<a class=icon href=https://ychen878.github.io/posts/cs538/ aria-label=Previous>
+<a class=icon href=https://www.mrr1vfe.io/posts/cs538/ aria-label=Previous>
 <i class="fas fa-chevron-left" aria-hidden=true onmouseover="$('#i-prev').toggle()" onmouseout="$('#i-prev').toggle()"></i>
 </a>
 </li>
 <li>
-<a class=icon href=https://ychen878.github.io/posts/cs537/ aria-label=Next>
+<a class=icon href=https://www.mrr1vfe.io/posts/cs537/ aria-label=Next>
 <i class="fas fa-chevron-right" aria-hidden=true onmouseover="$('#i-next').toggle()" onmouseout="$('#i-next').toggle()"></i>
 </a>
 </li>
@@ -84,47 +84,47 @@
 <div id=share style=display:none>
 <ul>
 <li>
-<a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f" aria-label=Facebook>
+<a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f" aria-label=Facebook>
 <i class="fab fa-facebook" aria-hidden=true></i>
 </a>
 </li>
 <li>
-<a class=icon href="https://twitter.com/share?url=https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f&text=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=Twitter>
+<a class=icon href="https://twitter.com/share?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&text=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=Twitter>
 <i class="fab fa-twitter" aria-hidden=true></i>
 </a>
 </li>
 <li>
-<a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f&title=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=Linkedin>
+<a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&title=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=Linkedin>
 <i class="fab fa-linkedin" aria-hidden=true></i>
 </a>
 </li>
 <li>
-<a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f&is_video=false&description=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=Pinterest>
+<a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&is_video=false&description=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=Pinterest>
 <i class="fab fa-pinterest" aria-hidden=true></i>
 </a>
 </li>
 <li>
-<a class=icon href="mailto:?subject=Notes%20on%20The%20Rust%20Programming%20Language&body=Check out this article: https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f" aria-label=Email>
+<a class=icon href="mailto:?subject=Notes%20on%20The%20Rust%20Programming%20Language&body=Check out this article: https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f" aria-label=Email>
 <i class="fas fa-envelope" aria-hidden=true></i>
 </a>
 </li>
 <li>
-<a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f&title=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=Pocket>
+<a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&title=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=Pocket>
 <i class="fab fa-get-pocket" aria-hidden=true></i>
 </a>
 </li>
 <li>
-<a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f&title=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=reddit>
+<a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&title=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=reddit>
 <i class="fab fa-reddit" aria-hidden=true></i>
 </a>
 </li>
 <li>
-<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f&name=Notes%20on%20The%20Rust%20Programming%20Language&description=Common%20Programming%20Concepts%201%20%20Variables%20and%20Mutability%20%20%20%20The%20default%20integer%20type%20for%20a%20positive%20number%20that%20is%20not%20so%20large%20is%20i32.%0a%20%20Variables%20by%20default%20are%20immutable.%0a%20%20Differences%20Between%20Variables%20and%20Constants%20%20%20%20mut%20cannot%20be%20used%20with%20constants.%0a%20%20Declare%20constants%20with%20const%20keyword%2c%20and%20the%20type%20must%20be%20annotated.%0a%20%20Constant%20can%20only%20be%20set%20to%20constant%20expression%2c%20not%20value%20computed%20during%20runtime." aria-label=Tumblr>
+<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&name=Notes%20on%20The%20Rust%20Programming%20Language&description=Common%20Programming%20Concepts%201%20%20Variables%20and%20Mutability%20%20%20%20The%20default%20integer%20type%20for%20a%20positive%20number%20that%20is%20not%20so%20large%20is%20i32.%0a%20%20Variables%20by%20default%20are%20immutable.%0a%20%20Differences%20Between%20Variables%20and%20Constants%20%20%20%20mut%20cannot%20be%20used%20with%20constants.%0a%20%20Declare%20constants%20with%20const%20keyword%2c%20and%20the%20type%20must%20be%20annotated.%0a%20%20Constant%20can%20only%20be%20set%20to%20constant%20expression%2c%20not%20value%20computed%20during%20runtime." aria-label=Tumblr>
 <i class="fab fa-tumblr" aria-hidden=true></i>
 </a>
 </li>
 <li>
-<a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f&t=Notes%20on%20The%20Rust%20Programming%20Language" aria-label="Hacker News">
+<a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&t=Notes%20on%20The%20Rust%20Programming%20Language" aria-label="Hacker News">
 <i class="fab fa-hacker-news" aria-hidden=true></i>
 </a>
 </li>
@@ -1225,9 +1225,9 @@ Validating References with Lifetimes
 <ul>
 <li><a href=/>Home</a></li>
 <li><a href=/posts>Writings</a></li>
-<li><a href=https://archive.casouri.cat>BHL0388</a></li>
 <li><a href=/tags>Tags</a></li>
 <li><a href=/about>About</a></li>
+<li><a href=https://archive.casouri.cat>BHL0388</a></li>
 </ul>
 </div>
 <div id=toc-footer style=display:none>
@@ -1357,47 +1357,47 @@ Validating References with Lifetimes
 <div id=share-footer style=display:none>
 <ul>
 <li>
-<a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f" aria-label=Facebook>
+<a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f" aria-label=Facebook>
 <i class="fab fa-facebook fa-lg" aria-hidden=true></i>
 </a>
 </li>
 <li>
-<a class=icon href="https://twitter.com/share?url=https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f&text=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=Twitter>
+<a class=icon href="https://twitter.com/share?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&text=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=Twitter>
 <i class="fab fa-twitter fa-lg" aria-hidden=true></i>
 </a>
 </li>
 <li>
-<a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f&title=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=Linkedin>
+<a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&title=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=Linkedin>
 <i class="fab fa-linkedin fa-lg" aria-hidden=true></i>
 </a>
 </li>
 <li>
-<a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f&is_video=false&description=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=Pinterest>
+<a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&is_video=false&description=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=Pinterest>
 <i class="fab fa-pinterest fa-lg" aria-hidden=true></i>
 </a>
 </li>
 <li>
-<a class=icon href="mailto:?subject=Notes%20on%20The%20Rust%20Programming%20Language&body=Check out this article: https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f" aria-label=Email>
+<a class=icon href="mailto:?subject=Notes%20on%20The%20Rust%20Programming%20Language&body=Check out this article: https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f" aria-label=Email>
 <i class="fas fa-envelope fa-lg" aria-hidden=true></i>
 </a>
 </li>
 <li>
-<a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f&title=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=Pocket>
+<a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&title=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=Pocket>
 <i class="fab fa-get-pocket fa-lg" aria-hidden=true></i>
 </a>
 </li>
 <li>
-<a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f&title=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=reddit>
+<a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&title=Notes%20on%20The%20Rust%20Programming%20Language" aria-label=reddit>
 <i class="fab fa-reddit fa-lg" aria-hidden=true></i>
 </a>
 </li>
 <li>
-<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f&name=Notes%20on%20The%20Rust%20Programming%20Language&description=Common%20Programming%20Concepts%201%20%20Variables%20and%20Mutability%20%20%20%20The%20default%20integer%20type%20for%20a%20positive%20number%20that%20is%20not%20so%20large%20is%20i32.%0a%20%20Variables%20by%20default%20are%20immutable.%0a%20%20Differences%20Between%20Variables%20and%20Constants%20%20%20%20mut%20cannot%20be%20used%20with%20constants.%0a%20%20Declare%20constants%20with%20const%20keyword%2c%20and%20the%20type%20must%20be%20annotated.%0a%20%20Constant%20can%20only%20be%20set%20to%20constant%20expression%2c%20not%20value%20computed%20during%20runtime." aria-label=Tumblr>
+<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&name=Notes%20on%20The%20Rust%20Programming%20Language&description=Common%20Programming%20Concepts%201%20%20Variables%20and%20Mutability%20%20%20%20The%20default%20integer%20type%20for%20a%20positive%20number%20that%20is%20not%20so%20large%20is%20i32.%0a%20%20Variables%20by%20default%20are%20immutable.%0a%20%20Differences%20Between%20Variables%20and%20Constants%20%20%20%20mut%20cannot%20be%20used%20with%20constants.%0a%20%20Declare%20constants%20with%20const%20keyword%2c%20and%20the%20type%20must%20be%20annotated.%0a%20%20Constant%20can%20only%20be%20set%20to%20constant%20expression%2c%20not%20value%20computed%20during%20runtime." aria-label=Tumblr>
 <i class="fab fa-tumblr fa-lg" aria-hidden=true></i>
 </a>
 </li>
 <li>
-<a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fychen878.github.io%2fposts%2ftrpl%2f&t=Notes%20on%20The%20Rust%20Programming%20Language" aria-label="Hacker News">
+<a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&t=Notes%20on%20The%20Rust%20Programming%20Language" aria-label="Hacker News">
 <i class="fab fa-hacker-news fa-lg" aria-hidden=true></i>
 </a>
 </li>
@@ -1424,9 +1424,9 @@ Copyright &copy; 2021 Yi Chen
 <ul>
 <li><a href=/>Home</a></li>
 <li><a href=/posts>Writings</a></li>
-<li><a href=https://archive.casouri.cat>BHL0388</a></li>
 <li><a href=/tags>Tags</a></li>
 <li><a href=/about>About</a></li>
+<li><a href=https://archive.casouri.cat>BHL0388</a></li>
 </ul>
 </nav>
 </div>
