@@ -1,0 +1,19 @@
+{
+   "list": [
+      {
+         "name":"'B' Compiler",
+         "url":"https://github.com/ychen878/b-compiler",
+         "desc":"A compiler (written in Haskell) for b, a tiny subset of the C++ language, defined in CS536."
+      },
+      {
+         "name":"Handwritten Math Symbol Detector",
+         "url":"https://github.com/ychen878/cs539-math-symbol",
+         "desc":"A handwritten math symbol and formula detector trained, as a course final project for CS539."
+      },
+      {
+         "name":"Coding 4 Good, Event page",
+         "url":"https://coding4good-site.herokuapp.com/event",
+         "desc":"A horizontal cover-flow."
+      }
+   ]
+}
