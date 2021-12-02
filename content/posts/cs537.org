@@ -1,0 +1,56 @@
+#+TITLE: Introduction to Operating Systems
+#+AUTHOR: Yi Chen
+#+EMAIL: reid@cs.wisc.edu
+#+DATE: <2020-04-30 Thu>
+#+tags[]: OS
+#+keywords[]: CS OS
+#+category: notes
+* Introduction [fn:1]
+** OS abstraction
+   Provide standard library to access resource that is valuable such as CPU, memory, and monitor. OS providing abstraction has a variety of advantages. It allows applications to reuse common facilities; it makes different devices look the same; and it provides higher-level or more useful functionality. The challenges of OS providing abstraction are identifying the correct abstraction and deciding how much of hardware should be exposed.
+[fn:1] The whole note is based on and is coming from the course materials of [[http://pages.cs.wisc.edu/~shivaram/cs537-sp20/][COMP SCI 537]] by Professor Shivaram Venkataraman.
+** Resource management
+   Resource management means finding the best way that shares resources well. Sharing can be found in the case of multiple users of the system, multiple applications run by same user and multiple devices for same functionality. The reason why OS should provide resource management is that the resource management protects application at a common layer and also provides efficient and fair access to resources such as cost, time, and energy. Finding the correct mechanisms and policies of resource management is a challenge.
+** Goals of OS
+   - Ease of use :: Abstractions are easy to use.
+   - Performance :: getting best performance from one hardware
+   - Isolation and Reliability :: security
+** Three conceptual pieces of OS
+   - Virtualization :: Makes each application believe it has each resource to itself.
+   - Concurrency :: Events occur simultaneously and may interact with one another. Need to hide concurrency from independent processes and manage concurrency with interacting processes. Should provide abstractions like locks, semaphores, condition variables etc.
+   - Persistence :: Lifetime of data is longer than lifetime of any one process. Machine may lose power or crash unexpectedly. There are issues with the persistence. For example, high-level abstractions such as files, directories and links are needed to be implemented. Moreover, unexpected failure, such as power failure, program/OS crashes, needed to be handled correctly. Lastly, the performance can also be an issue since disks are very slow, comparing to CPU.
+* Project 3
+  [[http://pages.cs.wisc.edu/~shivaram/cs537-sp20/p3.html][Project 3: xv6 Memory sub-system]]
+  Adding read only access to some pages in xv6, to protect the process from accidentally modifying it. The system, xv6, is not able to protect the memory. A process is able to alter its whole virtual memory, including code, while running. 
+** int mprotect(void *addr, int len)
+   It protest =len= number of pages starting at address =addr= by changing the protection bit to =read-only=. Trying to write to a =read-only= process will cause a trap, and the process will be killed.
+   - addr :: starting address of pages needing protection. 
+   - len :: number of pages needing protection
+   - return :: return 0 when success, If =addr= is not page aligned or does not belong to current address space, or =len= \le 0, return 0 and does nothing.
+** int munprotect(void *addr, int len)
+   Reverse =mprotect=. This system call changes pages back to =readable and writable=.
+** fork() inheritance x
+   Process created by =fork()= should inherit pages it forked from, including the protection bit.
+** CR3 register and lcr()
+   Overwrote =CR3= to let hardware know page-table entry has been changed.
+** Page allocation
+   In =kalloc.c=, =kinit()= shows how the free-list used by xv6 is initialized. When a page is needed, =kinit()= returns the first page in the free-list. It can also return =NULL= when not page can be allocated. Modifying this function =kinit()= allows different approaches of page allocation.
+   - Alternate allocation :: Keep a free frame between every allocated frame in the system.
+   - Random allocation :: Allocate the =i-th= frame, where =i= is a random number.
+** int dump_allocated(int *frames, int numframes)
+   - frames :: a pointer to an allocated array of integers.
+   - numframes :: size of =frames=
+   - return :: 0 success, -1 error
+* Project 3 Discussion
+  - allocuvm() :: In kernel/vm.c. It allocates user virtual memory and return the new size.
+  - mappages() :: In kernel/vm.c. It creates PTE that maps virtual memory to physical memory.
+  - walkpgdir() :: In kernel/vm.c. Walking down the page table. Go to the appropriate page table directory and index into the inner page table entry.
+  - mmu.h :: Line 93 - 99 shows the page table layout. 32-bit address. 4KB pages, 2-level page table.
+  - marco PDX(la) :: la stands for logical address. Can extras page directory index given a logical address.
+* I/O Devices
+** System Architecture
+* Project 4a Discussion
+** Programming Model
+   - Data Type :: Each record is (key, value)
+   - Map function :: (K_{in}, V_{in}) \rightarrow list(K_{inter}, V_{inter})
+   - Reduce function :: (K_{inter}, list(V_{inter})) \rightarrow list(K_{out}, V_{out})

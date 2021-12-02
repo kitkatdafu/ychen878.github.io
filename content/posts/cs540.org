@@ -1,0 +1,303 @@
+#+TITLE: Introduction to Artifical Intelligence
+#+AUTHOR: Yi Chen
+#+EMAIL: reid@cs.wisc.edu
+#+DATE: <2020-04-30 Thu>
+#+tags[]: ML
+#+keywords[]: ML, AI, Python
+#+category[]: notes
+* Basic Python, comparing to Java [fn:1]
+  - Why are we using python? :: It has a large amount of better machine learning libraries.
+  - Useful link :: [[https://repl.it/languages/python3][Online Python compiler]]
+[fn:1] The whole note is based on and is coming from the course materials of [[http://pages.cs.wisc.edu/~jerryzhu/cs540.html][COMP SCI 540]] by Professor Jerry Zhu and Hobbes LeGault.
+** Key differences from Java		   
+   - Do not bother with a class unless you actually want to make an object.
+   - Functions do not need return types (or parameter types).
+   - Indentations matter, not ={}=; begin functions with =:= and end by unindenting.
+   - Strings can be inside =""= or =''=; comments begin with =#=, and no semicolons are needed.
+*** Control flow
+    Conditions and loops have the same indentation rules as functions.
+    For loops are actually for each loops. Therefore some iterables objects are needed to iterate over (list, string, etc).
+*** Operators
+    - There is not =++= operator. Use =+=1= instead.
+    - =is= operator is Java's ====.
+    - ==== operator is Java's =.equals()=.
+*** Reading files
+    #+BEGIN_SRC python
+    with open('[filename]', '[mode]') as f: # closes automatically when you unindent.
+        for line in f:
+	    print(line)
+    #+END_SRC
+*** import
+    =import= is used to get access to any codes beyond the basic.
+    #+BEGIN_SRC python
+     import math # to get access to some math functions
+     #+END_SRC
+* Think AI at different levels
+  1. AI in movies
+  2. AI in reality
+  3. AI in "theory"
+  4. AI implementation
+** Big idea in AI: State space 
+   The search problem is to find a solution path from a state in $I$ to a state in $G$. Optionally minimize the cost of the solution
+   - State space :: $S$, all valid configurations
+   - Initial states :: $I \in S$
+   - Goal states :: $G \in S$
+   - Successor function :: succs($s$) $\in S$, states reachable in one step from $s$.
+   - Cost :: cost(path) = $\sum_{(\textrm{edge} \in \textrm{path})} \textrm{Cost(edge)}$
+* Hill Climbing
+** Optimization problems
+   - Each state $s$ has a =score= $f(s)$ that we can compute.
+   - The goal is to find the state with the =highest score=, or a reasonably high score.
+   - Do not care about path.
+*** Why?
+    - Hard to know the goal state
+    - Hard to know successor state
+    - Hard to enumerate
+** Idea
+   Starting from some state $s$, and move to a neighbor $t$ with better score. Repeat this process.
+   - Neighbor :: You have to define it, also known as =move set=. It is similar to successor function.
+   - Neighborhood :: A set of neighbors of a given state. A neighborhood bust be small enough for efficiency.
+** Neighbor picking
+   If no neighbor is better than the current state, i.e. $f(s)$ is worse, then do nothing. Otherwise pick the best one (greedy).
+** Algorithm
+   #+begin_src python
+     s = initial_state() # pick the initial state s
+     while True:
+	 neighbors = get_neighbors(s) # generate all neighbors
+	 best = best_neighbor(neighbor) # pick the neighbor with the best f score
+	 if f_score(best) <= f_score(s):
+	     return s
+	 s = best
+   #+end_src
+   This is very greedy. Easily stuck.
+** Local optima in hill climbing
+   We want global optimum. There can many local optima, which we do not want.\\
+   $s$ is local minimum if $\forall t \in \textrm{succ}(s), f(s) < f(t)$. \\
+   $s$ is global minimum if $\forall t \in S, f(s) < f(t)$
+** Repeated hill climbing with random restarts
+   When stuck, pick a random new start. run basic hill climbing from there. Repeat this process for $k$ times. Then return the best of the $k$ local optima. This can be very effective, and should be tried whenever hill climbing is used.
+* Basic Probability and Statistics
+  Great idea: Uncertainty modeled by probability.
+  Probability is the language of uncertainty. It is the central pillar of modern day artificial intelligence.
+** Sample Space
+   - A space of events that we assign probabilities to.
+   - Events can be binary, multi-values, or continuous.
+   - Events are mutually exclusive.
+   - Examples
+     - Coin flip: {head, tail}
+     - Die roll: {1, 2, 3, 4, 5, 6}
+     - English words: a dictionary
+** Random Variable
+   A variable, $x$, whose domain is the sample space, and whose value is somewhat uncertain.
+   Examples:
+   - x = coin flip outcome
+   - x = first word in tomorrow's headline news
+   - x = tomorrow's temperature
+** Axioms of probability
+   - $P(A) \in [0, 1]$
+   - $P(\textrm{True}) = 1$, $P(\textrm{False}) = 0$.
+   - $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+** Coin
+   A coin has 2 sides, head and tail. The probability of getting a head, when flipping a coin, is denoted as $P(H)$, and the probability of getting a tail is $P(T)$. And $P(H) + P(T) = 1$ since getting a head and getting a tail are the only two options, assuming the coin cannot stand. If the a coin is fair, then $P(H) = P(T) = \frac{1}{2}$. Otherwise, $P(H) = p \in [0, 1], P(T) = 1 - p$.
+** Law of large numbers
+   Flip a coin N times, let the outcomes be $x_1 \in \{H, T\}, x_2 \in \{H, T\}, ..., x_N \in \{H, T\}$. There is a indicator function called $\mathbb{I}$:
+   \begin{align*}
+   \mathbb{I}[Z] =
+         \begin{cases}
+	       1,& \text{if } Z \text{ is True}\\
+    	       0,& \text{if } Z \text{ is False}
+	 \end{cases}
+	 \text{ Where } Z \text{ is a boolean function}
+   \end{align*}
+   Then,
+   \begin{align*}
+   \lim_{N \rightarrow \infty} \frac{\sum^N_{i=1}\mathbb{I}[x_i = H]}{N} = p
+   \end{align*}
+   $p$ is the frequency interpretation of probability.
+** Die
+   Given a fair die that has 6 faces, the probability of getting each face after a roll is the same, $\frac{1}{6}$. However, if a die is loaded, or unfair, then the probability of getting each face, $P_1 ... P_6$ is $\sum^6_{j=1}P_j = 1, P_j \in [0, 1], j=1...6$. The outcome of a die rolling is $x \in \{1, 2, 3, 4, 5, 6\}$. Then,
+   \begin{align*}
+   \lim_{N \rightarrow \infty} \frac{\sum^N_{i=1}\mathbb{I}[x_i = j]}{N} = p_j \text{, for } j = 1 ... 6
+   \end{align*}
+** Joint probability
+   $P(A, B)$ \rightarrow Both events $A$ and $B$ are true.
+** Negation (complement)
+   $\bar{A} = \neg A = A^c$ \\
+   $P(\bar{A}) = 1 - P(A)$
+** Marginalization
+   $P(A, B) + P(\bar{A}, B) = P(B)$
+** Conditional Probability
+   $P(A|B)$ is the probability of A given B (is observed).
+   \begin{align*}
+   P(A | B) = \frac{P(A, B)}{P(B)} = \frac{P(A, B)}{P(A, B) + P(\bar{A} + B)}
+   \end{align*}
+*** Bayes Rule
+    \begin{align*}
+    P(F|H) &= \frac{P(F, H)}{P(H)} \\
+    P(H|F) &= \frac{P(H, F)}{P(F)} = \frac{P(F, H)}{P(F)}\\
+    P(F, H) &= P(H|F)P(F) \\
+    \frac{P(F, H)}{P(H)} &= \frac{P(H|F)P(F)}{P(H)} \\
+    P(F|H) &= \frac{P(F, H)}{P(H)} = \frac{P(H|F)P(F)}{P(H)}
+    \end{align*}
+** Independence
+   Two events A, B are =independent= if:
+   - P(A, B) = P(A) * P(B)
+   - P(A | B) = P(A)
+   - P(B | A) = P(B)
+** Conditional Independence
+   Random variables can be dependent, but conditionally independent.
+   In general, A, B are conditionally independent given C if
+   - P(A|B, C) = P(A | C) or
+   - P(B|A, C) = P(B | C) or
+   - P(A, B|C) = P(A|C) * P(B|C)
+* Tuning set
+  To minimize over-fitting, we can use a _tuning set_.
+  1. We get a labeled data set $(x_1, y_1) \cdot \cdot \cdot (x_N, y_N)$.
+  2. Randomly split the data set into 3 sets.
+     1. First, shuffle those N data items
+     2. Take some fraction (e.g. 60%) of the shuffled item, and call them =training set=
+     3. Take another fraction (e.g. 20%), and call them =tuning set=
+     4. The remaining items are =test set=
+     5. You want the =training set= to be large enough, but you also want the =tuning set= and the =test set= to be not so small
+  3. Train $\hat{\beta}^{(0)}, \hat{\beta}^{(1)}, \cdot\cdot\cdot \hat{\beta}^{(n-1)}$ on =training set=. 
+  4.  Measure their =tuning set= MSE.
+     1. Pick the best model, using
+	\begin{align*}
+	\hat{j}^* = argmin_{j = 0...n-1} [\textrm{tuning-set MSE}(\hat{\beta}^{(j)})]
+	\end{align*}
+	where
+	\begin{align*}
+	\textrm{tuning-set MSE}(\hat{\beta}^{(j)}) = \textrm{average of }L(x, y, \hat{\beta}^{(j)})\textrm{on tuning points } (x, y)
+        \end{align*}
+     2. We pick model $\hat{\beta}^{\hat{j}^*}$
+  5. We report =test-set= MSE with model $\hat{\beta}^{\hat{j}^*}$.
+* K nearest neighbor classifier
+** Recall
+   1. Unsupervised Learning, Data: $x_1 \cdot\cdot\cdot x_n$
+      1. Dimension Reduction
+      2. Clustering
+	 1. HAC
+	 2. kmeans
+   2. Supervised, Training Data $(x_i, y_i), i \in [1, n]$
+      1. Regression, $y \in R$
+      2. Classification, $y$ discrete finite "classes"
+	 1. Naive Bayes
+	 2. KNN
+** KNN algorithm
+   - input 1 :: $(x_1, y_1) \cdot\cdot\cdot (x_n, y_n),\textrm{ where } x_i \in R^d, y_i \textrm{ is a class label}$
+   - input 2 :: A distance function, $dist(x, x')$. e.g. Euclidean distance $|x - x'|$
+   1. Given a new item $x \in R^d$, find the K nearest neighbors of x in the training set under $dist()$.
+   2. Predict a label $\hat{y}$ as the majority label of the K nearest neighbor. (Break tie arbitrarily).
+** Classification vs. Clustering
+    #+CAPTION: Classification, decision boundary depends on the training data
+    #+NAME:   fig:classification
+    [[./classification.jpeg]]
+    #+CAPTION: Clustering, label is not provided
+    #+NAME:   fig:clustering
+    [[./clustering.jpeg]]
+** Terminology
+   - 0-1 Loss function :: $L(x, y, \hat{y}) = \begin{cases}  1, & \text{if}\ y \neq \hat{y} \text{ mis-prediction} \\ 0, & \text{if } y = \hat{y}\end{cases} = \textrm{Indicator}[y_i \neq \hat{y_i}]$, where $\hat{y}$ is the predicted label
+   - Training Set Error (rate) ::
+     Training set = $(x_1, y_1) \cdot\cdot\cdot (x_n, y_n)$
+     \begin{align*}
+     \frac{1}{n}\sum^{n}_{i=1}L(x_i, y_i, \hat{y_i}) = \frac{1}{n}\sum^{n}_{i=1}\textrm{Indicator}[y_i \neq \hat{y_i}]
+     \end{align*}
+   - Test Set Error ::
+     Test set = $(x_{n + 1}, y_{n + 1}) \cdot\cdot\cdot (x_{n + m}, y_{n +  m})$
+     \begin{align*}
+     \frac{1}{n}\sum^{n + m}_{i=n+1}\textrm{Indicator}[y_i \neq \hat{y_i}]
+     \end{align*}
+   - Why do we need a test set? ::
+     Machine learning assumes an underlying joint distribution
+     \begin{align*}
+     p(x, y) \text{ , unknown but fixed}
+     \end{align*}
+     Training set is an independent and identically-distributed (i.i.d) sample from $p$.
+     \begin{align*}
+     (x_i, y_i) \textrm{~} p(x, y) \\
+     (x_n, y_n) \textrm{~} p(x, y)
+     \end{align*}
+     Test set is also an iid sample from $p$. Test set and Training set have the same underlying distribution. The future item that will be applied to the model also has the same underlying distribution.
+   - True error ::
+     \begin{align*}
+     \textrm{EXP}_{(x, y) \textrm{~} p(x, y)} \textrm{Indicator}[y_i \neq \hat{y_i}] \text{ not computable}
+     \end{align*}
+     Since we cannot compute this true error, we use test set to evaluate the model.
+   - Accuracy ::
+     \begin{align*}
+     \textrm{Accuracy} = 1 - \textrm{error}
+     \end{align*}
+** How to choose k?
+*** Method 1: Use a tuning set
+    1. randomly shuffle
+    2. split into training, tuning, and test set.
+    3. $\hat{k} = \textrm{argmin}_{k = 1, 2, ...}$ [tuning error with respect to kNN predictions (from training set)]
+    4. report $\hat{k}NN$ prediction (from training set)'s test error.
+    If you use training error on kNN, then the training error is going to favor $k = 1$.
+*** Method 2: Cross Validation
+    - Start with full dataset, $(x_1, y_1) \cdot\cdot\cdot (x_N, y_N) \textrm{~} p$, split to two sets. The second set is test set
+    - K-fold Cross Validation
+      - Evenly split the first set into $k$ folds, $\textrm{fold }1 \cdot\cdot\cdot \textrm{fold }k$
+      - For $i = 1 \cdot\cdot\cdot k$	
+	- use fold $i$ as the tuning set
+	- and folds $1\cdot\cdot\cdot k$ excepts $i$ as the training set
+	- get tuning error $E_i$
+      - Pick the model parameter ($k$ in $kNN$)
+	\begin{align*}
+	\hat{k}_{kNN} = \textrm{argmin}_{k_{kNN}}\frac{1}{k_{\textrm{fold}}}\sum^{k_{fold}}_{i = 1}E_i
+	\end{align*}
+      - In practice, $k \in [5, 10]$
+      - Retrain model on all folds as training set
+      - Report test set error
+      - Train $k+1$ times total
+* Logistic Regression
+** Recall
+   1. Supervised, Training Data $(x_i, y_i), i \in [1, n]$
+      1. Regression, $y \in R$
+	 1. Linear Regression
+	    - $y = x^Tw + \epsilon, y \in R, x \in R^(d+1), x = \begin{bmatrix} 1\\.\\.\\.\\x_d\end{bmatrix}, w = \begin{bmatrix} w_0\\.\\.\\.\\w_d\end{bmatrix}$
+      2. Classification, $y$ discrete finite "classes"
+	 1. Naive Bayes
+	 2. KNN
+	 3. Logistic Regression
+** Logistic Regression
+   - Input (Training data) ::
+     $(x_1, y_1) \cdot\cdot\cdot (x_n, y_n)$ where 
+     \begin{align*}
+     &x_i = \begin{bmatrix} 1\\x_{i1}\\.\\.\\.\\x_{id}\end{bmatrix} \in R^{d+1} \\
+     &y_i \in \{-1, 1\} \text{ binary classification or}, \\
+     &y_i \in \{1, 2, 3, \cdot\cdot\cdot, k\} k\text{-classes}
+     \end{align*}
+   Let's start with binary classification
+** Binary Classification
+   Try to estimate conditional probability
+   \begin{align*}
+   P_w(y=1|x) = \frac{1}{1 + exp(-x^Tw)} \text{ Sigmoid function}
+   \end{align*}
+   if $x^T = 0, \frac{1}{1 + e^{-0}} = \frac{1}{1 + 1} = \frac{1}{2}$ \\
+   if $x^T = \infty, \frac{1}{1 + e^{-\infty}} = \frac{1}{1 + 0} = 1$ \\
+   if $x^T = -\infty, \frac{1}{1 + e^{\infty}} = \frac{1}{1 + \infty} = 0$ \\
+   $x^Tw$ represents how strongly is the label going to be 1.
+   \begin{align*}
+   P_w(y=1|x) = 1 - P_w(y=1, x)
+   \end{align*}
+   For $y \in \{-1, 1\}$, binary classification $P_w(y|x) = \frac{1}{1+e^{-yx^Tw}}$
+** Training
+   - Training :: Estimate $s \in R^{d+1}$ from training data (more later)
+   - Prediction :: Given a new item $x \in R^{d+1}$, predict its label
+   \begin{align*}  
+   \hat{y} = \textrm{argmax}_yP_w(y|x)
+   \end{align*}
+** K-class Logistic Regression
+   $y \in {1, 2, 3, \cdot\cdot\cdot, k}$
+   $w^{(1)} = \begin{bmatrix} w^{(1)}_0\\.\\.\\.\\w^{(1)}_d\end{bmatrix}$ \\
+   $w^{(2)} = \begin{bmatrix} w^{(2)}_0\\.\\.\\.\\w^{(2)}_d\end{bmatrix}$ \\
+   ... \\
+   $w^{(k-1)} = \begin{bmatrix} w^{(k-1)}_0\\.\\.\\.\\w^{(k-1)}_d\end{bmatrix}$ \\
+   $w^{(k)} = \begin{bmatrix} 0\\.\\.\\.\\0\end{bmatrix}$ \\
+   $P_w(y|x) = \frac{e^{x^Tw^{(j)}}}{\sum^{K}_{k=1}e^{x^Tw^{(k)}}}$, where $w$ is a collection of $w^{(1)}, \cdot\cdot\cdot, w^{(k)}$
+** Example
+   #+CAPTION: K-Class Example
+    #+NAME:   fig:k-class-example
+   [[./k_class_example.png]]
+

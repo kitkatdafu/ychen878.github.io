@@ -1,0 +1,177 @@
+#+TITLE: High Order Haskell
+#+DATE: <2021-11-07 Mon>
+#+category: notes
+#+tags[]: Haskell
+#+keywords[]: Haskell PL
+
+Notes on /Practical Haskell/: A. Serra no Mean, Practical Haskell, https://doi.org/10.1007/978-1-4842-4480-7_3
+* Parametric Polymorphism
+- Types are parametrized by type parameters
+  - first letter of a type parameter is in lower case
+- These type parameters can represent any type
+- Replaced when applying the function with values that have concrete types
+- Can have more than one type parameters
+- Can have more than one same type parameter
+  - Only means type must be the same, the value can be different
+- Can be used with ADT
+  - Need to declare the type parameter after the name of the type on the LHS of the equal sign
+* Functions as Parameters
+** Higher-Order Functions
+Functions that take other functions as parameters are known as higher-order functions.
+- =map=
+  - applies a function to each element of a list
+- =$=
+  - Perfrom function application
+    #+BEGIN_SRC haskell
+        ($) :: (a -> b) -> a -> b
+        f $ a = f a
+    #+END_SRC
+  - Very common in Haskell
+  - Has a very low precedence
+  - =f= and =a= are evaluated first, then =$=
+    - Used to save parentheses
+- =filter=
+  - keeps values that satisfies the predicate
+** Anonymous Functions
+- function bodies that are not binded to a name
+  - =\p1 p2 ... -> body=
+- pattern matching enabled
+  - =map (\(x, y) -> x) [(1, 2), (3, 4)]
+  - but can match only one pattern
+    - need to resort to a =case= statement for further pattern matching
+    - or can be lifted using =LambdaCase= extension with special syntax =\case=
+- recursion disabled
+  - since it has no name, how to make recursive call?
+- can be used to generate a function
+  - if this function depends on a parameter passed into its generator function, think of this as this functino remembers the value of that parameter
+** Partial Application of a Function and Combinators
+- =->= is right-associative
+- Combinators are functions that combine functions
+- =.=
+  - composes two functions
+  - =f . g = \x -> f $ g x=
+- =curried=
+  - convert a not-curried function into a curried function
+  - curried functions take a sequence of arguments
+- =uncurried=
+  - convert a curried function into a not-curried function
+  - not-curried functions only take one argument
+- =flip=
+  - reverse the order of parameters
+* Modules
+- module imports are located after module declaration and before other definition
+- importing a module does not import the module's child importations
+- importing a module that has a definition that is same as a definition in the current module can clash
+  - Can manually select which definition to import
+    - =import Data.List (permuations, subsequence)=
+  - Can manually select which definition not to import
+    - =import Data.List hiding (head, tail)=
+- ADT importing requires special syntax
+  - =Type(List of Constructors)=
+  - Use =..= in =(0= to indicate importing all constructors
+- Qualified import requires the usage to include the prefix that indicates from which package the usage comes
+  - prevent clash
+    #+BEGIN_SRC haskell
+    import qualified Data.List (filter, permutation)
+    filterEven = Data.List.filter even
+    #+END_SRC
+- Rename a module
+  - =import qualified Data.List as L=
+  - =import qualified Data.List as L(permutations, subsequences)=
+- =Prelude=
+  - =Prelude= is imported by all modules without qualification
+    - disabled by using the extension =NoImplicitPrelude=
+  - the most basic stuff
+- =PatternSynoyms= enables /bidrectional pattern/
+  - enabled by ={-# LANGUAGE PatternSynoyms #-}=
+  - need a smart constructor (function) that checks the validity of constructor's arguments
+  - Create a pattern for a type whose constructor should not be exposed
+    #+BEGIN_SRC haskell
+        pattern R :: Integer -> Integer -> Range
+        pattern R a b <- Range a b
+          where R a b = range a b
+    #+END_SRC
+
+** Smart Constructors and Views
+- Can control which declarations to be exported
+- Everything is exported (public) by default
+- =module M (f) where= exports declaration =f= only
+  - If exporting Data type only, pattern matching won't work since constructors are not available
+- /smart constructors/
+  - check if values provides into the arguments of a contructor is correct
+* Lists
+- fold
+  - a fold combines values in a list into a single result
+- =foldr=
+  - right-associative when folding
+  - takes three arguments
+    - a binary function
+      - used to combine values together
+    - a initial value
+      - used when the list is empty
+      - usually an identity to the binary operation
+    - a list
+    - evaluation starts when =foldr= reaches the point of using the initial value
+- =foldl=
+  - left-associative when folding
+  - if the function used for =foldl= and =foldr= is commutative, then =foldl= and =foldr= produce the same result
+- =foldr1= and =foldl1=
+  - similar to =foldr= and =foldl=, but do not take initial value
+  - initial value for =foldl1= is the first element in the list
+  - initial value for =foldr1= is the last element in the list
+- =partition=
+  - partition a list into two parts, where the first part satisfies the predicate and the second part does not.
+- =find=
+  - Get the first element from a list that satisfy a predicate
+  - returns a =Maybe=
+- =dropWhile=
+  - remove elements from a list until predicate is false
+- =takeWhile=
+  - takes elements until the predicate is false
+- =span=
+  - combination of =takeWhile= and =dropWhile=
+- =break=
+  - =span (not . p)=
+- =any=
+  - if these is any elements in the list that satisfies a predictate
+- =all=
+  - if all elements in the list satisfy a predicate
+- =nubBy=
+  - takes out elements such that no two elements in the returned list are equivalent. The equivalency is defined by the predicate.
+- =nub=
+  - similar to =nubBy=, but uses the default comparison supported by the type
+  - =nubBy= and =nub= has a quadratic time complexity
+- =union(By)=, =intersect(By)=, =insert(By)=
+  - treat the list as a set
+  - perform set operation
+    - the =By= version needs a predicate that indicates the way of checking equivalence
+- =elem=
+  - check if an element is in the list or not
+** List Comprehension
+#+BEGIN_SRC
+[ expr | quantifiers]
+#+END_SRC
+- =expr= defines each element in the list
+- =quantifiers= can be
+  - a generator: =e <- list=
+    - =e= can be a pattern
+    - can have multiple generators
+    - latter generator can depend on the value from the previous generator
+  - a binding to an expression
+  - a guard to filter (keep) elements that satisfy the guard
+- =quantifiers= are separated by =,=
+- Extension =TransformListComp= extends list comprehension
+  - =then f=
+    - transforms the input list by applying the function =f= to the result of the comprehension up to that point
+  - =then f by e=
+    - do =f= according to =e=
+      - =GHC.Exts.sortWith by v=
+        - sort depending on the values in =v=
+  - =then group by e using f=
+    - =f $::$ (a -> b) -> [a] -> [[a]]=
+- Extension =ParallelListComp= enables more than one branch of qualifiers
+    - Branches are delimited by =|=
+    - Results of all branches will be zipped and availale for the =expr=
+#+BEGIN_SRC haskell
+duplicateOdds list = [2 * x | x <- list, odd x]
+#+END_SRC

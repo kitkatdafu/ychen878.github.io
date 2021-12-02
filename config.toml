@@ -1,0 +1,83 @@
+baseURL = "https://ychen878.github.io"
+languageCode = "en-us"
+title = "XIAOYIJ"
+theme = "cactus"
+copyright = "Yi Chen"
+
+
+# Main menu which appears below site header.
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "Writings"
+url = "/posts"
+weight = 2
+
+[[menu.main]]
+name = "Tags"
+url = "/tags"
+weight = 3
+
+[[menu.main]]
+name = "About"
+url = "/about"
+weight = 4
+
+[[menu.main]]
+name = "BHL0388"
+url = "https://archive.casouri.cat"
+weight = 4
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 4
+    ordered = false
+    startLevel = 2
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = true
+    lineNumbersInTable = false
+    noClasses = true
+    style = "dracula"
+    tabWidth = 4
+
+[params]
+  mathjax = true
+  colortheme = "classic"
+  rss = false
+  googleAnalyticsAsync = true
+  showAllPostsArchive = false
+
+  # Home page settings
+  description = "This is my website"
+  mainSection = "posts"
+  showAllPostsOnHomePage = false
+  postsOnHomePage = 5 # this option will be ignored if showAllPostsOnHomePage is set to true
+  tagsOverview = true # show tags overview by default.
+  showProjectsList = true # show projects list by default (if projects data file exists).
+  projectsUrl = "https://github.com/ychen878" # title link for projects list
+
+  # https://gohugo.io/functions/format/#hugo-date-and-time-templating-reference
+  dateFormat = "2006-01-02" # default
+
+  # Post page settings
+  show_updated = true # default
+  showReadTime = true # default
+
+  # the value of name should be an valid font awesome icon name (brands type)
+  # https://fontawesome.com/icons?d=gallery&s=brands
+  [[params.social]]
+    name = "github"
+    link = "https://github.com/ychen878"
+  [[params.social]]
+    name = "linkedin"
+    link = "https://www.linkedin.com/in/yi-chen-1601a3185/"
+  [[params.social]]
+    name = "email"
+    link = "mrr1vfe@gmail.com"  # no need for "mailto:" in the head       disableInlineCSS: true

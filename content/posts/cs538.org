@@ -1,0 +1,467 @@
+#+TITLE: Theory and Design of Programming Languages
+#+AUTHOR: Yi Chen
+#+EMAIL: reid@cs.wisc.edu
+#+DATE: <2020-04-30 Thu>
+#+tags[]: PL
+#+keywords[]: CS PL Haskell Rust Lambda-Calculus
+#+category[]: notes
+* Lecture 1 [fn:1]
+[fn:1] The whole note is based on and is coming from the course materials of [[https://pages.cs.wisc.edu/~justhsu/teaching/current/cs538/][COMP SCI 538]] by Professor Justin Hsu.
+** Functional programming
+*** History
+    - Based on $\lambda$ calculus
+    - Lisp
+    - ML
+    - Haskell
+*** Building block
+    - function :: take *inputs* as arguments and produce *outputs*.
+    Functions are first class, like any other value. They can be passed to, returned by functions. Functions can also be combined into new function.
+*** Control side-effects
+    Think about program is isolation
+    - pure function :: Described only by input and output. Always returns same result on fixed input.
+    - Hidden state :: avoid counters, local variables, etc.
+    - Manage side-effects ::
+** A taste of Haskell
+*** Declaring function
+    #+BEGIN_SRC haskell
+    -- double is function's name, :: indicates the type of this function. Int -> Int means it takes a Int as an input and outputs an Int
+    double :: Int -> Int -- this line is optional, optional type signature / type annotation
+    double n = n + n -- this is the function definition
+    #+END_SRC
+*** Calling function
+    #+BEGIN_SRC haskell
+    myBool = myFun 42 -- myFun is function name, 42 is the argument
+    myBool = constFun () -- () called unit, not taking value
+    #+END_SRC
+*** Multiple arguments
+    #+BEGIN_SRC haskell
+    doubleTwos :: Int -> Int -> Int
+    doubleTwos x y = double x + double y
+    #+END_SRC
+*** Case analysis
+    #+BEGIN_SRC haskell
+    doubleIfBig :: Int -> Int
+    doubleIfBig n = if (n > 100) then n + n else n
+    #+END_SRC
+    or
+    #+BEGIN_SRC haskell
+    doubleIfBig' n
+        | n > 100 = n + n
+	| otherwise = n
+    #+END_SRC
+    
+*** Case expression
+    #+BEGIN_SRC haskell
+    listPrint :: [Int] -> String
+    listPrint l = case l of
+                  [] -> "Empty"
+                  (x:xs) -> show x ++ " and " ++ show xs
+    #+END_SRC
+    or
+    #+BEGIN_SRC haskell
+    listPrint :: [Int] -> String
+    listPrint [] = "Empty list"
+    listPrint (x:xs) = "..." -- x is the first element, xs is the rest of the list
+    #+END_SRC
+*** Declare variables
+    #+BEGIN_SRC haskell
+    tripleSecret :: Int
+    tripleSecret = let secret = mySecretNum
+                        other = myOtherNum
+                   in 3 * secret + other
+    #+END_SRC
+    or
+    #+BEGIN_SRC haskell
+    tripleSecret = 3 * secret + other
+                   where secret = mySecret
+                          other = myOther
+    #+END_SRC
+*** Tuples
+    Tuple can mix and match different types. An empty tuple is unit type.
+    #+BEGIN_SRC haskell
+    myTuple :: (Int, Int)
+    myTuple = (7, 42)
+    myTriple :: (Int, Int, Int)
+    myTriple = (7, 42, 108)
+    #+END_SRC
+*** List
+    List takes same type, unlike tuple.
+    #+BEGIN_SRC haskell
+    myList :: [Int]
+    #+END_SRC
+* Functional Programming [fn:2]
+[fn:2] Notes from Real World Haskell by Bryan O'Sullivan, Don Stewart, and John Goerze
+** Compilation
+   Compile code
+   #+begin_src 
+   ghc --make [filename.hs]
+   #+end_src
+** Keywords
+   - Do :: The =do= keyword introduces a block of actions that can cause effects in the real world, such as reading or writing a file.
+   - <- :: Assignment operator inside the do block.
+** lines
+   The function, =lines=, are able to convert a string to a list of strings where each item in the list is a line in the given string. The =\n= of a line will be discarded. However, when reading a file coming from Windows system, which prefers to put =\r\n= at the end of each line, using =lines= to split a string on an unix-based system would be a mess. The =\r= will be remained in each item of the generated list. \\
+   The following code are able to handle the =\r= and =\r\n= cases.
+   #+begin_src haskell
+   splitLines :: String -> [String]
+   splitLines [] = [] -- do nothing when facing an empty string
+   splitLines cs =
+       let (pre, suf) = break isLineTerminator cs -- pre contains substring before newline characters, suf contains everything else
+       in pre : case suf of -- : operator is used to concatenate pre and modified suf
+		 ('\r':'\n':rest) -> splitLines rest -- rest is the remainder of the suf
+		 ('\r':rest) -> splitLines rest
+		 ('\n':rest) -> splitLines rest
+		 _           -> []
+
+     isLineTerminator c = c == '\r' || c == '\n'
+   #+end_src
+   When writing the code, organize the important part first. Give functions easy-to-understand name. Define less important function at the end is okay. \\
+   The =break= provided by =Prelude= can break a list into two parts. =break= takes two arguments. The first one should be a function returns a boolean value, and the second one is a list. The function will examine each element of the list and decide if split at that element of not. If split, then return =True=, otherwise =False=. =break= is going to return a tuple of two lists. The first lists does not include the item which causes the function argument returning =True=.
+   #+begin_src haskell
+   break (\x->x) [False, False, True, True]
+   -- output: ([False,False],[True,True])
+   #+end_src
+** Infix
+   - prefix :: Writing the name of the function before its arguments.
+   - infix :: When a function has more than 1 arguments, it can be placed in between its first and second arguments.
+   #+begin_src haskell
+   a `times` b = a * b
+   #+end_src
+   =infix= notation does not change function's behavior. It improves readability.
+** Data.List
+   =prelude= only exports a partial of functions in Data.List. In order to use all functions of =Data.List= in =ghci=, enter the following command
+   #+begin_src 
+   :module +Data.List
+   #+end_src
+   - length :: return the number of elements in a list
+   - null :: determine whether a list is empty
+   - head :: access the first element of a list
+   - tail :: return a list of all but head
+   - last :: access the last element of a list
+   - init :: return a list of all but tail
+   Why not using =length= to check emptiness? List in Haskell does not contain its size. Therefore, =length= has to go through a whole list to find its size. In other words, =length= runs in liner time. A better alternative, =null=, not only runs in constant time but also clearly indicates the function of the code containing it.
+   - partial functions :: return values defined for a subset of valid inputs, like =head=
+   - total functions :: return valid results over their entire input domain
+   - ++ :: append an list to another list
+   - concat :: concatenate a list of lists into a list; remove one level of nesting
+   - reverse :: reverse list order
+   - and :: and each element of a list of bool
+   - or :: or each element of a list of bool
+   - all :: takes a predicate, return =True= if the predicate succeeds on every element of a list
+   - any :: takes a predicate, return =True= if the predicate succeeds on at least one element of a list
+*** Sublists
+    - take :: return a sublist of first $k$ elements
+    - drop :: return a sublist of without the first $k$ elements
+    - split :: split a list at index $k$; return a 2-tuple of list, item at index $k$ belongs to the second element of the tuple
+    - takeWhile :: take element from the beginning of the list as long as a predicate returns =True=
+    - dropWhile :: drop element from the beginning of the list as long as a predicate returns =True=
+    - break :: consume elements when predicate fails
+    - span :: consume elements when predicate is =True=
+*** Searching List
+    - elem :: return true if an element is in a list
+    - notElem :: return true if an element is not in a list
+    - filter :: return all elements on which predicate succeeds
+    - isPrefixOf :: return true if a sublist appears in the front of a list
+    - isInfixOf :: return true if a sublist appears in a list
+    - isSuffixOf :: return true if a sublist appears in the end of a list
+*** Multiple List
+    - zip :: combine two lists into a lists of pair, then length of the new list is the minimum length of the 2 given lists
+    - zipWith :: When zipping, apply a function
+*** String handling
+    - lines :: partition a string into a list of substring based on =\n=
+    - unlines :: concatenate a list of strings into a string. =\n= is used to connect each element
+    - words :: partition a string into a list of substring based on =space=
+    - unwords :: concatenate a list of strings into a string. =space= is used to connect each element
+** Loops
+   There is not traditional loop in Haskell. Use recursion instead.
+   - tail recursive function :: function call itself at the end
+   Normally, a large amount of times of recursion will lead to stack overflow. However, functional programming languages implement TCO, or tail call optimization, to detect and transform tail recursion to constant space
+   However, if need to apply function to each element of a list, =map= is a good function to use
+   - high order function :: function that takes another function as an argument
+*** Fold
+    - foldl :: Fold from left of the list. Take a step function, an initial value for its accumulator, and a list.
+    - step function :: Take accumulator, an element from list, and return new accumulator; define how to update the accumulator in =foldl=
+    - foldr :: Fold from right of the list.
+    - primitive recursive :: class of functions that can be expressed using =foldr=
+    =foldl= could cause stack overflow due to the laziness of Haskell. Use =foldl'= from =Data.List=
+** Lambda Function
+   - \ [arguments] -> [function body / definition]
+   - use a parentheses to let Haskell know where is the end of the function body
+   - can only have one single clause in definition
+** Partial Function and Currying
+   In Haskell, all functions only take one argument. 
+   - partial function :: the function formed by passing fewer arguments to an existing function
+   - currying :: application of partial function
+   - section :: enclose an operator in parentheses, supply its left or right argument inside the parentheses to get a partially applied function
+** As-pattern
+   xs@(_:xs') is called an as-pattern, and it means “bind the variable xs to the value that matches the right side of the @ symbol. As-pattern allows sharing data. Thus a little bit better runtime than copying data.
+
+
+
+#  LocalWords:  TCO Typeclasses Typeclass newtype exp num
+* Type Systems
+  Each program $e$ has a type $t$. Types describe what kind of program $e$ is, i.e. Boolean, Integer, etc. Some programs do not have a type but all programs have at most one type.\\
+** Base types
+   The base types used in class are only ="bool"= for boolean and ="int"= for integer.
+   #+begin_src
+   base-ty = "bool" | "int"
+   #+end_src
+** Function types
+   Type for lambda calculus. Denoted as =ty -> ty=. The first =ty= is the input type and the second =ty= is the output type. Note that both input and output can be functions.
+   #+begin_src 
+   ty = base-ty | ty -> ty
+   #+end_src
+** Full simple types examples
+   =true= has type =bool= \\
+   =42= has type =int= \\
+   =plusOne = \lambda x. x + 1= has type =int -> int
+** Typing context
+   Type depends on types of free variables in open terms. This kind of types are tracked in a typing context $G$
+   - binding :: $(x : t)$ means variable $x$ has type $t$
+   A typing context is a list of bindings. For example, A two-binding context $G$ is $G = x : bool, y : int$. Empty context is denoted as $G = \cdot$.
+** Together
+   $G \vdash e : t$ means program $e$ has type $t$ in context $G$.
+  - Unicity of Typing :: For every typing context $G$ and expression $e$, there exists at most one type $t$ such that $G \vdash e : t$.
+  - Inversion for Typing :: Suppose that $G \vdash e :t$. If $e = \mathrm{add}(e_1, e_2)$, then $t = int, G \vdash e_1 : int$, and $G \vdash e_2 : int$.
+* Typeclasses [fn:3]
+[fn:3] Notes from Real World Haskell by Bryan O'Sullivan, Don Stewart, and John Goerze
+- Typeclasses :: Typeclasses define a set of functions that can have different implementations depending on the type of data they are given.
+** Define a Typeclass
+   #+begin_src haskell
+   class <Typeclass name> <instance types> where
+     <function type prototype here>
+   #+end_src
+   Note that the keyword =class= here is different from the =class= in object-oriented languages.
+   - instance type :: type that implements the functions defined in the typeclass
+   For example:
+   #+begin_src haskell
+   class BasicEq a where -- the a is chosen arbitrary
+     isEqual :: a -> a -> Bool -- defines one funciton
+   #+end_src
+*** Interpret the type of a typeclass
+    The type of =isEqual= is
+    #+begin_src haskell
+    isEqual :: BasicEq a => a -> a -> Bool
+    #+end_src
+    ==>= is a type class constraint. The type of =isEqual= means if a is an instance of =BasicEq=, then =isEqual= takes two =a= as parameters and return a =Bool=.
+** Define an instance
+   #+begin_src haskell
+   instance <Typeclass name> <instance type> where
+     <functions here>
+   #+end_src
+   For example
+   #+begin_src haskell
+   instance BasicEq Bool where
+     isEqual True True = True
+     isEqual False False = True
+     isEqual _ _ = True
+   #+end_src
+   Now, =isEqual= works for =Bool=, but not for any other types since there is no =instance= created for other types. The compiler does not know how to compare types other than =Bool=
+  
+* Review I
+** Haskell
+*** Function
+    - Multiple arguments, Anonymous Functions (\x -> x + 1)
+*** Recursions
+    #+begin_src haskell
+    f :: [a] -> Int -> [a]
+    f list times = concat $ map dup list
+                   where dup 0 x = []
+		         dup times x = x : dup (times - 1) x
+    #+end_src
+*** Higher older function
+**** .
+     (a -> b) -> (b -> c) -> (a -> c)
+     function composition
+**** $
+     function application
+    - map
+    - foldr
+    - zip
+*** Curry
+    ((a, b) -> c) -> a -> b -> c
+*** Types
+ (newtype, data (most powerful), type (least powerful))
+    - =type= has to use with existed type
+      #+begin_src haskell
+      type Dollar = Int
+      #+end_src
+    - =newtype= only has one field
+      #+begin_src haskell
+      newtype AppendList a  = AList ([a] -> [a])
+      #+end_src
+    - =data= could be anything. Like a tree, node, etc.
+      #+begin_src haskell
+      data Tree = Leaf a | Node Left Mid Right | Child [a] | Empty
+      #+end_src
+*** Typeclasses / subclasses
+**** Functors
+     #+begin_src haskell
+     Functor m
+       pure :: a -> m a
+       pure a = Just a
+       fmap (a -> b) -> m a -> m b
+       -- <$> is fmap
+       fmap f m = case m of
+              Nothing -> Nothing
+	      Just val -> Just $ f val
+     #+end_src
+      - Applicative
+	- Monads
+	  - IO Monads
+** Theory
+   - Syntax
+     - digit = 0 | 1 | 2 | 3 ...
+       exp = num + exp | exp
+   - Lambdas Calculus (Not-typed)
+   - Semantics (small-step)
+   - Type theory (add safety = progress(can step) + preservation(step to same type))
+   - Bigger Types (P \times Q, P \plus Q)
+
+* Rust Language
+  [[./TRPL.html][Notes on The Rust Programming Language]
+* References and Borrowing
+  - References is an indirect name for some data. Similar to a pointer  to some data.
+  - Reference does not own the data.
+    - Can have only one owner, but many references.
+  - Reference going out of scope does not drop data.
+    - Can "borrow" reference to function
+  - Function can take (mutable) reference and modify caller's data directly
+    - Useful for mutable datastructures.
+  - Reference themselves are on stack.
+  - By default, references are immutable.
+    - Can't change underlying data through references.
+    - Reference type: =&T=
+  - Can declare mutable references
+    - Target must be mutable as well
+    - Reference type: =&mut T=
+    #+begin_src rust
+    let must my_str = String::from("foo"); // mutable var
+    let ref_to_str = &mut my_str; // mutable ref to my_str
+    #+end_src
+** Dereferencing
+  - Use =*= notation to get thing reference is pointing at
+  - Often not needed due to "auto-deref" (magic)
+    #+begin_src rust
+    let vr: &Vec<i32> = ...;
+    println!("First element: {}", (*vr)[0]); // Explicit deref
+    println!("First element: {}", vr[0]);    // Implicit deref
+    println!("First element: {}", vr.first); // Implicit deref
+    #+end_src
+** Somewhat confusingly
+   Reference itself can be mutable
+   #+begin_src rust
+   // Can't change ref or thing it's pointing at
+   let immut_ref_to_immut = &my_string;
+   // Can't change ref, can change thing it's pointing at
+   let immut_ref_to_mut = &mut my_string;
+
+   // Can change ref, can't change thing it's pointing at
+   let mut mut_ref_to_immut = &my_string;
+   mut_ref_to_immut = &my_other_string;
+
+   // Can change ref and thing it's poing at
+   let mut mut_ref_to_mut = &mut my_string;
+   mut_ref_to_mut = &mut my_other_string;
+   *mut_ref_to_mut = String::from("???");
+   #+end_src
+** What's going one
+   - Mutability is not a property of the data!
+     - Not: these bits are mutable or immutable
+   - Mutability is property of variable or reference
+     - YES: I can mutate data through this variable
+     - YES: I cannot mutate data through that reference
+** Multiple References
+   - Rust works hard to ensure one owner for each data
+   - Multiple references to same data is problematic
+     - Also known as aliasing
+   - References need to follow certain rules for safty
+   - In any scope, there can be either:
+     1. Any number of immutable references referring to the same variable
+     2. At most one mutable reference referring to the same variable
+** Multiple Immutable
+   - Can have any number of immutable references to variable
+   - Safe: none of the references can change the underlying
+     #+begin_src rust
+     let my_str = String::from("foo");
+     let ref_one = &my_str;
+     let ref_two = &my_str;
+
+     println!("Both refs: {} {}", ref_one, ref_two); // OK
+     #+end_src
+** At Most One Mutable
+   - Can only change underlying through single reference
+     - Also important in concurrent setting
+     - Also enables more optimizations
+     #+begin_src rust
+     let mut mut_str = String::from("foo");
+     let ref_one = &mut mut_str; // OK
+     let ref_two = &mut mut_str; // Not OK
+     #+end_src
+** Use Scopes to Manage References
+   Rules only apply to references currently in scope.
+   #+begin_src rust
+   let mut mut_str = String::from("foo");
+   let mut_ref = &mut mut_str;
+   mut_ref.push("bar"); // OK
+   mut_str.push("baz"); // Not OK
+
+   // Use scopes!
+   let mut mut_str = String::from("foo");
+   {
+       let mut_ref = &mut mut_str;
+       mut_ref.push("bar"); // OK
+   }
+   mut_str.push("baz"); // OK
+   #+end_src
+** Alternative Reading
+   - Immutable reference shared reference
+     - Shared access to some data
+     - Sharing: can't change the data
+   - Mutable reference: unique reference
+     - Exclusive access to some data
+     - Can modify it: no one else has access
+   - Can't mix shared and unique!
+** Isn't a Reference Just a Pointer?
+   - In machine code: a reference is just a pointer
+   - In Rust: a reference also gives *permissions* to do things
+   - With an immutable reference, code can
+     - Dereference/read location
+     - Point to/read *anything reachable* from reference.
+   - With an mutable reference, code can
+     - Dereference/read/write location
+     - Point to/read/write *anything reachable* from reference.
+** Passing Arguments
+*** "Moving" Arguments
+    - Operationally: arguments passed "by value"
+    - Ownership of argument passes into the function
+      - Caller can't use arguments after calling!
+      - Arguments moved into function
+    - Function can return argument to return ownership
+*** "Borrowing" Arguments
+    - Operationally: arguments passed "by reference"
+    - Ownership of argument doesn't change
+      - Original owner (caller, caller-of-caller, ...) owns argument.
+    - Function borrows arguments from the owner
+      - Will give it back to owner when done with it
+** Variables Are Key
+  - Anywhere there are variables:
+    - Think about ownership rules
+    - Think about borrowing rules
+** Matching Can Move Data
+   - Often: matching on Enums with data inside
+   - The inner data is moved into the match arm
+     - Variable from match arm has ownership
+   - Typical ownership rules apply
+     - Data is dropped at the end of the arm
+** Matching on a reference
+   - Rust will infer how to borrow inner values
+     - Matching on =&T= type: arms borrow immutable
+     - Marching on =&must T= type: arms borrow mutable
+   - Also called "default binding modes"
+     - Usually: Just work
+     - Sometimes; inferences goes wrong (doesn't work)
+
+       
+
+

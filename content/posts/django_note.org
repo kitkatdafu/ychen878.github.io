@@ -1,0 +1,671 @@
+#+TITLE: Python后台开发
+#+AUTHOR: Yi Chen
+#+EMAIL: reid@cs.wisc.edu
+#+DATE: <2019-06-21 Fri>
+#+keywords[]: Python Django RegEx MySQL
+#+tags[]: Web
+#+category: notes
+
+* 环境搭建与入门案例
+** 环境搭建
+   #+BEGIN_SRC
+   pip3 install django==2.2
+   pip3 install pymysql
+   pip3 install mysqlclient
+   pip3 install pillow
+   #+END_SRC
+** 主文件夹中的文件
+   - settings.py :: 总配置文件
+   - urls.py :: 总路由映射文件, 把请求过来的url地址进行分配，分配给不同的handler处理器，处理器处理得到不同的结果，并把结果返回给浏览器
+   - wsgi.py :: 项目部署
+** 项目搭建步骤
+   1. 创建Django项目
+   2. 创建app并在settings中配置
+   3. 创建urls.py并在总路由中配置
+   4. 定义首页视图
+   5. 定义解析器
+   6. 运行manage.py
+** 创建app并在settings中配置
+   #+BEGIN_SRC
+   django-admin startapp myapp
+   #+END_SRC
+   - 通过settings.py引入创建的app
+   #+BEGIN_SRC python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'myapp', # 新创建的app名称
+]
+   #+END_SRC
+** 创建urls.py并在总路由中配置
+   - 在myapp文件夹中创建一个python文件, urls.py 
+   - 在总路由urls.py中添加
+   #+BEGIN_SRC python
+from django.urls import path, include
+
+urlpatterns = [ 
+    path('admin/', admin.site.urls),
+    path('', include("myapp.urls"))
+]
+   #+END_SRC
+** 定义首页视图
+  在myapp/urls.py中添加
+  #+BEGIN_SRC python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index_handler)
+]
+  #+END_SRC 
+** 定义解析器
+  使用快捷键 option + enter 可以在views.py中快速创建解析器, 将views.py中的代码修改为
+#+BEGIN_SRC python
+from django.shortcuts import render, HttpResponse
+
+def index_handler(request):
+    return HttpResponse('Hello Django')
+#+END_SRC
+** 运行manage.py
+   #+BEGIN_SRC
+   python3 manage.py runserver 8000
+   #+END_SRC
+* 基本路由映射
+  - 总路由文件
+    #+BEGIN_SRC python
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('user/', include("myapp.urls"))
+]
+    #+END_SRC
+  - myapp中的urls.py
+    #+BEGIN_SRC python
+urlpatterns = [
+    path('name1', views.index_handler)
+]
+    #+END_SRC
+  可通过[host地址/user/name1] 访问 views.index_ handler，并拿到index_ handler返回的数据
+* 命名空间
+    在总路由文件中的urlpatterns添加
+    #+BEGIN_SRC python
+    path('user/', include(('myapp.urls', 'myapp'), namespace='user'))
+    #+END_SRC
+* 正则参数传递与接收
+  1. 导入re_ path
+     #+BEGIN_SRC python
+     from django.urls import re_path
+     #+END_SRC
+  2. re_ path的使用
+     #+BEGIN_SRC python
+     urlpatterns = [
+         re_path('(\d+)', views.re_handler)
+     ]
+     #+END_SRC
+  3. 处理器接收
+     #+BEGIN_SRC python
+     def re_handler(request, num):
+         return HttpResponse(num) # num对应正则表达式传递过来的参数
+     #+END_SRC
+* 基础正则表达式
+#+BEGIN_SRC regex
+. 除了\n和\r所有的字符
+#+END_SRC
+#+BEGIN_SRC regex
+\d 数字
+#+END_SRC
+#+BEGIN_SRC regex
+\D 非数字
+#+END_SRC
+#+BEGIN_SRC regex
+\w 字母和下划线
+#+END_SRC
+#+BEGIN_SRC regex
+\W 非字母和下划线
+#+END_SRC
+#+BEGIN_SRC regex
+\s 空格，包括制表符，换页符
+#+END_SRC
+#+BEGIN_SRC regex
+*出现次数 >= 0
+#+END_SRC
+#+BEGIN_SRC regex
++出现次数 >= 1
+#+END_SRC
+#+BEGIN_SRC regex
+{n} 出现次数 = n
+#+END_SRC
+#+BEGIN_SRC regex
+{n, m} m >= 出现次数 >= n
+#+END_SRC
+#+BEGIN_SRC regex
+^ 以开头
+#+END_SRC
+#+BEGIN_SRC regex
+$ 以结尾
+#+END_SRC
+* 反向解析处理器
+1. 导入
+#+BEGIN_SRC python
+from django.shortcuts import reverse
+#+END_SRC
+2. 无参处理器解析
+#+BEGIN_SRC python
+reverse('[命名]')
+#+END_SRC
+3. 有参处理器解析
+#+BEGIN_SRC python
+reverse('[命名]', args=([参数1], [参数2], ...))
+#+END_SRC
+* request和response
+客户端向服务器request数据，服务器response数据给客户端
+** request对象HttpRequest
+| 关键字  | 说明                                             |
+|---------+--------------------------------------------------|
+| method  | 返回请求的方式 (GET/POST)                        |
+| path    | 返回页面的路径 (不包括域名)                      |
+| META    | 封装请求头的数据 (字典类型，key大写，下划线连接) |
+| GET     | 封装GET请求数据的QueryDict对象                   |
+| POST    | 封装POST请求数据的QueryDict对象                  |
+| FILES   | 封装上传文件数据                                 |
+| COOKIES | 封装请求的cookies，类似字典的对象                |
+| session | 可读写的类似字典的对象                           |
+- GET请求会讲数据放在url中
+- POST请求会把数据封装在header里面，并加密
+- POST更安全，对于表单提交和敏感数据，通常使用POST请求
+- META的CONTENT_ TYPE请求正文的MIME类型
+  1. text/html HTML
+  2. text/plain 普通文本
+  3. application/json  Json
+- Python字典和Json的区别
+  1. Python使用None表示空，Json使用Null
+  2. Json中的true和false首字母小写
+- COOKIES保存在客户端，例如自动登陆功能
+- session保存在服务端，保存敏感信息，根据COOKIES上传的值获取
+** response对象HttpResponse
+   #+BEGIN_SRC python
+   HttpResponse(
+       content="[相应体]",
+       content_type="[MIME类型]",
+       status="[状态码]"
+   )
+   #+END_SRC
+  | 状态码 | 解释               |
+  |--------+--------------------|
+  |    200 | 请求成功           |
+  |    400 | 客户端请求语法错误 |
+  |    403 | 服务器拒绝请求     |
+  |    404 | 没有找到对应页面   |
+  |    500 | 服务器内部错误     |
+** JsonResponse对象
+   #+BEGIN_SRC python
+   from django.http import JsonResponse
+   JsonResponse(
+       {
+           "edu": "education",
+           "course": "Python语言"
+       },
+       json_dumps_params={"ensure_ascii": False} # 保证中文正确显示
+   )
+   #+END_SRC
+** 重定向
+   #+BEGIN_SRC python
+   from django.shortcuts import redirect
+   def redirect_handler(request):
+       return redirect('/user') # 重定向到用户首页
+
+   # 通过reverse配合重定项
+   from django.shortcuts import reverse
+   def rredirect_handler(request):
+       return redirect(reverse("user:index")) # 重定向到用户首页
+   #+END_SRC
+* 前端
+** 标签语言 
+   1. 双标签
+     #+BEGIN_SRC html
+     <标签名></标签名>
+     #+END_SRC
+   2. 单标签
+     #+BEGIN_SRC html
+     <标签名/>
+     #+END_SRC
+** 元素与属性
+   #+BEGIN_SRC html
+   <标签名 属性名=属性值>元素</标签名>
+   <标签名 属性名=属性值/>
+   #+END_SRC
+** 其他资源
+   [[https://web.stanford.edu/group/csp/cs21/htmlcheatsheet.pdf][Stanford HTML Cheatsheet]]
+ - HTML :: 名词
+ - CSS :: 形容词
+ - javascript :: 动词
+* 模板原理
+** 模板调用
+   1. 在templates文件夹中创建html文件，例如index.html
+   2. 在视图中调用
+      #+BEGIN_SRC python
+      def index_handler(request):
+          return render(request, 'index.html')
+      #+END_SRC
+** 模板传参
+   #+BEGIN_SRC python
+   def index_handler(request):
+       context = {
+           'username': 'name1',
+	   'password': 'pass1'
+       }
+   return render(request, 'index.html', context)
+   #+END_SRC
+** 模板层基础语法
+*** 参数输出
+    1. 普通值
+       #+BEGIN_SRC html
+       {{ key1 }}
+       #+END_SRC
+    2. 列表值
+       #+BEGIN_SRC html
+       {{ key2.0 }} {{ key2.1 }}
+       #+END_SRC
+    3. 字典值
+       #+BEGIN_SRC html
+       {{ key3.key3_1 }} {{ key3.key3_2 }}
+       #+END_SRC
+    变量名不可以以下划线开头, {#...#}是模版层中的注释
+*** 循环语句
+    #+BEGIN_SRC python
+    context = {
+        'loves': ['python', 'c++', 'java']
+    }
+    #+END_SRC
+    #+BEGIN_SRC html
+    {% for love in loves %}
+    {% endfor %}
+    #+END_SRC
+*** 判断语句
+    #+BEGIN_SRC html
+    {% if 条件%}
+    {% elif 条件%}
+    {% else 条件%}
+    {% endif 条件%}
+    #+END_SRC
+*** 视图函数地址
+    - 不需要额外传参的视图函数
+    #+BEGIN_SRC html
+    {% url "[namespace]:[name]" %}
+    #+END_SRC
+    - 需要传参的视图函数，例如
+      #+BEGIN_SRC python
+      def re_handler(request, num):
+      #+END_SRC
+      #+BEGIN_SRC html
+      {% url "[namespace]:[name]" [传递的参数] %}
+      #+END_SRC
+** 模板过滤器
+   - 过滤器 :: 模板中对传递过来的数据进行修饰，再进行显示
+   - 过滤器语法
+     #+BEGIN_SRC html
+     {{ 变量|过滤器关键字: 参数  }}
+     #+END_SRC
+     如果没有参数传递，可以不写
+*** 常用过滤器
+    | 关键字  | 说明               |
+    |---------+--------------------|
+    | safe    | 禁止HTML转义       |
+    | length  | 长度               |
+    | date    | 日期 (Y-m-d H:i:s) |
+    | default | 默认值                |
+    | upper   | 转大写                |
+    | lower   | 转小写                |
+** 模板复用和block提取
+   1. 模板继承
+      #+BEGIN_SRC html
+      {% extends "[父模板路径]" %}
+      #+END_SRC
+   2. block块定义与重写
+      #+BEGIN_SRC html
+      {% block [代码块名称] %}
+      {% endblock %}
+      #+END_SRC
+      调用父模板中的代码
+      #+BEGIN_SRC html
+      {{ block.super }}
+      #+END_SRC
+* MySQL数据库基础
+** 数据库的创建与删除
+   | 操作       | 命令                       |
+   |------------+----------------------------|
+   | 创建数据库 | create database [数据库名]; |
+   | 删除数据库 | drop database [数据库名];  |
+** 使用与查看数据库
+   | 操作                 | 命令               |
+   |----------------------+--------------------|
+   | 使用数据库           | use [数据库名];    |
+   | 查看所有的数据库     | show databases;    |
+   | 查看当前使用的数据库 | select database(); |
+** 数据库编码
+   | 操作                         | 命令                                       |
+   |------------------------------+--------------------------------------------|
+   | 创建数据库并指定编码 (utf-8) | create database [数据库名] charset="utf8"; |
+   | 修改数据库编码（gbk）        | alter database [数据库名] charset="gbk";        |
+** 常用数据类型
+   1.  整数
+      | 关键字    | 含义             |
+      |-----------+------------------|
+      | tinyint   | -2^7 ~ 2^7 - 1   |
+      | smallint  | -2^16 ~ 2^16 - 1 |
+      | mediumint | -2^23 ~ 2^23 - 1 |
+      | int       | -2^31 ~ 2^31 - 1 |
+      | bigint    | -2^63 ~ 2^63 - 1 |
+   2. 定点数
+      | 关键字        | 含义 |
+      |---------------+------|
+      | decimal(m, d) | 总位数 < m, 小数位 = d |
+   3. 浮点数
+      | 关键字        | 含义 |
+      |---------------+------|
+      | float(m, d)   | 16位精度，总位数 < m, 小数位 = d |
+      | double(m, d)  | 16位精度，总位数 < m, 小数位 = d |
+      浮点数只能保证最多8或16位的准确性，其余的数字随机填充
+   4. 字符串
+      | 关键字     | 含义            |
+      |------------+-----------------|
+      | char(n)    | 固定字符串长度n |
+      | varchar(n) | 最大字符串长度n |
+   5. 日期
+      | 关键字   | 含义                |
+      |----------+---------------------|
+      | datetime | YYYY-MM-DD HH:MM:SS |
+      | date     | YYYY-MM-DD          |
+      | time     | HH:MM:SS            |
+   6. 布尔
+      | 关键字   | 含义                |
+      |----------+---------------------|
+      | boolean  | true/false           |
+      底层其实是tinyint
+** 创建表结构
+   #+BEGIN_SRC sql
+   create table [表名] (
+       [字段名] [字段类型] [字段约束],
+       [字段名] [字段类型] [字段约束]
+   );
+   #+END_SRC
+** 常用字段约束
+   | 约束类型 | 关键字                     |
+   |----------+----------------------------|
+   | 主键自增 | primary key auto_increment |
+   | 不能重复 | unique                     |
+   | 不能为空 | not null                   |
+   | 默认值   | default                    |
+** 查询操作
+   1. 查看表内所有数据
+      #+BEGIN_SRC sql
+      select * from [表名];
+      #+END_SRC
+      *表示为所有字段
+   2. 查看指定字段 
+      #+BEGIN_SRC sql
+      select [字段1], [字段2] from [表名];
+      #+END_SRC
+   3. 比较条件查询
+      #+BEGIN_SRC sql
+      select * from [表名] where [条件];
+      #+END_SRC
+      | 条件   | 命令        |
+      |--------+-------------|
+      | 相等   | =           |
+      | 不相等 | !=          |
+      | 为空   | is null     |
+      | 不为空 | is not null |
+      | 大于   | >           |
+      | 小于   | <           |
+   4. 模糊查询
+      #+BEGIN_SRC sql
+      select * from [表名] where [字段] like "表达式";
+      #+END_SRC
+      | 关键字 | 说明                           |
+      |--------+--------------------------------|
+      | %      | 匹配任意多的字符               |
+      | _      | 匹配一个字符，汉字需要使用两个 |
+   5. 范围查询
+      #+BEGIN_SRC sql
+      select * from [表名] where [字段] in ([可能1], [可能2], ...);
+      #+END_SRC
+   6. 逻辑运算符
+      | 关键字 | 说明 |
+      |--------+------|
+      | and    | 与   |
+      | or     | 或   |
+      |        |      |
+   
+   7. 分组
+      #+BEGIN_SRC sql
+      select * from [表名] where [条件] group by [字段1], [字段2], ...;
+      #+END_SRC
+      1. 按照哪个字段分组，哪个字段就不会重复
+      2. group by要写在where的后面
+      #+BEGIN_SRC sql
+      select * from [表名] where [条件] group by [字段1], [字段2], ... having [条件];
+      #+END_SRC
+      1. where是对select...的结果进行筛选
+      2. having是对group by的结果进行筛选
+   8. 排序
+      #+BEGIN_SRC sql
+      select * from [表名] where [条件] group by [字段1], [字段2], ... having [条件] order by [字段1] asc/desc, [字段2] asc/desc;
+      #+END_SRC
+      - asc :: 升序
+      - desc :: 降序
+      - 排序优先级 :: 先按照 [字段1] 排序， 如果相同，那么按照 [字段2] 排序
+   9. 分页
+      #+BEGIN_SRC sql
+      select * from [表名] where [条件] group by [字段1], [字段2], ... having [条件] order by [字段1] asc/desc, [字段2] asc/desc limit [起始索引], [数据条数];
+      #+END_SRC
+** 增删改查
+   1. 插入数据
+      #+BEGIN_SRC sql
+      insert into [表名] value ([数据1], [数据2], ...);
+      #+END_SRC
+      #+BEGIN_SRC sql
+      insert into [表名] ([字段名1], [字段名2], ...) value ([数据1], [数据2], ...);
+      #+END_SRC
+      #+BEGIN_SRC sql
+      insert into [表名] ([字段名1], [字段名2], ...) values ([数据1], [数据2], ...), ([数据3], [数据4], ...);
+      #+END_SRC
+   2. 修改数据
+      #+BEGIN_SRC sql
+      update [表名] set [字段1] = [值1], [字段2] = [值2] ... where = [条件];
+      #+END_SRC
+   3. 删除数据
+      #+BEGIN_SRC sql
+      delete from [表名] where [条件];
+      #+END_SRC
+   - 插入数据 :: 多条数据插入尽量用一条sql语句，提高性能 
+   | 关键字     | 说明                         |
+   |------------+------------------------------|
+   | delete     | 删除表内行数据               |
+   | drop table | 删除整个表，可以恢复         |
+   | truncate   | 删除整个表，快速，但不可恢复 |
+   |            |                              |
+** 多表操作
+   1. 一对多
+      #+BEGIN_SRC sql
+      create table user (
+          id int primary key auto_increment, username varchar(16)
+      );
+      #+END_SRC
+      #+BEGIN_SRC sql
+      create table forum(
+          id int primary key auto_increment,
+          topic varchar(200),
+          user_id int,
+          constraint fu1 foreign key (user_id) references user(id) on delete CASCADE
+      );
+      #+END_SRC
+      | 级联类型            | 解释                                                  |
+      |---------------------+-------------------------------------------------------|
+      | on delete restrict  | 默认值，抛异常                                        |
+      | on delete cascade   | 如果主表被引用的外键删除，相关 联的表的记录也会被删除 |
+      | on delete set null  | 如果主表被引用的外键删除，相关 联的表的外键设置为空   |
+      | on delete no action | 什么也不做                                                      |
+   2. 多对多
+      #+BEGIN_SRC sql
+      create table user_forum(
+          id int primary key auto_increment,
+          user_id int,
+          forum_id int,
+          constraint c1 foreign key (user_id) references user(id) on delete cascade,
+          constraint c2 foreign key (forum_id) references forum(id) on delete cascade
+      );
+      #+END_SRC
+   3. 一对一
+      不常用，应用场景:
+      1. 单张表内字段数太多 
+      2. 敏感信息分离
+** ORM
+   1. 配置
+      Settings中:
+      #+BEGIN_SRC python   
+      DATABASES = {
+          'default': {
+              'ENGINE' : 'django.db.backends.mysql', 
+              'HOST': 'localhost',
+              'PORT': '3306',
+              'NAME': '【数据库名称】',
+              'USER': '【MySQL账号】', 'PASSWORD': '【密码】'
+          }
+      }
+       #+END_SRC
+   2. 表与字段定义
+      models.py中:
+      #+BEGIN_SRC python
+      class User(models.Model):
+          id = models.AutoField(primary_key=True)
+	  username = models.CharField(max_length=16)
+	  password = models.CharField(max_length=16)
+	  gender = models.PositiveSmallIntegerField()
+	  age = models.IntegerField()
+	  createDatetime = models.DateTimeField()
+      #+END_SRC
+      字段名不要用 __ 开头
+      | 字段类型关键字 | 说明                                                                                          |
+      |----------------+-----------------------------------------------------------------------------------------------|
+      | AutoField      | 自动增长的整数(相当于:int auto_increment)                                                     |
+      | IntegerField   | 整数 int                                                                                      |
+      | FloatField     | 浮点数                                                                                        |
+      | Decimal        | 定点数                                                                                        |
+      | CharField      | 字符串 varchar()                                                                              |
+      | TextField      | 大文本 Text                                                                                   |
+      | BooleanField   | True/False                                                                                    |
+      | DateTimeField  | 日期 Datetime: YYYY-MM-DD HH:MM:SS                                                            |
+      | EmailFiled     | 邮箱                                                                                          |
+      | ImageField     | 图片                                                                                          |
+      | primary_key    | 是否是主键                                                                                    |
+      | null           | 能否为空                                                                                      |
+      | unique         | 能否重复                                                                                      |
+      | default        | 默认值                                                                                        |
+      | blank          | 在django管理后台新增或编辑一条表数据 时，该字段能否为空 null是数据库范畴，blank是表单验证范畴 |
+   3. 数据库迁移与维护
+      - 生成迁移文件
+	#+BEGIN_SRC
+	python manage.py makemigration
+	#+END_SRC
+      - 执行迁移文件
+	#+BEGIN_SRC
+	python manage.py migrate
+	#+END_SRC
+   4. 增删改查
+      #+BEGIN_SRC python
+      user = User()
+      user.username = 'name1'
+      user.id
+      user.save()
+ 
+      user.password = 'pass1'
+      user.save()
+
+      user.delete()
+
+      user = User.objects.create(
+          username = "name2"
+      )
+
+      # 修改
+      User.objects.filter(【条件】).update(属性=属性值)
+      # 例如
+      User.objects.filter(id=2).update(password="pass2")
+      # 删除
+      User.objects.filter(id=2).delete()
+      #+END_SRC
+** 模型类的查询方法
+   | 方法          | 说明                 |
+   |---------------+----------------------|
+   | all()         | 返回所有             |
+   | get(条件)     | 返回满足条件的数据   |
+   | filter(条件)  | 返回满足条件的数据   |
+   | exclude(条件) | 返回不满足条件的数据 |
+   get方法必须返回一个对象 如果没有满足条件的对象，或者有多个满足条件的对象，都会报异常 \\
+   all、filter、exclude返回的结果类型是QuerySet(类似列表)
+   #+BEGIN_SRC python
+   users = User.objects.all()
+   users = User.objects.filter(id=1)
+   users = User.objects.exclude(id=1)
+   #+END_SRC
+*** 比较查询
+    | 条件     | 说明  |
+    |----------+-------|
+    | 相等     | exact |
+    | 大于     | gt    |
+    | 大于等于 | gte   |
+    | 小于     | lt    |
+    | 小于等于 | lte   |
+    | 为空查询 | isnull |
+    - 条件格式 :: 【字段名】__【条件关键字】=【比较值】
+    #+BEGIN_SRC python
+    # 查询id>=2的所有用户
+    users = User.objects.filter(id__gte=2)
+    #+END_SRC
+*** 模糊查询
+    | 条件 | 说明       |
+    |------+------------|
+    | 包含 | contains   |
+    | 开头 | startswith |
+    | 结尾 | endswith   |
+    #+BEGIN_SRC python
+    # 查询用户名中包含'1'的用户
+    user1_s = User.objects.filter(username__contains='1')
+    # 查询用户名以'name1'开头的用户
+    user2_s = User.objects.filter(username__startswith='name1')
+    # 查询邮箱以'@qq.com'结尾的用户
+    user3_s = User.objects.filter(email__endswith='@qq.com')
+    #+END_SRC
+*** 范围查询
+    | 条件 | 说明 |
+    |------+------|
+    | 范围 | in   |
+    #+BEGIN_SRC python
+    # 查询username属于["name1"，"name2"]的user对象
+    users = User.objects.filter(username__in= ["name1"，"name2"]
+    #+END_SRC
+* Redis
+** 安装包
+   #+BEGIN_SRC
+   pip3 install redis
+   pip3 install django-redis
+   pip3 install django-redis-sessions
+   #+END_SRC
+** settings配置
+   #+BEGIN_SRC python
+   SESSION_ENGINE = 'redis_sessions.session'
+   SESSION_REDIS_HOST = 'localhost'
+   SESSION_REDIS_PORT = 6379
+   SESSION_REDIS_DB = 0
+   SESSION_REDIS_PASSWORD = ''
+   #+END_SRC
+* CSRF跨域
+** 添加CSRF_TOKEN
+   在form表单中添加
+   #+BEGIN_SRC html
+   {% csrf_token %}
+   #+END_SRC
