@@ -1,4 +1,4 @@
-baseURL = "https://ychen878.github.io"
+baseURL = "https://www.mrr1vfe.io"
 languageCode = "en-us"
 title = "XIAOYIJ"
 theme = "cactus"
@@ -29,7 +29,7 @@ weight = 4
 [[menu.main]]
 name = "BHL0388"
 url = "https://archive.casouri.cat"
-weight = 3
+weight = 5
 
 [markup]
   [markup.tableOfContents]
