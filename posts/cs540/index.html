@@ -1,0 +1,1412 @@
+<!doctype html><html lang=en-us>
+<head>
+<link rel=preload href=/lib/font-awesome/webfonts/fa-brands-400.woff2 as=font type=font/woff2 crossorigin=anonymous>
+<link rel=preload href=/lib/font-awesome/webfonts/fa-regular-400.woff2 as=font type=font/woff2 crossorigin=anonymous>
+<link rel=preload href=/lib/font-awesome/webfonts/fa-solid-900.woff2 as=font type=font/woff2 crossorigin=anonymous>
+<link rel=preload href=/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2 as=font type=font/woff2 crossorigin=anonymous>
+<script type=text/javascript src=https://latest.cactus.chat/cactus.js></script>
+<link rel=stylesheet href=https://latest.cactus.chat/style.css type=text/css>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<title> Introduction to Artifical Intelligence | XIAOYIJ</title>
+<link rel=canonical href=https://ychen878.github.io/posts/cs540/>
+<meta name=description content="This is my website">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="all,follow">
+<meta name=googlebot content="index,follow,snippet,archive">
+<meta property="og:title" content="Introduction to Artifical Intelligence">
+<meta property="og:description" content="Basic Python, comparing to Java 1    Why are we using python?   It has a large amount of better machine learning libraries.
+  Useful link   Online Python compiler
+  Key differences from Java	   Do not bother with a class unless you actually want to make an object.
+  Functions do not need return types (or parameter types).">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ychen878.github.io/posts/cs540/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2020-04-30T00:00:00+00:00">
+<meta property="article:modified_time" content="2020-04-30T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Introduction to Artifical Intelligence">
+<meta name=twitter:description content="Basic Python, comparing to Java 1    Why are we using python?   It has a large amount of better machine learning libraries.
+  Useful link   Online Python compiler
+  Key differences from Java	   Do not bother with a class unless you actually want to make an object.
+  Functions do not need return types (or parameter types).">
+<link rel=stylesheet href=https://ychen878.github.io/css/styles.4c2b9aa1d874d6766f554b2d404e8fd62ab4761f51ee9b3f358d12e81e7fa43a1b4378db995bc1926bbe5ed98c060be5e7bd4f2470504cf94f22b4b3a74e62b6.css integrity="sha512-TCuaodh01nZvVUstQE6P1iq0dh9R7ps/NY0S6B5/pDobQ3jbmVvBkmu+XtmMBgvl571PJHBQTPlPIrSzp05itg=="><!--[if lt IE 9]><script src=https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script>
+<script src=https://oss.maxcdn.com/respond/1.4.2/respond.min.js></script><![endif]-->
+<link rel=icon type=image/png href=https://ychen878.github.io/images/favicon.ico>
+</head>
+<body class="max-width mx-auto px3 ltr">
+<div class="content index py4">
+<div id=header-post>
+<a id=menu-icon href=#><i class="fas fa-bars fa-lg"></i></a>
+<a id=menu-icon-tablet href=#><i class="fas fa-bars fa-lg"></i></a>
+<a id=top-icon-tablet href=# onclick="$('html, body').animate({scrollTop:0},'fast')" style=display:none aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+<span id=menu>
+<span id=nav>
+<ul>
+<li><a href=/>Home</a></li>
+<li><a href=/posts>Writings</a></li>
+<li><a href=/tags>Tags</a></li>
+<li><a href=/about>About</a></li>
+<li><a href=https://archive.casouri.cat>BHL0388</a></li>
+</ul>
+</span>
+<br>
+<span id=actions>
+<ul>
+<li>
+<a class=icon href=https://ychen878.github.io/posts/cs537/ aria-label=Previous>
+<i class="fas fa-chevron-left" aria-hidden=true onmouseover="$('#i-prev').toggle()" onmouseout="$('#i-prev').toggle()"></i>
+</a>
+</li>
+<li>
+<a class=icon href=https://ychen878.github.io/posts/contex-free-grammar/ aria-label=Next>
+<i class="fas fa-chevron-right" aria-hidden=true onmouseover="$('#i-next').toggle()" onmouseout="$('#i-next').toggle()"></i>
+</a>
+</li>
+<li>
+<a class=icon href=# onclick="$('html, body').animate({scrollTop:0},'fast')" aria-label="Top of Page">
+<i class="fas fa-chevron-up" aria-hidden=true onmouseover="$('#i-top').toggle()" onmouseout="$('#i-top').toggle()"></i>
+</a>
+</li>
+<li>
+<a class=icon href=# aria-label=Share>
+<i class="fas fa-share-alt" aria-hidden=true onmouseover="$('#i-share').toggle()" onmouseout="$('#i-share').toggle()" onclick="return $('#share').toggle(),!1"></i>
+</a>
+</li>
+</ul>
+<span id=i-prev class=info style=display:none>Previous post</span>
+<span id=i-next class=info style=display:none>Next post</span>
+<span id=i-top class=info style=display:none>Back to top</span>
+<span id=i-share class=info style=display:none>Share post</span>
+</span>
+<br>
+<div id=share style=display:none>
+<ul>
+<li>
+<a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f" aria-label=Facebook>
+<i class="fab fa-facebook" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="https://twitter.com/share?url=https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f&text=Introduction%20to%20Artifical%20Intelligence" aria-label=Twitter>
+<i class="fab fa-twitter" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f&title=Introduction%20to%20Artifical%20Intelligence" aria-label=Linkedin>
+<i class="fab fa-linkedin" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f&is_video=false&description=Introduction%20to%20Artifical%20Intelligence" aria-label=Pinterest>
+<i class="fab fa-pinterest" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="mailto:?subject=Introduction%20to%20Artifical%20Intelligence&body=Check out this article: https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f" aria-label=Email>
+<i class="fas fa-envelope" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f&title=Introduction%20to%20Artifical%20Intelligence" aria-label=Pocket>
+<i class="fab fa-get-pocket" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f&title=Introduction%20to%20Artifical%20Intelligence" aria-label=reddit>
+<i class="fab fa-reddit" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f&name=Introduction%20to%20Artifical%20Intelligence&description=Basic%20Python%2c%20comparing%20to%20Java%201%20%20%20%20Why%20are%20we%20using%20python%3f%20%20%20It%20has%20a%20large%20amount%20of%20better%20machine%20learning%20libraries.%0a%20%20Useful%20link%20%20%20Online%20Python%20compiler%0a%20%20Key%20differences%20from%20Java%09%20%20%20Do%20not%20bother%20with%20a%20class%20unless%20you%20actually%20want%20to%20make%20an%20object.%0a%20%20Functions%20do%20not%20need%20return%20types%20%28or%20parameter%20types%29." aria-label=Tumblr>
+<i class="fab fa-tumblr" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f&t=Introduction%20to%20Artifical%20Intelligence" aria-label="Hacker News">
+<i class="fab fa-hacker-news" aria-hidden=true></i>
+</a>
+</li>
+</ul>
+</div>
+<div id=toc>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#headline-1>Basic Python, comparing to Java <sup class=footnote-reference>1</sup></a>
+<ul>
+<li><a href=#headline-2>Key differences from Java </a>
+<ul>
+<li><a href=#headline-3>Control flow</a>
+</li>
+<li><a href=#headline-4>Operators</a>
+</li>
+<li><a href=#headline-5>Reading files</a>
+</li>
+<li><a href=#headline-6>import</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href=#headline-7>Think AI at different levels</a>
+<ul>
+<li><a href=#headline-8>Big idea in AI: State space </a>
+</li>
+</ul>
+</li>
+<li><a href=#headline-9>Hill Climbing</a>
+<ul>
+<li><a href=#headline-10>Optimization problems</a>
+<ul>
+<li><a href=#headline-11>Why?</a>
+</li>
+</ul>
+</li>
+<li><a href=#headline-12>Idea</a>
+</li>
+<li><a href=#headline-13>Neighbor picking</a>
+</li>
+<li><a href=#headline-14>Algorithm</a>
+</li>
+<li><a href=#headline-15>Local optima in hill climbing</a>
+</li>
+<li><a href=#headline-16>Repeated hill climbing with random restarts</a>
+</li>
+</ul>
+</li>
+<li><a href=#headline-17>Basic Probability and Statistics</a>
+<ul>
+<li><a href=#headline-18>Sample Space</a>
+</li>
+<li><a href=#headline-19>Random Variable</a>
+</li>
+<li><a href=#headline-20>Axioms of probability</a>
+</li>
+<li><a href=#headline-21>Coin</a>
+</li>
+<li><a href=#headline-22>Law of large numbers</a>
+</li>
+<li><a href=#headline-23>Die</a>
+</li>
+<li><a href=#headline-24>Joint probability</a>
+</li>
+<li><a href=#headline-25>Negation (complement)</a>
+</li>
+<li><a href=#headline-26>Marginalization</a>
+</li>
+<li><a href=#headline-27>Conditional Probability</a>
+<ul>
+<li><a href=#headline-28>Bayes Rule</a>
+</li>
+</ul>
+</li>
+<li><a href=#headline-29>Independence</a>
+</li>
+<li><a href=#headline-30>Conditional Independence</a>
+</li>
+</ul>
+</li>
+<li><a href=#headline-31>Tuning set</a>
+</li>
+<li><a href=#headline-32>K nearest neighbor classifier</a>
+<ul>
+<li><a href=#headline-33>Recall</a>
+</li>
+<li><a href=#headline-34>KNN algorithm</a>
+</li>
+<li><a href=#headline-35>Classification vs. Clustering</a>
+</li>
+<li><a href=#headline-36>Terminology</a>
+</li>
+<li><a href=#headline-37>How to choose k?</a>
+<ul>
+<li><a href=#headline-38>Method 1: Use a tuning set</a>
+</li>
+<li><a href=#headline-39>Method 2: Cross Validation</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href=#headline-40>Logistic Regression</a>
+<ul>
+<li><a href=#headline-41>Recall</a>
+</li>
+<li><a href=#headline-42>Logistic Regression</a>
+</li>
+<li><a href=#headline-43>Binary Classification</a>
+</li>
+<li><a href=#headline-44>Training</a>
+</li>
+<li><a href=#headline-45>K-class Logistic Regression</a>
+</li>
+<li><a href=#headline-46>Example</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</span>
+</div>
+<article class=post itemscope itemtype=http://schema.org/BlogPosting>
+<header>
+<h1 class=posttitle itemprop="name headline">
+Introduction to Artifical Intelligence
+</h1>
+<div class=meta>
+<div class=postdate>
+<time datetime="2020-04-30 00:00:00 +0000 UTC" itemprop=datePublished>2020-04-30</time>
+</div>
+<div class=article-read-time>
+<i class="far fa-clock"></i>
+9 minute read
+</div>
+<div class=article-tag>
+<i class="fas fa-tag"></i>
+<a class=tag-link href=/tags/ml rel=tag>ML</a>
+</div>
+</div>
+</header>
+<div class=content itemprop=articleBody>
+<div id=outline-container-headline-1 class=outline-2>
+<h2 id=headline-1>
+Basic Python, comparing to Java <sup class=footnote-reference><a id=footnote-reference-1 href=#footnote-1>1</a></sup>
+</h2>
+<div id=outline-text-headline-1 class=outline-text-2>
+<dl>
+<dt>
+Why are we using python?
+</dt>
+<dd>
+<p>It has a large amount of better machine learning libraries.</p>
+</dd>
+<dt>
+Useful link
+</dt>
+<dd>
+<p><a href=https://repl.it/languages/python3>Online Python compiler</a></p>
+</dd>
+</dl>
+<div id=outline-container-headline-2 class=outline-3>
+<h3 id=headline-2>
+Key differences from Java
+</h3>
+<div id=outline-text-headline-2 class=outline-text-3>
+<ul>
+<li>
+<p>Do not bother with a class unless you actually want to make an object.</p>
+</li>
+<li>
+<p>Functions do not need return types (or parameter types).</p>
+</li>
+<li>
+<p>Indentations matter, not <code class=verbatim>{}</code>; begin functions with <code class=verbatim>:</code> and end by unindenting.</p>
+</li>
+<li>
+<p>Strings can be inside <code class=verbatim>""</code> or <code class=verbatim>''</code>; comments begin with <code class=verbatim>#</code>, and no semicolons are needed.</p>
+</li>
+</ul>
+<div id=outline-container-headline-3 class=outline-4>
+<h4 id=headline-3>
+Control flow
+</h4>
+<div id=outline-text-headline-3 class=outline-text-4>
+<p>Conditions and loops have the same indentation rules as functions.
+For loops are actually for each loops. Therefore some iterables objects are needed to iterate over (list, string, etc).</p>
+</div>
+</div>
+<div id=outline-container-headline-4 class=outline-4>
+<h4 id=headline-4>
+Operators
+</h4>
+<div id=outline-text-headline-4 class=outline-text-4>
+<ul>
+<li>
+<p>There is not <code class=verbatim>++</code> operator. Use <code class=verbatim>+=1</code> instead.</p>
+</li>
+<li>
+<p><code class=verbatim>is</code> operator is Java's <code class=verbatim>==</code>.</p>
+</li>
+<li>
+<p><code class=verbatim>==</code> operator is Java's <code class=verbatim>.equals()</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div id=outline-container-headline-5 class=outline-4>
+<h4 id=headline-5>
+Reading files
+</h4>
+<div id=outline-text-headline-5 class=outline-text-4>
+<div class="src src-python">
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>with</span> <span style=color:#8be9fd;font-style:italic>open</span>(<span style=color:#f1fa8c>&#39;[filename]&#39;</span>, <span style=color:#f1fa8c>&#39;[mode]&#39;</span>) <span style=color:#ff79c6>as</span> f: <span style=color:#6272a4># closes automatically when you unindent.</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>    <span style=color:#ff79c6>for</span> line <span style=color:#ff79c6>in</span> f:
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span> <span style=color:#8be9fd;font-style:italic>print</span>(line)</code></pre></div>
+</div>
+</div>
+</div>
+<div id=outline-container-headline-6 class=outline-4>
+<h4 id=headline-6>
+import
+</h4>
+<div id=outline-text-headline-6 class=outline-text-4>
+<p><code class=verbatim>import</code> is used to get access to any codes beyond the basic.</p>
+<div class="src src-python">
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span> <span style=color:#ff79c6>import</span> math <span style=color:#6272a4># to get access to some math functions</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id=outline-container-headline-7 class=outline-2>
+<h2 id=headline-7>
+Think AI at different levels
+</h2>
+<div id=outline-text-headline-7 class=outline-text-2>
+<ol>
+<li>
+<p>AI in movies</p>
+</li>
+<li>
+<p>AI in reality</p>
+</li>
+<li>
+<p>AI in "theory"</p>
+</li>
+<li>
+<p>AI implementation</p>
+</li>
+</ol>
+<div id=outline-container-headline-8 class=outline-3>
+<h3 id=headline-8>
+Big idea in AI: State space
+</h3>
+<div id=outline-text-headline-8 class=outline-text-3>
+<p>The search problem is to find a solution path from a state in $I$ to a state in $G$. Optionally minimize the cost of the solution</p>
+<dl>
+<dt>
+State space
+</dt>
+<dd>
+<p>$S$, all valid configurations</p>
+</dd>
+<dt>
+Initial states
+</dt>
+<dd>
+<p>$I \in S$</p>
+</dd>
+<dt>
+Goal states
+</dt>
+<dd>
+<p>$G \in S$</p>
+</dd>
+<dt>
+Successor function
+</dt>
+<dd>
+<p>succs($s$) $\in S$, states reachable in one step from $s$.</p>
+</dd>
+<dt>
+Cost
+</dt>
+<dd>
+<p>cost(path) = $\sum_{(\textrm{edge} \in \textrm{path})} \textrm{Cost(edge)}$</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div id=outline-container-headline-9 class=outline-2>
+<h2 id=headline-9>
+Hill Climbing
+</h2>
+<div id=outline-text-headline-9 class=outline-text-2>
+<div id=outline-container-headline-10 class=outline-3>
+<h3 id=headline-10>
+Optimization problems
+</h3>
+<div id=outline-text-headline-10 class=outline-text-3>
+<ul>
+<li>
+<p>Each state $s$ has a <code class=verbatim>score</code> $f(s)$ that we can compute.</p>
+</li>
+<li>
+<p>The goal is to find the state with the <code class=verbatim>highest score</code>, or a reasonably high score.</p>
+</li>
+<li>
+<p>Do not care about path.</p>
+</li>
+</ul>
+<div id=outline-container-headline-11 class=outline-4>
+<h4 id=headline-11>
+Why?
+</h4>
+<div id=outline-text-headline-11 class=outline-text-4>
+<ul>
+<li>
+<p>Hard to know the goal state</p>
+</li>
+<li>
+<p>Hard to know successor state</p>
+</li>
+<li>
+<p>Hard to enumerate</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id=outline-container-headline-12 class=outline-3>
+<h3 id=headline-12>
+Idea
+</h3>
+<div id=outline-text-headline-12 class=outline-text-3>
+<p>Starting from some state $s$, and move to a neighbor $t$ with better score. Repeat this process.</p>
+<dl>
+<dt>
+Neighbor
+</dt>
+<dd>
+<p>You have to define it, also known as <code class=verbatim>move set</code>. It is similar to successor function.</p>
+</dd>
+<dt>
+Neighborhood
+</dt>
+<dd>
+<p>A set of neighbors of a given state. A neighborhood bust be small enough for efficiency.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div id=outline-container-headline-13 class=outline-3>
+<h3 id=headline-13>
+Neighbor picking
+</h3>
+<div id=outline-text-headline-13 class=outline-text-3>
+<p>If no neighbor is better than the current state, i.e. $f(s)$ is worse, then do nothing. Otherwise pick the best one (greedy).</p>
+</div>
+</div>
+<div id=outline-container-headline-14 class=outline-3>
+<h3 id=headline-14>
+Algorithm
+</h3>
+<div id=outline-text-headline-14 class=outline-text-3>
+<div class="src src-python">
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>  s <span style=color:#ff79c6>=</span> initial_state() <span style=color:#6272a4># pick the initial state s</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>  <span style=color:#ff79c6>while</span> <span style=color:#ff79c6>True</span>:
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>neighbors <span style=color:#ff79c6>=</span> get_neighbors(s) <span style=color:#6272a4># generate all neighbors</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>best <span style=color:#ff79c6>=</span> best_neighbor(neighbor) <span style=color:#6272a4># pick the neighbor with the best f score</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#ff79c6>if</span> f_score(best) <span style=color:#ff79c6>&lt;=</span> f_score(s):
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>   <span style=color:#ff79c6>return</span> s
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span>s <span style=color:#ff79c6>=</span> best</code></pre></div>
+</div>
+<p>This is very greedy. Easily stuck.</p>
+</div>
+</div>
+<div id=outline-container-headline-15 class=outline-3>
+<h3 id=headline-15>
+Local optima in hill climbing
+</h3>
+<div id=outline-text-headline-15 class=outline-text-3>
+<p>We want global optimum. There can many local optima, which we do not want.<br>
+$s$ is local minimum if $\forall t \in \textrm{succ}(s), f(s) &lt; f(t)$. <br>
+$s$ is global minimum if $\forall t \in S, f(s) &lt; f(t)$</p>
+</div>
+</div>
+<div id=outline-container-headline-16 class=outline-3>
+<h3 id=headline-16>
+Repeated hill climbing with random restarts
+</h3>
+<div id=outline-text-headline-16 class=outline-text-3>
+<p>When stuck, pick a random new start. run basic hill climbing from there. Repeat this process for $k$ times. Then return the best of the $k$ local optima. This can be very effective, and should be tried whenever hill climbing is used.</p>
+</div>
+</div>
+</div>
+</div>
+<div id=outline-container-headline-17 class=outline-2>
+<h2 id=headline-17>
+Basic Probability and Statistics
+</h2>
+<div id=outline-text-headline-17 class=outline-text-2>
+<p>Great idea: Uncertainty modeled by probability.
+Probability is the language of uncertainty. It is the central pillar of modern day artificial intelligence.</p>
+<div id=outline-container-headline-18 class=outline-3>
+<h3 id=headline-18>
+Sample Space
+</h3>
+<div id=outline-text-headline-18 class=outline-text-3>
+<ul>
+<li>
+<p>A space of events that we assign probabilities to.</p>
+</li>
+<li>
+<p>Events can be binary, multi-values, or continuous.</p>
+</li>
+<li>
+<p>Events are mutually exclusive.</p>
+</li>
+<li>
+<p>Examples</p>
+<ul>
+<li>
+<p>Coin flip: {head, tail}</p>
+</li>
+<li>
+<p>Die roll: {1, 2, 3, 4, 5, 6}</p>
+</li>
+<li>
+<p>English words: a dictionary</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id=outline-container-headline-19 class=outline-3>
+<h3 id=headline-19>
+Random Variable
+</h3>
+<div id=outline-text-headline-19 class=outline-text-3>
+<p>A variable, $x$, whose domain is the sample space, and whose value is somewhat uncertain.
+Examples:</p>
+<ul>
+<li>
+<p>x = coin flip outcome</p>
+</li>
+<li>
+<p>x = first word in tomorrow's headline news</p>
+</li>
+<li>
+<p>x = tomorrow's temperature</p>
+</li>
+</ul>
+</div>
+</div>
+<div id=outline-container-headline-20 class=outline-3>
+<h3 id=headline-20>
+Axioms of probability
+</h3>
+<div id=outline-text-headline-20 class=outline-text-3>
+<ul>
+<li>
+<p>$P(A) \in [0, 1]$</p>
+</li>
+<li>
+<p>$P(\textrm{True}) = 1$, $P(\textrm{False}) = 0$.</p>
+</li>
+<li>
+<p>$P(A \cup B) = P(A) + P(B) - P(A \cap B)$</p>
+</li>
+</ul>
+</div>
+</div>
+<div id=outline-container-headline-21 class=outline-3>
+<h3 id=headline-21>
+Coin
+</h3>
+<div id=outline-text-headline-21 class=outline-text-3>
+<p>A coin has 2 sides, head and tail. The probability of getting a head, when flipping a coin, is denoted as $P(H)$, and the probability of getting a tail is $P(T)$. And $P(H) + P(T) = 1$ since getting a head and getting a tail are the only two options, assuming the coin cannot stand. If the a coin is fair, then $P(H) = P(T) = \frac{1}{2}$. Otherwise, $P(H) = p \in [0, 1], P(T) = 1 - p$.</p>
+</div>
+</div>
+<div id=outline-container-headline-22 class=outline-3>
+<h3 id=headline-22>
+Law of large numbers
+</h3>
+<div id=outline-text-headline-22 class=outline-text-3>
+<p>Flip a coin N times, let the outcomes be $x_1 \in \{H, T\}, x_2 \in \{H, T\}, ..., x_N \in \{H, T\}$. There is a indicator function called $\mathbb{I}$:
+\begin{align*}
+\mathbb{I}[Z] =
+\begin{cases}
+1,& \text{if } Z \text{ is True}\\
+0,& \text{if } Z \text{ is False}
+\end{cases}
+\text{ Where } Z \text{ is a boolean function}
+\end{align*}
+Then,
+\begin{align*}
+lim<sub>N → ∞</sub> \frac{∑^N<sub>i=1</sub>\mathbb{I}[x_i = H]}{N} = p
+\end{align*}
+$p$ is the frequency interpretation of probability.</p>
+</div>
+</div>
+<div id=outline-container-headline-23 class=outline-3>
+<h3 id=headline-23>
+Die
+</h3>
+<div id=outline-text-headline-23 class=outline-text-3>
+<p>Given a fair die that has 6 faces, the probability of getting each face after a roll is the same, $\frac{1}{6}$. However, if a die is loaded, or unfair, then the probability of getting each face, $P_1 ... P_6$ is $\sum^6_{j=1}P_j = 1, P_j \in [0, 1], j=1...6$. The outcome of a die rolling is $x \in \{1, 2, 3, 4, 5, 6\}$. Then,
+\begin{align*}
+lim<sub>N → ∞</sub> \frac{∑^N<sub>i=1</sub>\mathbb{I}[x_i = j]}{N} = p_j \text{, for } j = 1 … 6
+\end{align*}</p>
+</div>
+</div>
+<div id=outline-container-headline-24 class=outline-3>
+<h3 id=headline-24>
+Joint probability
+</h3>
+<div id=outline-text-headline-24 class=outline-text-3>
+<p>$P(A, B)$ → Both events $A$ and $B$ are true.</p>
+</div>
+</div>
+<div id=outline-container-headline-25 class=outline-3>
+<h3 id=headline-25>
+Negation (complement)
+</h3>
+<div id=outline-text-headline-25 class=outline-text-3>
+<p>$\bar{A} = \neg A = A^c$ <br>
+$P(\bar{A}) = 1 - P(A)$</p>
+</div>
+</div>
+<div id=outline-container-headline-26 class=outline-3>
+<h3 id=headline-26>
+Marginalization
+</h3>
+<div id=outline-text-headline-26 class=outline-text-3>
+<p>$P(A, B) + P(\bar{A}, B) = P(B)$</p>
+</div>
+</div>
+<div id=outline-container-headline-27 class=outline-3>
+<h3 id=headline-27>
+Conditional Probability
+</h3>
+<div id=outline-text-headline-27 class=outline-text-3>
+<p>$P(A|B)$ is the probability of A given B (is observed).
+\begin{align*}
+P(A | B) = \frac{P(A, B)}{P(B)} = \frac{P(A, B)}{P(A, B) + P(\bar{A} + B)}
+\end{align*}</p>
+<div id=outline-container-headline-28 class=outline-4>
+<h4 id=headline-28>
+Bayes Rule
+</h4>
+<div id=outline-text-headline-28 class=outline-text-4>
+<p>\begin{align*}
+P(F|H) &= \frac{P(F, H)}{P(H)} <br>
+P(H|F) &= \frac{P(H, F)}{P(F)} = \frac{P(F, H)}{P(F)}<br>
+P(F, H) &= P(H|F)P(F) <br>
+\frac{P(F, H)}{P(H)} &= \frac{P(H|F)P(F)}{P(H)} <br>
+P(F|H) &= \frac{P(F, H)}{P(H)} = \frac{P(H|F)P(F)}{P(H)}
+\end{align*}</p>
+</div>
+</div>
+</div>
+</div>
+<div id=outline-container-headline-29 class=outline-3>
+<h3 id=headline-29>
+Independence
+</h3>
+<div id=outline-text-headline-29 class=outline-text-3>
+<p>Two events A, B are <code class=verbatim>independent</code> if:</p>
+<ul>
+<li>
+<p>P(A, B) = P(A) * P(B)</p>
+</li>
+<li>
+<p>P(A | B) = P(A)</p>
+</li>
+<li>
+<p>P(B | A) = P(B)</p>
+</li>
+</ul>
+</div>
+</div>
+<div id=outline-container-headline-30 class=outline-3>
+<h3 id=headline-30>
+Conditional Independence
+</h3>
+<div id=outline-text-headline-30 class=outline-text-3>
+<p>Random variables can be dependent, but conditionally independent.
+In general, A, B are conditionally independent given C if</p>
+<ul>
+<li>
+<p>P(A|B, C) = P(A | C) or</p>
+</li>
+<li>
+<p>P(B|A, C) = P(B | C) or</p>
+</li>
+<li>
+<p>P(A, B|C) = P(A|C) * P(B|C)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id=outline-container-headline-31 class=outline-2>
+<h2 id=headline-31>
+Tuning set
+</h2>
+<div id=outline-text-headline-31 class=outline-text-2>
+<p>To minimize over-fitting, we can use a <span style=text-decoration:underline>tuning set</span>.</p>
+<ol>
+<li>
+<p>We get a labeled data set $(x_1, y_1) \cdot \cdot \cdot (x_N, y_N)$.</p>
+</li>
+<li>
+<p>Randomly split the data set into 3 sets.</p>
+<ol>
+<li>
+<p>First, shuffle those N data items</p>
+</li>
+<li>
+<p>Take some fraction (e.g. 60%) of the shuffled item, and call them <code class=verbatim>training set</code></p>
+</li>
+<li>
+<p>Take another fraction (e.g. 20%), and call them <code class=verbatim>tuning set</code></p>
+</li>
+<li>
+<p>The remaining items are <code class=verbatim>test set</code></p>
+</li>
+<li>
+<p>You want the <code class=verbatim>training set</code> to be large enough, but you also want the <code class=verbatim>tuning set</code> and the <code class=verbatim>test set</code> to be not so small</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Train $\hat{\beta}^{(0)}, \hat{\beta}^{(1)}, \cdot\cdot\cdot \hat{\beta}^{(n-1)}$ on <code class=verbatim>training set</code>. </p>
+</li>
+<li>
+<p>Measure their <code class=verbatim>tuning set</code> MSE.</p>
+<ol>
+<li>
+<p>Pick the best model, using</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>\begin{align*}
+\hat{j}^* = argmin<sub>j = 0…n-1</sub> [\textrm{tuning-set MSE}(\hat{β}<sup>(j)</sup>)]
+\end{align*}
+where
+\begin{align*}
+\textrm{tuning-set MSE}(\hat{β}<sup>(j)</sup>) = \textrm{average of }L(x, y, \hat{β}<sup>(j)</sup>)\textrm{on tuning points } (x, y)
+\end{align*}</p>
+<ol>
+<li>
+<p>We pick model $\hat{\beta}^{\hat{j}^*}$</p>
+</li>
+</ol>
+<ol>
+<li>
+<p>We report <code class=verbatim>test-set</code> MSE with model $\hat{\beta}^{\hat{j}^*}$.</p>
+</li>
+</ol>
+</div>
+</div>
+<div id=outline-container-headline-32 class=outline-2>
+<h2 id=headline-32>
+K nearest neighbor classifier
+</h2>
+<div id=outline-text-headline-32 class=outline-text-2>
+<div id=outline-container-headline-33 class=outline-3>
+<h3 id=headline-33>
+Recall
+</h3>
+<div id=outline-text-headline-33 class=outline-text-3>
+<ol>
+<li>
+<p>Unsupervised Learning, Data: $x_1 \cdot\cdot\cdot x_n$</p>
+<ol>
+<li>
+<p>Dimension Reduction</p>
+</li>
+<li>
+<p>Clustering</p>
+</li>
+</ol>
+</li>
+</ol>
+<ol>
+<li>
+<p>HAC</p>
+</li>
+<li>
+<p>kmeans</p>
+</li>
+</ol>
+<ol>
+<li>
+<p>Supervised, Training Data $(x_i, y_i), i \in [1, n]$</p>
+<ol>
+<li>
+<p>Regression, $y \in R$</p>
+</li>
+<li>
+<p>Classification, $y$ discrete finite "classes"</p>
+</li>
+</ol>
+</li>
+</ol>
+<ol>
+<li>
+<p>Naive Bayes</p>
+</li>
+<li>
+<p>KNN</p>
+</li>
+</ol>
+</div>
+</div>
+<div id=outline-container-headline-34 class=outline-3>
+<h3 id=headline-34>
+KNN algorithm
+</h3>
+<div id=outline-text-headline-34 class=outline-text-3>
+<dl>
+<dt>
+input 1
+</dt>
+<dd>
+<p>$(x_1, y_1) \cdot\cdot\cdot (x_n, y_n),\textrm{ where } x_i \in R^d, y_i \textrm{ is a class label}$</p>
+</dd>
+<dt>
+input 2
+</dt>
+<dd>
+<p>A distance function, $dist(x, x')$. e.g. Euclidean distance $|x - x'|$</p>
+</dd>
+</dl>
+<ol>
+<li>
+<p>Given a new item $x \in R^d$, find the K nearest neighbors of x in the training set under $dist()$.</p>
+</li>
+<li>
+<p>Predict a label $\hat{y}$ as the majority label of the K nearest neighbor. (Break tie arbitrarily).</p>
+</li>
+</ol>
+</div>
+</div>
+<div id=outline-container-headline-35 class=outline-3>
+<h3 id=headline-35>
+Classification vs. Clustering
+</h3>
+<div id=outline-text-headline-35 class=outline-text-3>
+<p><img src=./classification.jpeg alt=./classification.jpeg title=./classification.jpeg></p>
+<p><img src=./clustering.jpeg alt=./clustering.jpeg title=./clustering.jpeg></p>
+</div>
+</div>
+<div id=outline-container-headline-36 class=outline-3>
+<h3 id=headline-36>
+Terminology
+</h3>
+<div id=outline-text-headline-36 class=outline-text-3>
+<dl>
+<dt>
+0-1 Loss function
+</dt>
+<dd>
+<p>$L(x, y, \hat{y}) = \begin{cases} 1, & \text{if}\ y \neq \hat{y} \text{ mis-prediction} \\ 0, & \text{if } y = \hat{y}\end{cases} = \textrm{Indicator}[y_i \neq \hat{y_i}]$, where $\hat{y}$ is the predicted label</p>
+</dd>
+<dt>
+Training Set Error (rate)
+</dt>
+<dd>
+<p>
+Training set = $(x_1, y_1) \cdot\cdot\cdot (x_n, y_n)$
+\begin{align*}
+\frac{1}{n}∑<sup>n</sup><sub>i=1</sub>L(x_i, y_i, \hat{y_i}) = \frac{1}{n}∑<sup>n</sup><sub>i=1</sub>\textrm{Indicator}[y_i ≠q \hat{y_i}]
+\end{align*}</p>
+</dd>
+<dt>
+Test Set Error
+</dt>
+<dd>
+<p>
+Test set = $(x_{n + 1}, y_{n + 1}) \cdot\cdot\cdot (x_{n + m}, y_{n + m})$
+\begin{align*}
+\frac{1}{n}∑<sup>n + m</sup><sub>i=n+1</sub>\textrm{Indicator}[y_i ≠q \hat{y_i}]
+\end{align*}</p>
+</dd>
+<dt>
+Why do we need a test set?
+</dt>
+<dd>
+<p>
+Machine learning assumes an underlying joint distribution
+\begin{align*}
+p(x, y) \text{ , unknown but fixed}
+\end{align*}
+Training set is an independent and identically-distributed (i.i.d) sample from $p$.
+\begin{align*}
+(x_i, y_i) \textrm{<code>} p(x, y) \\
+(x_n, y_n) \textrm{</code>} p(x, y)
+\end{align*}
+Test set is also an iid sample from $p$. Test set and Training set have the same underlying distribution. The future item that will be applied to the model also has the same underlying distribution.</p>
+</dd>
+<dt>
+True error
+</dt>
+<dd>
+<p>
+\begin{align*}
+\textrm{EXP}_{(x, y) \textrm{~} p(x, y)} \textrm{Indicator}[y_i ≠q \hat{y_i}] \text{ not computable}
+\end{align*}
+Since we cannot compute this true error, we use test set to evaluate the model.</p>
+</dd>
+<dt>
+Accuracy
+</dt>
+<dd>
+<p>
+\begin{align*}
+\textrm{Accuracy} = 1 - \textrm{error}
+\end{align*}</p>
+</dd>
+</dl>
+</div>
+</div>
+<div id=outline-container-headline-37 class=outline-3>
+<h3 id=headline-37>
+How to choose k?
+</h3>
+<div id=outline-text-headline-37 class=outline-text-3>
+<div id=outline-container-headline-38 class=outline-4>
+<h4 id=headline-38>
+Method 1: Use a tuning set
+</h4>
+<div id=outline-text-headline-38 class=outline-text-4>
+<ol>
+<li>
+<p>randomly shuffle</p>
+</li>
+<li>
+<p>split into training, tuning, and test set.</p>
+</li>
+<li>
+<p>$\hat{k} = \textrm{argmin}_{k = 1, 2, ...}$ [tuning error with respect to kNN predictions (from training set)]</p>
+</li>
+<li>
+<p>report $\hat{k}NN$ prediction (from training set)'s test error.</p>
+</li>
+</ol>
+<p>If you use training error on kNN, then the training error is going to favor $k = 1$.</p>
+</div>
+</div>
+<div id=outline-container-headline-39 class=outline-4>
+<h4 id=headline-39>
+Method 2: Cross Validation
+</h4>
+<div id=outline-text-headline-39 class=outline-text-4>
+<ul>
+<li>
+<p>Start with full dataset, $(x_1, y_1) \cdot\cdot\cdot (x_N, y_N) \textrm{~} p$, split to two sets. The second set is test set</p>
+</li>
+<li>
+<p>K-fold Cross Validation</p>
+<ul>
+<li>
+<p>Evenly split the first set into $k$ folds, $\textrm{fold }1 \cdot\cdot\cdot \textrm{fold }k$</p>
+</li>
+<li>
+<p>For $i = 1 \cdot\cdot\cdot k$ </p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p>use fold $i$ as the tuning set</p>
+</li>
+<li>
+<p>and folds $1\cdot\cdot\cdot k$ excepts $i$ as the training set</p>
+</li>
+<li>
+<p>get tuning error $E_i$</p>
+<ul>
+<li>
+<p>Pick the model parameter ($k$ in $kNN$)</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>\begin{align*}
+\hat{k}<sub>kNN</sub> = \textrm{argmin}_{k<sub>kNN</sub>}\frac{1}{k_{\textrm{fold}}}∑^{k<sub>fold</sub>}<sub>i = 1</sub>E_i
+\end{align*}</p>
+<ul>
+<li>
+<p>In practice, $k \in [5, 10]$</p>
+</li>
+<li>
+<p>Retrain model on all folds as training set</p>
+</li>
+<li>
+<p>Report test set error</p>
+</li>
+<li>
+<p>Train $k+1$ times total</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id=outline-container-headline-40 class=outline-2>
+<h2 id=headline-40>
+Logistic Regression
+</h2>
+<div id=outline-text-headline-40 class=outline-text-2>
+<div id=outline-container-headline-41 class=outline-3>
+<h3 id=headline-41>
+Recall
+</h3>
+<div id=outline-text-headline-41 class=outline-text-3>
+<ol>
+<li>
+<p>Supervised, Training Data $(x_i, y_i), i \in [1, n]$</p>
+<ol>
+<li>
+<p>Regression, $y \in R$</p>
+</li>
+</ol>
+</li>
+</ol>
+<ol>
+<li>
+<p>Linear Regression</p>
+<ul>
+<li>
+<p>$y = x^Tw + \epsilon, y \in R, x \in R^(d+1), x = \begin{bmatrix} 1\\.\\.\\.\\x_d\end{bmatrix}, w = \begin{bmatrix} w_0\\.\\.\\.\\w_d\end{bmatrix}$</p>
+<ol>
+<li>
+<p>Classification, $y$ discrete finite "classes"</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>Naive Bayes</p>
+</li>
+<li>
+<p>KNN</p>
+</li>
+<li>
+<p>Logistic Regression</p>
+</li>
+</ol>
+</div>
+</div>
+<div id=outline-container-headline-42 class=outline-3>
+<h3 id=headline-42>
+Logistic Regression
+</h3>
+<div id=outline-text-headline-42 class=outline-text-3>
+<dl>
+<dt>
+Input (Training data)
+</dt>
+<dd>
+<p>
+$(x_1, y_1) \cdot\cdot\cdot (x_n, y_n)$ where
+\begin{align*}
+&x_i = \begin{bmatrix} 1\\x_{i1}\\.\\.\\.\\x_{id}\end{bmatrix} ∈ R<sup>d+1</sup> <br>
+&y_i ∈ \{-1, 1\} \text{ binary classification or}, <br>
+&y_i ∈ \{1, 2, 3, ⋅⋅⋅, k\} k\text{-classes}
+\end{align*}</p>
+</dd>
+</dl>
+<p>Let's start with binary classification</p>
+</div>
+</div>
+<div id=outline-container-headline-43 class=outline-3>
+<h3 id=headline-43>
+Binary Classification
+</h3>
+<div id=outline-text-headline-43 class=outline-text-3>
+<p>Try to estimate conditional probability
+\begin{align*}
+P_w(y=1|x) = \frac{1}{1 + exp(-x^Tw)} \text{ Sigmoid function}
+\end{align*}
+if $x^T = 0, \frac{1}{1 + e^{-0}} = \frac{1}{1 + 1} = \frac{1}{2}$ <br>
+if $x^T = \infty, \frac{1}{1 + e^{-\infty}} = \frac{1}{1 + 0} = 1$ <br>
+if $x^T = -\infty, \frac{1}{1 + e^{\infty}} = \frac{1}{1 + \infty} = 0$ <br>
+$x^Tw$ represents how strongly is the label going to be 1.
+\begin{align*}
+P_w(y=1|x) = 1 - P_w(y=1, x)
+\end{align*}
+For $y \in \{-1, 1\}$, binary classification $P_w(y|x) = \frac{1}{1+e^{-yx^Tw}}$</p>
+</div>
+</div>
+<div id=outline-container-headline-44 class=outline-3>
+<h3 id=headline-44>
+Training
+</h3>
+<div id=outline-text-headline-44 class=outline-text-3>
+<dl>
+<dt>
+Training
+</dt>
+<dd>
+<p>Estimate $s \in R^{d+1}$ from training data (more later)</p>
+</dd>
+<dt>
+Prediction
+</dt>
+<dd>
+<p>Given a new item $x \in R^{d+1}$, predict its label</p>
+</dd>
+</dl>
+<p>\begin{align*}
+\hat{y} = \textrm{argmax}_yP_w(y|x)
+\end{align*}</p>
+</div>
+</div>
+<div id=outline-container-headline-45 class=outline-3>
+<h3 id=headline-45>
+K-class Logistic Regression
+</h3>
+<div id=outline-text-headline-45 class=outline-text-3>
+<p>$y \in {1, 2, 3, \cdot\cdot\cdot, k}$
+$w^{(1)} = \begin{bmatrix} w^{(1)}_0\\.\\.\\.\\w^{(1)}_d\end{bmatrix}$ <br>
+$w^{(2)} = \begin{bmatrix} w^{(2)}_0\\.\\.\\.\\w^{(2)}_d\end{bmatrix}$ <br>
+… <br>
+$w^{(k-1)} = \begin{bmatrix} w^{(k-1)}_0\\.\\.\\.\\w^{(k-1)}_d\end{bmatrix}$ <br>
+$w^{(k)} = \begin{bmatrix} 0\\.\\.\\.\\0\end{bmatrix}$ <br>
+$P_w(y|x) = \frac{e^{x^Tw^{(j)}}}{\sum^{K}_{k=1}e^{x^Tw^{(k)}}}$, where $w$ is a collection of $w^{(1)}, \cdot\cdot\cdot, w^{(k)}$</p>
+</div>
+</div>
+<div id=outline-container-headline-46 class=outline-3>
+<h3 id=headline-46>
+Example
+</h3>
+<div id=outline-text-headline-46 class=outline-text-3>
+<p><img src=./k_class_example.png alt=./k_class_example.png title=./k_class_example.png></p>
+</div>
+</div>
+</div>
+</div>
+<div class=footnotes>
+<hr class=footnotes-separatator>
+<div class=footnote-definitions>
+<div class=footnote-definition>
+<sup id=footnote-1><a href=#footnote-reference-1>1</a></sup>
+<div class=footnote-body>
+<p>The whole note is based on and is coming from the course materials of <a href=http://pages.cs.wisc.edu/~jerryzhu/cs540.html>COMP SCI 540</a> by Professor Jerry Zhu and Hobbes LeGault.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<div id=footer-post-container>
+<div id=footer-post>
+<div id=nav-footer style=display:none>
+<ul>
+<li><a href=/>Home</a></li>
+<li><a href=/posts>Writings</a></li>
+<li><a href=/tags>Tags</a></li>
+<li><a href=/about>About</a></li>
+<li><a href=https://archive.casouri.cat>BHL0388</a></li>
+</ul>
+</div>
+<div id=toc-footer style=display:none>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#headline-1>Basic Python, comparing to Java <sup class=footnote-reference>1</sup></a>
+<ul>
+<li><a href=#headline-2>Key differences from Java </a>
+<ul>
+<li><a href=#headline-3>Control flow</a>
+</li>
+<li><a href=#headline-4>Operators</a>
+</li>
+<li><a href=#headline-5>Reading files</a>
+</li>
+<li><a href=#headline-6>import</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href=#headline-7>Think AI at different levels</a>
+<ul>
+<li><a href=#headline-8>Big idea in AI: State space </a>
+</li>
+</ul>
+</li>
+<li><a href=#headline-9>Hill Climbing</a>
+<ul>
+<li><a href=#headline-10>Optimization problems</a>
+<ul>
+<li><a href=#headline-11>Why?</a>
+</li>
+</ul>
+</li>
+<li><a href=#headline-12>Idea</a>
+</li>
+<li><a href=#headline-13>Neighbor picking</a>
+</li>
+<li><a href=#headline-14>Algorithm</a>
+</li>
+<li><a href=#headline-15>Local optima in hill climbing</a>
+</li>
+<li><a href=#headline-16>Repeated hill climbing with random restarts</a>
+</li>
+</ul>
+</li>
+<li><a href=#headline-17>Basic Probability and Statistics</a>
+<ul>
+<li><a href=#headline-18>Sample Space</a>
+</li>
+<li><a href=#headline-19>Random Variable</a>
+</li>
+<li><a href=#headline-20>Axioms of probability</a>
+</li>
+<li><a href=#headline-21>Coin</a>
+</li>
+<li><a href=#headline-22>Law of large numbers</a>
+</li>
+<li><a href=#headline-23>Die</a>
+</li>
+<li><a href=#headline-24>Joint probability</a>
+</li>
+<li><a href=#headline-25>Negation (complement)</a>
+</li>
+<li><a href=#headline-26>Marginalization</a>
+</li>
+<li><a href=#headline-27>Conditional Probability</a>
+<ul>
+<li><a href=#headline-28>Bayes Rule</a>
+</li>
+</ul>
+</li>
+<li><a href=#headline-29>Independence</a>
+</li>
+<li><a href=#headline-30>Conditional Independence</a>
+</li>
+</ul>
+</li>
+<li><a href=#headline-31>Tuning set</a>
+</li>
+<li><a href=#headline-32>K nearest neighbor classifier</a>
+<ul>
+<li><a href=#headline-33>Recall</a>
+</li>
+<li><a href=#headline-34>KNN algorithm</a>
+</li>
+<li><a href=#headline-35>Classification vs. Clustering</a>
+</li>
+<li><a href=#headline-36>Terminology</a>
+</li>
+<li><a href=#headline-37>How to choose k?</a>
+<ul>
+<li><a href=#headline-38>Method 1: Use a tuning set</a>
+</li>
+<li><a href=#headline-39>Method 2: Cross Validation</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href=#headline-40>Logistic Regression</a>
+<ul>
+<li><a href=#headline-41>Recall</a>
+</li>
+<li><a href=#headline-42>Logistic Regression</a>
+</li>
+<li><a href=#headline-43>Binary Classification</a>
+</li>
+<li><a href=#headline-44>Training</a>
+</li>
+<li><a href=#headline-45>K-class Logistic Regression</a>
+</li>
+<li><a href=#headline-46>Example</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+<div id=share-footer style=display:none>
+<ul>
+<li>
+<a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f" aria-label=Facebook>
+<i class="fab fa-facebook fa-lg" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="https://twitter.com/share?url=https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f&text=Introduction%20to%20Artifical%20Intelligence" aria-label=Twitter>
+<i class="fab fa-twitter fa-lg" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f&title=Introduction%20to%20Artifical%20Intelligence" aria-label=Linkedin>
+<i class="fab fa-linkedin fa-lg" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f&is_video=false&description=Introduction%20to%20Artifical%20Intelligence" aria-label=Pinterest>
+<i class="fab fa-pinterest fa-lg" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="mailto:?subject=Introduction%20to%20Artifical%20Intelligence&body=Check out this article: https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f" aria-label=Email>
+<i class="fas fa-envelope fa-lg" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f&title=Introduction%20to%20Artifical%20Intelligence" aria-label=Pocket>
+<i class="fab fa-get-pocket fa-lg" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f&title=Introduction%20to%20Artifical%20Intelligence" aria-label=reddit>
+<i class="fab fa-reddit fa-lg" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f&name=Introduction%20to%20Artifical%20Intelligence&description=Basic%20Python%2c%20comparing%20to%20Java%201%20%20%20%20Why%20are%20we%20using%20python%3f%20%20%20It%20has%20a%20large%20amount%20of%20better%20machine%20learning%20libraries.%0a%20%20Useful%20link%20%20%20Online%20Python%20compiler%0a%20%20Key%20differences%20from%20Java%09%20%20%20Do%20not%20bother%20with%20a%20class%20unless%20you%20actually%20want%20to%20make%20an%20object.%0a%20%20Functions%20do%20not%20need%20return%20types%20%28or%20parameter%20types%29." aria-label=Tumblr>
+<i class="fab fa-tumblr fa-lg" aria-hidden=true></i>
+</a>
+</li>
+<li>
+<a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fychen878.github.io%2fposts%2fcs540%2f&t=Introduction%20to%20Artifical%20Intelligence" aria-label="Hacker News">
+<i class="fab fa-hacker-news fa-lg" aria-hidden=true></i>
+</a>
+</li>
+</ul>
+</div>
+<div id=actions-footer>
+<a id=menu-toggle class=icon href=# onclick="return $('#nav-footer').toggle(),!1" aria-label=Menu>
+<i class="fas fa-bars fa-lg" aria-hidden=true></i> Menu</a>
+<a id=toc-toggle class=icon href=# onclick="return $('#toc-footer').toggle(),!1" aria-label=TOC>
+<i class="fas fa-list fa-lg" aria-hidden=true></i> TOC</a>
+<a id=share-toggle class=icon href=# onclick="return $('#share-footer').toggle(),!1" aria-label=Share>
+<i class="fas fa-share-alt fa-lg" aria-hidden=true></i> share</a>
+<a id=top style=display:none class=icon href=# onclick="$('html, body').animate({scrollTop:0},'fast')" aria-label="Top of Page">
+<i class="fas fa-chevron-up fa-lg" aria-hidden=true></i> Top</a>
+</div>
+</div>
+</div>
+<footer id=footer>
+<div class=footer-left>
+Copyright &copy; 2021 Yi Chen
+</div>
+<div class=footer-right>
+<nav>
+<ul>
+<li><a href=/>Home</a></li>
+<li><a href=/posts>Writings</a></li>
+<li><a href=/tags>Tags</a></li>
+<li><a href=/about>About</a></li>
+<li><a href=https://archive.casouri.cat>BHL0388</a></li>
+</ul>
+</nav>
+</div>
+</footer>
+</div>
+</body>
+<link rel=stylesheet href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+<script src=/js/code-copy.js></script>
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]},svg:{fontCache:'global'}}</script>
+<script type=text/javascript id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script>
+</html>
