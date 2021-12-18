@@ -3,7 +3,7 @@
     {
       "name": "CS 536 Course Project",
       "url": "https://github.com/ychen878/CS536",
-      "desc": "A compiler, including Scanner, Parser, Semantic Analayzer, and Gode Generator."
+      "desc": "A compiler, including Scanner, Parser, Semantic Analyzer, and Code Generator."
     },
     {
       "name":"'B' Compiler",
