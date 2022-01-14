@@ -15,32 +15,14 @@
 <meta name=robots content="all,follow">
 <meta name=googlebot content="index,follow,snippet,archive">
 <meta property="og:title" content="Python后台开发">
-<meta property="og:description" content="环境搭建与入门案例  环境搭建  1pip3 install django==2.2 2pip3 install pymysql 3pip3 install mysqlclient 4pip3 install pillow    主文件夹中的文件    settings.py   总配置文件
-  urls.py   总路由映射文件, 把请求过来的url地址进行分配，分配给不同的handler处理器，处理器处理得到不同的结果，并把结果返回给浏览器
-  wsgi.py   项目部署
-    项目搭建步骤    创建Django项目
-  创建app并在settings中配置
-  创建urls.py并在总路由中配置
-  定义首页视图
-  定义解析器
-  运行manage.py
-    创建app并在settings中配置  1django-admin startapp myapp    通过settings.">
+<meta property="og:description" content="环境搭建与入门案例  环境搭建  1pip3 install django==2.2 2pip3 install pymysql 3pip3 install mysqlclient 4pip3 install pillow    主文件夹中的文件    settings.py  总配置文件  urls.py  总路由映射文件, 把请求过来的url地址进行分配，分配给不同的handler处理器，处理器处理得到不同的结果，并把结果返回给浏览器  wsgi.py  项目部署    项目搭建步骤   创建Django项目 创建app并在settings中配置 创建urls.py并在总路由中配置 定义首页视图 定义解析器 运行manage.py    创建app并在settings中配置  1django-admin startapp myapp   通过settings.py引入创建的app  1INSTALLED_APPS = [ 2 'django.contrib.admin', 3 'django.contrib.auth', 4 'django.contrib.contenttypes', 5 'django.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.mrr1vfe.io/posts/django_note/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2019-06-21T00:00:00+00:00">
 <meta property="article:modified_time" content="2019-06-21T00:00:00+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Python后台开发">
-<meta name=twitter:description content="环境搭建与入门案例  环境搭建  1pip3 install django==2.2 2pip3 install pymysql 3pip3 install mysqlclient 4pip3 install pillow    主文件夹中的文件    settings.py   总配置文件
-  urls.py   总路由映射文件, 把请求过来的url地址进行分配，分配给不同的handler处理器，处理器处理得到不同的结果，并把结果返回给浏览器
-  wsgi.py   项目部署
-    项目搭建步骤    创建Django项目
-  创建app并在settings中配置
-  创建urls.py并在总路由中配置
-  定义首页视图
-  定义解析器
-  运行manage.py
-    创建app并在settings中配置  1django-admin startapp myapp    通过settings.">
+<meta name=twitter:description content="环境搭建与入门案例  环境搭建  1pip3 install django==2.2 2pip3 install pymysql 3pip3 install mysqlclient 4pip3 install pillow    主文件夹中的文件    settings.py  总配置文件  urls.py  总路由映射文件, 把请求过来的url地址进行分配，分配给不同的handler处理器，处理器处理得到不同的结果，并把结果返回给浏览器  wsgi.py  项目部署    项目搭建步骤   创建Django项目 创建app并在settings中配置 创建urls.py并在总路由中配置 定义首页视图 定义解析器 运行manage.py    创建app并在settings中配置  1django-admin startapp myapp   通过settings.py引入创建的app  1INSTALLED_APPS = [ 2 'django.contrib.admin', 3 'django.contrib.auth', 4 'django.contrib.contenttypes', 5 'django.">
 <link rel=stylesheet href=https://www.mrr1vfe.io/css/styles.4c2b9aa1d874d6766f554b2d404e8fd62ab4761f51ee9b3f358d12e81e7fa43a1b4378db995bc1926bbe5ed98c060be5e7bd4f2470504cf94f22b4b3a74e62b6.css integrity="sha512-TCuaodh01nZvVUstQE6P1iq0dh9R7ps/NY0S6B5/pDobQ3jbmVvBkmu+XtmMBgvl571PJHBQTPlPIrSzp05itg=="><!--[if lt IE 9]><script src=https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script>
 <script src=https://oss.maxcdn.com/respond/1.4.2/respond.min.js></script><![endif]-->
 <link rel=icon type=image/png href=https://www.mrr1vfe.io/images/favicon.ico>
@@ -124,7 +106,7 @@
 </a>
 </li>
 <li>
-<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdjango_note%2f&name=Python%e5%90%8e%e5%8f%b0%e5%bc%80%e5%8f%91&description=%e7%8e%af%e5%a2%83%e6%90%ad%e5%bb%ba%e4%b8%8e%e5%85%a5%e9%97%a8%e6%a1%88%e4%be%8b%20%20%e7%8e%af%e5%a2%83%e6%90%ad%e5%bb%ba%20%201pip3%20install%20django%3d%3d2.2%202pip3%20install%20pymysql%203pip3%20install%20mysqlclient%204pip3%20install%20pillow%20%20%20%20%e4%b8%bb%e6%96%87%e4%bb%b6%e5%a4%b9%e4%b8%ad%e7%9a%84%e6%96%87%e4%bb%b6%20%20%20%20settings.py%20%20%20%e6%80%bb%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6%0a%20%20urls.py%20%20%20%e6%80%bb%e8%b7%af%e7%94%b1%e6%98%a0%e5%b0%84%e6%96%87%e4%bb%b6%2c%20%e6%8a%8a%e8%af%b7%e6%b1%82%e8%bf%87%e6%9d%a5%e7%9a%84url%e5%9c%b0%e5%9d%80%e8%bf%9b%e8%a1%8c%e5%88%86%e9%85%8d%ef%bc%8c%e5%88%86%e9%85%8d%e7%bb%99%e4%b8%8d%e5%90%8c%e7%9a%84handler%e5%a4%84%e7%90%86%e5%99%a8%ef%bc%8c%e5%a4%84%e7%90%86%e5%99%a8%e5%a4%84%e7%90%86%e5%be%97%e5%88%b0%e4%b8%8d%e5%90%8c%e7%9a%84%e7%bb%93%e6%9e%9c%ef%bc%8c%e5%b9%b6%e6%8a%8a%e7%bb%93%e6%9e%9c%e8%bf%94%e5%9b%9e%e7%bb%99%e6%b5%8f%e8%a7%88%e5%99%a8%0a%20%20wsgi.py%20%20%20%e9%a1%b9%e7%9b%ae%e9%83%a8%e7%bd%b2%0a%20%20%20%20%e9%a1%b9%e7%9b%ae%e6%90%ad%e5%bb%ba%e6%ad%a5%e9%aa%a4%20%20%20%20%e5%88%9b%e5%bb%baDjango%e9%a1%b9%e7%9b%ae%0a%20%20%e5%88%9b%e5%bb%baapp%e5%b9%b6%e5%9c%a8settings%e4%b8%ad%e9%85%8d%e7%bd%ae%0a%20%20%e5%88%9b%e5%bb%baurls.py%e5%b9%b6%e5%9c%a8%e6%80%bb%e8%b7%af%e7%94%b1%e4%b8%ad%e9%85%8d%e7%bd%ae%0a%20%20%e5%ae%9a%e4%b9%89%e9%a6%96%e9%a1%b5%e8%a7%86%e5%9b%be%0a%20%20%e5%ae%9a%e4%b9%89%e8%a7%a3%e6%9e%90%e5%99%a8%0a%20%20%e8%bf%90%e8%a1%8cmanage.py%0a%20%20%20%20%e5%88%9b%e5%bb%baapp%e5%b9%b6%e5%9c%a8settings%e4%b8%ad%e9%85%8d%e7%bd%ae%20%201django-admin%20startapp%20myapp%20%20%20%20%e9%80%9a%e8%bf%87settings." aria-label=Tumblr>
+<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdjango_note%2f&name=Python%e5%90%8e%e5%8f%b0%e5%bc%80%e5%8f%91&description=%e7%8e%af%e5%a2%83%e6%90%ad%e5%bb%ba%e4%b8%8e%e5%85%a5%e9%97%a8%e6%a1%88%e4%be%8b%20%20%e7%8e%af%e5%a2%83%e6%90%ad%e5%bb%ba%20%201pip3%20install%20django%3d%3d2.2%202pip3%20install%20pymysql%203pip3%20install%20mysqlclient%204pip3%20install%20pillow%20%20%20%20%e4%b8%bb%e6%96%87%e4%bb%b6%e5%a4%b9%e4%b8%ad%e7%9a%84%e6%96%87%e4%bb%b6%20%20%20%20settings.py%20%20%e6%80%bb%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6%20%20urls.py%20%20%e6%80%bb%e8%b7%af%e7%94%b1%e6%98%a0%e5%b0%84%e6%96%87%e4%bb%b6%2c%20%e6%8a%8a%e8%af%b7%e6%b1%82%e8%bf%87%e6%9d%a5%e7%9a%84url%e5%9c%b0%e5%9d%80%e8%bf%9b%e8%a1%8c%e5%88%86%e9%85%8d%ef%bc%8c%e5%88%86%e9%85%8d%e7%bb%99%e4%b8%8d%e5%90%8c%e7%9a%84handler%e5%a4%84%e7%90%86%e5%99%a8%ef%bc%8c%e5%a4%84%e7%90%86%e5%99%a8%e5%a4%84%e7%90%86%e5%be%97%e5%88%b0%e4%b8%8d%e5%90%8c%e7%9a%84%e7%bb%93%e6%9e%9c%ef%bc%8c%e5%b9%b6%e6%8a%8a%e7%bb%93%e6%9e%9c%e8%bf%94%e5%9b%9e%e7%bb%99%e6%b5%8f%e8%a7%88%e5%99%a8%20%20wsgi.py%20%20%e9%a1%b9%e7%9b%ae%e9%83%a8%e7%bd%b2%20%20%20%20%e9%a1%b9%e7%9b%ae%e6%90%ad%e5%bb%ba%e6%ad%a5%e9%aa%a4%20%20%20%e5%88%9b%e5%bb%baDjango%e9%a1%b9%e7%9b%ae%20%e5%88%9b%e5%bb%baapp%e5%b9%b6%e5%9c%a8settings%e4%b8%ad%e9%85%8d%e7%bd%ae%20%e5%88%9b%e5%bb%baurls.py%e5%b9%b6%e5%9c%a8%e6%80%bb%e8%b7%af%e7%94%b1%e4%b8%ad%e9%85%8d%e7%bd%ae%20%e5%ae%9a%e4%b9%89%e9%a6%96%e9%a1%b5%e8%a7%86%e5%9b%be%20%e5%ae%9a%e4%b9%89%e8%a7%a3%e6%9e%90%e5%99%a8%20%e8%bf%90%e8%a1%8cmanage.py%20%20%20%20%e5%88%9b%e5%bb%baapp%e5%b9%b6%e5%9c%a8settings%e4%b8%ad%e9%85%8d%e7%bd%ae%20%201django-admin%20startapp%20myapp%20%20%20%e9%80%9a%e8%bf%87settings.py%e5%bc%95%e5%85%a5%e5%88%9b%e5%bb%ba%e7%9a%84app%20%201INSTALLED_APPS%20%3d%20%5b%202%20%26%2339%3bdjango.contrib.admin%26%2339%3b%2c%203%20%26%2339%3bdjango.contrib.auth%26%2339%3b%2c%204%20%26%2339%3bdjango.contrib.contenttypes%26%2339%3b%2c%205%20%26%2339%3bdjango." aria-label=Tumblr>
 <i class="fab fa-tumblr" aria-hidden=true></i>
 </a>
 </li>
@@ -318,21 +300,15 @@ Python后台开发
 <dt>
 settings.py
 </dt>
-<dd>
-<p>总配置文件</p>
-</dd>
+<dd>总配置文件</dd>
 <dt>
 urls.py
 </dt>
-<dd>
-<p>总路由映射文件, 把请求过来的url地址进行分配，分配给不同的handler处理器，处理器处理得到不同的结果，并把结果返回给浏览器</p>
-</dd>
+<dd>总路由映射文件, 把请求过来的url地址进行分配，分配给不同的handler处理器，处理器处理得到不同的结果，并把结果返回给浏览器</dd>
 <dt>
 wsgi.py
 </dt>
-<dd>
-<p>项目部署</p>
-</dd>
+<dd>项目部署</dd>
 </dl>
 </div>
 </div>
@@ -342,24 +318,12 @@ wsgi.py
 </h3>
 <div id=outline-text-headline-4 class=outline-text-3>
 <ol>
-<li>
-<p>创建Django项目</p>
-</li>
-<li>
-<p>创建app并在settings中配置</p>
-</li>
-<li>
-<p>创建urls.py并在总路由中配置</p>
-</li>
-<li>
-<p>定义首页视图</p>
-</li>
-<li>
-<p>定义解析器</p>
-</li>
-<li>
-<p>运行manage.py</p>
-</li>
+<li>创建Django项目</li>
+<li>创建app并在settings中配置</li>
+<li>创建urls.py并在总路由中配置</li>
+<li>定义首页视图</li>
+<li>定义解析器</li>
+<li>运行manage.py</li>
 </ol>
 </div>
 </div>
@@ -372,9 +336,7 @@ wsgi.py
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>django-admin startapp myapp</code></pre></div>
 </div>
 <ul>
-<li>
-<p>通过settings.py引入创建的app</p>
-</li>
+<li>通过settings.py引入创建的app</li>
 </ul>
 <div class="src src-python">
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>INSTALLED_APPS <span style=color:#ff79c6>=</span> [
@@ -395,12 +357,8 @@ wsgi.py
 </h3>
 <div id=outline-text-headline-6 class=outline-text-3>
 <ul>
-<li>
-<p>在myapp文件夹中创建一个python文件, urls.py </p>
-</li>
-<li>
-<p>在总路由urls.py中添加</p>
-</li>
+<li>在myapp文件夹中创建一个python文件, urls.py </li>
+<li>在总路由urls.py中添加</li>
 </ul>
 <div class="src src-python">
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>from</span> django.urls <span style=color:#ff79c6>import</span> path, include
@@ -571,25 +529,19 @@ wsgi.py
 </h2>
 <div id=outline-text-headline-14 class=outline-text-2>
 <ol>
-<li>
-<p>导入</p>
-</li>
+<li>导入</li>
 </ol>
 <div class="src src-python">
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>from</span> django.shortcuts <span style=color:#ff79c6>import</span> reverse</code></pre></div>
 </div>
 <ol>
-<li>
-<p>无参处理器解析</p>
-</li>
+<li>无参处理器解析</li>
 </ol>
 <div class="src src-python">
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>reverse(<span style=color:#f1fa8c>&#39;[命名]&#39;</span>)</code></pre></div>
 </div>
 <ol>
-<li>
-<p>有参处理器解析</p>
-</li>
+<li>有参处理器解析</li>
 </ol>
 <div class="src src-python">
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>reverse(<span style=color:#f1fa8c>&#39;[命名]&#39;</span>, args<span style=color:#ff79c6>=</span>([参数1], [参数2], <span style=color:#ff79c6>...</span>))</code></pre></div>
@@ -650,46 +602,26 @@ request对象HttpRequest
 </tbody>
 </table>
 <ul>
-<li>
-<p>GET请求会讲数据放在url中</p>
-</li>
-<li>
-<p>POST请求会把数据封装在header里面，并加密</p>
-</li>
-<li>
-<p>POST更安全，对于表单提交和敏感数据，通常使用POST请求</p>
-</li>
+<li>GET请求会讲数据放在url中</li>
+<li>POST请求会把数据封装在header里面，并加密</li>
+<li>POST更安全，对于表单提交和敏感数据，通常使用POST请求</li>
 <li>
 <p>META的CONTENT_ TYPE请求正文的MIME类型</p>
 <ol>
-<li>
-<p>text/html HTML</p>
-</li>
-<li>
-<p>text/plain 普通文本</p>
-</li>
-<li>
-<p>application/json Json</p>
-</li>
+<li>text/html HTML</li>
+<li>text/plain 普通文本</li>
+<li>application/json Json</li>
 </ol>
 </li>
 <li>
 <p>Python字典和Json的区别</p>
 <ol>
-<li>
-<p>Python使用None表示空，Json使用Null</p>
-</li>
-<li>
-<p>Json中的true和false首字母小写</p>
-</li>
+<li>Python使用None表示空，Json使用Null</li>
+<li>Json中的true和false首字母小写</li>
 </ol>
 </li>
-<li>
-<p>COOKIES保存在客户端，例如自动登陆功能</p>
-</li>
-<li>
-<p>session保存在服务端，保存敏感信息，根据COOKIES上传的值获取</p>
-</li>
+<li>COOKIES保存在客户端，例如自动登陆功能</li>
+<li>session保存在服务端，保存敏感信息，根据COOKIES上传的值获取</li>
 </ul>
 </div>
 </div>
@@ -820,21 +752,15 @@ JsonResponse对象
 <dt>
 HTML
 </dt>
-<dd>
-<p>名词</p>
-</dd>
+<dd>名词</dd>
 <dt>
 CSS
 </dt>
-<dd>
-<p>形容词</p>
-</dd>
+<dd>形容词</dd>
 <dt>
 javascript
 </dt>
-<dd>
-<p>动词</p>
-</dd>
+<dd>动词</dd>
 </dl>
 </div>
 </div>
@@ -851,9 +777,7 @@ javascript
 </h3>
 <div id=outline-text-headline-25 class=outline-text-3>
 <ol>
-<li>
-<p>在templates文件夹中创建html文件，例如index.html</p>
-</li>
+<li>在templates文件夹中创建html文件，例如index.html</li>
 <li>
 <p>在视图中调用</p>
 <div class="src src-python">
@@ -947,9 +871,7 @@ javascript
 </h4>
 <div id=outline-text-headline-31 class=outline-text-4>
 <ul>
-<li>
-<p>不需要额外传参的视图函数</p>
-</li>
+<li>不需要额外传参的视图函数</li>
 </ul>
 <div class="src src-html">
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>{% url &#34;[namespace]:[name]&#34; %}</code></pre></div>
@@ -978,9 +900,7 @@ javascript
 <dt>
 过滤器
 </dt>
-<dd>
-<p>模板中对传递过来的数据进行修饰，再进行显示</p>
-</dd>
+<dd>模板中对传递过来的数据进行修饰，再进行显示</dd>
 <dt>
 ?
 </dt>
@@ -1454,23 +1374,15 @@ MySQL数据库基础
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>select</span> <span style=color:#ff79c6>*</span> <span style=color:#ff79c6>from</span> [表名] <span style=color:#ff79c6>where</span> [条件] <span style=color:#ff79c6>group</span> <span style=color:#ff79c6>by</span> [字段<span style=color:#bd93f9>1</span>], [字段<span style=color:#bd93f9>2</span>], ...;</code></pre></div>
 </div>
 <ol>
-<li>
-<p>按照哪个字段分组，哪个字段就不会重复</p>
-</li>
-<li>
-<p>group by要写在where的后面</p>
-</li>
+<li>按照哪个字段分组，哪个字段就不会重复</li>
+<li>group by要写在where的后面</li>
 </ol>
 <div class="src src-sql">
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>select</span> <span style=color:#ff79c6>*</span> <span style=color:#ff79c6>from</span> [表名] <span style=color:#ff79c6>where</span> [条件] <span style=color:#ff79c6>group</span> <span style=color:#ff79c6>by</span> [字段<span style=color:#bd93f9>1</span>], [字段<span style=color:#bd93f9>2</span>], ... <span style=color:#ff79c6>having</span> [条件];</code></pre></div>
 </div>
 <ol>
-<li>
-<p>where是对select…的结果进行筛选</p>
-</li>
-<li>
-<p>having是对group by的结果进行筛选</p>
-</li>
+<li>where是对select…的结果进行筛选</li>
+<li>having是对group by的结果进行筛选</li>
 </ol>
 </li>
 <li>
@@ -1482,21 +1394,15 @@ MySQL数据库基础
 <dt>
 asc
 </dt>
-<dd>
-<p>升序</p>
-</dd>
+<dd>升序</dd>
 <dt>
 desc
 </dt>
-<dd>
-<p>降序</p>
-</dd>
+<dd>降序</dd>
 <dt>
 排序优先级
 </dt>
-<dd>
-<p>先按照 [字段1] 排序， 如果相同，那么按照 [字段2] 排序</p>
-</dd>
+<dd>先按照 [字段1] 排序， 如果相同，那么按照 [字段2] 排序</dd>
 </dl>
 </li>
 <li>
@@ -1543,9 +1449,7 @@ desc
 <dt>
 插入数据
 </dt>
-<dd>
-<p>多条数据插入尽量用一条sql语句，提高性能 </p>
-</dd>
+<dd>多条数据插入尽量用一条sql语句，提高性能 </dd>
 </dl>
 <table>
 <thead>
@@ -1635,12 +1539,8 @@ desc
 <p>一对一
 不常用，应用场景:</p>
 <ol>
-<li>
-<p>单张表内字段数太多 </p>
-</li>
-<li>
-<p>敏感信息分离</p>
-</li>
+<li>单张表内字段数太多 </li>
+<li>敏感信息分离</li>
 </ol>
 </li>
 </ol>
@@ -1754,9 +1654,7 @@ models.py中:</p>
 <li>
 <p>数据库迁移与维护</p>
 <ul>
-<li>
-<p>生成迁移文件</p>
-</li>
+<li>生成迁移文件</li>
 </ul>
 </li>
 </ol>
@@ -1764,9 +1662,7 @@ models.py中:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>python manage.py makemigration</code></pre></div>
 </div>
 <ul>
-<li>
-<p>执行迁移文件</p>
-</li>
+<li>执行迁移文件</li>
 </ul>
 <div class="src src-text">
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>python manage.py migrate</code></pre></div>
@@ -1881,9 +1777,7 @@ all、filter、exclude返回的结果类型是QuerySet(类似列表)</p>
 <dt>
 条件格式
 </dt>
-<dd>
-<p>【字段名】__【条件关键字】=【比较值】</p>
-</dd>
+<dd>【字段名】__【条件关键字】=【比较值】</dd>
 </dl>
 <div class="src src-python">
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#6272a4># 查询id&gt;=2的所有用户</span>
@@ -2193,7 +2087,7 @@ CSRF跨域
 </a>
 </li>
 <li>
-<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdjango_note%2f&name=Python%e5%90%8e%e5%8f%b0%e5%bc%80%e5%8f%91&description=%e7%8e%af%e5%a2%83%e6%90%ad%e5%bb%ba%e4%b8%8e%e5%85%a5%e9%97%a8%e6%a1%88%e4%be%8b%20%20%e7%8e%af%e5%a2%83%e6%90%ad%e5%bb%ba%20%201pip3%20install%20django%3d%3d2.2%202pip3%20install%20pymysql%203pip3%20install%20mysqlclient%204pip3%20install%20pillow%20%20%20%20%e4%b8%bb%e6%96%87%e4%bb%b6%e5%a4%b9%e4%b8%ad%e7%9a%84%e6%96%87%e4%bb%b6%20%20%20%20settings.py%20%20%20%e6%80%bb%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6%0a%20%20urls.py%20%20%20%e6%80%bb%e8%b7%af%e7%94%b1%e6%98%a0%e5%b0%84%e6%96%87%e4%bb%b6%2c%20%e6%8a%8a%e8%af%b7%e6%b1%82%e8%bf%87%e6%9d%a5%e7%9a%84url%e5%9c%b0%e5%9d%80%e8%bf%9b%e8%a1%8c%e5%88%86%e9%85%8d%ef%bc%8c%e5%88%86%e9%85%8d%e7%bb%99%e4%b8%8d%e5%90%8c%e7%9a%84handler%e5%a4%84%e7%90%86%e5%99%a8%ef%bc%8c%e5%a4%84%e7%90%86%e5%99%a8%e5%a4%84%e7%90%86%e5%be%97%e5%88%b0%e4%b8%8d%e5%90%8c%e7%9a%84%e7%bb%93%e6%9e%9c%ef%bc%8c%e5%b9%b6%e6%8a%8a%e7%bb%93%e6%9e%9c%e8%bf%94%e5%9b%9e%e7%bb%99%e6%b5%8f%e8%a7%88%e5%99%a8%0a%20%20wsgi.py%20%20%20%e9%a1%b9%e7%9b%ae%e9%83%a8%e7%bd%b2%0a%20%20%20%20%e9%a1%b9%e7%9b%ae%e6%90%ad%e5%bb%ba%e6%ad%a5%e9%aa%a4%20%20%20%20%e5%88%9b%e5%bb%baDjango%e9%a1%b9%e7%9b%ae%0a%20%20%e5%88%9b%e5%bb%baapp%e5%b9%b6%e5%9c%a8settings%e4%b8%ad%e9%85%8d%e7%bd%ae%0a%20%20%e5%88%9b%e5%bb%baurls.py%e5%b9%b6%e5%9c%a8%e6%80%bb%e8%b7%af%e7%94%b1%e4%b8%ad%e9%85%8d%e7%bd%ae%0a%20%20%e5%ae%9a%e4%b9%89%e9%a6%96%e9%a1%b5%e8%a7%86%e5%9b%be%0a%20%20%e5%ae%9a%e4%b9%89%e8%a7%a3%e6%9e%90%e5%99%a8%0a%20%20%e8%bf%90%e8%a1%8cmanage.py%0a%20%20%20%20%e5%88%9b%e5%bb%baapp%e5%b9%b6%e5%9c%a8settings%e4%b8%ad%e9%85%8d%e7%bd%ae%20%201django-admin%20startapp%20myapp%20%20%20%20%e9%80%9a%e8%bf%87settings." aria-label=Tumblr>
+<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdjango_note%2f&name=Python%e5%90%8e%e5%8f%b0%e5%bc%80%e5%8f%91&description=%e7%8e%af%e5%a2%83%e6%90%ad%e5%bb%ba%e4%b8%8e%e5%85%a5%e9%97%a8%e6%a1%88%e4%be%8b%20%20%e7%8e%af%e5%a2%83%e6%90%ad%e5%bb%ba%20%201pip3%20install%20django%3d%3d2.2%202pip3%20install%20pymysql%203pip3%20install%20mysqlclient%204pip3%20install%20pillow%20%20%20%20%e4%b8%bb%e6%96%87%e4%bb%b6%e5%a4%b9%e4%b8%ad%e7%9a%84%e6%96%87%e4%bb%b6%20%20%20%20settings.py%20%20%e6%80%bb%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6%20%20urls.py%20%20%e6%80%bb%e8%b7%af%e7%94%b1%e6%98%a0%e5%b0%84%e6%96%87%e4%bb%b6%2c%20%e6%8a%8a%e8%af%b7%e6%b1%82%e8%bf%87%e6%9d%a5%e7%9a%84url%e5%9c%b0%e5%9d%80%e8%bf%9b%e8%a1%8c%e5%88%86%e9%85%8d%ef%bc%8c%e5%88%86%e9%85%8d%e7%bb%99%e4%b8%8d%e5%90%8c%e7%9a%84handler%e5%a4%84%e7%90%86%e5%99%a8%ef%bc%8c%e5%a4%84%e7%90%86%e5%99%a8%e5%a4%84%e7%90%86%e5%be%97%e5%88%b0%e4%b8%8d%e5%90%8c%e7%9a%84%e7%bb%93%e6%9e%9c%ef%bc%8c%e5%b9%b6%e6%8a%8a%e7%bb%93%e6%9e%9c%e8%bf%94%e5%9b%9e%e7%bb%99%e6%b5%8f%e8%a7%88%e5%99%a8%20%20wsgi.py%20%20%e9%a1%b9%e7%9b%ae%e9%83%a8%e7%bd%b2%20%20%20%20%e9%a1%b9%e7%9b%ae%e6%90%ad%e5%bb%ba%e6%ad%a5%e9%aa%a4%20%20%20%e5%88%9b%e5%bb%baDjango%e9%a1%b9%e7%9b%ae%20%e5%88%9b%e5%bb%baapp%e5%b9%b6%e5%9c%a8settings%e4%b8%ad%e9%85%8d%e7%bd%ae%20%e5%88%9b%e5%bb%baurls.py%e5%b9%b6%e5%9c%a8%e6%80%bb%e8%b7%af%e7%94%b1%e4%b8%ad%e9%85%8d%e7%bd%ae%20%e5%ae%9a%e4%b9%89%e9%a6%96%e9%a1%b5%e8%a7%86%e5%9b%be%20%e5%ae%9a%e4%b9%89%e8%a7%a3%e6%9e%90%e5%99%a8%20%e8%bf%90%e8%a1%8cmanage.py%20%20%20%20%e5%88%9b%e5%bb%baapp%e5%b9%b6%e5%9c%a8settings%e4%b8%ad%e9%85%8d%e7%bd%ae%20%201django-admin%20startapp%20myapp%20%20%20%e9%80%9a%e8%bf%87settings.py%e5%bc%95%e5%85%a5%e5%88%9b%e5%bb%ba%e7%9a%84app%20%201INSTALLED_APPS%20%3d%20%5b%202%20%26%2339%3bdjango.contrib.admin%26%2339%3b%2c%203%20%26%2339%3bdjango.contrib.auth%26%2339%3b%2c%204%20%26%2339%3bdjango.contrib.contenttypes%26%2339%3b%2c%205%20%26%2339%3bdjango." aria-label=Tumblr>
 <i class="fab fa-tumblr fa-lg" aria-hidden=true></i>
 </a>
 </li>
@@ -2218,7 +2112,7 @@ CSRF跨域
 </div>
 <footer id=footer>
 <div class=footer-left>
-Copyright &copy; 2021 Yi Chen
+Copyright &copy; 2022 Yi Chen
 </div>
 <div class=footer-right>
 <nav>

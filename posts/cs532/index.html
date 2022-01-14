@@ -232,14 +232,10 @@ There is a relationship between rank of a matrix and solution to a linear system
 <li>
 <p>If $d$ is a linear combination of $a_1, a_2, \cdots, a_m$, then there is a solution, or $rank(A) = rank([A|d]) \Leftrightarrow \text{there is a solution}$</p>
 <ul>
-<li>
-<p>So far, it is not clear if there is a solution or infinity many solution</p>
-</li>
+<li>So far, it is not clear if there is a solution or infinity many solution</li>
 </ul>
 </li>
-<li>
-<p>If $a_1, a_2, \cdots, a_m, d$ are linearly independent, then there is no solution, or $rank(A) &lt; rank([A|d]) \Leftrightarrow \text{no solution}$</p>
-</li>
+<li>If $a_1, a_2, \cdots, a_m, d$ are linearly independent, then there is no solution, or $rank(A) &lt; rank([A|d]) \Leftrightarrow \text{no solution}$</li>
 </ol>
 </div>
 </div>
@@ -253,17 +249,11 @@ Solutions to Learning Problems
 <li>
 <p>$rank(A) = rank([A|d]) \Leftrightarrow \text{there is a solution}$</p>
 <ol>
-<li>
-<p>$rank(A) = dim(w) \Leftrightarrow \text{unique solution}$</p>
-</li>
-<li>
-<p>$rank(A) &lt; dim(w) \Leftrightarrow \text{infinity many solutions}$</p>
-</li>
+<li>$rank(A) = dim(w) \Leftrightarrow \text{unique solution}$</li>
+<li>$rank(A) &lt; dim(w) \Leftrightarrow \text{infinity many solutions}$</li>
 </ol>
 </li>
-<li>
-<p>$rank(A) &lt; rank([A|d]) \Leftrightarrow \text{no solution}$</p>
-</li>
+<li>$rank(A) &lt; rank([A|d]) \Leftrightarrow \text{no solution}$</li>
 </ol>
 <p>One way to understand that $rank(A) &lt; dim(w)$ implies infinity many solutions is that imagine you have 2 linear equations but 3 variables. One of the variable must be a free one, meaning its value depends on how you set the other two. Hence, there are infinity many solutions.</p>
 </div>
@@ -315,12 +305,8 @@ Skinny SVD
 <p>If $A \in \mathbb{R}^{N \times M}, N > M$, then $\Sigma \in \mathbb{R} ^ {N \times M}$.
 Since $N > M$, there are $M$ singular values $\sigma$. The rest of the entries in $\Sigma$ are zero. This way, $\Sigma$ can be partitioned into two matrices:</p>
 <ol>
-<li>
-<p>row $1$ to row $M$</p>
-</li>
-<li>
-<p>row $M + 1$ to row $N$</p>
-</li>
+<li>row $1$ to row $M$</li>
+<li>row $M + 1$ to row $N$</li>
 </ol>
 <p>Since the the second part is a zero matrix, the result of $U\Sigma$ is determined by the first $M$ columns of $U$ and the first part of $\Sigma$. Hence, we can shrink the singular value decomposition of $A$ into:
 A = U Σ V^T \quad s.t. \quad U ∈ \mathbb{R} ^ {N × M}, Σ ∈ \mathbb{R} ^ {M × M}, V^T ∈ \mathbb{R} ^ {M × M}.
@@ -343,9 +329,7 @@ According to Eckart-Young Theorem, the best rank $k$ approximation of matrix $A$
 <dt>
 Forbenius norm
 </dt>
-<dd>
-<p>$\norm{A}^2_F = \sum^N_{i=1}\sum^M_{j=1} A_{ij}^2 = \norm{vec(A)}^2_2$</p>
-</dd>
+<dd>$\norm{A}^2_F = \sum^N_{i=1}\sum^M_{j=1} A_{ij}^2 = \norm{vec(A)}^2_2$</dd>
 </dl>
 </div>
 </div>
@@ -362,9 +346,7 @@ $\Sigma[V^Tx]$ scales $V^Tx$. Finally, $U$ rotates and raises the dimension of $
 <dt>
 Operator norm
 </dt>
-<dd>
-<p>$\norm{A}_2 = \norm{A}_{op} = max_{x \neq 0} \frac{\norm{Ax}_2}{\norm{x}_2} = \sigma_1$</p>
-</dd>
+<dd>$\norm{A}_2 = \norm{A}_{op} = max_{x \neq 0} \frac{\norm{Ax}_2}{\norm{x}_2} = \sigma_1$</dd>
 </dl>
 </div>
 </div>
@@ -383,18 +365,10 @@ Kernel Regression
 </h3>
 <div id=outline-text-headline-14 class=outline-text-3>
 <ul>
-<li>
-<p>Why use higher-dimensional feature spaces</p>
-</li>
-<li>
-<p>Reformulate regression in terms of kernels</p>
-</li>
-<li>
-<p>Popular kernels</p>
-</li>
-<li>
-<p>Cautions and considerations</p>
-</li>
+<li>Why use higher-dimensional feature spaces</li>
+<li>Reformulate regression in terms of kernels</li>
+<li>Popular kernels</li>
+<li>Cautions and considerations</li>
 </ul>
 <div id=outline-container-headline-15 class=outline-4>
 <h4 id=headline-15>
@@ -467,21 +441,15 @@ the closer $u$ and $v$, the larger the result $u^Tv$.</p>
 <dt>
 Monomials of degree $q$
 </dt>
-<dd>
-<p>$K(u, v) = (u^Tv)^q$</p>
-</dd>
+<dd>$K(u, v) = (u^Tv)^q$</dd>
 <dt>
 Polynomials up to degree $q$
 </dt>
-<dd>
-<p>$K(u, v) = (u^Tv + 1)^q$</p>
-</dd>
+<dd>$K(u, v) = (u^Tv + 1)^q$</dd>
 <dt>
 Gaussian/radial kernel
 </dt>
-<dd>
-<p>$K(u, v) = e^{\frac{-\norm{u - v}^2_2}{2 \sigma^2}}$</p>
-</dd>
+<dd>$K(u, v) = e^{\frac{-\norm{u - v}^2_2}{2 \sigma^2}}$</dd>
 </dl>
 <p>There is no explicit $\phi(x)$ for Gaussian kernel since it has infinity dimensions, meaning it can be applied to all polynomial orders.
 The smoothness of Gaussian kernel is controlled by $\sigma$.</p>
@@ -631,7 +599,7 @@ Kernel regression considerations
 </div>
 <footer id=footer>
 <div class=footer-left>
-Copyright &copy; 2021 Yi Chen
+Copyright &copy; 2022 Yi Chen
 </div>
 <div class=footer-right>
 <nav>

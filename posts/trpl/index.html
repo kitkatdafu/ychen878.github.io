@@ -15,22 +15,14 @@
 <meta name=robots content="all,follow">
 <meta name=googlebot content="index,follow,snippet,archive">
 <meta property="og:title" content="Notes on The Rust Programming Language">
-<meta property="og:description" content="Common Programming Concepts 1  Variables and Mutability    The default integer type for a positive number that is not so large is i32.
-  Variables by default are immutable.
-  Differences Between Variables and Constants    mut cannot be used with constants.
-  Declare constants with const keyword, and the type must be annotated.
-  Constant can only be set to constant expression, not value computed during runtime.">
+<meta property="og:description" content="Common Programming Concepts 1  Variables and Mutability   The default integer type for a positive number that is not so large is i32. Variables by default are immutable.  Differences Between Variables and Constants   mut cannot be used with constants. Declare constants with const keyword, and the type must be annotated. Constant can only be set to constant expression, not value computed during runtime.    Shadowing   You can declare a new variable with the same name as a previous variable and the new variable shadows the previous variable.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.mrr1vfe.io/posts/trpl/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2020-04-30T00:00:00+00:00">
 <meta property="article:modified_time" content="2020-04-30T00:00:00+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Notes on The Rust Programming Language">
-<meta name=twitter:description content="Common Programming Concepts 1  Variables and Mutability    The default integer type for a positive number that is not so large is i32.
-  Variables by default are immutable.
-  Differences Between Variables and Constants    mut cannot be used with constants.
-  Declare constants with const keyword, and the type must be annotated.
-  Constant can only be set to constant expression, not value computed during runtime.">
+<meta name=twitter:description content="Common Programming Concepts 1  Variables and Mutability   The default integer type for a positive number that is not so large is i32. Variables by default are immutable.  Differences Between Variables and Constants   mut cannot be used with constants. Declare constants with const keyword, and the type must be annotated. Constant can only be set to constant expression, not value computed during runtime.    Shadowing   You can declare a new variable with the same name as a previous variable and the new variable shadows the previous variable.">
 <link rel=stylesheet href=https://www.mrr1vfe.io/css/styles.4c2b9aa1d874d6766f554b2d404e8fd62ab4761f51ee9b3f358d12e81e7fa43a1b4378db995bc1926bbe5ed98c060be5e7bd4f2470504cf94f22b4b3a74e62b6.css integrity="sha512-TCuaodh01nZvVUstQE6P1iq0dh9R7ps/NY0S6B5/pDobQ3jbmVvBkmu+XtmMBgvl571PJHBQTPlPIrSzp05itg=="><!--[if lt IE 9]><script src=https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script>
 <script src=https://oss.maxcdn.com/respond/1.4.2/respond.min.js></script><![endif]-->
 <link rel=icon type=image/png href=https://www.mrr1vfe.io/images/favicon.ico>
@@ -119,7 +111,7 @@
 </a>
 </li>
 <li>
-<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&name=Notes%20on%20The%20Rust%20Programming%20Language&description=Common%20Programming%20Concepts%201%20%20Variables%20and%20Mutability%20%20%20%20The%20default%20integer%20type%20for%20a%20positive%20number%20that%20is%20not%20so%20large%20is%20i32.%0a%20%20Variables%20by%20default%20are%20immutable.%0a%20%20Differences%20Between%20Variables%20and%20Constants%20%20%20%20mut%20cannot%20be%20used%20with%20constants.%0a%20%20Declare%20constants%20with%20const%20keyword%2c%20and%20the%20type%20must%20be%20annotated.%0a%20%20Constant%20can%20only%20be%20set%20to%20constant%20expression%2c%20not%20value%20computed%20during%20runtime." aria-label=Tumblr>
+<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&name=Notes%20on%20The%20Rust%20Programming%20Language&description=Common%20Programming%20Concepts%201%20%20Variables%20and%20Mutability%20%20%20The%20default%20integer%20type%20for%20a%20positive%20number%20that%20is%20not%20so%20large%20is%20i32.%20Variables%20by%20default%20are%20immutable.%20%20Differences%20Between%20Variables%20and%20Constants%20%20%20mut%20cannot%20be%20used%20with%20constants.%20Declare%20constants%20with%20const%20keyword%2c%20and%20the%20type%20must%20be%20annotated.%20Constant%20can%20only%20be%20set%20to%20constant%20expression%2c%20not%20value%20computed%20during%20runtime.%20%20%20%20Shadowing%20%20%20You%20can%20declare%20a%20new%20variable%20with%20the%20same%20name%20as%20a%20previous%20variable%20and%20the%20new%20variable%20shadows%20the%20previous%20variable." aria-label=Tumblr>
 <i class="fab fa-tumblr" aria-hidden=true></i>
 </a>
 </li>
@@ -293,12 +285,8 @@ Variables and Mutability
 </h3>
 <div id=outline-text-headline-2 class=outline-text-3>
 <ul>
-<li>
-<p>The default integer type for a positive number that is not so large is <code class=verbatim>i32</code>.</p>
-</li>
-<li>
-<p>Variables by default are <code class=verbatim>immutable</code>.</p>
-</li>
+<li>The default integer type for a positive number that is not so large is <code class=verbatim>i32</code>.</li>
+<li>Variables by default are <code class=verbatim>immutable</code>.</li>
 </ul>
 <div id=outline-container-headline-3 class=outline-4>
 <h4 id=headline-3>
@@ -306,15 +294,9 @@ Differences Between Variables and Constants
 </h4>
 <div id=outline-text-headline-3 class=outline-text-4>
 <ul>
-<li>
-<p><code class=verbatim>mut</code> cannot be used with constants.</p>
-</li>
-<li>
-<p>Declare constants with <code class=verbatim>const</code> keyword, and the type must be annotated.</p>
-</li>
-<li>
-<p>Constant can only be set to constant expression, not value computed during runtime.</p>
-</li>
+<li><code class=verbatim>mut</code> cannot be used with constants.</li>
+<li>Declare constants with <code class=verbatim>const</code> keyword, and the type must be annotated.</li>
+<li>Constant can only be set to constant expression, not value computed during runtime.</li>
 </ul>
 </div>
 </div>
@@ -324,15 +306,9 @@ Shadowing
 </h4>
 <div id=outline-text-headline-4 class=outline-text-4>
 <ul>
-<li>
-<p>You can declare a new variable with the same name as a previous variable and the new variable shadows the previous variable.</p>
-</li>
-<li>
-<p>Type can be changed when shadowing.</p>
-</li>
-<li>
-<p>Type cannot be changed when re-assigning a value with a different type to a mutable variable</p>
-</li>
+<li>You can declare a new variable with the same name as a previous variable and the new variable shadows the previous variable.</li>
+<li>Type can be changed when shadowing.</li>
+<li>Type cannot be changed when re-assigning a value with a different type to a mutable variable</li>
 </ul>
 </div>
 </div>
@@ -344,9 +320,7 @@ Data Types
 </h3>
 <div id=outline-text-headline-5 class=outline-text-3>
 <ul>
-<li>
-<p>Rust must know the types of all variables at compile time.</p>
-</li>
+<li>Rust must know the types of all variables at compile time.</li>
 </ul>
 <div id=outline-container-headline-6 class=outline-4>
 <h4 id=headline-6>
@@ -357,9 +331,7 @@ Scalar Types
 <dt>
 scalar type
 </dt>
-<dd>
-<p>Type represents a single value.</p>
-</dd>
+<dd>Type represents a single value.</dd>
 </dl>
 </div>
 </div>
@@ -369,15 +341,9 @@ Integer Types
 </h4>
 <div id=outline-text-headline-7 class=outline-text-4>
 <ul>
-<li>
-<p>Size of <code class=verbatim>isize</code> and <code class=verbatim>usize</code> depends on the architecture of which program runs on. 32 bits if running on a 32-bit architecture.</p>
-</li>
-<li>
-<p>Integer literals support <code class=verbatim>_</code> as a visual separator.</p>
-</li>
-<li>
-<p>Default type is <code class=verbatim>i32</code>.</p>
-</li>
+<li>Size of <code class=verbatim>isize</code> and <code class=verbatim>usize</code> depends on the architecture of which program runs on. 32 bits if running on a 32-bit architecture.</li>
+<li>Integer literals support <code class=verbatim>_</code> as a visual separator.</li>
+<li>Default type is <code class=verbatim>i32</code>.</li>
 </ul>
 </div>
 </div>
@@ -387,12 +353,8 @@ Floating-Point Types
 </h4>
 <div id=outline-text-headline-8 class=outline-text-4>
 <ul>
-<li>
-<p>There are <code class=verbatim>f32</code> or <code class=verbatim>f64</code> in Rust. There is no double.</p>
-</li>
-<li>
-<p>Default type is <code class=verbatim>f64</code>.</p>
-</li>
+<li>There are <code class=verbatim>f32</code> or <code class=verbatim>f64</code> in Rust. There is no double.</li>
+<li>Default type is <code class=verbatim>f64</code>.</li>
 </ul>
 </div>
 </div>
@@ -402,9 +364,7 @@ Numeric Operations
 </h4>
 <div id=outline-text-headline-9 class=outline-text-4>
 <ul>
-<li>
-<p>Division behaves in the same way as <code class=verbatim>C</code>.</p>
-</li>
+<li>Division behaves in the same way as <code class=verbatim>C</code>.</li>
 </ul>
 </div>
 </div>
@@ -414,9 +374,7 @@ Boolean Type
 </h4>
 <div id=outline-text-headline-10 class=outline-text-4>
 <ul>
-<li>
-<p>Type <code class=verbatim>bool</code> has too possible values, <code class=verbatim>true</code> or <code class=verbatim>false</code>.</p>
-</li>
+<li>Type <code class=verbatim>bool</code> has too possible values, <code class=verbatim>true</code> or <code class=verbatim>false</code>.</li>
 </ul>
 </div>
 </div>
@@ -426,12 +384,8 @@ Character Type
 </h4>
 <div id=outline-text-headline-11 class=outline-text-4>
 <ul>
-<li>
-<p>Size of 4 bytes</p>
-</li>
-<li>
-<p>Represents a Unicode Scalar Value.</p>
-</li>
+<li>Size of 4 bytes</li>
+<li>Represents a Unicode Scalar Value.</li>
 </ul>
 </div>
 </div>
@@ -444,9 +398,7 @@ Compound Types
 <dt>
 compound types
 </dt>
-<dd>
-<p>Can group multiple values into one type.</p>
-</dd>
+<dd>Can group multiple values into one type.</dd>
 </dl>
 </div>
 </div>
@@ -456,15 +408,9 @@ Tuple Type
 </h4>
 <div id=outline-text-headline-13 class=outline-text-4>
 <ul>
-<li>
-<p>Create a tuple by writing a comma-separated list of values inside parentheses.</p>
-</li>
-<li>
-<p>Each position in the parentheses has a type.</p>
-</li>
-<li>
-<p>These types do not have to be the same.</p>
-</li>
+<li>Create a tuple by writing a comma-separated list of values inside parentheses.</li>
+<li>Each position in the parentheses has a type.</li>
+<li>These types do not have to be the same.</li>
 </ul>
 <div class="src src-rust">
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>main</span>() {
@@ -474,12 +420,8 @@ Tuple Type
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>}</code></pre></div>
 </div>
 <ul>
-<li>
-<p>One way to access a value inside a tuple is destructuring through pattern matching.</p>
-</li>
-<li>
-<p>Another way to access a value is using <code class=verbatim>.</code> with an index. The first element in the tuple is indexed 0.</p>
-</li>
+<li>One way to access a value inside a tuple is destructuring through pattern matching.</li>
+<li>Another way to access a value is using <code class=verbatim>.</code> with an index. The first element in the tuple is indexed 0.</li>
 </ul>
 <div class="src src-rust">
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>main</span>() {
@@ -495,15 +437,9 @@ Array Type
 </h4>
 <div id=outline-text-headline-14 class=outline-text-4>
 <ul>
-<li>
-<p>Each element in an array must has the same type.</p>
-</li>
-<li>
-<p>Arrays in rust have fixed length.</p>
-</li>
-<li>
-<p>Arrays are allocated on stack.</p>
-</li>
+<li>Each element in an array must has the same type.</li>
+<li>Arrays in rust have fixed length.</li>
+<li>Arrays are allocated on stack.</li>
 <li>
 <p>Type on an array is a composition of its elements' type and its length.</p>
 <div class="src src-rust">
@@ -524,12 +460,8 @@ Accessing Array Element
 </h5>
 <div id=outline-text-headline-15 class=outline-text-5>
 <ul>
-<li>
-<p>Element can be accessed using indexing.</p>
-</li>
-<li>
-<p>Rust will check if an index is in the bound in runtime.</p>
-</li>
+<li>Element can be accessed using indexing.</li>
+<li>Rust will check if an index is in the bound in runtime.</li>
 </ul>
 </div>
 </div>
@@ -543,36 +475,16 @@ Functions
 </h3>
 <div id=outline-text-headline-16 class=outline-text-3>
 <ul>
-<li>
-<p><code class=verbatim>fn</code> allows you to declare a new function.</p>
-</li>
-<li>
-<p>Functions can be defined anywhere in the source code.</p>
-</li>
-<li>
-<p>Parameters of a function must have types declared.</p>
-</li>
-<li>
-<p>Instructions that perform some action and do not return a value are <code class=verbatim>statements</code>.</p>
-</li>
-<li>
-<p><code class=verbatim>Expressions</code> Evaluate to a resulting value.</p>
-</li>
-<li>
-<p>Expressions can be part of statements.</p>
-</li>
-<li>
-<p>Function bodies are made up of a series of statements optionally ending in an expression.</p>
-</li>
-<li>
-<p>Calling a function is an expression.</p>
-</li>
-<li>
-<p>The block that we use to create new scopes, <code class=verbatim>{}</code>, is an expression.</p>
-</li>
-<li>
-<p>Expressions do not include ending semicolons.</p>
-</li>
+<li><code class=verbatim>fn</code> allows you to declare a new function.</li>
+<li>Functions can be defined anywhere in the source code.</li>
+<li>Parameters of a function must have types declared.</li>
+<li>Instructions that perform some action and do not return a value are <code class=verbatim>statements</code>.</li>
+<li><code class=verbatim>Expressions</code> Evaluate to a resulting value.</li>
+<li>Expressions can be part of statements.</li>
+<li>Function bodies are made up of a series of statements optionally ending in an expression.</li>
+<li>Calling a function is an expression.</li>
+<li>The block that we use to create new scopes, <code class=verbatim>{}</code>, is an expression.</li>
+<li>Expressions do not include ending semicolons.</li>
 </ul>
 <div id=outline-container-headline-17 class=outline-5>
 <h5 id=headline-17>
@@ -580,15 +492,9 @@ Functions with Return Values
 </h5>
 <div id=outline-text-headline-17 class=outline-text-5>
 <ul>
-<li>
-<p>Declare return value's type using <code class=verbatim>-></code>.</p>
-</li>
-<li>
-<p>The return value of the function is synonymous with the value of the final expression in the block of the body of a function.</p>
-</li>
-<li>
-<p>To return early, use <code class=verbatim>return</code>.</p>
-</li>
+<li>Declare return value's type using <code class=verbatim>-></code>.</li>
+<li>The return value of the function is synonymous with the value of the final expression in the block of the body of a function.</li>
+<li>To return early, use <code class=verbatim>return</code>.</li>
 </ul>
 </div>
 </div>
@@ -600,9 +506,7 @@ Control Flow
 </h3>
 <div id=outline-text-headline-18 class=outline-text-3>
 <ul>
-<li>
-<p>Unlike <code class=verbatim>C</code>, the condition must be a <code class=verbatim>bool</code>.</p>
-</li>
+<li>Unlike <code class=verbatim>C</code>, the condition must be a <code class=verbatim>bool</code>.</li>
 </ul>
 <div id=outline-container-headline-19 class=outline-4>
 <h4 id=headline-19>
@@ -610,12 +514,8 @@ If
 </h4>
 <div id=outline-text-headline-19 class=outline-text-4>
 <ul>
-<li>
-<p><code class=verbatim>if</code> is an expression, so it can be used on the right side of a <code class=verbatim>let</code> statement.</p>
-</li>
-<li>
-<p>All arms must have the same type.</p>
-</li>
+<li><code class=verbatim>if</code> is an expression, so it can be used on the right side of a <code class=verbatim>let</code> statement.</li>
+<li>All arms must have the same type.</li>
 </ul>
 </div>
 </div>
@@ -630,12 +530,8 @@ Loop
 </h5>
 <div id=outline-text-headline-21 class=outline-text-5>
 <ul>
-<li>
-<p>The loop keyword tells Rust to execute a block of code over and over again forever or until you explicitly tell it to stop by using the keyword <code class=verbatim>break</code>.</p>
-</li>
-<li>
-<p>Value after the <code class=verbatim>break</code> expression will be return.</p>
-</li>
+<li>The loop keyword tells Rust to execute a block of code over and over again forever or until you explicitly tell it to stop by using the keyword <code class=verbatim>break</code>.</li>
+<li>Value after the <code class=verbatim>break</code> expression will be return.</li>
 </ul>
 </div>
 </div>
@@ -682,18 +578,10 @@ Defining and Instantiating Structs
 </h3>
 <div id=outline-text-headline-24 class=outline-text-3>
 <ul>
-<li>
-<p>Using dot notation, <code class=verbatim>.</code>, to get a specific value from a struct.</p>
-</li>
-<li>
-<p>A filed of an immutable struct cannot be modified.</p>
-</li>
-<li>
-<p>If a struct is mutable, the dot notation can both access and modify fields of that struct.</p>
-</li>
-<li>
-<p>Cannot make certain field of a struct mutable.</p>
-</li>
+<li>Using dot notation, <code class=verbatim>.</code>, to get a specific value from a struct.</li>
+<li>A filed of an immutable struct cannot be modified.</li>
+<li>If a struct is mutable, the dot notation can both access and modify fields of that struct.</li>
+<li>Cannot make certain field of a struct mutable.</li>
 <li>
 <p>If variable that initialize a field has the same name as the field, no need to repeat the name.</p>
 <div class="src src-rust">
@@ -733,9 +621,7 @@ Method Syntax
 </h3>
 <div id=outline-text-headline-25 class=outline-text-3>
 <ul>
-<li>
-<p>The first parameter for a method is always <code class=verbatim>self</code>.</p>
-</li>
+<li>The first parameter for a method is always <code class=verbatim>self</code>.</li>
 <li>
 <p>Methods can also take ownership, like functions.</p>
 <div class="src src-rust">
@@ -751,15 +637,9 @@ Method Syntax
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>}</code></pre></div>
 </div>
 </li>
-<li>
-<p>If a method inside <code class=verbatim>impl</code> block does not have <code class=verbatim>self</code> as its first parameter, then this method is considered as <code class=verbatim>associated function</code>.</p>
-</li>
-<li>
-<p>Associated functions can be called by <code class=verbatim>::</code> syntax.</p>
-</li>
-<li>
-<p>Each struct can have multiple <code class=verbatim>impl</code> blocks.</p>
-</li>
+<li>If a method inside <code class=verbatim>impl</code> block does not have <code class=verbatim>self</code> as its first parameter, then this method is considered as <code class=verbatim>associated function</code>.</li>
+<li>Associated functions can be called by <code class=verbatim>::</code> syntax.</li>
+<li>Each struct can have multiple <code class=verbatim>impl</code> blocks.</li>
 </ul>
 </div>
 </div>
@@ -776,50 +656,24 @@ What is Ownership?
 </h3>
 <div id=outline-text-headline-27 class=outline-text-3>
 <ul>
-<li>
-<p>All data stored on the stack must have a known, fixed size.</p>
-</li>
-<li>
-<p>Data with an unknown size at compile time or a size that might change must be stored on the heap instead.</p>
-</li>
+<li>All data stored on the stack must have a known, fixed size.</li>
+<li>Data with an unknown size at compile time or a size that might change must be stored on the heap instead.</li>
 <li>
 <p>Ownership Rules</p>
 <ul>
-<li>
-<p>Each value in Rust has a variable that's called it s owner.</p>
-</li>
-<li>
-<p>There can only be one owner at a time.</p>
-</li>
-<li>
-<p>When the owner goes out of scope, the value will be dropped.</p>
-</li>
+<li>Each value in Rust has a variable that's called it s owner.</li>
+<li>There can only be one owner at a time.</li>
+<li>When the owner goes out of scope, the value will be dropped.</li>
 </ul>
 </li>
-<li>
-<p>In Rust, the memory is automatically returned once the variable that owns it goes out of scope.</p>
-</li>
-<li>
-<p>Rust calls <code class=verbatim>drop</code> automatically at the closing curly bracket where the variable will go out of scope.</p>
-</li>
-<li>
-<p>Only copying those on the stack and pointers, which are also on the stack, to the heap, but not data on the heap.</p>
-</li>
-<li>
-<p>This sounds like shallow copy, but rust invalid the variable being copied. That is, old variable cannot be read or wrote anymore.</p>
-</li>
-<li>
-<p>This is known as move.</p>
-</li>
-<li>
-<p>Copying everything on the heap is very expensive.</p>
-</li>
-<li>
-<p>rust will never automatically create "deep" copies of your data.</p>
-</li>
-<li>
-<p>Use common method <code class=verbatim>clone</code> to create a "deep" copy.</p>
-</li>
+<li>In Rust, the memory is automatically returned once the variable that owns it goes out of scope.</li>
+<li>Rust calls <code class=verbatim>drop</code> automatically at the closing curly bracket where the variable will go out of scope.</li>
+<li>Only copying those on the stack and pointers, which are also on the stack, to the heap, but not data on the heap.</li>
+<li>This sounds like shallow copy, but rust invalid the variable being copied. That is, old variable cannot be read or wrote anymore.</li>
+<li>This is known as move.</li>
+<li>Copying everything on the heap is very expensive.</li>
+<li>rust will never automatically create "deep" copies of your data.</li>
+<li>Use common method <code class=verbatim>clone</code> to create a "deep" copy.</li>
 </ul>
 <div id=outline-container-headline-28 class=outline-4>
 <h4 id=headline-28>
@@ -827,15 +681,9 @@ Ownership and Functions
 </h4>
 <div id=outline-text-headline-28 class=outline-text-4>
 <ul>
-<li>
-<p>The semantics for passing a value to a function are similar to those for assigning a value to a variable.</p>
-</li>
-<li>
-<p>When a value passes into a function, the ownership also is passed into the function.</p>
-</li>
-<li>
-<p>Returning a value can also pass ownership.</p>
-</li>
+<li>The semantics for passing a value to a function are similar to those for assigning a value to a variable.</li>
+<li>When a value passes into a function, the ownership also is passed into the function.</li>
+<li>Returning a value can also pass ownership.</li>
 </ul>
 </div>
 </div>
@@ -847,36 +695,18 @@ References and Borrowing
 </h3>
 <div id=outline-text-headline-29 class=outline-text-3>
 <ul>
-<li>
-<p>Reference allows you to refer to some value without taking ownership of it.</p>
-</li>
-<li>
-<p>The <code class=verbatim>&val</code> syntax lets us create a reference that refers to the value <code class=verbatim>val</code> but does not own it.</p>
-</li>
-<li>
-<p>We don't drop what the reference points to when the reference goes out of scope because we don't have ownership.</p>
-</li>
-<li>
-<p>References are immutable by default.</p>
-</li>
-<li>
-<p>You can have only one mutable reference to a particular piece of data in a particular scope.</p>
-</li>
-<li>
-<p>We also cannot have a mutable reference while we have an immutable one.</p>
-</li>
-<li>
-<p>The scope of a reference starts from where it is introduces and continues through the last time that reference is used.</p>
-</li>
+<li>Reference allows you to refer to some value without taking ownership of it.</li>
+<li>The <code class=verbatim>&val</code> syntax lets us create a reference that refers to the value <code class=verbatim>val</code> but does not own it.</li>
+<li>We don't drop what the reference points to when the reference goes out of scope because we don't have ownership.</li>
+<li>References are immutable by default.</li>
+<li>You can have only one mutable reference to a particular piece of data in a particular scope.</li>
+<li>We also cannot have a mutable reference while we have an immutable one.</li>
+<li>The scope of a reference starts from where it is introduces and continues through the last time that reference is used.</li>
 <li>
 <p>The Rules of References:</p>
 <ol>
-<li>
-<p>At any given time, you can have either one mutable reference or any number of immutable references.</p>
-</li>
-<li>
-<p>References must always be valid.</p>
-</li>
+<li>At any given time, you can have either one mutable reference or any number of immutable references.</li>
+<li>References must always be valid.</li>
 </ol>
 </li>
 </ul>
@@ -895,12 +725,8 @@ Defining an Enum
 </h3>
 <div id=outline-text-headline-31 class=outline-text-3>
 <ul>
-<li>
-<p>Enums can have different types.</p>
-</li>
-<li>
-<p>Enums is similar to algebraic data types in functional programming languages.</p>
-</li>
+<li>Enums can have different types.</li>
+<li>Enums is similar to algebraic data types in functional programming languages.</li>
 <li>
 <p>Enums can have methods using <code class=verbatim>impl</code>.</p>
 <div class="src src-rust">
@@ -935,9 +761,7 @@ The <code class=verbatim>Option</code> Enum
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>}</code></pre></div>
 </div>
 </li>
-<li>
-<p>Value of <code class=verbatim>Option&lt;T></code> typed cannot be used in place of value typed <code class=verbatim>&lt;T></code>.</p>
-</li>
+<li>Value of <code class=verbatim>Option&lt;T></code> typed cannot be used in place of value typed <code class=verbatim>&lt;T></code>.</li>
 </ul>
 </div>
 </div>
@@ -949,18 +773,10 @@ The <code class=verbatim>match</code> Control Flow Operator
 </h3>
 <div id=outline-text-headline-33 class=outline-text-3>
 <ul>
-<li>
-<p><code class=verbatim>=></code> separates the pattern and the code to run.</p>
-</li>
-<li>
-<p>You can use curly braces if there are multiple lines of code to run after pattern-matched.</p>
-</li>
-<li>
-<p>We must exhaust every last possibility in order for the code to be valid.</p>
-</li>
-<li>
-<p><code class=verbatim>_</code> will match any value</p>
-</li>
+<li><code class=verbatim>=></code> separates the pattern and the code to run.</li>
+<li>You can use curly braces if there are multiple lines of code to run after pattern-matched.</li>
+<li>We must exhaust every last possibility in order for the code to be valid.</li>
+<li><code class=verbatim>_</code> will match any value</li>
 </ul>
 </div>
 </div>
@@ -978,12 +794,8 @@ Concise Control flow with <code class=verbatim>if let</code>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>}</code></pre></div>
 </div>
 </li>
-<li>
-<p>Compiler does not check if cases are exhaustive.</p>
-</li>
-<li>
-<p>Can be used with a <code class=verbatim>else</code> statement.</p>
-</li>
+<li>Compiler does not check if cases are exhaustive.</li>
+<li>Can be used with a <code class=verbatim>else</code> statement.</li>
 </ul>
 </div>
 </div>
@@ -1000,18 +812,10 @@ Vector
 </h3>
 <div id=outline-text-headline-36 class=outline-text-3>
 <ul>
-<li>
-<p>Can only store values of the same type</p>
-</li>
-<li>
-<p>When a vector gets dropped, all of its contents are also dropped.</p>
-</li>
-<li>
-<p>Vectors are indexed by number, starting at zero.</p>
-</li>
-<li>
-<p>Adding a new element onto the end of the vector might require allocating new memory and copying the old elements to the new space.</p>
-</li>
+<li>Can only store values of the same type</li>
+<li>When a vector gets dropped, all of its contents are also dropped.</li>
+<li>Vectors are indexed by number, starting at zero.</li>
+<li>Adding a new element onto the end of the vector might require allocating new memory and copying the old elements to the new space.</li>
 </ul>
 </div>
 </div>
@@ -1021,15 +825,9 @@ String
 </h3>
 <div id=outline-text-headline-37 class=outline-text-3>
 <ul>
-<li>
-<p>The compiler can coerce the <code class=verbatim>&String</code> argument into a <code class=verbatim>&str</code>.</p>
-</li>
-<li>
-<p>Using <code class=verbatim>+</code> to concatenate two strings <code class=verbatim>s1</code> and <code class=verbatim>s2</code>, <code class=verbatim>let s3 = s1 + &s2</code>, actually takes ownership of s1, appends a copy of the contents of s2, and then returns ownership of the result.</p>
-</li>
-<li>
-<p>Rust strings don't support indexing.</p>
-</li>
+<li>The compiler can coerce the <code class=verbatim>&String</code> argument into a <code class=verbatim>&str</code>.</li>
+<li>Using <code class=verbatim>+</code> to concatenate two strings <code class=verbatim>s1</code> and <code class=verbatim>s2</code>, <code class=verbatim>let s3 = s1 + &s2</code>, actually takes ownership of s1, appends a copy of the contents of s2, and then returns ownership of the result.</li>
+<li>Rust strings don't support indexing.</li>
 </ul>
 </div>
 </div>
@@ -1039,42 +837,18 @@ Hash Map
 </h3>
 <div id=outline-text-headline-38 class=outline-text-3>
 <ul>
-<li>
-<p>The type <code class=verbatim>HashMap&lt;K, V></code> stores a mapping of keys of type <code class=verbatim>K</code> to values of type <code class=verbatim>V</code>.</p>
-</li>
-<li>
-<p>We need to first <code class=verbatim>use</code> the <code class=verbatim>HashMap</code> form the collections portion of the standard library.</p>
-</li>
-<li>
-<p>All of keys must have the same type, and all of the values must have the same type.</p>
-</li>
-<li>
-<p>One can use <code class=verbatim>collect</code> method to turn a vector of tuples into a hash map.</p>
-</li>
-<li>
-<p>Types that implement the <code class=verbatim>Copy</code> trait are copied into the hash map.</p>
-</li>
-<li>
-<p>Owned values are moved and the hash map will be the owner of those values.</p>
-</li>
-<li>
-<p>Inserting references to values into the hasp map does not move the value into the hash map.</p>
-</li>
-<li>
-<p><code class=verbatim>get()</code> returns an <code class=verbatim>Option&lt;&V></code>.</p>
-</li>
-<li>
-<p>Insert a inserted key with different value will replace the old value.</p>
-</li>
-<li>
-<p>Use <code class=verbatim>entry()</code> and <code class=verbatim>or_insert()</code> to insert a value if the key does not appear in the hash map.</p>
-</li>
-<li>
-<p><code class=verbatim>or_insert()</code> returns a reference to the value associates to the key.</p>
-</li>
-<li>
-<p>Can dereference the return value of <code class=verbatim>or_insert()</code> to update the value.</p>
-</li>
+<li>The type <code class=verbatim>HashMap&lt;K, V></code> stores a mapping of keys of type <code class=verbatim>K</code> to values of type <code class=verbatim>V</code>.</li>
+<li>We need to first <code class=verbatim>use</code> the <code class=verbatim>HashMap</code> form the collections portion of the standard library.</li>
+<li>All of keys must have the same type, and all of the values must have the same type.</li>
+<li>One can use <code class=verbatim>collect</code> method to turn a vector of tuples into a hash map.</li>
+<li>Types that implement the <code class=verbatim>Copy</code> trait are copied into the hash map.</li>
+<li>Owned values are moved and the hash map will be the owner of those values.</li>
+<li>Inserting references to values into the hasp map does not move the value into the hash map.</li>
+<li><code class=verbatim>get()</code> returns an <code class=verbatim>Option&lt;&V></code>.</li>
+<li>Insert a inserted key with different value will replace the old value.</li>
+<li>Use <code class=verbatim>entry()</code> and <code class=verbatim>or_insert()</code> to insert a value if the key does not appear in the hash map.</li>
+<li><code class=verbatim>or_insert()</code> returns a reference to the value associates to the key.</li>
+<li>Can dereference the return value of <code class=verbatim>or_insert()</code> to update the value.</li>
 </ul>
 </div>
 </div>
@@ -1091,12 +865,8 @@ Unrecoverable Errors with <code class=verbatim>panic!</code>
 </h3>
 <div id=outline-text-headline-40 class=outline-text-3>
 <ul>
-<li>
-<p>When the <code class=verbatim>panic!</code> macro executes, the program will print a failure message, unwind and clean up the stack, and then quit.</p>
-</li>
-<li>
-<p>Set <code class=verbatim>RUST_BACKTRACE=1</code> to display the backtrace.</p>
-</li>
+<li>When the <code class=verbatim>panic!</code> macro executes, the program will print a failure message, unwind and clean up the stack, and then quit.</li>
+<li>Set <code class=verbatim>RUST_BACKTRACE=1</code> to display the backtrace.</li>
 </ul>
 </div>
 </div>
@@ -1106,15 +876,9 @@ Recoverable Errors with <code class=verbatim>Result</code>
 </h3>
 <div id=outline-text-headline-41 class=outline-text-3>
 <ul>
-<li>
-<p>Use <code class=verbatim>unwrap()</code> method on <code class=verbatim>Result</code> type. If the value is <code class=verbatim>Ok</code> variant, <code class=verbatim>unwrap</code> will return the value inside the <code class=verbatim>Ok</code>. If the <code class=verbatim>Result</code> is the <code class=verbatim>Err</code> variant, <code class=verbatim>unwrap</code> will call the <code class=verbatim>panic!</code> macro for us.</p>
-</li>
-<li>
-<p><code class=verbatim>expect()</code> is similar to <code class=verbatim>unwrap()</code>, but more detailed error message can be provided.</p>
-</li>
-<li>
-<p>The <code class=verbatim>?</code> operator can be used in Functions that return <code class=verbatim>Result</code>.</p>
-</li>
+<li>Use <code class=verbatim>unwrap()</code> method on <code class=verbatim>Result</code> type. If the value is <code class=verbatim>Ok</code> variant, <code class=verbatim>unwrap</code> will return the value inside the <code class=verbatim>Ok</code>. If the <code class=verbatim>Result</code> is the <code class=verbatim>Err</code> variant, <code class=verbatim>unwrap</code> will call the <code class=verbatim>panic!</code> macro for us.</li>
+<li><code class=verbatim>expect()</code> is similar to <code class=verbatim>unwrap()</code>, but more detailed error message can be provided.</li>
+<li>The <code class=verbatim>?</code> operator can be used in Functions that return <code class=verbatim>Result</code>.</li>
 </ul>
 </div>
 </div>
@@ -1131,36 +895,16 @@ Traits: Defining Shared Behavior
 </h3>
 <div id=outline-text-headline-43 class=outline-text-3>
 <ul>
-<li>
-<p>A trait tells the Rust compiler about functionality a particular types has can share with other types.</p>
-</li>
-<li>
-<p>When implementing a trait, put the trait name after <code class=verbatim>impl</code> and then use the <code class=verbatim>for</code> keyword and specify the name of the type we want to implement the trait for.</p>
-</li>
-<li>
-<p><code class=verbatim>pub</code> makes a trait public so that other crates are able to implement it.</p>
-</li>
-<li>
-<p>We can implement a trait on a type only if either the trait or the type is local to our crate.</p>
-</li>
-<li>
-<p>To use a default implementation, specify and empty <code class=verbatim>impl</code> block.</p>
-</li>
-<li>
-<p><code class=verbatim>impl</code> can also be used on type parameter.</p>
-</li>
-<li>
-<p><code class=verbatim>+</code> syntax to specify multiple trait bounds.</p>
-</li>
-<li>
-<p><code class=verbatim>where</code> clause allows clearer trait bounds.</p>
-</li>
-<li>
-<p><code class=verbatim>impl Trait</code> syntax can also be used in the return position, but this function should only return a single type.</p>
-</li>
-<li>
-<p>Rust allows conditionally implement a trait.</p>
-</li>
+<li>A trait tells the Rust compiler about functionality a particular types has can share with other types.</li>
+<li>When implementing a trait, put the trait name after <code class=verbatim>impl</code> and then use the <code class=verbatim>for</code> keyword and specify the name of the type we want to implement the trait for.</li>
+<li><code class=verbatim>pub</code> makes a trait public so that other crates are able to implement it.</li>
+<li>We can implement a trait on a type only if either the trait or the type is local to our crate.</li>
+<li>To use a default implementation, specify and empty <code class=verbatim>impl</code> block.</li>
+<li><code class=verbatim>impl</code> can also be used on type parameter.</li>
+<li><code class=verbatim>+</code> syntax to specify multiple trait bounds.</li>
+<li><code class=verbatim>where</code> clause allows clearer trait bounds.</li>
+<li><code class=verbatim>impl Trait</code> syntax can also be used in the return position, but this function should only return a single type.</li>
+<li>Rust allows conditionally implement a trait.</li>
 </ul>
 </div>
 </div>
@@ -1171,33 +915,17 @@ Validating References with Lifetimes
 <div id=outline-text-headline-44 class=outline-text-3>
 <p>Every reference in Rust has a lifetime.</p>
 <ul>
-<li>
-<p>Lifetimes prevent dangling references.</p>
-</li>
-<li>
-<p>The names of lifetime parameters must start with an apostrophe (<code class=verbatim>'</code>).</p>
-</li>
-<li>
-<p>We place lifetime parameter annotations after the <code class=verbatim>&</code> of a reference.</p>
-</li>
-<li>
-<p>When returning a reference from a function, the lifetime parameter for the return type needs to match the lifetime parameter for one of the parameters.</p>
-</li>
-<li>
-<p>Lifetimes syntax is about connecting the lifetimes of various parameters and return values of functions.</p>
-</li>
+<li>Lifetimes prevent dangling references.</li>
+<li>The names of lifetime parameters must start with an apostrophe (<code class=verbatim>'</code>).</li>
+<li>We place lifetime parameter annotations after the <code class=verbatim>&</code> of a reference.</li>
+<li>When returning a reference from a function, the lifetime parameter for the return type needs to match the lifetime parameter for one of the parameters.</li>
+<li>Lifetimes syntax is about connecting the lifetimes of various parameters and return values of functions.</li>
 <li>
 <p>Lifetime Elision Rules</p>
 <ul>
-<li>
-<p>Each parameter that is a reference gets its own lifetime.</p>
-</li>
-<li>
-<p>If there is exactly one input lifetime parameter, that lifetime is assigned to all.</p>
-</li>
-<li>
-<p>If there are multiple input lifetime parameters, but one of them is <code class=verbatim>&self</code> or <code class=verbatim>&mut self</code> because this is a method, the lifetime of <code class=verbatim>self</code> is assigned to all output lifetime parameters.</p>
-</li>
+<li>Each parameter that is a reference gets its own lifetime.</li>
+<li>If there is exactly one input lifetime parameter, that lifetime is assigned to all.</li>
+<li>If there are multiple input lifetime parameters, but one of them is <code class=verbatim>&self</code> or <code class=verbatim>&mut self</code> because this is a method, the lifetime of <code class=verbatim>self</code> is assigned to all output lifetime parameters.</li>
 </ul>
 <p>-<code class=verbatim>'static</code> means that this reference can live for the entire duration of the program.</p>
 </li>
@@ -1392,7 +1120,7 @@ Validating References with Lifetimes
 </a>
 </li>
 <li>
-<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&name=Notes%20on%20The%20Rust%20Programming%20Language&description=Common%20Programming%20Concepts%201%20%20Variables%20and%20Mutability%20%20%20%20The%20default%20integer%20type%20for%20a%20positive%20number%20that%20is%20not%20so%20large%20is%20i32.%0a%20%20Variables%20by%20default%20are%20immutable.%0a%20%20Differences%20Between%20Variables%20and%20Constants%20%20%20%20mut%20cannot%20be%20used%20with%20constants.%0a%20%20Declare%20constants%20with%20const%20keyword%2c%20and%20the%20type%20must%20be%20annotated.%0a%20%20Constant%20can%20only%20be%20set%20to%20constant%20expression%2c%20not%20value%20computed%20during%20runtime." aria-label=Tumblr>
+<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2ftrpl%2f&name=Notes%20on%20The%20Rust%20Programming%20Language&description=Common%20Programming%20Concepts%201%20%20Variables%20and%20Mutability%20%20%20The%20default%20integer%20type%20for%20a%20positive%20number%20that%20is%20not%20so%20large%20is%20i32.%20Variables%20by%20default%20are%20immutable.%20%20Differences%20Between%20Variables%20and%20Constants%20%20%20mut%20cannot%20be%20used%20with%20constants.%20Declare%20constants%20with%20const%20keyword%2c%20and%20the%20type%20must%20be%20annotated.%20Constant%20can%20only%20be%20set%20to%20constant%20expression%2c%20not%20value%20computed%20during%20runtime.%20%20%20%20Shadowing%20%20%20You%20can%20declare%20a%20new%20variable%20with%20the%20same%20name%20as%20a%20previous%20variable%20and%20the%20new%20variable%20shadows%20the%20previous%20variable." aria-label=Tumblr>
 <i class="fab fa-tumblr fa-lg" aria-hidden=true></i>
 </a>
 </li>
@@ -1417,7 +1145,7 @@ Validating References with Lifetimes
 </div>
 <footer id=footer>
 <div class=footer-left>
-Copyright &copy; 2021 Yi Chen
+Copyright &copy; 2022 Yi Chen
 </div>
 <div class=footer-right>
 <nav>

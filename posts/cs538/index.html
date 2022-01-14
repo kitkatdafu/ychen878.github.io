@@ -15,24 +15,16 @@
 <meta name=robots content="all,follow">
 <meta name=googlebot content="index,follow,snippet,archive">
 <meta property="og:title" content="Theory and Design of Programming Languages">
-<meta property="og:description" content="Lecture 1 1  Functional programming  History    Based on $\lambda$ calculus
-  Lisp
-  ML
-  Haskell
-    Building block    function   take inputs as arguments and produce outputs.
-  Functions are first class, like any other value. They can be passed to, returned by functions. Functions can also be combined into new function.">
+<meta property="og:description" content="Lecture 1 1  Functional programming  History   Based on $\lambda$ calculus Lisp ML Haskell    Building block    function  take inputs as arguments and produce outputs.  Functions are first class, like any other value. They can be passed to, returned by functions. Functions can also be combined into new function.
+  Control side-effects  Think about program is isolation">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.mrr1vfe.io/posts/cs538/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2020-04-30T00:00:00+00:00">
 <meta property="article:modified_time" content="2020-04-30T00:00:00+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Theory and Design of Programming Languages">
-<meta name=twitter:description content="Lecture 1 1  Functional programming  History    Based on $\lambda$ calculus
-  Lisp
-  ML
-  Haskell
-    Building block    function   take inputs as arguments and produce outputs.
-  Functions are first class, like any other value. They can be passed to, returned by functions. Functions can also be combined into new function.">
+<meta name=twitter:description content="Lecture 1 1  Functional programming  History   Based on $\lambda$ calculus Lisp ML Haskell    Building block    function  take inputs as arguments and produce outputs.  Functions are first class, like any other value. They can be passed to, returned by functions. Functions can also be combined into new function.
+  Control side-effects  Think about program is isolation">
 <link rel=stylesheet href=https://www.mrr1vfe.io/css/styles.4c2b9aa1d874d6766f554b2d404e8fd62ab4761f51ee9b3f358d12e81e7fa43a1b4378db995bc1926bbe5ed98c060be5e7bd4f2470504cf94f22b4b3a74e62b6.css integrity="sha512-TCuaodh01nZvVUstQE6P1iq0dh9R7ps/NY0S6B5/pDobQ3jbmVvBkmu+XtmMBgvl571PJHBQTPlPIrSzp05itg=="><!--[if lt IE 9]><script src=https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script>
 <script src=https://oss.maxcdn.com/respond/1.4.2/respond.min.js></script><![endif]-->
 <link rel=icon type=image/png href=https://www.mrr1vfe.io/images/favicon.ico>
@@ -121,7 +113,7 @@
 </a>
 </li>
 <li>
-<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fcs538%2f&name=Theory%20and%20Design%20of%20Programming%20Languages&description=Lecture%201%201%20%20Functional%20programming%20%20History%20%20%20%20Based%20on%20%24%5clambda%24%20calculus%0a%20%20Lisp%0a%20%20ML%0a%20%20Haskell%0a%20%20%20%20Building%20block%20%20%20%20function%20%20%20take%20inputs%20as%20arguments%20and%20produce%20outputs.%0a%20%20Functions%20are%20first%20class%2c%20like%20any%20other%20value.%20They%20can%20be%20passed%20to%2c%20returned%20by%20functions.%20Functions%20can%20also%20be%20combined%20into%20new%20function." aria-label=Tumblr>
+<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fcs538%2f&name=Theory%20and%20Design%20of%20Programming%20Languages&description=Lecture%201%201%20%20Functional%20programming%20%20History%20%20%20Based%20on%20%24%5clambda%24%20calculus%20Lisp%20ML%20Haskell%20%20%20%20Building%20block%20%20%20%20function%20%20take%20inputs%20as%20arguments%20and%20produce%20outputs.%20%20Functions%20are%20first%20class%2c%20like%20any%20other%20value.%20They%20can%20be%20passed%20to%2c%20returned%20by%20functions.%20Functions%20can%20also%20be%20combined%20into%20new%20function.%0a%20%20Control%20side-effects%20%20Think%20about%20program%20is%20isolation" aria-label=Tumblr>
 <i class="fab fa-tumblr" aria-hidden=true></i>
 </a>
 </li>
@@ -342,18 +334,10 @@ History
 </h4>
 <div id=outline-text-headline-3 class=outline-text-4>
 <ul>
-<li>
-<p>Based on $\lambda$ calculus</p>
-</li>
-<li>
-<p>Lisp</p>
-</li>
-<li>
-<p>ML</p>
-</li>
-<li>
-<p>Haskell</p>
-</li>
+<li>Based on $\lambda$ calculus</li>
+<li>Lisp</li>
+<li>ML</li>
+<li>Haskell</li>
 </ul>
 </div>
 </div>
@@ -366,9 +350,7 @@ Building block
 <dt>
 function
 </dt>
-<dd>
-<p>take <strong>inputs</strong> as arguments and produce <strong>outputs</strong>.</p>
-</dd>
+<dd>take <strong>inputs</strong> as arguments and produce <strong>outputs</strong>.</dd>
 </dl>
 <p>Functions are first class, like any other value. They can be passed to, returned by functions. Functions can also be combined into new function.</p>
 </div>
@@ -383,20 +365,15 @@ Control side-effects
 <dt>
 pure function
 </dt>
-<dd>
-<p>Described only by input and output. Always returns same result on fixed input.</p>
-</dd>
+<dd>Described only by input and output. Always returns same result on fixed input.</dd>
 <dt>
 Hidden state
 </dt>
-<dd>
-<p>avoid counters, local variables, etc.</p>
-</dd>
+<dd>avoid counters, local variables, etc.</dd>
 <dt>
 Manage side-effects
 </dt>
-<dd>
-</dd>
+<dd></dd>
 </dl>
 </div>
 </div>
@@ -550,15 +527,11 @@ Keywords
 <dt>
 Do
 </dt>
-<dd>
-<p>The <code class=verbatim>do</code> keyword introduces a block of actions that can cause effects in the real world, such as reading or writing a file.</p>
-</dd>
+<dd>The <code class=verbatim>do</code> keyword introduces a block of actions that can cause effects in the real world, such as reading or writing a file.</dd>
 <dt>
 &lt;-
 </dt>
-<dd>
-<p>Assignment operator inside the do block.</p>
-</dd>
+<dd>Assignment operator inside the do block.</dd>
 </dl>
 </div>
 </div>
@@ -599,15 +572,11 @@ Infix
 <dt>
 prefix
 </dt>
-<dd>
-<p>Writing the name of the function before its arguments.</p>
-</dd>
+<dd>Writing the name of the function before its arguments.</dd>
 <dt>
 infix
 </dt>
-<dd>
-<p>When a function has more than 1 arguments, it can be placed in between its first and second arguments.</p>
-</dd>
+<dd>When a function has more than 1 arguments, it can be placed in between its first and second arguments.</dd>
 </dl>
 <div class="src src-haskell">
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-haskell data-lang=haskell><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#50fa7b>a</span> `times` b <span style=color:#ff79c6>=</span> a <span style=color:#ff79c6>*</span> b</code></pre></div>
@@ -628,96 +597,66 @@ Data.List
 <dt>
 length
 </dt>
-<dd>
-<p>return the number of elements in a list</p>
-</dd>
+<dd>return the number of elements in a list</dd>
 <dt>
 null
 </dt>
-<dd>
-<p>determine whether a list is empty</p>
-</dd>
+<dd>determine whether a list is empty</dd>
 <dt>
 head
 </dt>
-<dd>
-<p>access the first element of a list</p>
-</dd>
+<dd>access the first element of a list</dd>
 <dt>
 tail
 </dt>
-<dd>
-<p>return a list of all but head</p>
-</dd>
+<dd>return a list of all but head</dd>
 <dt>
 last
 </dt>
-<dd>
-<p>access the last element of a list</p>
-</dd>
+<dd>access the last element of a list</dd>
 <dt>
 init
 </dt>
-<dd>
-<p>return a list of all but tail</p>
-</dd>
+<dd>return a list of all but tail</dd>
 </dl>
 <p>Why not using <code class=verbatim>length</code> to check emptiness? List in Haskell does not contain its size. Therefore, <code class=verbatim>length</code> has to go through a whole list to find its size. In other words, <code class=verbatim>length</code> runs in liner time. A better alternative, <code class=verbatim>null</code>, not only runs in constant time but also clearly indicates the function of the code containing it.</p>
 <dl>
 <dt>
 partial functions
 </dt>
-<dd>
-<p>return values defined for a subset of valid inputs, like <code class=verbatim>head</code></p>
-</dd>
+<dd>return values defined for a subset of valid inputs, like <code class=verbatim>head</code></dd>
 <dt>
 total functions
 </dt>
-<dd>
-<p>return valid results over their entire input domain</p>
-</dd>
+<dd>return valid results over their entire input domain</dd>
 <dt>
 ++
 </dt>
-<dd>
-<p>append an list to another list</p>
-</dd>
+<dd>append an list to another list</dd>
 <dt>
 concat
 </dt>
-<dd>
-<p>concatenate a list of lists into a list; remove one level of nesting</p>
-</dd>
+<dd>concatenate a list of lists into a list; remove one level of nesting</dd>
 <dt>
 reverse
 </dt>
-<dd>
-<p>reverse list order</p>
-</dd>
+<dd>reverse list order</dd>
 <dt>
 and
 </dt>
-<dd>
-<p>and each element of a list of bool</p>
-</dd>
+<dd>and each element of a list of bool</dd>
 <dt>
 or
 </dt>
-<dd>
-<p>or each element of a list of bool</p>
-</dd>
+<dd>or each element of a list of bool</dd>
 <dt>
 all
 </dt>
-<dd>
-<p>takes a predicate, return <code class=verbatim>True</code> if the predicate succeeds on every element of a list</p>
-</dd>
+<dd>takes a predicate, return <code class=verbatim>True</code> if the predicate succeeds on every element of a list</dd>
 <dt>
 any
 </dt>
-<dd>
-<p>takes a predicate, return <code class=verbatim>True</code> if the predicate succeeds on at least one element of a list</p>
-</dd>
+<dd>takes a predicate, return <code class=verbatim>True</code> if the predicate succeeds on at least one element of a list</dd>
 </dl>
 <div id=outline-container-headline-21 class=outline-4>
 <h4 id=headline-21>
@@ -728,45 +667,31 @@ Sublists
 <dt>
 take
 </dt>
-<dd>
-<p>return a sublist of first $k$ elements</p>
-</dd>
+<dd>return a sublist of first $k$ elements</dd>
 <dt>
 drop
 </dt>
-<dd>
-<p>return a sublist of without the first $k$ elements</p>
-</dd>
+<dd>return a sublist of without the first $k$ elements</dd>
 <dt>
 split
 </dt>
-<dd>
-<p>split a list at index $k$; return a 2-tuple of list, item at index $k$ belongs to the second element of the tuple</p>
-</dd>
+<dd>split a list at index $k$; return a 2-tuple of list, item at index $k$ belongs to the second element of the tuple</dd>
 <dt>
 takeWhile
 </dt>
-<dd>
-<p>take element from the beginning of the list as long as a predicate returns <code class=verbatim>True</code></p>
-</dd>
+<dd>take element from the beginning of the list as long as a predicate returns <code class=verbatim>True</code></dd>
 <dt>
 dropWhile
 </dt>
-<dd>
-<p>drop element from the beginning of the list as long as a predicate returns <code class=verbatim>True</code></p>
-</dd>
+<dd>drop element from the beginning of the list as long as a predicate returns <code class=verbatim>True</code></dd>
 <dt>
 break
 </dt>
-<dd>
-<p>consume elements when predicate fails</p>
-</dd>
+<dd>consume elements when predicate fails</dd>
 <dt>
 span
 </dt>
-<dd>
-<p>consume elements when predicate is <code class=verbatim>True</code></p>
-</dd>
+<dd>consume elements when predicate is <code class=verbatim>True</code></dd>
 </dl>
 </div>
 </div>
@@ -779,39 +704,27 @@ Searching List
 <dt>
 elem
 </dt>
-<dd>
-<p>return true if an element is in a list</p>
-</dd>
+<dd>return true if an element is in a list</dd>
 <dt>
 notElem
 </dt>
-<dd>
-<p>return true if an element is not in a list</p>
-</dd>
+<dd>return true if an element is not in a list</dd>
 <dt>
 filter
 </dt>
-<dd>
-<p>return all elements on which predicate succeeds</p>
-</dd>
+<dd>return all elements on which predicate succeeds</dd>
 <dt>
 isPrefixOf
 </dt>
-<dd>
-<p>return true if a sublist appears in the front of a list</p>
-</dd>
+<dd>return true if a sublist appears in the front of a list</dd>
 <dt>
 isInfixOf
 </dt>
-<dd>
-<p>return true if a sublist appears in a list</p>
-</dd>
+<dd>return true if a sublist appears in a list</dd>
 <dt>
 isSuffixOf
 </dt>
-<dd>
-<p>return true if a sublist appears in the end of a list</p>
-</dd>
+<dd>return true if a sublist appears in the end of a list</dd>
 </dl>
 </div>
 </div>
@@ -824,15 +737,11 @@ Multiple List
 <dt>
 zip
 </dt>
-<dd>
-<p>combine two lists into a lists of pair, then length of the new list is the minimum length of the 2 given lists</p>
-</dd>
+<dd>combine two lists into a lists of pair, then length of the new list is the minimum length of the 2 given lists</dd>
 <dt>
 zipWith
 </dt>
-<dd>
-<p>When zipping, apply a function</p>
-</dd>
+<dd>When zipping, apply a function</dd>
 </dl>
 </div>
 </div>
@@ -845,27 +754,19 @@ String handling
 <dt>
 lines
 </dt>
-<dd>
-<p>partition a string into a list of substring based on <code class=verbatim>\n</code></p>
-</dd>
+<dd>partition a string into a list of substring based on <code class=verbatim>\n</code></dd>
 <dt>
 unlines
 </dt>
-<dd>
-<p>concatenate a list of strings into a string. <code class=verbatim>\n</code> is used to connect each element</p>
-</dd>
+<dd>concatenate a list of strings into a string. <code class=verbatim>\n</code> is used to connect each element</dd>
 <dt>
 words
 </dt>
-<dd>
-<p>partition a string into a list of substring based on <code class=verbatim>space</code></p>
-</dd>
+<dd>partition a string into a list of substring based on <code class=verbatim>space</code></dd>
 <dt>
 unwords
 </dt>
-<dd>
-<p>concatenate a list of strings into a string. <code class=verbatim>space</code> is used to connect each element</p>
-</dd>
+<dd>concatenate a list of strings into a string. <code class=verbatim>space</code> is used to connect each element</dd>
 </dl>
 </div>
 </div>
@@ -881,9 +782,7 @@ Loops
 <dt>
 tail recursive function
 </dt>
-<dd>
-<p>function call itself at the end</p>
-</dd>
+<dd>function call itself at the end</dd>
 </dl>
 <p>Normally, a large amount of times of recursion will lead to stack overflow. However, functional programming languages implement TCO, or tail call optimization, to detect and transform tail recursion to constant space
 However, if need to apply function to each element of a list, <code class=verbatim>map</code> is a good function to use</p>
@@ -891,9 +790,7 @@ However, if need to apply function to each element of a list, <code class=verbat
 <dt>
 high order function
 </dt>
-<dd>
-<p>function that takes another function as an argument</p>
-</dd>
+<dd>function that takes another function as an argument</dd>
 </dl>
 <div id=outline-container-headline-26 class=outline-4>
 <h4 id=headline-26>
@@ -904,27 +801,19 @@ Fold
 <dt>
 foldl
 </dt>
-<dd>
-<p>Fold from left of the list. Take a step function, an initial value for its accumulator, and a list.</p>
-</dd>
+<dd>Fold from left of the list. Take a step function, an initial value for its accumulator, and a list.</dd>
 <dt>
 step function
 </dt>
-<dd>
-<p>Take accumulator, an element from list, and return new accumulator; define how to update the accumulator in <code class=verbatim>foldl</code></p>
-</dd>
+<dd>Take accumulator, an element from list, and return new accumulator; define how to update the accumulator in <code class=verbatim>foldl</code></dd>
 <dt>
 foldr
 </dt>
-<dd>
-<p>Fold from right of the list.</p>
-</dd>
+<dd>Fold from right of the list.</dd>
 <dt>
 primitive recursive
 </dt>
-<dd>
-<p>class of functions that can be expressed using <code class=verbatim>foldr</code></p>
-</dd>
+<dd>class of functions that can be expressed using <code class=verbatim>foldr</code></dd>
 </dl>
 <p><code class=verbatim>foldl</code> could cause stack overflow due to the laziness of Haskell. Use <code class=verbatim>foldl'</code> from <code class=verbatim>Data.List</code></p>
 </div>
@@ -937,15 +826,9 @@ Lambda Function
 </h3>
 <div id=outline-text-headline-27 class=outline-text-3>
 <ul>
-<li>
-<p>\ [arguments] -> [function body / definition]</p>
-</li>
-<li>
-<p>use a parentheses to let Haskell know where is the end of the function body</p>
-</li>
-<li>
-<p>can only have one single clause in definition</p>
-</li>
+<li>\ [arguments] -> [function body / definition]</li>
+<li>use a parentheses to let Haskell know where is the end of the function body</li>
+<li>can only have one single clause in definition</li>
 </ul>
 </div>
 </div>
@@ -959,21 +842,15 @@ Partial Function and Currying
 <dt>
 partial function
 </dt>
-<dd>
-<p>the function formed by passing fewer arguments to an existing function</p>
-</dd>
+<dd>the function formed by passing fewer arguments to an existing function</dd>
 <dt>
 currying
 </dt>
-<dd>
-<p>application of partial function</p>
-</dd>
+<dd>application of partial function</dd>
 <dt>
 section
 </dt>
-<dd>
-<p>enclose an operator in parentheses, supply its left or right argument inside the parentheses to get a partially applied function</p>
-</dd>
+<dd>enclose an operator in parentheses, supply its left or right argument inside the parentheses to get a partially applied function</dd>
 </dl>
 </div>
 </div>
@@ -1035,9 +912,7 @@ Typing context
 <dt>
 binding
 </dt>
-<dd>
-<p>$(x : t)$ means variable $x$ has type $t$</p>
-</dd>
+<dd>$(x : t)$ means variable $x$ has type $t$</dd>
 </dl>
 <p>A typing context is a list of bindings. For example, A two-binding context $G$ is $G = x : bool, y : int$. Empty context is denoted as $G = \cdot$.</p>
 </div>
@@ -1052,15 +927,11 @@ Together
 <dt>
 Unicity of Typing
 </dt>
-<dd>
-<p>For every typing context $G$ and expression $e$, there exists at most one type $t$ such that $G \vdash e : t$.</p>
-</dd>
+<dd>For every typing context $G$ and expression $e$, there exists at most one type $t$ such that $G \vdash e : t$.</dd>
 <dt>
 Inversion for Typing
 </dt>
-<dd>
-<p>Suppose that $G \vdash e :t$. If $e = \mathrm{add}(e_1, e_2)$, then $t = int, G \vdash e_1 : int$, and $G \vdash e_2 : int$.</p>
-</dd>
+<dd>Suppose that $G \vdash e :t$. If $e = \mathrm{add}(e_1, e_2)$, then $t = int, G \vdash e_1 : int$, and $G \vdash e_2 : int$.</dd>
 </dl>
 </div>
 </div>
@@ -1085,9 +956,7 @@ Define a Typeclass
 <dt>
 instance type
 </dt>
-<dd>
-<p>type that implements the functions defined in the typeclass</p>
-</dd>
+<dd>type that implements the functions defined in the typeclass</dd>
 </dl>
 <p>For example:</p>
 <div class="src src-haskell">
@@ -1145,9 +1014,7 @@ Function
 </h4>
 <div id=outline-text-headline-42 class=outline-text-4>
 <ul>
-<li>
-<p>Multiple arguments, Anonymous Functions (\x -> x + 1)</p>
-</li>
+<li>Multiple arguments, Anonymous Functions (\x -> x + 1)</li>
 </ul>
 </div>
 </div>
@@ -1185,15 +1052,9 @@ $
 <div id=outline-text-headline-46 class=outline-text-5>
 <p>function application</p>
 <ul>
-<li>
-<p>map</p>
-</li>
-<li>
-<p>foldr</p>
-</li>
-<li>
-<p>zip</p>
-</li>
+<li>map</li>
+<li>foldr</li>
+<li>zip</li>
 </ul>
 </div>
 </div>
@@ -1256,17 +1117,13 @@ Functors
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8</span>  <span style=color:#8be9fd>Just</span> val <span style=color:#ff79c6>-&gt;</span> <span style=color:#8be9fd>Just</span> <span style=color:#ff79c6>$</span> f val</code></pre></div>
 </div>
 <ul>
-<li>
-<p>Applicative</p>
-</li>
+<li>Applicative</li>
 </ul>
 <ul>
 <li>
 <p>Monads</p>
 <ul>
-<li>
-<p>IO Monads</p>
-</li>
+<li>IO Monads</li>
 </ul>
 </li>
 </ul>
@@ -1285,24 +1142,14 @@ Theory
 <li>
 <p>Syntax</p>
 <ul>
-<li>
-<p>digit = 0 | 1 | 2 | 3 …
-exp = num + exp | exp</p>
-</li>
+<li>digit = 0 | 1 | 2 | 3 …
+exp = num + exp | exp</li>
 </ul>
 </li>
-<li>
-<p>Lambdas Calculus (Not-typed)</p>
-</li>
-<li>
-<p>Semantics (small-step)</p>
-</li>
-<li>
-<p>Type theory (add safety = progress(can step) + preservation(step to same type))</p>
-</li>
-<li>
-<p>Bigger Types (P × Q, P + Q)</p>
-</li>
+<li>Lambdas Calculus (Not-typed)</li>
+<li>Semantics (small-step)</li>
+<li>Type theory (add safety = progress(can step) + preservation(step to same type))</li>
+<li>Bigger Types (P × Q, P + Q)</li>
 </ul>
 </div>
 </div>
@@ -1322,56 +1169,38 @@ References and Borrowing
 </h2>
 <div id=outline-text-headline-53 class=outline-text-2>
 <ul>
-<li>
-<p>References is an indirect name for some data. Similar to a pointer to some data.</p>
-</li>
+<li>References is an indirect name for some data. Similar to a pointer to some data.</li>
 <li>
 <p>Reference does not own the data.</p>
 <ul>
-<li>
-<p>Can have only one owner, but many references.</p>
-</li>
+<li>Can have only one owner, but many references.</li>
 </ul>
 </li>
 <li>
 <p>Reference going out of scope does not drop data.</p>
 <ul>
-<li>
-<p>Can "borrow" reference to function</p>
-</li>
+<li>Can "borrow" reference to function</li>
 </ul>
 </li>
 <li>
 <p>Function can take (mutable) reference and modify caller's data directly</p>
 <ul>
-<li>
-<p>Useful for mutable datastructures.</p>
-</li>
+<li>Useful for mutable datastructures.</li>
 </ul>
 </li>
-<li>
-<p>Reference themselves are on stack.</p>
-</li>
+<li>Reference themselves are on stack.</li>
 <li>
 <p>By default, references are immutable.</p>
 <ul>
-<li>
-<p>Can't change underlying data through references.</p>
-</li>
-<li>
-<p>Reference type: <code class=verbatim>&T</code></p>
-</li>
+<li>Can't change underlying data through references.</li>
+<li>Reference type: <code class=verbatim>&T</code></li>
 </ul>
 </li>
 <li>
 <p>Can declare mutable references</p>
 <ul>
-<li>
-<p>Target must be mutable as well</p>
-</li>
-<li>
-<p>Reference type: <code class=verbatim>&mut T</code></p>
-</li>
+<li>Target must be mutable as well</li>
+<li>Reference type: <code class=verbatim>&mut T</code></li>
 </ul>
 <div class="src src-rust">
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#8be9fd;font-style:italic>let</span> must my_str <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>::from(<span style=color:#f1fa8c>&#34;foo&#34;</span>); <span style=color:#6272a4>// mutable var
@@ -1386,9 +1215,7 @@ Dereferencing
 </h3>
 <div id=outline-text-headline-54 class=outline-text-3>
 <ul>
-<li>
-<p>Use <code class=verbatim>*</code> notation to get thing reference is pointing at</p>
-</li>
+<li>Use <code class=verbatim>*</code> notation to get thing reference is pointing at</li>
 <li>
 <p>Often not needed due to "auto-deref" (magic)</p>
 <div class="src src-rust">
@@ -1434,20 +1261,14 @@ What's going one
 <li>
 <p>Mutability is not a property of the data!</p>
 <ul>
-<li>
-<p>Not: these bits are mutable or immutable</p>
-</li>
+<li>Not: these bits are mutable or immutable</li>
 </ul>
 </li>
 <li>
 <p>Mutability is property of variable or reference</p>
 <ul>
-<li>
-<p>YES: I can mutate data through this variable</p>
-</li>
-<li>
-<p>YES: I cannot mutate data through that reference</p>
-</li>
+<li>YES: I can mutate data through this variable</li>
+<li>YES: I cannot mutate data through that reference</li>
 </ul>
 </li>
 </ul>
@@ -1459,29 +1280,19 @@ Multiple References
 </h3>
 <div id=outline-text-headline-57 class=outline-text-3>
 <ul>
-<li>
-<p>Rust works hard to ensure one owner for each data</p>
-</li>
+<li>Rust works hard to ensure one owner for each data</li>
 <li>
 <p>Multiple references to same data is problematic</p>
 <ul>
-<li>
-<p>Also known as aliasing</p>
-</li>
+<li>Also known as aliasing</li>
 </ul>
 </li>
-<li>
-<p>References need to follow certain rules for safty</p>
-</li>
+<li>References need to follow certain rules for safty</li>
 <li>
 <p>In any scope, there can be either:</p>
 <ol>
-<li>
-<p>Any number of immutable references referring to the same variable</p>
-</li>
-<li>
-<p>At most one mutable reference referring to the same variable</p>
-</li>
+<li>Any number of immutable references referring to the same variable</li>
+<li>At most one mutable reference referring to the same variable</li>
 </ol>
 </li>
 </ul>
@@ -1493,9 +1304,7 @@ Multiple Immutable
 </h3>
 <div id=outline-text-headline-58 class=outline-text-3>
 <ul>
-<li>
-<p>Can have any number of immutable references to variable</p>
-</li>
+<li>Can have any number of immutable references to variable</li>
 <li>
 <p>Safe: none of the references can change the underlying</p>
 <div class="src src-rust">
@@ -1519,12 +1328,8 @@ At Most One Mutable
 <li>
 <p>Can only change underlying through single reference</p>
 <ul>
-<li>
-<p>Also important in concurrent setting</p>
-</li>
-<li>
-<p>Also enables more optimizations</p>
-</li>
+<li>Also important in concurrent setting</li>
+<li>Also enables more optimizations</li>
 </ul>
 <div class="src src-rust">
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#8be9fd;font-style:italic>let</span> <span style=color:#ff79c6>mut</span> mut_str <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>::from(<span style=color:#f1fa8c>&#34;foo&#34;</span>);
@@ -1568,28 +1373,18 @@ Alternative Reading
 <li>
 <p>Immutable reference shared reference</p>
 <ul>
-<li>
-<p>Shared access to some data</p>
-</li>
-<li>
-<p>Sharing: can't change the data</p>
-</li>
+<li>Shared access to some data</li>
+<li>Sharing: can't change the data</li>
 </ul>
 </li>
 <li>
 <p>Mutable reference: unique reference</p>
 <ul>
-<li>
-<p>Exclusive access to some data</p>
-</li>
-<li>
-<p>Can modify it: no one else has access</p>
-</li>
+<li>Exclusive access to some data</li>
+<li>Can modify it: no one else has access</li>
 </ul>
 </li>
-<li>
-<p>Can't mix shared and unique!</p>
-</li>
+<li>Can't mix shared and unique!</li>
 </ul>
 </div>
 </div>
@@ -1599,32 +1394,20 @@ Isn't a Reference Just a Pointer?
 </h3>
 <div id=outline-text-headline-62 class=outline-text-3>
 <ul>
-<li>
-<p>In machine code: a reference is just a pointer</p>
-</li>
-<li>
-<p>In Rust: a reference also gives <strong>permissions</strong> to do things</p>
-</li>
+<li>In machine code: a reference is just a pointer</li>
+<li>In Rust: a reference also gives <strong>permissions</strong> to do things</li>
 <li>
 <p>With an immutable reference, code can</p>
 <ul>
-<li>
-<p>Dereference/read location</p>
-</li>
-<li>
-<p>Point to/read <strong>anything reachable</strong> from reference.</p>
-</li>
+<li>Dereference/read location</li>
+<li>Point to/read <strong>anything reachable</strong> from reference.</li>
 </ul>
 </li>
 <li>
 <p>With an mutable reference, code can</p>
 <ul>
-<li>
-<p>Dereference/read/write location</p>
-</li>
-<li>
-<p>Point to/read/write <strong>anything reachable</strong> from reference.</p>
-</li>
+<li>Dereference/read/write location</li>
+<li>Point to/read/write <strong>anything reachable</strong> from reference.</li>
 </ul>
 </li>
 </ul>
@@ -1641,23 +1424,15 @@ Passing Arguments
 </h4>
 <div id=outline-text-headline-64 class=outline-text-4>
 <ul>
-<li>
-<p>Operationally: arguments passed "by value"</p>
-</li>
+<li>Operationally: arguments passed "by value"</li>
 <li>
 <p>Ownership of argument passes into the function</p>
 <ul>
-<li>
-<p>Caller can't use arguments after calling!</p>
-</li>
-<li>
-<p>Arguments moved into function</p>
-</li>
+<li>Caller can't use arguments after calling!</li>
+<li>Arguments moved into function</li>
 </ul>
 </li>
-<li>
-<p>Function can return argument to return ownership</p>
-</li>
+<li>Function can return argument to return ownership</li>
 </ul>
 </div>
 </div>
@@ -1667,23 +1442,17 @@ Passing Arguments
 </h4>
 <div id=outline-text-headline-65 class=outline-text-4>
 <ul>
-<li>
-<p>Operationally: arguments passed "by reference"</p>
-</li>
+<li>Operationally: arguments passed "by reference"</li>
 <li>
 <p>Ownership of argument doesn't change</p>
 <ul>
-<li>
-<p>Original owner (caller, caller-of-caller, …) owns argument.</p>
-</li>
+<li>Original owner (caller, caller-of-caller, …) owns argument.</li>
 </ul>
 </li>
 <li>
 <p>Function borrows arguments from the owner</p>
 <ul>
-<li>
-<p>Will give it back to owner when done with it</p>
-</li>
+<li>Will give it back to owner when done with it</li>
 </ul>
 </li>
 </ul>
@@ -1700,12 +1469,8 @@ Variables Are Key
 <li>
 <p>Anywhere there are variables:</p>
 <ul>
-<li>
-<p>Think about ownership rules</p>
-</li>
-<li>
-<p>Think about borrowing rules</p>
-</li>
+<li>Think about ownership rules</li>
+<li>Think about borrowing rules</li>
 </ul>
 </li>
 </ul>
@@ -1717,23 +1482,17 @@ Matching Can Move Data
 </h3>
 <div id=outline-text-headline-67 class=outline-text-3>
 <ul>
-<li>
-<p>Often: matching on Enums with data inside</p>
-</li>
+<li>Often: matching on Enums with data inside</li>
 <li>
 <p>The inner data is moved into the match arm</p>
 <ul>
-<li>
-<p>Variable from match arm has ownership</p>
-</li>
+<li>Variable from match arm has ownership</li>
 </ul>
 </li>
 <li>
 <p>Typical ownership rules apply</p>
 <ul>
-<li>
-<p>Data is dropped at the end of the arm</p>
-</li>
+<li>Data is dropped at the end of the arm</li>
 </ul>
 </li>
 </ul>
@@ -1748,23 +1507,15 @@ Matching on a reference
 <li>
 <p>Rust will infer how to borrow inner values</p>
 <ul>
-<li>
-<p>Matching on <code class=verbatim>&T</code> type: arms borrow immutable</p>
-</li>
-<li>
-<p>Marching on <code class=verbatim>&must T</code> type: arms borrow mutable</p>
-</li>
+<li>Matching on <code class=verbatim>&T</code> type: arms borrow immutable</li>
+<li>Marching on <code class=verbatim>&must T</code> type: arms borrow mutable</li>
 </ul>
 </li>
 <li>
 <p>Also called "default binding modes"</p>
 <ul>
-<li>
-<p>Usually: Just work</p>
-</li>
-<li>
-<p>Sometimes; inferences goes wrong (doesn't work)</p>
-</li>
+<li>Usually: Just work</li>
+<li>Sometimes; inferences goes wrong (doesn't work)</li>
 </ul>
 </li>
 </ul>
@@ -1795,9 +1546,7 @@ Matching on a reference
 <dt>
 Typeclasses
 </dt>
-<dd>
-<p>Typeclasses define a set of functions that can have different implementations depending on the type of data they are given.</p>
-</dd>
+<dd>Typeclasses define a set of functions that can have different implementations depending on the type of data they are given.</dd>
 </dl>
 </div>
 </div>
@@ -2026,7 +1775,7 @@ Typeclasses
 </a>
 </li>
 <li>
-<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fcs538%2f&name=Theory%20and%20Design%20of%20Programming%20Languages&description=Lecture%201%201%20%20Functional%20programming%20%20History%20%20%20%20Based%20on%20%24%5clambda%24%20calculus%0a%20%20Lisp%0a%20%20ML%0a%20%20Haskell%0a%20%20%20%20Building%20block%20%20%20%20function%20%20%20take%20inputs%20as%20arguments%20and%20produce%20outputs.%0a%20%20Functions%20are%20first%20class%2c%20like%20any%20other%20value.%20They%20can%20be%20passed%20to%2c%20returned%20by%20functions.%20Functions%20can%20also%20be%20combined%20into%20new%20function." aria-label=Tumblr>
+<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fcs538%2f&name=Theory%20and%20Design%20of%20Programming%20Languages&description=Lecture%201%201%20%20Functional%20programming%20%20History%20%20%20Based%20on%20%24%5clambda%24%20calculus%20Lisp%20ML%20Haskell%20%20%20%20Building%20block%20%20%20%20function%20%20take%20inputs%20as%20arguments%20and%20produce%20outputs.%20%20Functions%20are%20first%20class%2c%20like%20any%20other%20value.%20They%20can%20be%20passed%20to%2c%20returned%20by%20functions.%20Functions%20can%20also%20be%20combined%20into%20new%20function.%0a%20%20Control%20side-effects%20%20Think%20about%20program%20is%20isolation" aria-label=Tumblr>
 <i class="fab fa-tumblr fa-lg" aria-hidden=true></i>
 </a>
 </li>
@@ -2051,7 +1800,7 @@ Typeclasses
 </div>
 <footer id=footer>
 <div class=footer-left>
-Copyright &copy; 2021 Yi Chen
+Copyright &copy; 2022 Yi Chen
 </div>
 <div class=footer-right>
 <nav>

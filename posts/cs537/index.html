@@ -222,21 +222,15 @@ Goals of OS
 <dt>
 Ease of use
 </dt>
-<dd>
-<p>Abstractions are easy to use.</p>
-</dd>
+<dd>Abstractions are easy to use.</dd>
 <dt>
 Performance
 </dt>
-<dd>
-<p>getting best performance from one hardware</p>
-</dd>
+<dd>getting best performance from one hardware</dd>
 <dt>
 Isolation and Reliability
 </dt>
-<dd>
-<p>security</p>
-</dd>
+<dd>security</dd>
 </dl>
 </div>
 </div>
@@ -249,21 +243,15 @@ Three conceptual pieces of OS
 <dt>
 Virtualization
 </dt>
-<dd>
-<p>Makes each application believe it has each resource to itself.</p>
-</dd>
+<dd>Makes each application believe it has each resource to itself.</dd>
 <dt>
 Concurrency
 </dt>
-<dd>
-<p>Events occur simultaneously and may interact with one another. Need to hide concurrency from independent processes and manage concurrency with interacting processes. Should provide abstractions like locks, semaphores, condition variables etc.</p>
-</dd>
+<dd>Events occur simultaneously and may interact with one another. Need to hide concurrency from independent processes and manage concurrency with interacting processes. Should provide abstractions like locks, semaphores, condition variables etc.</dd>
 <dt>
 Persistence
 </dt>
-<dd>
-<p>Lifetime of data is longer than lifetime of any one process. Machine may lose power or crash unexpectedly. There are issues with the persistence. For example, high-level abstractions such as files, directories and links are needed to be implemented. Moreover, unexpected failure, such as power failure, program/OS crashes, needed to be handled correctly. Lastly, the performance can also be an issue since disks are very slow, comparing to CPU.</p>
-</dd>
+<dd>Lifetime of data is longer than lifetime of any one process. Machine may lose power or crash unexpectedly. There are issues with the persistence. For example, high-level abstractions such as files, directories and links are needed to be implemented. Moreover, unexpected failure, such as power failure, program/OS crashes, needed to be handled correctly. Lastly, the performance can also be an issue since disks are very slow, comparing to CPU.</dd>
 </dl>
 </div>
 </div>
@@ -286,21 +274,15 @@ int mprotect(void *addr, int len)
 <dt>
 addr
 </dt>
-<dd>
-<p>starting address of pages needing protection. </p>
-</dd>
+<dd>starting address of pages needing protection. </dd>
 <dt>
 len
 </dt>
-<dd>
-<p>number of pages needing protection</p>
-</dd>
+<dd>number of pages needing protection</dd>
 <dt>
 return
 </dt>
-<dd>
-<p>return 0 when success, If <code class=verbatim>addr</code> is not page aligned or does not belong to current address space, or <code class=verbatim>len</code> ≤ 0, return 0 and does nothing.</p>
-</dd>
+<dd>return 0 when success, If <code class=verbatim>addr</code> is not page aligned or does not belong to current address space, or <code class=verbatim>len</code> ≤ 0, return 0 and does nothing.</dd>
 </dl>
 </div>
 </div>
@@ -338,15 +320,11 @@ Page allocation
 <dt>
 Alternate allocation
 </dt>
-<dd>
-<p>Keep a free frame between every allocated frame in the system.</p>
-</dd>
+<dd>Keep a free frame between every allocated frame in the system.</dd>
 <dt>
 Random allocation
 </dt>
-<dd>
-<p>Allocate the <code class=verbatim>i-th</code> frame, where <code class=verbatim>i</code> is a random number.</p>
-</dd>
+<dd>Allocate the <code class=verbatim>i-th</code> frame, where <code class=verbatim>i</code> is a random number.</dd>
 </dl>
 </div>
 </div>
@@ -359,21 +337,15 @@ int dump_allocated(int *frames, int numframes)
 <dt>
 frames
 </dt>
-<dd>
-<p>a pointer to an allocated array of integers.</p>
-</dd>
+<dd>a pointer to an allocated array of integers.</dd>
 <dt>
 numframes
 </dt>
-<dd>
-<p>size of <code class=verbatim>frames</code></p>
-</dd>
+<dd>size of <code class=verbatim>frames</code></dd>
 <dt>
 return
 </dt>
-<dd>
-<p>0 success, -1 error</p>
-</dd>
+<dd>0 success, -1 error</dd>
 </dl>
 </div>
 </div>
@@ -388,33 +360,23 @@ Project 3 Discussion
 <dt>
 allocuvm()
 </dt>
-<dd>
-<p>In kernel/vm.c. It allocates user virtual memory and return the new size.</p>
-</dd>
+<dd>In kernel/vm.c. It allocates user virtual memory and return the new size.</dd>
 <dt>
 mappages()
 </dt>
-<dd>
-<p>In kernel/vm.c. It creates PTE that maps virtual memory to physical memory.</p>
-</dd>
+<dd>In kernel/vm.c. It creates PTE that maps virtual memory to physical memory.</dd>
 <dt>
 walkpgdir()
 </dt>
-<dd>
-<p>In kernel/vm.c. Walking down the page table. Go to the appropriate page table directory and index into the inner page table entry.</p>
-</dd>
+<dd>In kernel/vm.c. Walking down the page table. Go to the appropriate page table directory and index into the inner page table entry.</dd>
 <dt>
 mmu.h
 </dt>
-<dd>
-<p>Line 93 - 99 shows the page table layout. 32-bit address. 4KB pages, 2-level page table.</p>
-</dd>
+<dd>Line 93 - 99 shows the page table layout. 32-bit address. 4KB pages, 2-level page table.</dd>
 <dt>
 marco PDX(la)
 </dt>
-<dd>
-<p>la stands for logical address. Can extras page directory index given a logical address.</p>
-</dd>
+<dd>la stands for logical address. Can extras page directory index given a logical address.</dd>
 </dl>
 </div>
 </div>
@@ -444,21 +406,15 @@ Programming Model
 <dt>
 Data Type
 </dt>
-<dd>
-<p>Each record is (key, value)</p>
-</dd>
+<dd>Each record is (key, value)</dd>
 <dt>
 Map function
 </dt>
-<dd>
-<p>(K<sub>in</sub>, V<sub>in</sub>) → list(K<sub>inter</sub>, V<sub>inter</sub>)</p>
-</dd>
+<dd>(K<sub>in</sub>, V<sub>in</sub>) → list(K<sub>inter</sub>, V<sub>inter</sub>)</dd>
 <dt>
 Reduce function
 </dt>
-<dd>
-<p>(K<sub>inter</sub>, list(V<sub>inter</sub>)) → list(K<sub>out</sub>, V<sub>out</sub>)</p>
-</dd>
+<dd>(K<sub>inter</sub>, list(V<sub>inter</sub>)) → list(K<sub>out</sub>, V<sub>out</sub>)</dd>
 </dl>
 </div>
 </div>
@@ -599,7 +555,7 @@ Reduce function
 </div>
 <footer id=footer>
 <div class=footer-left>
-Copyright &copy; 2021 Yi Chen
+Copyright &copy; 2022 Yi Chen
 </div>
 <div class=footer-right>
 <nav>

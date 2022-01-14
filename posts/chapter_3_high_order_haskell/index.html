@@ -17,11 +17,7 @@
 <meta property="og:title" content="High Order Haskell">
 <meta property="og:description" content="Notes on Practical Haskell: A. Serra no Mean, Practical Haskell, https://doi.org/10.1007/978-1-4842-4480-7_3
 Parametric Polymorphism    Types are parametrized by type parameters
-  first letter of a type parameter is in lower case
-    These type parameters can represent any type
-  Replaced when applying the function with values that have concrete types
-  Can have more than one type parameters
-  Can have more than one same type parameter">
+ first letter of a type parameter is in lower case   These type parameters can represent any type Replaced when applying the function with values that have concrete types Can have more than one type parameters  Can have more than one same type parameter">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.mrr1vfe.io/posts/chapter_3_high_order_haskell/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2021-11-07T00:00:00+00:00">
@@ -30,11 +26,7 @@ Parametric Polymorphism    Types are parametrized by type parameters
 <meta name=twitter:title content="High Order Haskell">
 <meta name=twitter:description content="Notes on Practical Haskell: A. Serra no Mean, Practical Haskell, https://doi.org/10.1007/978-1-4842-4480-7_3
 Parametric Polymorphism    Types are parametrized by type parameters
-  first letter of a type parameter is in lower case
-    These type parameters can represent any type
-  Replaced when applying the function with values that have concrete types
-  Can have more than one type parameters
-  Can have more than one same type parameter">
+ first letter of a type parameter is in lower case   These type parameters can represent any type Replaced when applying the function with values that have concrete types Can have more than one type parameters  Can have more than one same type parameter">
 <link rel=stylesheet href=https://www.mrr1vfe.io/css/styles.4c2b9aa1d874d6766f554b2d404e8fd62ab4761f51ee9b3f358d12e81e7fa43a1b4378db995bc1926bbe5ed98c060be5e7bd4f2470504cf94f22b4b3a74e62b6.css integrity="sha512-TCuaodh01nZvVUstQE6P1iq0dh9R7ps/NY0S6B5/pDobQ3jbmVvBkmu+XtmMBgvl571PJHBQTPlPIrSzp05itg=="><!--[if lt IE 9]><script src=https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script>
 <script src=https://oss.maxcdn.com/respond/1.4.2/respond.min.js></script><![endif]-->
 <link rel=icon type=image/png href=https://www.mrr1vfe.io/images/favicon.ico>
@@ -123,7 +115,7 @@ Parametric Polymorphism    Types are parametrized by type parameters
 </a>
 </li>
 <li>
-<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fchapter_3_high_order_haskell%2f&name=High%20Order%20Haskell&description=Notes%20on%20Practical%20Haskell%3a%20A.%20Serra%20no%20Mean%2c%20Practical%20Haskell%2c%20https%3a%2f%2fdoi.org%2f10.1007%2f978-1-4842-4480-7_3%0aParametric%20Polymorphism%20%20%20%20Types%20are%20parametrized%20by%20type%20parameters%0a%20%20first%20letter%20of%20a%20type%20parameter%20is%20in%20lower%20case%0a%20%20%20%20These%20type%20parameters%20can%20represent%20any%20type%0a%20%20Replaced%20when%20applying%20the%20function%20with%20values%20that%20have%20concrete%20types%0a%20%20Can%20have%20more%20than%20one%20type%20parameters%0a%20%20Can%20have%20more%20than%20one%20same%20type%20parameter" aria-label=Tumblr>
+<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fchapter_3_high_order_haskell%2f&name=High%20Order%20Haskell&description=Notes%20on%20Practical%20Haskell%3a%20A.%20Serra%20no%20Mean%2c%20Practical%20Haskell%2c%20https%3a%2f%2fdoi.org%2f10.1007%2f978-1-4842-4480-7_3%0aParametric%20Polymorphism%20%20%20%20Types%20are%20parametrized%20by%20type%20parameters%0a%20first%20letter%20of%20a%20type%20parameter%20is%20in%20lower%20case%20%20%20These%20type%20parameters%20can%20represent%20any%20type%20Replaced%20when%20applying%20the%20function%20with%20values%20that%20have%20concrete%20types%20Can%20have%20more%20than%20one%20type%20parameters%20%20Can%20have%20more%20than%20one%20same%20type%20parameter" aria-label=Tumblr>
 <i class="fab fa-tumblr" aria-hidden=true></i>
 </a>
 </li>
@@ -197,34 +189,22 @@ Parametric Polymorphism
 <li>
 <p>Types are parametrized by type parameters</p>
 <ul>
-<li>
-<p>first letter of a type parameter is in lower case</p>
-</li>
+<li>first letter of a type parameter is in lower case</li>
 </ul>
 </li>
-<li>
-<p>These type parameters can represent any type</p>
-</li>
-<li>
-<p>Replaced when applying the function with values that have concrete types</p>
-</li>
-<li>
-<p>Can have more than one type parameters</p>
-</li>
+<li>These type parameters can represent any type</li>
+<li>Replaced when applying the function with values that have concrete types</li>
+<li>Can have more than one type parameters</li>
 <li>
 <p>Can have more than one same type parameter</p>
 <ul>
-<li>
-<p>Only means type must be the same, the value can be different</p>
-</li>
+<li>Only means type must be the same, the value can be different</li>
 </ul>
 </li>
 <li>
 <p>Can be used with ADT</p>
 <ul>
-<li>
-<p>Need to declare the type parameter after the name of the type on the LHS of the equal sign</p>
-</li>
+<li>Need to declare the type parameter after the name of the type on the LHS of the equal sign</li>
 </ul>
 </li>
 </ul>
@@ -245,9 +225,7 @@ Higher-Order Functions
 <li>
 <p><code class=verbatim>map</code></p>
 <ul>
-<li>
-<p>applies a function to each element of a list</p>
-</li>
+<li>applies a function to each element of a list</li>
 </ul>
 </li>
 <li>
@@ -260,18 +238,12 @@ Higher-Order Functions
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>    f <span style=color:#ff79c6>$</span> a <span style=color:#ff79c6>=</span> f a</code></pre></div>
 </div>
 </li>
-<li>
-<p>Very common in Haskell</p>
-</li>
-<li>
-<p>Has a very low precedence</p>
-</li>
+<li>Very common in Haskell</li>
+<li>Has a very low precedence</li>
 <li>
 <p><code class=verbatim>f</code> and <code class=verbatim>a</code> are evaluated first, then <code class=verbatim>$</code></p>
 <ul>
-<li>
-<p>Used to save parentheses</p>
-</li>
+<li>Used to save parentheses</li>
 </ul>
 </li>
 </ul>
@@ -279,9 +251,7 @@ Higher-Order Functions
 <li>
 <p><code class=verbatim>filter</code></p>
 <ul>
-<li>
-<p>keeps values that satisfies the predicate</p>
-</li>
+<li>keeps values that satisfies the predicate</li>
 </ul>
 </li>
 </ul>
@@ -296,26 +266,18 @@ Anonymous Functions
 <li>
 <p>function bodies that are not binded to a name</p>
 <ul>
-<li>
-<p><code class=verbatim>\p1 p2 ... -> body</code></p>
-</li>
+<li><code class=verbatim>\p1 p2 ... -> body</code></li>
 </ul>
 </li>
 <li>
 <p>pattern matching enabled</p>
 <ul>
-<li>
-<p>=map (\(x, y) -> x) [(1, 2), (3, 4)]</p>
-</li>
+<li>=map (\(x, y) -> x) [(1, 2), (3, 4)]</li>
 <li>
 <p>but can match only one pattern</p>
 <ul>
-<li>
-<p>need to resort to a <code class=verbatim>case</code> statement for further pattern matching</p>
-</li>
-<li>
-<p>or can be lifted using <code class=verbatim>LambdaCase</code> extension with special syntax <code class=verbatim>\case</code></p>
-</li>
+<li>need to resort to a <code class=verbatim>case</code> statement for further pattern matching</li>
+<li>or can be lifted using <code class=verbatim>LambdaCase</code> extension with special syntax <code class=verbatim>\case</code></li>
 </ul>
 </li>
 </ul>
@@ -323,17 +285,13 @@ Anonymous Functions
 <li>
 <p>recursion disabled</p>
 <ul>
-<li>
-<p>since it has no name, how to make recursive call?</p>
-</li>
+<li>since it has no name, how to make recursive call?</li>
 </ul>
 </li>
 <li>
 <p>can be used to generate a function</p>
 <ul>
-<li>
-<p>if this function depends on a parameter passed into its generator function, think of this as this functino remembers the value of that parameter</p>
-</li>
+<li>if this function depends on a parameter passed into its generator function, think of this as this functino remembers the value of that parameter</li>
 </ul>
 </li>
 </ul>
@@ -345,51 +303,33 @@ Partial Application of a Function and Combinators
 </h3>
 <div id=outline-text-headline-5 class=outline-text-3>
 <ul>
-<li>
-<p><code class=verbatim>-></code> is right-associative</p>
-</li>
-<li>
-<p>Combinators are functions that combine functions</p>
-</li>
+<li><code class=verbatim>-></code> is right-associative</li>
+<li>Combinators are functions that combine functions</li>
 <li>
 <p><code class=verbatim>.</code></p>
 <ul>
-<li>
-<p>composes two functions</p>
-</li>
-<li>
-<p><code class=verbatim>f . g = \x -> f $ g x</code></p>
-</li>
+<li>composes two functions</li>
+<li><code class=verbatim>f . g = \x -> f $ g x</code></li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>curried</code></p>
 <ul>
-<li>
-<p>convert a not-curried function into a curried function</p>
-</li>
-<li>
-<p>curried functions take a sequence of arguments</p>
-</li>
+<li>convert a not-curried function into a curried function</li>
+<li>curried functions take a sequence of arguments</li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>uncurried</code></p>
 <ul>
-<li>
-<p>convert a curried function into a not-curried function</p>
-</li>
-<li>
-<p>not-curried functions only take one argument</p>
-</li>
+<li>convert a curried function into a not-curried function</li>
+<li>not-curried functions only take one argument</li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>flip</code></p>
 <ul>
-<li>
-<p>reverse the order of parameters</p>
-</li>
+<li>reverse the order of parameters</li>
 </ul>
 </li>
 </ul>
@@ -403,29 +343,21 @@ Modules
 </h2>
 <div id=outline-text-headline-6 class=outline-text-2>
 <ul>
-<li>
-<p>module imports are located after module declaration and before other definition</p>
-</li>
-<li>
-<p>importing a module does not import the module's child importations</p>
-</li>
+<li>module imports are located after module declaration and before other definition</li>
+<li>importing a module does not import the module's child importations</li>
 <li>
 <p>importing a module that has a definition that is same as a definition in the current module can clash</p>
 <ul>
 <li>
 <p>Can manually select which definition to import</p>
 <ul>
-<li>
-<p><code class=verbatim>import Data.List (permuations, subsequence)</code></p>
-</li>
+<li><code class=verbatim>import Data.List (permuations, subsequence)</code></li>
 </ul>
 </li>
 <li>
 <p>Can manually select which definition not to import</p>
 <ul>
-<li>
-<p><code class=verbatim>import Data.List hiding (head, tail)</code></p>
-</li>
+<li><code class=verbatim>import Data.List hiding (head, tail)</code></li>
 </ul>
 </li>
 </ul>
@@ -433,12 +365,8 @@ Modules
 <li>
 <p>ADT importing requires special syntax</p>
 <ul>
-<li>
-<p><code class=verbatim>Type(List of Constructors)</code></p>
-</li>
-<li>
-<p>Use <code class=verbatim>..</code> in <code class=verbatim>(0</code> to indicate importing all constructors</p>
-</li>
+<li><code class=verbatim>Type(List of Constructors)</code></li>
+<li>Use <code class=verbatim>..</code> in <code class=verbatim>(0</code> to indicate importing all constructors</li>
 </ul>
 </li>
 <li>
@@ -456,12 +384,8 @@ Modules
 <li>
 <p>Rename a module</p>
 <ul>
-<li>
-<p><code class=verbatim>import qualified Data.List as L</code></p>
-</li>
-<li>
-<p><code class=verbatim>import qualified Data.List as L(permutations, subsequences)</code></p>
-</li>
+<li><code class=verbatim>import qualified Data.List as L</code></li>
+<li><code class=verbatim>import qualified Data.List as L(permutations, subsequences)</code></li>
 </ul>
 </li>
 <li>
@@ -470,25 +394,17 @@ Modules
 <li>
 <p><code class=verbatim>Prelude</code> is imported by all modules without qualification</p>
 <ul>
-<li>
-<p>disabled by using the extension <code class=verbatim>NoImplicitPrelude</code></p>
-</li>
+<li>disabled by using the extension <code class=verbatim>NoImplicitPrelude</code></li>
 </ul>
 </li>
-<li>
-<p>the most basic stuff</p>
-</li>
+<li>the most basic stuff</li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>PatternSynoyms</code> enables <em>bidrectional pattern</em></p>
 <ul>
-<li>
-<p>enabled by <code class=verbatim>{-# LANGUAGE PatternSynoyms #-}</code></p>
-</li>
-<li>
-<p>need a smart constructor (function) that checks the validity of constructor's arguments</p>
-</li>
+<li>enabled by <code class=verbatim>{-# LANGUAGE PatternSynoyms #-}</code></li>
+<li>need a smart constructor (function) that checks the validity of constructor's arguments</li>
 <li>
 <p>Create a pattern for a type whose constructor should not be exposed</p>
 <div class="src src-haskell">
@@ -506,26 +422,18 @@ Smart Constructors and Views
 </h3>
 <div id=outline-text-headline-7 class=outline-text-3>
 <ul>
-<li>
-<p>Can control which declarations to be exported</p>
-</li>
-<li>
-<p>Everything is exported (public) by default</p>
-</li>
+<li>Can control which declarations to be exported</li>
+<li>Everything is exported (public) by default</li>
 <li>
 <p><code class=verbatim>module M (f) where</code> exports declaration <code class=verbatim>f</code> only</p>
 <ul>
-<li>
-<p>If exporting Data type only, pattern matching won't work since constructors are not available</p>
-</li>
+<li>If exporting Data type only, pattern matching won't work since constructors are not available</li>
 </ul>
 </li>
 <li>
 <p><em>smart constructors</em></p>
 <ul>
-<li>
-<p>check if values provides into the arguments of a contructor is correct</p>
-</li>
+<li>check if values provides into the arguments of a contructor is correct</li>
 </ul>
 </li>
 </ul>
@@ -542,45 +450,31 @@ Lists
 <li>
 <p>fold</p>
 <ul>
-<li>
-<p>a fold combines values in a list into a single result</p>
-</li>
+<li>a fold combines values in a list into a single result</li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>foldr</code></p>
 <ul>
-<li>
-<p>right-associative when folding</p>
-</li>
+<li>right-associative when folding</li>
 <li>
 <p>takes three arguments</p>
 <ul>
 <li>
 <p>a binary function</p>
 <ul>
-<li>
-<p>used to combine values together</p>
-</li>
+<li>used to combine values together</li>
 </ul>
 </li>
 <li>
 <p>a initial value</p>
 <ul>
-<li>
-<p>used when the list is empty</p>
-</li>
-<li>
-<p>usually an identity to the binary operation</p>
-</li>
+<li>used when the list is empty</li>
+<li>usually an identity to the binary operation</li>
 </ul>
 </li>
-<li>
-<p>a list</p>
-</li>
-<li>
-<p>evaluation starts when <code class=verbatim>foldr</code> reaches the point of using the initial value</p>
-</li>
+<li>a list</li>
+<li>evaluation starts when <code class=verbatim>foldr</code> reaches the point of using the initial value</li>
 </ul>
 </li>
 </ul>
@@ -588,126 +482,88 @@ Lists
 <li>
 <p><code class=verbatim>foldl</code></p>
 <ul>
-<li>
-<p>left-associative when folding</p>
-</li>
-<li>
-<p>if the function used for <code class=verbatim>foldl</code> and <code class=verbatim>foldr</code> is commutative, then <code class=verbatim>foldl</code> and <code class=verbatim>foldr</code> produce the same result</p>
-</li>
+<li>left-associative when folding</li>
+<li>if the function used for <code class=verbatim>foldl</code> and <code class=verbatim>foldr</code> is commutative, then <code class=verbatim>foldl</code> and <code class=verbatim>foldr</code> produce the same result</li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>foldr1</code> and <code class=verbatim>foldl1</code></p>
 <ul>
-<li>
-<p>similar to <code class=verbatim>foldr</code> and <code class=verbatim>foldl</code>, but do not take initial value</p>
-</li>
-<li>
-<p>initial value for <code class=verbatim>foldl1</code> is the first element in the list</p>
-</li>
-<li>
-<p>initial value for <code class=verbatim>foldr1</code> is the last element in the list</p>
-</li>
+<li>similar to <code class=verbatim>foldr</code> and <code class=verbatim>foldl</code>, but do not take initial value</li>
+<li>initial value for <code class=verbatim>foldl1</code> is the first element in the list</li>
+<li>initial value for <code class=verbatim>foldr1</code> is the last element in the list</li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>partition</code></p>
 <ul>
-<li>
-<p>partition a list into two parts, where the first part satisfies the predicate and the second part does not.</p>
-</li>
+<li>partition a list into two parts, where the first part satisfies the predicate and the second part does not.</li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>find</code></p>
 <ul>
-<li>
-<p>Get the first element from a list that satisfy a predicate</p>
-</li>
-<li>
-<p>returns a <code class=verbatim>Maybe</code></p>
-</li>
+<li>Get the first element from a list that satisfy a predicate</li>
+<li>returns a <code class=verbatim>Maybe</code></li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>dropWhile</code></p>
 <ul>
-<li>
-<p>remove elements from a list until predicate is false</p>
-</li>
+<li>remove elements from a list until predicate is false</li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>takeWhile</code></p>
 <ul>
-<li>
-<p>takes elements until the predicate is false</p>
-</li>
+<li>takes elements until the predicate is false</li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>span</code></p>
 <ul>
-<li>
-<p>combination of <code class=verbatim>takeWhile</code> and <code class=verbatim>dropWhile</code></p>
-</li>
+<li>combination of <code class=verbatim>takeWhile</code> and <code class=verbatim>dropWhile</code></li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>break</code></p>
 <ul>
-<li>
-<p><code class=verbatim>span (not . p)</code></p>
-</li>
+<li><code class=verbatim>span (not . p)</code></li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>any</code></p>
 <ul>
-<li>
-<p>if these is any elements in the list that satisfies a predictate</p>
-</li>
+<li>if these is any elements in the list that satisfies a predictate</li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>all</code></p>
 <ul>
-<li>
-<p>if all elements in the list satisfy a predicate</p>
-</li>
+<li>if all elements in the list satisfy a predicate</li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>nubBy</code></p>
 <ul>
-<li>
-<p>takes out elements such that no two elements in the returned list are equivalent. The equivalency is defined by the predicate.</p>
-</li>
+<li>takes out elements such that no two elements in the returned list are equivalent. The equivalency is defined by the predicate.</li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>nub</code></p>
 <ul>
-<li>
-<p>similar to <code class=verbatim>nubBy</code>, but uses the default comparison supported by the type</p>
-</li>
-<li>
-<p><code class=verbatim>nubBy</code> and <code class=verbatim>nub</code> has a quadratic time complexity</p>
-</li>
+<li>similar to <code class=verbatim>nubBy</code>, but uses the default comparison supported by the type</li>
+<li><code class=verbatim>nubBy</code> and <code class=verbatim>nub</code> has a quadratic time complexity</li>
 </ul>
 </li>
 <li>
 <p><code class=verbatim>union(By)</code>, <code class=verbatim>intersect(By)</code>, <code class=verbatim>insert(By)</code></p>
 <ul>
-<li>
-<p>treat the list as a set</p>
-</li>
+<li>treat the list as a set</li>
 <li>
 <p>perform set operation</p>
 <ul>
-<li>
-<p>the <code class=verbatim>By</code> version needs a predicate that indicates the way of checking equivalence</p>
-</li>
+<li>the <code class=verbatim>By</code> version needs a predicate that indicates the way of checking equivalence</li>
 </ul>
 </li>
 </ul>
@@ -715,9 +571,7 @@ Lists
 <li>
 <p><code class=verbatim>elem</code></p>
 <ul>
-<li>
-<p>check if an element is in the list or not</p>
-</li>
+<li>check if an element is in the list or not</li>
 </ul>
 </li>
 </ul>
@@ -730,46 +584,30 @@ List Comprehension
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>[ expr | quantifiers]</code></pre></div>
 </div>
 <ul>
-<li>
-<p><code class=verbatim>expr</code> defines each element in the list</p>
-</li>
+<li><code class=verbatim>expr</code> defines each element in the list</li>
 <li>
 <p><code class=verbatim>quantifiers</code> can be</p>
 <ul>
 <li>
 <p>a generator: <code class=verbatim>e &lt;- list</code></p>
 <ul>
-<li>
-<p><code class=verbatim>e</code> can be a pattern</p>
-</li>
-<li>
-<p>can have multiple generators</p>
-</li>
-<li>
-<p>latter generator can depend on the value from the previous generator</p>
-</li>
+<li><code class=verbatim>e</code> can be a pattern</li>
+<li>can have multiple generators</li>
+<li>latter generator can depend on the value from the previous generator</li>
 </ul>
 </li>
-<li>
-<p>a binding to an expression</p>
-</li>
-<li>
-<p>a guard to filter (keep) elements that satisfy the guard</p>
-</li>
+<li>a binding to an expression</li>
+<li>a guard to filter (keep) elements that satisfy the guard</li>
 </ul>
 </li>
-<li>
-<p><code class=verbatim>quantifiers</code> are separated by <code class=verbatim>,</code></p>
-</li>
+<li><code class=verbatim>quantifiers</code> are separated by <code class=verbatim>,</code></li>
 <li>
 <p>Extension <code class=verbatim>TransformListComp</code> extends list comprehension</p>
 <ul>
 <li>
 <p><code class=verbatim>then f</code></p>
 <ul>
-<li>
-<p>transforms the input list by applying the function <code class=verbatim>f</code> to the result of the comprehension up to that point</p>
-</li>
+<li>transforms the input list by applying the function <code class=verbatim>f</code> to the result of the comprehension up to that point</li>
 </ul>
 </li>
 <li>
@@ -781,9 +619,7 @@ List Comprehension
 <li>
 <p><code class=verbatim>GHC.Exts.sortWith by v</code></p>
 <ul>
-<li>
-<p>sort depending on the values in <code class=verbatim>v</code></p>
-</li>
+<li>sort depending on the values in <code class=verbatim>v</code></li>
 </ul>
 </li>
 </ul>
@@ -793,9 +629,7 @@ List Comprehension
 <li>
 <p><code class=verbatim>then group by e using f</code></p>
 <ul>
-<li>
-<p><code class=verbatim>f $::$ (a -> b) -> [a] -> [[a]]</code></p>
-</li>
+<li><code class=verbatim>f $::$ (a -> b) -> [a] -> [[a]]</code></li>
 </ul>
 </li>
 </ul>
@@ -803,12 +637,8 @@ List Comprehension
 <li>
 <p>Extension <code class=verbatim>ParallelListComp</code> enables more than one branch of qualifiers</p>
 <ul>
-<li>
-<p>Branches are delimited by <code class=verbatim>|</code></p>
-</li>
-<li>
-<p>Results of all branches will be zipped and availale for the <code class=verbatim>expr</code></p>
-</li>
+<li>Branches are delimited by <code class=verbatim>|</code></li>
+<li>Results of all branches will be zipped and availale for the <code class=verbatim>expr</code></li>
 </ul>
 </li>
 </ul>
@@ -900,7 +730,7 @@ List Comprehension
 </a>
 </li>
 <li>
-<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fchapter_3_high_order_haskell%2f&name=High%20Order%20Haskell&description=Notes%20on%20Practical%20Haskell%3a%20A.%20Serra%20no%20Mean%2c%20Practical%20Haskell%2c%20https%3a%2f%2fdoi.org%2f10.1007%2f978-1-4842-4480-7_3%0aParametric%20Polymorphism%20%20%20%20Types%20are%20parametrized%20by%20type%20parameters%0a%20%20first%20letter%20of%20a%20type%20parameter%20is%20in%20lower%20case%0a%20%20%20%20These%20type%20parameters%20can%20represent%20any%20type%0a%20%20Replaced%20when%20applying%20the%20function%20with%20values%20that%20have%20concrete%20types%0a%20%20Can%20have%20more%20than%20one%20type%20parameters%0a%20%20Can%20have%20more%20than%20one%20same%20type%20parameter" aria-label=Tumblr>
+<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fchapter_3_high_order_haskell%2f&name=High%20Order%20Haskell&description=Notes%20on%20Practical%20Haskell%3a%20A.%20Serra%20no%20Mean%2c%20Practical%20Haskell%2c%20https%3a%2f%2fdoi.org%2f10.1007%2f978-1-4842-4480-7_3%0aParametric%20Polymorphism%20%20%20%20Types%20are%20parametrized%20by%20type%20parameters%0a%20first%20letter%20of%20a%20type%20parameter%20is%20in%20lower%20case%20%20%20These%20type%20parameters%20can%20represent%20any%20type%20Replaced%20when%20applying%20the%20function%20with%20values%20that%20have%20concrete%20types%20Can%20have%20more%20than%20one%20type%20parameters%20%20Can%20have%20more%20than%20one%20same%20type%20parameter" aria-label=Tumblr>
 <i class="fab fa-tumblr fa-lg" aria-hidden=true></i>
 </a>
 </li>
@@ -925,7 +755,7 @@ List Comprehension
 </div>
 <footer id=footer>
 <div class=footer-left>
-Copyright &copy; 2021 Yi Chen
+Copyright &copy; 2022 Yi Chen
 </div>
 <div class=footer-right>
 <nav>
