@@ -1,341 +1,47 @@
-<!doctype html><html lang=en-us>
-<head>
-<link rel=preload href=/lib/font-awesome/webfonts/fa-brands-400.woff2 as=font type=font/woff2 crossorigin=anonymous>
-<link rel=preload href=/lib/font-awesome/webfonts/fa-regular-400.woff2 as=font type=font/woff2 crossorigin=anonymous>
-<link rel=preload href=/lib/font-awesome/webfonts/fa-solid-900.woff2 as=font type=font/woff2 crossorigin=anonymous>
-<link rel=preload href=/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2 as=font type=font/woff2 crossorigin=anonymous>
-<script type=text/javascript src=https://latest.cactus.chat/cactus.js></script>
-<link rel=stylesheet href=https://latest.cactus.chat/style.css type=text/css>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<title> Decimal Numbers | XIAOYIJ</title>
-<link rel=canonical href=https://www.mrr1vfe.io/posts/decimal-numbers/>
-<meta name=description content="This is my website">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=robots content="all,follow">
-<meta name=googlebot content="index,follow,snippet,archive">
-<meta property="og:title" content="Decimal Numbers">
-<meta property="og:description" content="Notes on Rust in Action, by Tim McNamara
+<!doctype html><html lang=en-us><head><link rel=preload href=/lib/font-awesome/webfonts/fa-brands-400.woff2 as=font type=font/woff2 crossorigin=anonymous><link rel=preload href=/lib/font-awesome/webfonts/fa-regular-400.woff2 as=font type=font/woff2 crossorigin=anonymous><link rel=preload href=/lib/font-awesome/webfonts/fa-solid-900.woff2 as=font type=font/woff2 crossorigin=anonymous><link rel=preload href=/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2 as=font type=font/woff2 crossorigin=anonymous><script type=text/javascript src=https://latest.cactus.chat/cactus.js></script>
+<link rel=stylesheet href=https://latest.cactus.chat/style.css type=text/css><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>Decimal Numbers | XIAOYIJ</title><link rel=canonical href=https://www.mrr1vfe.io/posts/decimal-numbers/><meta name=description content="This is my website"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="all,follow"><meta name=googlebot content="index,follow,snippet,archive"><meta property="og:title" content="Decimal Numbers"><meta property="og:description" content="Notes on Rust in Action, by Tim McNamara
 Scientific Notation \[3.14 \times 10 ^ 8 \]
  ::Sign:: representing positive or negative ::Mantissa:: 3.14 ::Radix:: 10 ::Exponent:: 8  Floating Point Computers use scientific notation in memory to represent floating point numbers. A floating number in memory is constitutive of 3 parts
- ::Sign:: ::Mantissa:: ::Exponent:: The ::radix:: is predefined to be 2 and therefore does not need to be stored.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://www.mrr1vfe.io/posts/decimal-numbers/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2021-01-24T00:00:00+00:00">
-<meta property="article:modified_time" content="2021-01-24T00:00:00+00:00">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="Decimal Numbers">
-<meta name=twitter:description content="Notes on Rust in Action, by Tim McNamara
+ ::Sign:: ::Mantissa:: ::Exponent:: The ::radix:: is predefined to be 2 and therefore does not need to be stored."><meta property="og:type" content="article"><meta property="og:url" content="https://www.mrr1vfe.io/posts/decimal-numbers/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-01-24T00:00:00+00:00"><meta property="article:modified_time" content="2021-01-24T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Decimal Numbers"><meta name=twitter:description content="Notes on Rust in Action, by Tim McNamara
 Scientific Notation \[3.14 \times 10 ^ 8 \]
  ::Sign:: representing positive or negative ::Mantissa:: 3.14 ::Radix:: 10 ::Exponent:: 8  Floating Point Computers use scientific notation in memory to represent floating point numbers. A floating number in memory is constitutive of 3 parts
- ::Sign:: ::Mantissa:: ::Exponent:: The ::radix:: is predefined to be 2 and therefore does not need to be stored.">
-<link rel=stylesheet href=https://www.mrr1vfe.io/css/styles.4c2b9aa1d874d6766f554b2d404e8fd62ab4761f51ee9b3f358d12e81e7fa43a1b4378db995bc1926bbe5ed98c060be5e7bd4f2470504cf94f22b4b3a74e62b6.css integrity="sha512-TCuaodh01nZvVUstQE6P1iq0dh9R7ps/NY0S6B5/pDobQ3jbmVvBkmu+XtmMBgvl571PJHBQTPlPIrSzp05itg=="><!--[if lt IE 9]><script src=https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script>
-<script src=https://oss.maxcdn.com/respond/1.4.2/respond.min.js></script><![endif]-->
-<link rel=icon type=image/png href=https://www.mrr1vfe.io/images/favicon.ico>
-</head>
-<body class="max-width mx-auto px3 ltr">
-<div class="content index py4">
-<div id=header-post>
-<a id=menu-icon href=#><i class="fas fa-bars fa-lg"></i></a>
+ ::Sign:: ::Mantissa:: ::Exponent:: The ::radix:: is predefined to be 2 and therefore does not need to be stored."><link rel=stylesheet href=https://www.mrr1vfe.io/css/styles.4c2b9aa1d874d6766f554b2d404e8fd62ab4761f51ee9b3f358d12e81e7fa43a1b4378db995bc1926bbe5ed98c060be5e7bd4f2470504cf94f22b4b3a74e62b6.css integrity="sha512-TCuaodh01nZvVUstQE6P1iq0dh9R7ps/NY0S6B5/pDobQ3jbmVvBkmu+XtmMBgvl571PJHBQTPlPIrSzp05itg=="><!--[if lt IE 9]><script src=https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script>
+<script src=https://oss.maxcdn.com/respond/1.4.2/respond.min.js></script><![endif]--><link rel=icon type=image/png href=https://www.mrr1vfe.io/images/favicon.ico></head><body class="max-width mx-auto px3 ltr"><div class="content index py4"><div id=header-post><a id=menu-icon href=#><i class="fas fa-bars fa-lg"></i></a>
 <a id=menu-icon-tablet href=#><i class="fas fa-bars fa-lg"></i></a>
-<a id=top-icon-tablet href=# onclick="$('html, body').animate({scrollTop:0},'fast')" style=display:none aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
-<span id=menu>
-<span id=nav>
-<ul>
-<li><a href=/>Home</a></li>
-<li><a href=/posts>Writings</a></li>
-<li><a href=/tags>Tags</a></li>
-<li><a href=/about>About</a></li>
-<li><a href=https://archive.casouri.cat>BHL0388</a></li>
-</ul>
-</span>
-<br>
-<span id=actions>
-<ul>
-<li>
-<a class=icon href=https://www.mrr1vfe.io/posts/lifetimes-ownership-borrowing/ aria-label=Previous>
-<i class="fas fa-chevron-left" aria-hidden=true onmouseover="$('#i-prev').toggle()" onmouseout="$('#i-prev').toggle()"></i>
-</a>
-</li>
-<li>
-<a class=icon href=https://www.mrr1vfe.io/posts/k-means/ aria-label=Next>
-<i class="fas fa-chevron-right" aria-hidden=true onmouseover="$('#i-next').toggle()" onmouseout="$('#i-next').toggle()"></i>
-</a>
-</li>
-<li>
-<a class=icon href=# onclick="$('html, body').animate({scrollTop:0},'fast')" aria-label="Top of Page">
-<i class="fas fa-chevron-up" aria-hidden=true onmouseover="$('#i-top').toggle()" onmouseout="$('#i-top').toggle()"></i>
-</a>
-</li>
-<li>
-<a class=icon href=# aria-label=Share>
-<i class="fas fa-share-alt" aria-hidden=true onmouseover="$('#i-share').toggle()" onmouseout="$('#i-share').toggle()" onclick="return $('#share').toggle(),!1"></i>
-</a>
-</li>
-</ul>
-<span id=i-prev class=info style=display:none>Previous post</span>
+<a id=top-icon-tablet href=# onclick='$("html, body").animate({scrollTop:0},"fast")' style=display:none aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+<span id=menu><span id=nav><ul><li><a href=/>Home</a></li><li><a href=/posts>Writings</a></li><li><a href=/tags>Tags</a></li><li><a href=/about>About</a></li><li><a href=https://archive.casouri.cat>BHL0388</a></li></ul></span><br><span id=actions><ul><li><a class=icon href=https://www.mrr1vfe.io/posts/lifetimes-ownership-borrowing/ aria-label=Previous><i class="fas fa-chevron-left" aria-hidden=true onmouseover='$("#i-prev").toggle()' onmouseout='$("#i-prev").toggle()'></i></a></li><li><a class=icon href=https://www.mrr1vfe.io/posts/k-means/ aria-label=Next><i class="fas fa-chevron-right" aria-hidden=true onmouseover='$("#i-next").toggle()' onmouseout='$("#i-next").toggle()'></i></a></li><li><a class=icon href=# onclick='$("html, body").animate({scrollTop:0},"fast")' aria-label="Top of Page"><i class="fas fa-chevron-up" aria-hidden=true onmouseover='$("#i-top").toggle()' onmouseout='$("#i-top").toggle()'></i></a></li><li><a class=icon href=# aria-label=Share><i class="fas fa-share-alt" aria-hidden=true onmouseover='$("#i-share").toggle()' onmouseout='$("#i-share").toggle()' onclick='return $("#share").toggle(),!1'></i></a></li></ul><span id=i-prev class=info style=display:none>Previous post</span>
 <span id=i-next class=info style=display:none>Next post</span>
 <span id=i-top class=info style=display:none>Back to top</span>
-<span id=i-share class=info style=display:none>Share post</span>
-</span>
-<br>
-<div id=share style=display:none>
-<ul>
-<li>
-<a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f" aria-label=Facebook>
-<i class="fab fa-facebook" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://twitter.com/share?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&text=Decimal%20Numbers" aria-label=Twitter>
-<i class="fab fa-twitter" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&title=Decimal%20Numbers" aria-label=Linkedin>
-<i class="fab fa-linkedin" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&is_video=false&description=Decimal%20Numbers" aria-label=Pinterest>
-<i class="fab fa-pinterest" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="mailto:?subject=Decimal%20Numbers&body=Check out this article: https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f" aria-label=Email>
-<i class="fas fa-envelope" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&title=Decimal%20Numbers" aria-label=Pocket>
-<i class="fab fa-get-pocket" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&title=Decimal%20Numbers" aria-label=reddit>
-<i class="fab fa-reddit" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&name=Decimal%20Numbers&description=Notes%20on%20Rust%20in%20Action%2c%20by%20Tim%20McNamara%0aScientific%20Notation%20%5c%5b3.14%20%5ctimes%2010%20%5e%208%20%5c%5d%0a%20%3a%3aSign%3a%3a%20representing%20positive%20or%20negative%20%3a%3aMantissa%3a%3a%203.14%20%3a%3aRadix%3a%3a%2010%20%3a%3aExponent%3a%3a%208%20%20Floating%20Point%20Computers%20use%20scientific%20notation%20in%20memory%20to%20represent%20floating%20point%20numbers.%20A%20floating%20number%20in%20memory%20is%20constitutive%20of%203%20parts%0a%20%3a%3aSign%3a%3a%20%3a%3aMantissa%3a%3a%20%3a%3aExponent%3a%3a%20The%20%3a%3aradix%3a%3a%20is%20predefined%20to%20be%202%20and%20therefore%20does%20not%20need%20to%20be%20stored." aria-label=Tumblr>
-<i class="fab fa-tumblr" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&t=Decimal%20Numbers" aria-label="Hacker News">
-<i class="fab fa-hacker-news" aria-hidden=true></i>
-</a>
-</li>
-</ul>
-</div>
-<div id=toc>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#scientific-notation>Scientific Notation</a></li>
-<li><a href=#floating-point>Floating Point</a></li>
-<li><a href=#ieee-754-binary32>IEEE 754 Binary32</a></li>
-<li><a href=#get-the-sign>Get the Sign</a></li>
-<li><a href=#get-the-exponent>Get the Exponent</a>
-<ul>
-<li><a href=#special-cases>Special cases</a></li>
-</ul>
-</li>
-<li><a href=#get-the-mantissa>Get the Mantissa</a></li>
-</ul>
-</nav>
-</div>
-</span>
-</div>
-<article class=post itemscope itemtype=http://schema.org/BlogPosting>
-<header>
-<h1 class=posttitle itemprop="name headline">
-Decimal Numbers
-</h1>
-<div class=meta>
-<div class=postdate>
-<time datetime="2021-01-24 00:00:00 +0000 UTC" itemprop=datePublished>2021-01-24</time>
-</div>
-<div class=article-read-time>
-<i class="far fa-clock"></i>
-3 minute read
-</div>
-<div class=article-tag>
-<i class="fas fa-tag"></i>
-<a class=tag-link href=/tags/rust rel=tag>Rust</a>
-</div>
-</div>
-</header>
-<div class=content itemprop=articleBody>
-<p>Notes on <a href="https://www.manning.com/books/rust-in-action?query=rust%20in%20action">Rust in Action</a>, by Tim McNamara</p>
-<h2 id=scientific-notation>Scientific Notation</h2>
-<p>\[3.14 \times 10 ^ 8 \]</p>
-<ol>
-<li>::Sign:: representing positive or negative</li>
-<li>::Mantissa:: 3.14</li>
-<li>::Radix:: 10</li>
-<li>::Exponent:: 8</li>
-</ol>
-<h2 id=floating-point>Floating Point</h2>
-<p>Computers use scientific notation in memory to represent floating point numbers. A floating number in memory is constitutive of 3 parts</p>
-<ol>
-<li>::Sign::</li>
-<li>::Mantissa::</li>
-<li>::Exponent::
+<span id=i-share class=info style=display:none>Share post</span></span><br><div id=share style=display:none><ul><li><a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f" aria-label=Facebook><i class="fab fa-facebook" aria-hidden=true></i></a></li><li><a class=icon href="https://twitter.com/share?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&text=Decimal%20Numbers" aria-label=Twitter><i class="fab fa-twitter" aria-hidden=true></i></a></li><li><a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&title=Decimal%20Numbers" aria-label=Linkedin><i class="fab fa-linkedin" aria-hidden=true></i></a></li><li><a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&is_video=false&description=Decimal%20Numbers" aria-label=Pinterest><i class="fab fa-pinterest" aria-hidden=true></i></a></li><li><a class=icon href="mailto:?subject=Decimal%20Numbers&body=Check out this article: https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f" aria-label=Email><i class="fas fa-envelope" aria-hidden=true></i></a></li><li><a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&title=Decimal%20Numbers" aria-label=Pocket><i class="fab fa-get-pocket" aria-hidden=true></i></a></li><li><a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&title=Decimal%20Numbers" aria-label=reddit><i class="fab fa-reddit" aria-hidden=true></i></a></li><li><a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&name=Decimal%20Numbers&description=Notes%20on%20Rust%20in%20Action%2c%20by%20Tim%20McNamara%0aScientific%20Notation%20%5c%5b3.14%20%5ctimes%2010%20%5e%208%20%5c%5d%0a%20%3a%3aSign%3a%3a%20representing%20positive%20or%20negative%20%3a%3aMantissa%3a%3a%203.14%20%3a%3aRadix%3a%3a%2010%20%3a%3aExponent%3a%3a%208%20%20Floating%20Point%20Computers%20use%20scientific%20notation%20in%20memory%20to%20represent%20floating%20point%20numbers.%20A%20floating%20number%20in%20memory%20is%20constitutive%20of%203%20parts%0a%20%3a%3aSign%3a%3a%20%3a%3aMantissa%3a%3a%20%3a%3aExponent%3a%3a%20The%20%3a%3aradix%3a%3a%20is%20predefined%20to%20be%202%20and%20therefore%20does%20not%20need%20to%20be%20stored." aria-label=Tumblr><i class="fab fa-tumblr" aria-hidden=true></i></a></li><li><a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&t=Decimal%20Numbers" aria-label="Hacker News"><i class="fab fa-hacker-news" aria-hidden=true></i></a></li></ul></div><div id=toc><nav id=TableOfContents><ul><li><a href=#scientific-notation>Scientific Notation</a></li><li><a href=#floating-point>Floating Point</a></li><li><a href=#ieee-754-binary32>IEEE 754 Binary32</a></li><li><a href=#get-the-sign>Get the Sign</a></li><li><a href=#get-the-exponent>Get the Exponent</a><ul><li><a href=#special-cases>Special cases</a></li></ul></li><li><a href=#get-the-mantissa>Get the Mantissa</a></li></ul></nav></div></span></div><article class=post itemscope itemtype=http://schema.org/BlogPosting><header><h1 class=posttitle itemprop="name headline">Decimal Numbers</h1><div class=meta><div class=postdate><time datetime="2021-01-24 00:00:00 +0000 UTC" itemprop=datePublished>2021-01-24</time></div><div class=article-read-time><i class="far fa-clock"></i>
+3 minute read</div><div class=article-tag><i class="fas fa-tag"></i>
+<a class=tag-link href=/tags/rust rel=tag>Rust</a></div></div></header><div class=content itemprop=articleBody><p>Notes on <a href="https://www.manning.com/books/rust-in-action?query=rust%20in%20action">Rust in Action</a>, by Tim McNamara</p><h2 id=scientific-notation>Scientific Notation</h2><p>\[3.14 \times 10 ^ 8 \]</p><ol><li>::Sign:: representing positive or negative</li><li>::Mantissa:: 3.14</li><li>::Radix:: 10</li><li>::Exponent:: 8</li></ol><h2 id=floating-point>Floating Point</h2><p>Computers use scientific notation in memory to represent floating point numbers. A floating number in memory is constitutive of 3 parts</p><ol><li>::Sign::</li><li>::Mantissa::</li><li>::Exponent::
 The ::radix:: is predefined to be 2 and therefore does not need to be stored.
-The ::sign::, self-evidently, requires only 1 bit.</li>
-</ol>
-<h2 id=ieee-754-binary32>IEEE 754 Binary32</h2>
-<p>The leftmost bit, or $b_{31}$ is called the sign bit; the next eight bits are the exponent bits ($b_{23} - b_{30}$); and the last 23 bits are fraction bits ($b_0 - b_{22}$).
+The ::sign::, self-evidently, requires only 1 bit.</li></ol><h2 id=ieee-754-binary32>IEEE 754 Binary32</h2><p>The leftmost bit, or $b_{31}$ is called the sign bit; the next eight bits are the exponent bits ($b_{23} - b_{30}$); and the last 23 bits are fraction bits ($b_0 - b_{22}$).
 \[v = (-1)^\text{sign} \times 2^{(exp - 127)} \times (1 + \sum_{i=1}^{23} b_{23-i} 2^{-i})\]
-When ::sign = 1:: , the number is negative.</p>
-<h2 id=get-the-sign>Get the Sign</h2>
-<p>To retrieve the sign bit of a <code>f32</code> in rust, one first needs to use <code>u32</code> to represent the bits of the floating number. This process is unsafe and should be placed inside the <code>unsafe</code> block. The function that reinterprets the bits is called <code>transmute</code>.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#8be9fd;font-style:italic>let</span> n: <span style=color:#8be9fd>u32</span> <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>unsafe</span> { std::mem::transmute(<span style=color:#bd93f9>7.7_</span><span style=color:#ff79c6>f32</span>) };
-</code></pre></div><p>Then, use the bit-wise move operator to move the the bits of <code>n</code> 31 bits to the left.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#8be9fd;font-style:italic>let</span> sign_bit <span style=color:#ff79c6>=</span> n <span style=color:#ff79c6>&gt;&gt;</span> <span style=color:#bd93f9>31</span>;
-</code></pre></div><p>The left bits will be filled with 0. Since 1 represents negative and 0 represents positive, we would use the exponential function to get the sign (-1 or 1).</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#8be9fd;font-style:italic>let</span> sign <span style=color:#ff79c6>=</span> (<span style=color:#ff79c6>-</span><span style=color:#bd93f9>1_</span><span style=color:#ff79c6>f32</span>).powf(sign_bit <span style=color:#ff79c6>as</span> f_32);
-</code></pre></div><h2 id=get-the-exponent>Get the Exponent</h2>
-<p>Before doing anything, the 8 exponent bits from the floating number has to be retrieved. To achieve this, we move bitwise shift the bits to the left for 23 bits. This way, we have 9 bits left. The leftmost bit is the sign bit and the rest are the exponent bits.
+When ::sign = 1:: , the number is negative.</p><h2 id=get-the-sign>Get the Sign</h2><p>To retrieve the sign bit of a <code>f32</code> in rust, one first needs to use <code>u32</code> to represent the bits of the floating number. This process is unsafe and should be placed inside the <code>unsafe</code> block. The function that reinterprets the bits is called <code>transmute</code>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span><span style=color:#8be9fd;font-style:italic>let</span> n: <span style=color:#8be9fd>u32</span> <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>unsafe</span> { std::mem::transmute(<span style=color:#bd93f9>7.7_</span><span style=color:#ff79c6>f32</span>) };
+</span></span></code></pre></div><p>Then, use the bit-wise move operator to move the the bits of <code>n</code> 31 bits to the left.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span><span style=color:#8be9fd;font-style:italic>let</span> sign_bit <span style=color:#ff79c6>=</span> n <span style=color:#ff79c6>&gt;&gt;</span> <span style=color:#bd93f9>31</span>;
+</span></span></code></pre></div><p>The left bits will be filled with 0. Since 1 represents negative and 0 represents positive, we would use the exponential function to get the sign (-1 or 1).</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span><span style=color:#8be9fd;font-style:italic>let</span> sign <span style=color:#ff79c6>=</span> (<span style=color:#ff79c6>-</span><span style=color:#bd93f9>1_</span><span style=color:#ff79c6>f32</span>).powf(sign_bit <span style=color:#ff79c6>as</span> f_32);
+</span></span></code></pre></div><h2 id=get-the-exponent>Get the Exponent</h2><p>Before doing anything, the 8 exponent bits from the floating number has to be retrieved. To achieve this, we move bitwise shift the bits to the left for 23 bits. This way, we have 9 bits left. The leftmost bit is the sign bit and the rest are the exponent bits.
 The <code>&</code> operator, or bitwise-and operator, allows us to retrieve the bits we want. To get the 8 bits we are interested in, simply <code>&</code> the number with 0xFF. Since 0xFF only has 8 1-bits on the position we are interested in, the non-relevant sign-bit has therefore been filtered out. We call the number we got from this step $n$.
-Finally, according to IEEE 754, a bias, 127, should be subtracted from the decimal number represented by the 8-bits we got. Then the exponent is going to be $2^{n}$.</p>
-<h3 id=special-cases>Special cases</h3>
-<ol>
-<li>If $n$ is 0xFF, then the decimal number could be positive infinity, negative infinity (mantissa is 0), or Not a Number (mantissa is anything but 0). These type of numbers are generated from invalid mathematical operations. And comparisons between these number usually do not provide ideal results.</li>
-<li>If $n$ is 0x00, then the decimal number is a subnormal number. The implicit 24th bit of mantissa is set to be 0.</li>
-</ol>
-<h2 id=get-the-mantissa>Get the Mantissa</h2>
-<p>Although there are only 23 bits in <code>f32</code> left for mantissa. There is an implicit bit that is always 1, which represents the value 1.0, or $2^0$. Then, the $i^{th}$ value, ranging from 22 to 0, represents number $2^{i-23}$, if that bit is set to 1, otherwise 0. The sum of all these number, including the 1.0 of the implicit bit, is the mantissa.</p>
-<p>We could use the bitwise and operator and the bitwise shift operator in a loop to retrieve the bit value at bit $i$.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>main</span>() {
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    <span style=color:#8be9fd;font-style:italic>let</span> n: <span style=color:#8be9fd>u32</span> <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>unsafe</span> { std::mem::transmute(<span style=color:#bd93f9>0.1_</span><span style=color:#ff79c6>f32</span>) };
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>    <span style=color:#8be9fd;font-style:italic>let</span> <span style=color:#ff79c6>mut</span> mantissa <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0.15625</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>    <span style=color:#8be9fd;font-style:italic>let</span> base <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>2_</span><span style=color:#ff79c6>f32</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>    <span style=color:#8be9fd;font-style:italic>let</span> <span style=color:#ff79c6>mut</span> ad <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>    <span style=color:#ff79c6>for</span> i <span style=color:#ff79c6>in</span> <span style=color:#bd93f9>0</span><span style=color:#ff79c6>..</span><span style=color:#bd93f9>23</span> {
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>		<span style=color:#8be9fd;font-style:italic>let</span> bit <span style=color:#ff79c6>=</span> n <span style=color:#ff79c6>&amp;</span> ad;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>		<span style=color:#ff79c6>if</span> bit <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>0</span> {
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>	    	<span style=color:#ff79c6>continue</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>		}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>		mantissa <span style=color:#ff79c6>+=</span> base.powf((i<span style=color:#ff79c6>-</span><span style=color:#bd93f9>23</span>) <span style=color:#ff79c6>as</span> <span style=color:#8be9fd>f32</span>);
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>		ad <span style=color:#ff79c6>=</span> ad <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#bd93f9>1</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>    }
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>    println!(<span style=color:#f1fa8c>&#34;{}&#34;</span>, mantissa);
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>
-</code></pre></div>
-</div>
-</article>
-<div id=footer-post-container>
-<div id=footer-post>
-<div id=nav-footer style=display:none>
-<ul>
-<li><a href=/>Home</a></li>
-<li><a href=/posts>Writings</a></li>
-<li><a href=/tags>Tags</a></li>
-<li><a href=/about>About</a></li>
-<li><a href=https://archive.casouri.cat>BHL0388</a></li>
-</ul>
-</div>
-<div id=toc-footer style=display:none>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#scientific-notation>Scientific Notation</a></li>
-<li><a href=#floating-point>Floating Point</a></li>
-<li><a href=#ieee-754-binary32>IEEE 754 Binary32</a></li>
-<li><a href=#get-the-sign>Get the Sign</a></li>
-<li><a href=#get-the-exponent>Get the Exponent</a>
-<ul>
-<li><a href=#special-cases>Special cases</a></li>
-</ul>
-</li>
-<li><a href=#get-the-mantissa>Get the Mantissa</a></li>
-</ul>
-</nav>
-</div>
-<div id=share-footer style=display:none>
-<ul>
-<li>
-<a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f" aria-label=Facebook>
-<i class="fab fa-facebook fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://twitter.com/share?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&text=Decimal%20Numbers" aria-label=Twitter>
-<i class="fab fa-twitter fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&title=Decimal%20Numbers" aria-label=Linkedin>
-<i class="fab fa-linkedin fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&is_video=false&description=Decimal%20Numbers" aria-label=Pinterest>
-<i class="fab fa-pinterest fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="mailto:?subject=Decimal%20Numbers&body=Check out this article: https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f" aria-label=Email>
-<i class="fas fa-envelope fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&title=Decimal%20Numbers" aria-label=Pocket>
-<i class="fab fa-get-pocket fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&title=Decimal%20Numbers" aria-label=reddit>
-<i class="fab fa-reddit fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&name=Decimal%20Numbers&description=Notes%20on%20Rust%20in%20Action%2c%20by%20Tim%20McNamara%0aScientific%20Notation%20%5c%5b3.14%20%5ctimes%2010%20%5e%208%20%5c%5d%0a%20%3a%3aSign%3a%3a%20representing%20positive%20or%20negative%20%3a%3aMantissa%3a%3a%203.14%20%3a%3aRadix%3a%3a%2010%20%3a%3aExponent%3a%3a%208%20%20Floating%20Point%20Computers%20use%20scientific%20notation%20in%20memory%20to%20represent%20floating%20point%20numbers.%20A%20floating%20number%20in%20memory%20is%20constitutive%20of%203%20parts%0a%20%3a%3aSign%3a%3a%20%3a%3aMantissa%3a%3a%20%3a%3aExponent%3a%3a%20The%20%3a%3aradix%3a%3a%20is%20predefined%20to%20be%202%20and%20therefore%20does%20not%20need%20to%20be%20stored." aria-label=Tumblr>
-<i class="fab fa-tumblr fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&t=Decimal%20Numbers" aria-label="Hacker News">
-<i class="fab fa-hacker-news fa-lg" aria-hidden=true></i>
-</a>
-</li>
-</ul>
-</div>
-<div id=actions-footer>
-<a id=menu-toggle class=icon href=# onclick="return $('#nav-footer').toggle(),!1" aria-label=Menu>
-<i class="fas fa-bars fa-lg" aria-hidden=true></i> Menu</a>
-<a id=toc-toggle class=icon href=# onclick="return $('#toc-footer').toggle(),!1" aria-label=TOC>
-<i class="fas fa-list fa-lg" aria-hidden=true></i> TOC</a>
-<a id=share-toggle class=icon href=# onclick="return $('#share-footer').toggle(),!1" aria-label=Share>
-<i class="fas fa-share-alt fa-lg" aria-hidden=true></i> share</a>
-<a id=top style=display:none class=icon href=# onclick="$('html, body').animate({scrollTop:0},'fast')" aria-label="Top of Page">
-<i class="fas fa-chevron-up fa-lg" aria-hidden=true></i> Top</a>
-</div>
-</div>
-</div>
-<footer id=footer>
-<div class=footer-left>
-Copyright &copy; 2022 Yi Chen
-</div>
-<div class=footer-right>
-<nav>
-<ul>
-<li><a href=/>Home</a></li>
-<li><a href=/posts>Writings</a></li>
-<li><a href=/tags>Tags</a></li>
-<li><a href=/about>About</a></li>
-<li><a href=https://archive.casouri.cat>BHL0388</a></li>
-</ul>
-</nav>
-</div>
-</footer>
-</div>
-</body>
-<link rel=stylesheet href=/lib/font-awesome/css/all.min.css>
-<script src=/lib/jquery/jquery.min.js></script>
+Finally, according to IEEE 754, a bias, 127, should be subtracted from the decimal number represented by the 8-bits we got. Then the exponent is going to be $2^{n}$.</p><h3 id=special-cases>Special cases</h3><ol><li>If $n$ is 0xFF, then the decimal number could be positive infinity, negative infinity (mantissa is 0), or Not a Number (mantissa is anything but 0). These type of numbers are generated from invalid mathematical operations. And comparisons between these number usually do not provide ideal results.</li><li>If $n$ is 0x00, then the decimal number is a subnormal number. The implicit 24th bit of mantissa is set to be 0.</li></ol><h2 id=get-the-mantissa>Get the Mantissa</h2><p>Although there are only 23 bits in <code>f32</code> left for mantissa. There is an implicit bit that is always 1, which represents the value 1.0, or $2^0$. Then, the $i^{th}$ value, ranging from 22 to 0, represents number $2^{i-23}$, if that bit is set to 1, otherwise 0. The sum of all these number, including the 1.0 of the implicit bit, is the mantissa.</p><p>We could use the bitwise and operator and the bitwise shift operator in a loop to retrieve the bit value at bit $i$.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span><span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span>    <span style=color:#8be9fd;font-style:italic>let</span> n: <span style=color:#8be9fd>u32</span> <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>unsafe</span> { std::mem::transmute(<span style=color:#bd93f9>0.1_</span><span style=color:#ff79c6>f32</span>) };
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span>    <span style=color:#8be9fd;font-style:italic>let</span> <span style=color:#ff79c6>mut</span> mantissa <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0.15625</span>;
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span>    <span style=color:#8be9fd;font-style:italic>let</span> base <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>2_</span><span style=color:#ff79c6>f32</span>;
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span>    <span style=color:#8be9fd;font-style:italic>let</span> <span style=color:#ff79c6>mut</span> ad <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>;
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span>    <span style=color:#ff79c6>for</span> i <span style=color:#ff79c6>in</span> <span style=color:#bd93f9>0</span><span style=color:#ff79c6>..</span><span style=color:#bd93f9>23</span> {
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span>		<span style=color:#8be9fd;font-style:italic>let</span> bit <span style=color:#ff79c6>=</span> n <span style=color:#ff79c6>&amp;</span> ad;
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span>		<span style=color:#ff79c6>if</span> bit <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>0</span> {
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span>	    	<span style=color:#ff79c6>continue</span>;
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span>		}
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span>		mantissa <span style=color:#ff79c6>+=</span> base.powf((i<span style=color:#ff79c6>-</span><span style=color:#bd93f9>23</span>) <span style=color:#ff79c6>as</span> <span style=color:#8be9fd>f32</span>);
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span>		ad <span style=color:#ff79c6>=</span> ad <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#bd93f9>1</span>;
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span>    }
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span>    println!(<span style=color:#f1fa8c>&#34;{}&#34;</span>, mantissa);
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span>}
+</span></span></code></pre></div></div></article><div id=footer-post-container><div id=footer-post><div id=nav-footer style=display:none><ul><li><a href=/>Home</a></li><li><a href=/posts>Writings</a></li><li><a href=/tags>Tags</a></li><li><a href=/about>About</a></li><li><a href=https://archive.casouri.cat>BHL0388</a></li></ul></div><div id=toc-footer style=display:none><nav id=TableOfContents><ul><li><a href=#scientific-notation>Scientific Notation</a></li><li><a href=#floating-point>Floating Point</a></li><li><a href=#ieee-754-binary32>IEEE 754 Binary32</a></li><li><a href=#get-the-sign>Get the Sign</a></li><li><a href=#get-the-exponent>Get the Exponent</a><ul><li><a href=#special-cases>Special cases</a></li></ul></li><li><a href=#get-the-mantissa>Get the Mantissa</a></li></ul></nav></div><div id=share-footer style=display:none><ul><li><a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f" aria-label=Facebook><i class="fab fa-facebook fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="https://twitter.com/share?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&text=Decimal%20Numbers" aria-label=Twitter><i class="fab fa-twitter fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&title=Decimal%20Numbers" aria-label=Linkedin><i class="fab fa-linkedin fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&is_video=false&description=Decimal%20Numbers" aria-label=Pinterest><i class="fab fa-pinterest fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="mailto:?subject=Decimal%20Numbers&body=Check out this article: https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f" aria-label=Email><i class="fas fa-envelope fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&title=Decimal%20Numbers" aria-label=Pocket><i class="fab fa-get-pocket fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&title=Decimal%20Numbers" aria-label=reddit><i class="fab fa-reddit fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&name=Decimal%20Numbers&description=Notes%20on%20Rust%20in%20Action%2c%20by%20Tim%20McNamara%0aScientific%20Notation%20%5c%5b3.14%20%5ctimes%2010%20%5e%208%20%5c%5d%0a%20%3a%3aSign%3a%3a%20representing%20positive%20or%20negative%20%3a%3aMantissa%3a%3a%203.14%20%3a%3aRadix%3a%3a%2010%20%3a%3aExponent%3a%3a%208%20%20Floating%20Point%20Computers%20use%20scientific%20notation%20in%20memory%20to%20represent%20floating%20point%20numbers.%20A%20floating%20number%20in%20memory%20is%20constitutive%20of%203%20parts%0a%20%3a%3aSign%3a%3a%20%3a%3aMantissa%3a%3a%20%3a%3aExponent%3a%3a%20The%20%3a%3aradix%3a%3a%20is%20predefined%20to%20be%202%20and%20therefore%20does%20not%20need%20to%20be%20stored." aria-label=Tumblr><i class="fab fa-tumblr fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fdecimal-numbers%2f&t=Decimal%20Numbers" aria-label="Hacker News"><i class="fab fa-hacker-news fa-lg" aria-hidden=true></i></a></li></ul></div><div id=actions-footer><a id=menu-toggle class=icon href=# onclick='return $("#nav-footer").toggle(),!1' aria-label=Menu><i class="fas fa-bars fa-lg" aria-hidden=true></i> Menu</a>
+<a id=toc-toggle class=icon href=# onclick='return $("#toc-footer").toggle(),!1' aria-label=TOC><i class="fas fa-list fa-lg" aria-hidden=true></i> TOC</a>
+<a id=share-toggle class=icon href=# onclick='return $("#share-footer").toggle(),!1' aria-label=Share><i class="fas fa-share-alt fa-lg" aria-hidden=true></i> share</a>
+<a id=top style=display:none class=icon href=# onclick='$("html, body").animate({scrollTop:0},"fast")' aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg" aria-hidden=true></i> Top</a></div></div></div><footer id=footer><div class=footer-left>Copyright &copy; 2022 Yi Chen</div><div class=footer-right><nav><ul><li><a href=/>Home</a></li><li><a href=/posts>Writings</a></li><li><a href=/tags>Tags</a></li><li><a href=/about>About</a></li><li><a href=https://archive.casouri.cat>BHL0388</a></li></ul></nav></div></footer></div></body><link rel=stylesheet href=/lib/font-awesome/css/all.min.css><script src=/lib/jquery/jquery.min.js></script>
 <script src=/js/main.js></script>
 <script src=/js/code-copy.js></script>
-<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]},svg:{fontCache:'global'}}</script>
-<script type=text/javascript id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script>
-</html>
+<script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]},svg:{fontCache:"global"}}</script><script type=text/javascript id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></html>

@@ -1,315 +1,43 @@
-<!doctype html><html lang=en-us>
-<head>
-<link rel=preload href=/lib/font-awesome/webfonts/fa-brands-400.woff2 as=font type=font/woff2 crossorigin=anonymous>
-<link rel=preload href=/lib/font-awesome/webfonts/fa-regular-400.woff2 as=font type=font/woff2 crossorigin=anonymous>
-<link rel=preload href=/lib/font-awesome/webfonts/fa-solid-900.woff2 as=font type=font/woff2 crossorigin=anonymous>
-<link rel=preload href=/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2 as=font type=font/woff2 crossorigin=anonymous>
-<script type=text/javascript src=https://latest.cactus.chat/cactus.js></script>
-<link rel=stylesheet href=https://latest.cactus.chat/style.css type=text/css>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<title> Struct, Enum | XIAOYIJ</title>
-<link rel=canonical href=https://www.mrr1vfe.io/posts/struct-enum/>
-<meta name=description content="This is my website">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=robots content="all,follow">
-<meta name=googlebot content="index,follow,snippet,archive">
-<meta property="og:title" content="Struct, Enum">
-<meta property="og:description" content="Notes on Rust in Action, by Tim McNamara
+<!doctype html><html lang=en-us><head><link rel=preload href=/lib/font-awesome/webfonts/fa-brands-400.woff2 as=font type=font/woff2 crossorigin=anonymous><link rel=preload href=/lib/font-awesome/webfonts/fa-regular-400.woff2 as=font type=font/woff2 crossorigin=anonymous><link rel=preload href=/lib/font-awesome/webfonts/fa-solid-900.woff2 as=font type=font/woff2 crossorigin=anonymous><link rel=preload href=/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2 as=font type=font/woff2 crossorigin=anonymous><script type=text/javascript src=https://latest.cactus.chat/cactus.js></script>
+<link rel=stylesheet href=https://latest.cactus.chat/style.css type=text/css><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>Struct, Enum | XIAOYIJ</title><link rel=canonical href=https://www.mrr1vfe.io/posts/struct-enum/><meta name=description content="This is my website"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="all,follow"><meta name=googlebot content="index,follow,snippet,archive"><meta property="og:title" content="Struct, Enum"><meta property="og:description" content="Notes on Rust in Action, by Tim McNamara
 type Just an aliasing mechanism. For example, the following code will compile and run:
 1type MyString = String; 2fn main() { 3	let haha: MyString = String::from(&#34;haha&#34;); 4	let hehe: String = MyString::from(&#34;hehe&#34;); 5} “new type” struct wrapping If aliasing is not ideal, try this:
-1struct MyString(String); // a tuple Now, the following code will not compile since MyString and String are no longer interchangeable.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://www.mrr1vfe.io/posts/struct-enum/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2021-01-20T00:00:00+00:00">
-<meta property="article:modified_time" content="2021-01-20T00:00:00+00:00">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="Struct, Enum">
-<meta name=twitter:description content="Notes on Rust in Action, by Tim McNamara
+1struct MyString(String); // a tuple Now, the following code will not compile since MyString and String are no longer interchangeable."><meta property="og:type" content="article"><meta property="og:url" content="https://www.mrr1vfe.io/posts/struct-enum/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-01-20T00:00:00+00:00"><meta property="article:modified_time" content="2021-01-20T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Struct, Enum"><meta name=twitter:description content="Notes on Rust in Action, by Tim McNamara
 type Just an aliasing mechanism. For example, the following code will compile and run:
 1type MyString = String; 2fn main() { 3	let haha: MyString = String::from(&#34;haha&#34;); 4	let hehe: String = MyString::from(&#34;hehe&#34;); 5} “new type” struct wrapping If aliasing is not ideal, try this:
-1struct MyString(String); // a tuple Now, the following code will not compile since MyString and String are no longer interchangeable.">
-<link rel=stylesheet href=https://www.mrr1vfe.io/css/styles.4c2b9aa1d874d6766f554b2d404e8fd62ab4761f51ee9b3f358d12e81e7fa43a1b4378db995bc1926bbe5ed98c060be5e7bd4f2470504cf94f22b4b3a74e62b6.css integrity="sha512-TCuaodh01nZvVUstQE6P1iq0dh9R7ps/NY0S6B5/pDobQ3jbmVvBkmu+XtmMBgvl571PJHBQTPlPIrSzp05itg=="><!--[if lt IE 9]><script src=https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script>
-<script src=https://oss.maxcdn.com/respond/1.4.2/respond.min.js></script><![endif]-->
-<link rel=icon type=image/png href=https://www.mrr1vfe.io/images/favicon.ico>
-</head>
-<body class="max-width mx-auto px3 ltr">
-<div class="content index py4">
-<div id=header-post>
-<a id=menu-icon href=#><i class="fas fa-bars fa-lg"></i></a>
+1struct MyString(String); // a tuple Now, the following code will not compile since MyString and String are no longer interchangeable."><link rel=stylesheet href=https://www.mrr1vfe.io/css/styles.4c2b9aa1d874d6766f554b2d404e8fd62ab4761f51ee9b3f358d12e81e7fa43a1b4378db995bc1926bbe5ed98c060be5e7bd4f2470504cf94f22b4b3a74e62b6.css integrity="sha512-TCuaodh01nZvVUstQE6P1iq0dh9R7ps/NY0S6B5/pDobQ3jbmVvBkmu+XtmMBgvl571PJHBQTPlPIrSzp05itg=="><!--[if lt IE 9]><script src=https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js></script>
+<script src=https://oss.maxcdn.com/respond/1.4.2/respond.min.js></script><![endif]--><link rel=icon type=image/png href=https://www.mrr1vfe.io/images/favicon.ico></head><body class="max-width mx-auto px3 ltr"><div class="content index py4"><div id=header-post><a id=menu-icon href=#><i class="fas fa-bars fa-lg"></i></a>
 <a id=menu-icon-tablet href=#><i class="fas fa-bars fa-lg"></i></a>
-<a id=top-icon-tablet href=# onclick="$('html, body').animate({scrollTop:0},'fast')" style=display:none aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
-<span id=menu>
-<span id=nav>
-<ul>
-<li><a href=/>Home</a></li>
-<li><a href=/posts>Writings</a></li>
-<li><a href=/tags>Tags</a></li>
-<li><a href=/about>About</a></li>
-<li><a href=https://archive.casouri.cat>BHL0388</a></li>
-</ul>
-</span>
-<br>
-<span id=actions>
-<ul>
-<li>
-<a class=icon href=https://www.mrr1vfe.io/posts/arrays-slices-vectors/ aria-label=Previous>
-<i class="fas fa-chevron-left" aria-hidden=true onmouseover="$('#i-prev').toggle()" onmouseout="$('#i-prev').toggle()"></i>
-</a>
-</li>
-<li>
-<a class=icon href=https://www.mrr1vfe.io/posts/global-variables/ aria-label=Next>
-<i class="fas fa-chevron-right" aria-hidden=true onmouseover="$('#i-next').toggle()" onmouseout="$('#i-next').toggle()"></i>
-</a>
-</li>
-<li>
-<a class=icon href=# onclick="$('html, body').animate({scrollTop:0},'fast')" aria-label="Top of Page">
-<i class="fas fa-chevron-up" aria-hidden=true onmouseover="$('#i-top').toggle()" onmouseout="$('#i-top').toggle()"></i>
-</a>
-</li>
-<li>
-<a class=icon href=# aria-label=Share>
-<i class="fas fa-share-alt" aria-hidden=true onmouseover="$('#i-share').toggle()" onmouseout="$('#i-share').toggle()" onclick="return $('#share').toggle(),!1"></i>
-</a>
-</li>
-</ul>
-<span id=i-prev class=info style=display:none>Previous post</span>
+<a id=top-icon-tablet href=# onclick='$("html, body").animate({scrollTop:0},"fast")' style=display:none aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+<span id=menu><span id=nav><ul><li><a href=/>Home</a></li><li><a href=/posts>Writings</a></li><li><a href=/tags>Tags</a></li><li><a href=/about>About</a></li><li><a href=https://archive.casouri.cat>BHL0388</a></li></ul></span><br><span id=actions><ul><li><a class=icon href=https://www.mrr1vfe.io/posts/arrays-slices-vectors/ aria-label=Previous><i class="fas fa-chevron-left" aria-hidden=true onmouseover='$("#i-prev").toggle()' onmouseout='$("#i-prev").toggle()'></i></a></li><li><a class=icon href=https://www.mrr1vfe.io/posts/global-variables/ aria-label=Next><i class="fas fa-chevron-right" aria-hidden=true onmouseover='$("#i-next").toggle()' onmouseout='$("#i-next").toggle()'></i></a></li><li><a class=icon href=# onclick='$("html, body").animate({scrollTop:0},"fast")' aria-label="Top of Page"><i class="fas fa-chevron-up" aria-hidden=true onmouseover='$("#i-top").toggle()' onmouseout='$("#i-top").toggle()'></i></a></li><li><a class=icon href=# aria-label=Share><i class="fas fa-share-alt" aria-hidden=true onmouseover='$("#i-share").toggle()' onmouseout='$("#i-share").toggle()' onclick='return $("#share").toggle(),!1'></i></a></li></ul><span id=i-prev class=info style=display:none>Previous post</span>
 <span id=i-next class=info style=display:none>Next post</span>
 <span id=i-top class=info style=display:none>Back to top</span>
-<span id=i-share class=info style=display:none>Share post</span>
-</span>
-<br>
-<div id=share style=display:none>
-<ul>
-<li>
-<a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f" aria-label=Facebook>
-<i class="fab fa-facebook" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://twitter.com/share?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&text=Struct%2c%20Enum" aria-label=Twitter>
-<i class="fab fa-twitter" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&title=Struct%2c%20Enum" aria-label=Linkedin>
-<i class="fab fa-linkedin" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&is_video=false&description=Struct%2c%20Enum" aria-label=Pinterest>
-<i class="fab fa-pinterest" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="mailto:?subject=Struct%2c%20Enum&body=Check out this article: https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f" aria-label=Email>
-<i class="fas fa-envelope" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&title=Struct%2c%20Enum" aria-label=Pocket>
-<i class="fab fa-get-pocket" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&title=Struct%2c%20Enum" aria-label=reddit>
-<i class="fab fa-reddit" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&name=Struct%2c%20Enum&description=Notes%20on%20Rust%20in%20Action%2c%20by%20Tim%20McNamara%0atype%20Just%20an%20aliasing%20mechanism.%20For%20example%2c%20the%20following%20code%20will%20compile%20and%20run%3a%0a1type%20MyString%20%3d%20String%3b%202fn%20main%28%29%20%7b%203%09let%20haha%3a%20MyString%20%3d%20String%3a%3afrom%28%26%2334%3bhaha%26%2334%3b%29%3b%204%09let%20hehe%3a%20String%20%3d%20MyString%3a%3afrom%28%26%2334%3bhehe%26%2334%3b%29%3b%205%7d%20%e2%80%9cnew%20type%e2%80%9d%20struct%20wrapping%20If%20aliasing%20is%20not%20ideal%2c%20try%20this%3a%0a1struct%20MyString%28String%29%3b%20%2f%2f%20a%20tuple%20Now%2c%20the%20following%20code%20will%20not%20compile%20since%20MyString%20and%20String%20are%20no%20longer%20interchangeable." aria-label=Tumblr>
-<i class="fab fa-tumblr" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&t=Struct%2c%20Enum" aria-label="Hacker News">
-<i class="fab fa-hacker-news" aria-hidden=true></i>
-</a>
-</li>
-</ul>
-</div>
-<div id=toc>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#type><code>type</code></a></li>
-<li><a href=#new-type-struct-wrapping>“new type” <code>struct</code> wrapping</a></li>
-<li><a href=#methods>methods</a></li>
-<li><a href=#result><code>Result</code></a></li>
-<li><a href=#enum><code>enum</code></a></li>
-<li><a href=#trait><code>trait</code></a></li>
-</ul>
-</nav>
-</div>
-</span>
-</div>
-<article class=post itemscope itemtype=http://schema.org/BlogPosting>
-<header>
-<h1 class=posttitle itemprop="name headline">
-Struct, Enum
-</h1>
-<div class=meta>
-<div class=postdate>
-<time datetime="2021-01-20 00:00:00 +0000 UTC" itemprop=datePublished>2021-01-20</time>
-</div>
-<div class=article-read-time>
-<i class="far fa-clock"></i>
-1 minute read
-</div>
-<div class=article-tag>
-<i class="fas fa-tag"></i>
-<a class=tag-link href=/tags/rust rel=tag>Rust</a>
-</div>
-</div>
-</header>
-<div class=content itemprop=articleBody>
-<p>Notes on <a href="https://www.manning.com/books/rust-in-action?query=rust%20in%20action">Rust in Action</a>, by Tim McNamara</p>
-<h2 id=type><code>type</code></h2>
-<p>Just an aliasing mechanism.
-For example, the following code will compile and run:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>type</span> <span style=color:#50fa7b>MyString</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>main</span>() {
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>	<span style=color:#8be9fd;font-style:italic>let</span> haha: <span style=color:#50fa7b>MyString</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>::from(<span style=color:#f1fa8c>&#34;haha&#34;</span>);
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>	<span style=color:#8be9fd;font-style:italic>let</span> hehe: <span style=color:#8be9fd;font-style:italic>String</span> <span style=color:#ff79c6>=</span> MyString::from(<span style=color:#f1fa8c>&#34;hehe&#34;</span>);
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>}
-</code></pre></div><h2 id=new-type-struct-wrapping>“new type” <code>struct</code> wrapping</h2>
-<p>If aliasing is not ideal, try this:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>struct</span> <span style=color:#50fa7b>MyString</span>(<span style=color:#8be9fd;font-style:italic>String</span>); <span style=color:#6272a4>// a tuple
-</span></code></pre></div><p>Now, the following code will not compile since MyString and String are no longer interchangeable.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>main</span>() {
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>	<span style=color:#8be9fd;font-style:italic>let</span> haha: <span style=color:#50fa7b>MyString</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>::from(<span style=color:#f1fa8c>&#34;haha&#34;</span>);
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>}
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#bd93f9>1</span>  <span style=color:#ff79c6>|</span>     <span style=color:#8be9fd;font-style:italic>let</span> haha: <span style=color:#50fa7b>MyString</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>::from(<span style=color:#f1fa8c>&#34;haha&#34;</span>);
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>   <span style=color:#ff79c6>|</span>               <span style=color:#ff79c6>--------</span>   <span style=color:#ff79c6>^^^^^^^^^^^^^^^^^^^^</span> expected <span style=color:#ff79c6>struct</span> `MyString`, found <span style=color:#ff79c6>struct</span> `<span style=color:#8be9fd;font-style:italic>String</span>`
-</code></pre></div><h2 id=methods>methods</h2>
-<p>Use <code>impl</code> block with the name of the struct to declare methods.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>impl</span> StructName {
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>	<span style=color:#6272a4>// todo
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#6272a4></span>}
-</code></pre></div><p>Although structs can be initialized using the struct literal, a more common way is to declare a <code>new()</code> methods, as a helper function, to create a new instant of the struct.</p>
-<h2 id=result><code>Result</code></h2>
-<p><code>Result</code> is an enum, it consists of two variants: <code>Ok(T)</code> and <code>Err(E)</code>.</p>
-<h2 id=enum><code>enum</code></h2>
-<ol>
-<li>Works with pattern matching</li>
-<li>Can have methods</li>
-<li>Can include data within its variants</li>
-</ol>
-<h2 id=trait><code>trait</code></h2>
-<p>Similar to an interface, it defines a behavior that struct implemented this trait shall follow.
-To define a trait, create a block with the <code>trait</code> keyword and the name of the trait. Place method’s name, parameters, and return value only inside the <code>trait</code> block:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#ff79c6>trait</span> Read {
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>    <span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>read</span>(self: <span style=color:#ff79c6>&amp;</span><span style=color:#50fa7b>Self</span>, save_to: <span style=color:#ff79c6>&amp;</span><span style=color:#50fa7b>mut</span> <span style=color:#8be9fd;font-style:italic>Vec</span><span style=color:#ff79c6>&lt;</span><span style=color:#8be9fd>u8</span><span style=color:#ff79c6>&gt;</span>) -&gt; <span style=color:#8be9fd;font-style:italic>Result</span><span style=color:#ff79c6>&lt;</span><span style=color:#8be9fd>usize</span>, <span style=color:#8be9fd;font-style:italic>String</span><span style=color:#ff79c6>&gt;</span>;
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>}
-</code></pre></div><p>The <code>Self</code> is a pseudo type, playing as a player holder for the type that will implement this <code>trait</code>
-To implement a trait, create a block with <code>impl [trait name] for [struct name]</code>.</p>
-</div>
-</article>
-<div id=footer-post-container>
-<div id=footer-post>
-<div id=nav-footer style=display:none>
-<ul>
-<li><a href=/>Home</a></li>
-<li><a href=/posts>Writings</a></li>
-<li><a href=/tags>Tags</a></li>
-<li><a href=/about>About</a></li>
-<li><a href=https://archive.casouri.cat>BHL0388</a></li>
-</ul>
-</div>
-<div id=toc-footer style=display:none>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#type><code>type</code></a></li>
-<li><a href=#new-type-struct-wrapping>“new type” <code>struct</code> wrapping</a></li>
-<li><a href=#methods>methods</a></li>
-<li><a href=#result><code>Result</code></a></li>
-<li><a href=#enum><code>enum</code></a></li>
-<li><a href=#trait><code>trait</code></a></li>
-</ul>
-</nav>
-</div>
-<div id=share-footer style=display:none>
-<ul>
-<li>
-<a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f" aria-label=Facebook>
-<i class="fab fa-facebook fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://twitter.com/share?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&text=Struct%2c%20Enum" aria-label=Twitter>
-<i class="fab fa-twitter fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&title=Struct%2c%20Enum" aria-label=Linkedin>
-<i class="fab fa-linkedin fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&is_video=false&description=Struct%2c%20Enum" aria-label=Pinterest>
-<i class="fab fa-pinterest fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="mailto:?subject=Struct%2c%20Enum&body=Check out this article: https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f" aria-label=Email>
-<i class="fas fa-envelope fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&title=Struct%2c%20Enum" aria-label=Pocket>
-<i class="fab fa-get-pocket fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&title=Struct%2c%20Enum" aria-label=reddit>
-<i class="fab fa-reddit fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&name=Struct%2c%20Enum&description=Notes%20on%20Rust%20in%20Action%2c%20by%20Tim%20McNamara%0atype%20Just%20an%20aliasing%20mechanism.%20For%20example%2c%20the%20following%20code%20will%20compile%20and%20run%3a%0a1type%20MyString%20%3d%20String%3b%202fn%20main%28%29%20%7b%203%09let%20haha%3a%20MyString%20%3d%20String%3a%3afrom%28%26%2334%3bhaha%26%2334%3b%29%3b%204%09let%20hehe%3a%20String%20%3d%20MyString%3a%3afrom%28%26%2334%3bhehe%26%2334%3b%29%3b%205%7d%20%e2%80%9cnew%20type%e2%80%9d%20struct%20wrapping%20If%20aliasing%20is%20not%20ideal%2c%20try%20this%3a%0a1struct%20MyString%28String%29%3b%20%2f%2f%20a%20tuple%20Now%2c%20the%20following%20code%20will%20not%20compile%20since%20MyString%20and%20String%20are%20no%20longer%20interchangeable." aria-label=Tumblr>
-<i class="fab fa-tumblr fa-lg" aria-hidden=true></i>
-</a>
-</li>
-<li>
-<a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&t=Struct%2c%20Enum" aria-label="Hacker News">
-<i class="fab fa-hacker-news fa-lg" aria-hidden=true></i>
-</a>
-</li>
-</ul>
-</div>
-<div id=actions-footer>
-<a id=menu-toggle class=icon href=# onclick="return $('#nav-footer').toggle(),!1" aria-label=Menu>
-<i class="fas fa-bars fa-lg" aria-hidden=true></i> Menu</a>
-<a id=toc-toggle class=icon href=# onclick="return $('#toc-footer').toggle(),!1" aria-label=TOC>
-<i class="fas fa-list fa-lg" aria-hidden=true></i> TOC</a>
-<a id=share-toggle class=icon href=# onclick="return $('#share-footer').toggle(),!1" aria-label=Share>
-<i class="fas fa-share-alt fa-lg" aria-hidden=true></i> share</a>
-<a id=top style=display:none class=icon href=# onclick="$('html, body').animate({scrollTop:0},'fast')" aria-label="Top of Page">
-<i class="fas fa-chevron-up fa-lg" aria-hidden=true></i> Top</a>
-</div>
-</div>
-</div>
-<footer id=footer>
-<div class=footer-left>
-Copyright &copy; 2022 Yi Chen
-</div>
-<div class=footer-right>
-<nav>
-<ul>
-<li><a href=/>Home</a></li>
-<li><a href=/posts>Writings</a></li>
-<li><a href=/tags>Tags</a></li>
-<li><a href=/about>About</a></li>
-<li><a href=https://archive.casouri.cat>BHL0388</a></li>
-</ul>
-</nav>
-</div>
-</footer>
-</div>
-</body>
-<link rel=stylesheet href=/lib/font-awesome/css/all.min.css>
-<script src=/lib/jquery/jquery.min.js></script>
+<span id=i-share class=info style=display:none>Share post</span></span><br><div id=share style=display:none><ul><li><a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f" aria-label=Facebook><i class="fab fa-facebook" aria-hidden=true></i></a></li><li><a class=icon href="https://twitter.com/share?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&text=Struct%2c%20Enum" aria-label=Twitter><i class="fab fa-twitter" aria-hidden=true></i></a></li><li><a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&title=Struct%2c%20Enum" aria-label=Linkedin><i class="fab fa-linkedin" aria-hidden=true></i></a></li><li><a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&is_video=false&description=Struct%2c%20Enum" aria-label=Pinterest><i class="fab fa-pinterest" aria-hidden=true></i></a></li><li><a class=icon href="mailto:?subject=Struct%2c%20Enum&body=Check out this article: https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f" aria-label=Email><i class="fas fa-envelope" aria-hidden=true></i></a></li><li><a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&title=Struct%2c%20Enum" aria-label=Pocket><i class="fab fa-get-pocket" aria-hidden=true></i></a></li><li><a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&title=Struct%2c%20Enum" aria-label=reddit><i class="fab fa-reddit" aria-hidden=true></i></a></li><li><a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&name=Struct%2c%20Enum&description=Notes%20on%20Rust%20in%20Action%2c%20by%20Tim%20McNamara%0atype%20Just%20an%20aliasing%20mechanism.%20For%20example%2c%20the%20following%20code%20will%20compile%20and%20run%3a%0a1type%20MyString%20%3d%20String%3b%202fn%20main%28%29%20%7b%203%09let%20haha%3a%20MyString%20%3d%20String%3a%3afrom%28%26%2334%3bhaha%26%2334%3b%29%3b%204%09let%20hehe%3a%20String%20%3d%20MyString%3a%3afrom%28%26%2334%3bhehe%26%2334%3b%29%3b%205%7d%20%e2%80%9cnew%20type%e2%80%9d%20struct%20wrapping%20If%20aliasing%20is%20not%20ideal%2c%20try%20this%3a%0a1struct%20MyString%28String%29%3b%20%2f%2f%20a%20tuple%20Now%2c%20the%20following%20code%20will%20not%20compile%20since%20MyString%20and%20String%20are%20no%20longer%20interchangeable." aria-label=Tumblr><i class="fab fa-tumblr" aria-hidden=true></i></a></li><li><a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&t=Struct%2c%20Enum" aria-label="Hacker News"><i class="fab fa-hacker-news" aria-hidden=true></i></a></li></ul></div><div id=toc><nav id=TableOfContents><ul><li><a href=#type><code>type</code></a></li><li><a href=#new-type-struct-wrapping>“new type” <code>struct</code> wrapping</a></li><li><a href=#methods>methods</a></li><li><a href=#result><code>Result</code></a></li><li><a href=#enum><code>enum</code></a></li><li><a href=#trait><code>trait</code></a></li></ul></nav></div></span></div><article class=post itemscope itemtype=http://schema.org/BlogPosting><header><h1 class=posttitle itemprop="name headline">Struct, Enum</h1><div class=meta><div class=postdate><time datetime="2021-01-20 00:00:00 +0000 UTC" itemprop=datePublished>2021-01-20</time></div><div class=article-read-time><i class="far fa-clock"></i>
+1 minute read</div><div class=article-tag><i class="fas fa-tag"></i>
+<a class=tag-link href=/tags/rust rel=tag>Rust</a></div></div></header><div class=content itemprop=articleBody><p>Notes on <a href="https://www.manning.com/books/rust-in-action?query=rust%20in%20action">Rust in Action</a>, by Tim McNamara</p><h2 id=type><code>type</code></h2><p>Just an aliasing mechanism.
+For example, the following code will compile and run:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span><span style=color:#ff79c6>type</span> <span style=color:#50fa7b>MyString</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>;
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span><span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span>	<span style=color:#8be9fd;font-style:italic>let</span> haha: <span style=color:#50fa7b>MyString</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>::from(<span style=color:#f1fa8c>&#34;haha&#34;</span>);
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span>	<span style=color:#8be9fd;font-style:italic>let</span> hehe: <span style=color:#8be9fd;font-style:italic>String</span> <span style=color:#ff79c6>=</span> MyString::from(<span style=color:#f1fa8c>&#34;hehe&#34;</span>);
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span>}
+</span></span></code></pre></div><h2 id=new-type-struct-wrapping>“new type” <code>struct</code> wrapping</h2><p>If aliasing is not ideal, try this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span><span style=color:#ff79c6>struct</span> <span style=color:#50fa7b>MyString</span>(<span style=color:#8be9fd;font-style:italic>String</span>); <span style=color:#6272a4>// a tuple
+</span></span></span></code></pre></div><p>Now, the following code will not compile since MyString and String are no longer interchangeable.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span><span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>main</span>() {
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span>	<span style=color:#8be9fd;font-style:italic>let</span> haha: <span style=color:#50fa7b>MyString</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>::from(<span style=color:#f1fa8c>&#34;haha&#34;</span>);
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span>}
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span><span style=color:#bd93f9>1</span>  <span style=color:#ff79c6>|</span>     <span style=color:#8be9fd;font-style:italic>let</span> haha: <span style=color:#50fa7b>MyString</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>::from(<span style=color:#f1fa8c>&#34;haha&#34;</span>);
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span>   <span style=color:#ff79c6>|</span>               <span style=color:#ff79c6>--------</span>   <span style=color:#ff79c6>^^^^^^^^^^^^^^^^^^^^</span> expected <span style=color:#ff79c6>struct</span> `MyString`, found <span style=color:#ff79c6>struct</span> `<span style=color:#8be9fd;font-style:italic>String</span>`
+</span></span></code></pre></div><h2 id=methods>methods</h2><p>Use <code>impl</code> block with the name of the struct to declare methods.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span><span style=color:#ff79c6>impl</span> StructName {
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span>	<span style=color:#6272a4>// todo
+</span></span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span><span style=color:#6272a4></span>}
+</span></span></code></pre></div><p>Although structs can be initialized using the struct literal, a more common way is to declare a <code>new()</code> methods, as a helper function, to create a new instant of the struct.</p><h2 id=result><code>Result</code></h2><p><code>Result</code> is an enum, it consists of two variants: <code>Ok(T)</code> and <code>Err(E)</code>.</p><h2 id=enum><code>enum</code></h2><ol><li>Works with pattern matching</li><li>Can have methods</li><li>Can include data within its variants</li></ol><h2 id=trait><code>trait</code></h2><p>Similar to an interface, it defines a behavior that struct implemented this trait shall follow.
+To define a trait, create a block with the <code>trait</code> keyword and the name of the trait. Place method’s name, parameters, and return value only inside the <code>trait</code> block:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span><span style=color:#ff79c6>trait</span> Read {
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span>    <span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>read</span>(self: <span style=color:#ff79c6>&amp;</span><span style=color:#50fa7b>Self</span>, save_to: <span style=color:#ff79c6>&amp;</span><span style=color:#50fa7b>mut</span> <span style=color:#8be9fd;font-style:italic>Vec</span><span style=color:#ff79c6>&lt;</span><span style=color:#8be9fd>u8</span><span style=color:#ff79c6>&gt;</span>) -&gt; <span style=color:#8be9fd;font-style:italic>Result</span><span style=color:#ff79c6>&lt;</span><span style=color:#8be9fd>usize</span>, <span style=color:#8be9fd;font-style:italic>String</span><span style=color:#ff79c6>&gt;</span>;
+</span></span><span style=display:flex><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span>}
+</span></span></code></pre></div><p>The <code>Self</code> is a pseudo type, playing as a player holder for the type that will implement this <code>trait</code>
+To implement a trait, create a block with <code>impl [trait name] for [struct name]</code>.</p></div></article><div id=footer-post-container><div id=footer-post><div id=nav-footer style=display:none><ul><li><a href=/>Home</a></li><li><a href=/posts>Writings</a></li><li><a href=/tags>Tags</a></li><li><a href=/about>About</a></li><li><a href=https://archive.casouri.cat>BHL0388</a></li></ul></div><div id=toc-footer style=display:none><nav id=TableOfContents><ul><li><a href=#type><code>type</code></a></li><li><a href=#new-type-struct-wrapping>“new type” <code>struct</code> wrapping</a></li><li><a href=#methods>methods</a></li><li><a href=#result><code>Result</code></a></li><li><a href=#enum><code>enum</code></a></li><li><a href=#trait><code>trait</code></a></li></ul></nav></div><div id=share-footer style=display:none><ul><li><a class=icon href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f" aria-label=Facebook><i class="fab fa-facebook fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="https://twitter.com/share?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&text=Struct%2c%20Enum" aria-label=Twitter><i class="fab fa-twitter fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&title=Struct%2c%20Enum" aria-label=Linkedin><i class="fab fa-linkedin fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&is_video=false&description=Struct%2c%20Enum" aria-label=Pinterest><i class="fab fa-pinterest fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="mailto:?subject=Struct%2c%20Enum&body=Check out this article: https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f" aria-label=Email><i class="fas fa-envelope fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="https://getpocket.com/save?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&title=Struct%2c%20Enum" aria-label=Pocket><i class="fab fa-get-pocket fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="http://reddit.com/submit?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&title=Struct%2c%20Enum" aria-label=reddit><i class="fab fa-reddit fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="http://www.tumblr.com/share/link?url=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&name=Struct%2c%20Enum&description=Notes%20on%20Rust%20in%20Action%2c%20by%20Tim%20McNamara%0atype%20Just%20an%20aliasing%20mechanism.%20For%20example%2c%20the%20following%20code%20will%20compile%20and%20run%3a%0a1type%20MyString%20%3d%20String%3b%202fn%20main%28%29%20%7b%203%09let%20haha%3a%20MyString%20%3d%20String%3a%3afrom%28%26%2334%3bhaha%26%2334%3b%29%3b%204%09let%20hehe%3a%20String%20%3d%20MyString%3a%3afrom%28%26%2334%3bhehe%26%2334%3b%29%3b%205%7d%20%e2%80%9cnew%20type%e2%80%9d%20struct%20wrapping%20If%20aliasing%20is%20not%20ideal%2c%20try%20this%3a%0a1struct%20MyString%28String%29%3b%20%2f%2f%20a%20tuple%20Now%2c%20the%20following%20code%20will%20not%20compile%20since%20MyString%20and%20String%20are%20no%20longer%20interchangeable." aria-label=Tumblr><i class="fab fa-tumblr fa-lg" aria-hidden=true></i></a></li><li><a class=icon href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fwww.mrr1vfe.io%2fposts%2fstruct-enum%2f&t=Struct%2c%20Enum" aria-label="Hacker News"><i class="fab fa-hacker-news fa-lg" aria-hidden=true></i></a></li></ul></div><div id=actions-footer><a id=menu-toggle class=icon href=# onclick='return $("#nav-footer").toggle(),!1' aria-label=Menu><i class="fas fa-bars fa-lg" aria-hidden=true></i> Menu</a>
+<a id=toc-toggle class=icon href=# onclick='return $("#toc-footer").toggle(),!1' aria-label=TOC><i class="fas fa-list fa-lg" aria-hidden=true></i> TOC</a>
+<a id=share-toggle class=icon href=# onclick='return $("#share-footer").toggle(),!1' aria-label=Share><i class="fas fa-share-alt fa-lg" aria-hidden=true></i> share</a>
+<a id=top style=display:none class=icon href=# onclick='$("html, body").animate({scrollTop:0},"fast")' aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg" aria-hidden=true></i> Top</a></div></div></div><footer id=footer><div class=footer-left>Copyright &copy; 2022 Yi Chen</div><div class=footer-right><nav><ul><li><a href=/>Home</a></li><li><a href=/posts>Writings</a></li><li><a href=/tags>Tags</a></li><li><a href=/about>About</a></li><li><a href=https://archive.casouri.cat>BHL0388</a></li></ul></nav></div></footer></div></body><link rel=stylesheet href=/lib/font-awesome/css/all.min.css><script src=/lib/jquery/jquery.min.js></script>
 <script src=/js/main.js></script>
 <script src=/js/code-copy.js></script>
-<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]},svg:{fontCache:'global'}}</script>
-<script type=text/javascript id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script>
-</html>
+<script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]},svg:{fontCache:"global"}}</script><script type=text/javascript id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></html>
