@@ -30,7 +30,7 @@ partition = [[0, 3, 4], [1, 2]]
 Observe that `partition` has a length of 2, which implies that the $k$ for the K-means algorithm is 2. Each list in `partition` represents a cluster. Elements within each list is the corresponding index of that observation in the dataset. So, with respect to this `partition`, the first cluster has 3 elements, namely `[5, 6], [1, 0], [3, 3]`, and the second cluster contains `[6, 5]` and `[0, 1]`.
 
 ## Finding the centroids
-To calculate the centroids, we need information about the dataset and about the partition. The centroid for a cluster $C$ is the average of all observations in the clsuter, namely
+To calculate the centroids, we need information about the dataset and about the partition. The centroid for a cluster $C$ is the average of all observations in the cluster, namely
 $$ \mu = \frac{1}{|C|}\sum_{i \in C} x_i $$,
 where $x_i$ is the $i^\text{th}$ observation in the dataset.
 
@@ -48,12 +48,12 @@ def find_centroids(dataset: np.ndarray, partition: list) -> np.ndarray:
             u.append(np.mean(dataset[indices], axis=0))
     return np.array(u)
 ```
-Each centroid is stored in the list $u$ (which is returned as an numpy array). Note that the length of $u$ should equivalent to $k$.
+Each centroid is stored in the list $u$ (which is returned as an numpy array). Note that the length of $u$ should be equivalent to $k$.
 
 ## Finding the partition
-With the centroids calculated, we need to re-partition the dataset based on these (newly calculated) centroids. This process is observation-wise, which means for each observation in the dataset, we need to compare is to each of the centroids, which represent clusters in an one-to-one manner, and find to which centroid the observation is close. The observation will be assigned to the cluster that represented by the centroid.
+With the centroids calculated, we need to re-partition the dataset based on these (newly calculated) centroids. This process is observation-wise, which means for each observation in the dataset, we need to compare it to each of the centroids, which represent clusters in a one-to-one manner, and find to which centroid the observation is close. The observation will be assigned to the cluster that represented by the centroid.
 
-We could use the eclidian distance, i.e. `np.linalg.norm()`, to find the distance between an obervation to all centroids at the same time. Then, use the `np.argmin()` function to select the index of the least distance. This index will be the cluster index for this observation.
+We could use the Euclidean distance, i.e. `np.linalg.norm()`, to find the distance between an obervation to all centroids at the same time. Then, use the `np.argmin()` function to select the index of the least distance. This index will be the cluster index for this observation.
 ```python
 def new_partition(dataset: np.ndarray, u: np.ndarray) -> list:
     """
@@ -66,8 +66,8 @@ def new_partition(dataset: np.ndarray, u: np.ndarray) -> list:
     return partition
 ```
 ## Putting everything together
-K-means is an itertive algorithm. All we need to do is to put the first step and the second step in a for loop. Here, we hard coded the epoch number to 3. And we hard coded the initial partition. One, instead, can randomized the initial partition and run the algorithm to see which convergence has the best result. And one can check whether the loss of a new partition is improved significantly or not to determine if the algorithm should halt or not.
-```
+K-means is an iterative algorithm. All we need to do is to put the first step and the second step in a for loop. Here, we hard code the epoch number to 3. And we hard code the initial partition. One, instead, can randomize the initial partition and run the algorithm to see which convergence has the best result. And one can check whether the loss of a new partition is improved significantly or not to determine if the algorithm should halt or not.
+```python
 def kmeans(dataset: np.ndarray, partition: list):
     """
     K-means algorithm, k can be inferred from the shape of partition
