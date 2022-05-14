@@ -1,5 +1,5 @@
 ---
-title: k-means in python
+title: K-means in Python
 date: 2021-10-19
 category: notes
 tags:
