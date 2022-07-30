@@ -5,7 +5,7 @@ category: reading
 ---
 # Calculus
 ```
-Book: Spivak, Michael. "Calculus, Publish or Perish." Inc., Houston, Texas (1994).
+Spivak, Michael. "Calculus, Publish or Perish." Inc., Houston, Texas (1994).
 ```
-1. [Functions](/posts/spivak_chpt1)
-2. [Graphs](/posts/spivak_chpt2)
+1. [Functions](/posts/spivak_chpt1/)
+2. [Graphs](/posts/spivak_chpt2/)
