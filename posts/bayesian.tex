@@ -1,0 +1,51 @@
+% Created 2022-08-08 Mon 15:46
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 29.0.50 (Org mode 9.5.1)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
+
+\section{Building a model}
+\label{sec:orgbddc419}
+Designing a simple Bayesian model benefits from a design loop with 3 steps:
+\begin{enumerate}
+\item Data story: Motivate the model by narrating how the data might arise.
+\item Update: Educate your model by feeding it the data.
+\item Evaluate: All statistical models require supervision, leading to model revision.
+\end{enumerate}
+\subsection{Data story}
+\label{sec:org8671a31}
+Bayesian data analysis usually means producing a story for how the data came to be.
+Such a story may be descriptive, i.e. it specifies associations that can be used
+to predict outcomes, given observations.
+Or it may be causal, a theory of how some events produce other events.
+You can motivate your data story by trying to explain how each piece of data is
+born.
+\subsection{Update}
+\label{sec:org794646c}
+A Bayesian model begins with one set of plausibilities assigned to each possible
+parameters. These are the prior plausibilities. Then, it
+updates them in light of the data, to produce the posterior plausibilities. This
+udpating process is a kind of learning, called bayesian updating.
+\end{document}
