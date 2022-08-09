@@ -1,4 +1,4 @@
-% Created 2022-08-08 Mon 15:46
+% Created 2022-08-08 Mon 18:01
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -13,21 +13,22 @@
 \usepackage{capt-of}
 \usepackage{hyperref}
 \date{\today}
-\title{}
+\title{Bayesian Statistics}
 \hypersetup{
  pdfauthor={},
- pdftitle={},
+ pdftitle={Bayesian Statistics},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 29.0.50 (Org mode 9.5.1)}, 
+ pdfcreator={Emacs 28.1 (Org mode 9.5.2)}, 
  pdflang={English}}
 \begin{document}
 
+\maketitle
 \tableofcontents
 
 
 \section{Building a model}
-\label{sec:orgbddc419}
+\label{sec:orgdc0c2bd}
 Designing a simple Bayesian model benefits from a design loop with 3 steps:
 \begin{enumerate}
 \item Data story: Motivate the model by narrating how the data might arise.
@@ -35,7 +36,7 @@ Designing a simple Bayesian model benefits from a design loop with 3 steps:
 \item Evaluate: All statistical models require supervision, leading to model revision.
 \end{enumerate}
 \subsection{Data story}
-\label{sec:org8671a31}
+\label{sec:orgdee63bd}
 Bayesian data analysis usually means producing a story for how the data came to be.
 Such a story may be descriptive, i.e. it specifies associations that can be used
 to predict outcomes, given observations.
@@ -43,9 +44,94 @@ Or it may be causal, a theory of how some events produce other events.
 You can motivate your data story by trying to explain how each piece of data is
 born.
 \subsection{Update}
-\label{sec:org794646c}
+\label{sec:org304cf9a}
 A Bayesian model begins with one set of plausibilities assigned to each possible
 parameters. These are the prior plausibilities. Then, it
 updates them in light of the data, to produce the posterior plausibilities. This
-udpating process is a kind of learning, called bayesian updating.
+updating process is a kind of learning, called Bayesian updating.
+\subsection{Evaluate}
+\label{sec:org064aaba}
+The model's certainty is no guarantee that the model is a good one. Models of
+all sorts can be very confident about an inference, even when the model is
+seriously misleading.
+\section{Components of the model}
+\label{sec:org1ff6b47}
+\begin{enumerate}
+\item The number of ways each conjecture could produce an observation
+\item The accumulated number of ways each conjecture could produce the entire data
+\item The initial plausibility of each conjectured cause of the data
+\end{enumerate}
+\subsection{Variables}
+\label{sec:org0fcdb74}
+\begin{description}
+\item[{Variables}] Symbols that can take on different values.
+\end{description}
+There could be variables for things we wish to infer and things we might observe.
+Unobserved variables are usually called parameters. We want to infer parameters
+from the other (observed) variables.
+\subsection{Definitions}
+\label{sec:orgf72be6d}
+We need to define the variables. In defining each, we build a model that relates
+the variables to one another.
+\subsubsection{Observed variables}
+\label{sec:org4c50e9b}
+\begin{description}
+\item[{Likelihood}] A distribution function assigned to an ovserved variable.
+\end{description}
+
+For the count of water \(W\) and land \(L\), we define how plausible any
+combiniation of \(W\) and \(L\) would be, for a specific value of \(p\). If we assume
+that each toss is independent of the other tosses and the probability of \(W\) is
+the same on every toss, we have
+$$
+Pr(W, L | p) = \frac{(W + L)!}{W!L!}p^W(1-p)^L.
+$$
+For example, \(P(W=6, L=4 | p=0.5) = 0.164\). This value, 0.164, is the relative
+number of ways to get six water, holding \(p\) at 0.5 and \(N = W + L\) at nine.
+\subsubsection{Unobserved variables}
+\label{sec:orgfc23b8f}
+For every parameter you intend your Bayesian machine to consider, you must
+provide a distribution of prior plausibility, its prior. A Bayesian machine must
+have an initial plausibility assignmnet for each possible value of the
+parameter, and these initial assignments do useful work.
+Finding the priors are both engineering assumptions and scientific assumption.
+\begin{itemize}
+\item engineering assumption, chosen to help the machine to learn
+\item scientific assumption, chosen to reflect what we know about a phenomenon
+\end{itemize}
+There is not law mandating we use only one prior. If you don't have a strong
+argument for any particular prior, then try different ones.
+\subsubsection{A model is born}
+\label{sec:orgfce0624}
+$$
+W \approx \textrm{Binomial}(N, p)
+$$
+where \(N = W + L\).
+$$
+p \approx \textrm{Uniform}(0, 1)
+$$
+\subsection{Making the model go}
+\label{sec:orgeb1dfeb}
+A Bayesian model can update all of the prior distributions to their purely
+logical consequences: the posterior distribution. This distribution contains the
+relative plausibility of different parameter values, conditional on the data and
+the model, denoted as \(Pr(p | W, L)\).
+\subsubsection{Bayes' theorem}
+\label{sec:org7cfe9e8}
+The joint probability of the data \(W\) and \(L\) and any particular value of \(p\) is
+$$
+Pr(W, L, p)= Pr(W, L | p) Pr(p), \quad 
+Pr(W, L, p)= Pr(p | W, L) Pr(W, L)
+$$
+$$
+Pr(p | W, L) = \frac{Pr(W, L | p)Pr(p)}{Pr(W, L)}.
+$$
+The probability of any particular value of \(p\), considering the data, is equal
+to the product of the relative plausibility of the data, conditional on \(p\) and
+the prior plausibility of \(p\), divided by \(Pr(W, L)\), the average probability of
+the data (evidence/average liklihood). The job of this term (evidence) is to
+standardize the posterior.
+$$
+Pr(W, L) = E_p(Pr(W, L | p)) = \int Pr(W, L | p) Pr(p) dp.
+$$
 \end{document}
