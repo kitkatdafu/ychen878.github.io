@@ -1,0 +1,41 @@
+#+TITLE: MCMC
+#+AUTHOR:
+#+DATE: 08-15-2022
+* About MCMC
+- The esitmation of posterior probability distributions using a stochastic process
+known as Markov chain Monte Carlo (MCMC).
+- We will be able to sample directly from the posterior.
+- MCMC requires more computation (takes longer to complete estimation).
+** Metropolis algorithm
+The metropolis algorihtm works whenever the probability of proposing a jump to
+$B$ from $A$ is equal to the probability of proposing $A$ from $B$, when the
+proposal distribution is symmetric.
+** Metropolis-Hastings algorithm
+- It allows asymmetric proposals.
+- Easier to handle parameters that have boundaries.
+- Generates savvy proposals that explore the posterior more efficiently. (We can
+  acquire an equally good image of the posterior distribution in fewer steps.)
+** Gibbs sampling
+- A variant of the Metropolis-Hastings algorithm.
+- It uses adaptive proposals
+  - The distribution of proposed parameter values adjusts itself intelligently, depending upon the prameter values at the moment.
+  - Adaptive proposals use conjugate paris, particular combinations of prior
+    distributions and likelihoods.
+  - Conjugate pairs have analytical solutions for the posterior distribution of
+    an individual parameter.
+*** High-dimensional problems
+- Some conjugate priors are actually pathological in shape.
+- As models become more complex and contain hundreds or thousands or tens of
+  thousands of parameters, both Metropolis and Gibbs sampling become shockeling
+  inefficnet.
+  - They tend to get stuck in small regions of the posterior for potentially a
+    long time.
+- When the number of parameters is large, two or more parameters are highly
+  correlated with one another in the posterior samples.
+  - High correlation means a narrow ridge of high probability combinations, and
+    both Metropolis and Gibbs make too many dumb proposals of where to go
+    next. So they get stuck.
+- When the number of dimension is high, the smapled points are in a thin, high
+  dimensional shell very far from the mode. This shell create very hard paths
+  fro a sampler to follow.
+

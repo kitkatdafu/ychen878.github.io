@@ -1,6 +1,6 @@
 ---
 title: Functions
-date: 2022-08-01
+date: 2022-08-15
 category: reading
 tags:
     - Calculus

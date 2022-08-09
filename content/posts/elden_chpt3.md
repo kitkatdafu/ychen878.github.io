@@ -1,6 +1,6 @@
 ---
 title: Linear Systems and Least Squares
-date: 2022-08-03
+date: 2022-08-17
 category: reading
 tags:
     - Matrix Methods

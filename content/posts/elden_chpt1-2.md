@@ -1,6 +1,6 @@
 ---
 title: Vectors and Matrices
-date: 2022-08-01
+date: 2022-08-15
 category: reading
 tags:
     - Matrix Methods
