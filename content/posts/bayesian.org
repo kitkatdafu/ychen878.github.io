@@ -1,6 +1,6 @@
 #+TITLE: Bayesian Statistics
 #+AUTHOR: 
-#+DATE: 08-15-2022
+#+DATE: <2022-10-01 Wed 19:15>
 
 * Building a model
 Designing a simple Bayesian model benefits from a design loop with 3 steps:

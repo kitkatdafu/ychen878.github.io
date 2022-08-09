@@ -1,6 +1,6 @@
 #+TITLE: MCMC
 #+AUTHOR:
-#+DATE: 08-15-2022
+#+DATE: <2022-10-01 Wed 19:15>
 * About MCMC
 - The esitmation of posterior probability distributions using a stochastic process
 known as Markov chain Monte Carlo (MCMC).
