@@ -2,7 +2,7 @@ baseURL = "https://www.mrr1vfe.io"
 languageCode = "en-us"
 title = "mrr1vfe"
 theme = "cactus"
-copyright = "Yi Chen"
+copyright = "Reid Chen"
 
 
 # Main menu which appears below site header.
@@ -72,7 +72,7 @@ weight = 4
     link = "https://github.com/ychen878"
   [[params.social]]
     name = "linkedin"
-    link = "https://www.linkedin.com/in/yi-chen-1601a3185/"
+    link = "https://www.linkedin.com/in/reid-chen-1601a3185/"
   [[params.social]]
     name = "email"
     link = "mrr1vfe@gmail.com"  # no need for "mailto:" in the head       disableInlineCSS: true
