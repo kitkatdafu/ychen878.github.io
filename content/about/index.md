@@ -8,3 +8,5 @@ I am a graduate student in the ECE department at the University of Wisconsin-Mad
 [CV](/about/files/CV.pdf)
 
 ![Lettie](/about/images/cats.jpeg)
+
+*my girlfriend is 招财*
