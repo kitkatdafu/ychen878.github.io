@@ -9,4 +9,4 @@ I am a graduate student in the ECE department at the University of Wisconsin-Mad
 
 ![Lettie](/about/images/cats.jpeg)
 
-*my girlfriend is 招财*
+*my girlfriend is 招财*.
