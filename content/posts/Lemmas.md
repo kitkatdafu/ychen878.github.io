@@ -1,3 +1,13 @@
+---
+title: Some useful lemmas
+date: 2022-12-16
+category: notes
+tags:
+    - math
+keywords:
+    - analysis
+---
+
 # Completeness
 
 ## $-\sup -A = \inf A$
