@@ -1,6 +1,6 @@
 ---
 title: Some useful lemmas
-date: 2022-12-06
+date: 2022-12-05
 category: notes
 tags:
     - math
