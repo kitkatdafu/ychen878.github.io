@@ -43,7 +43,7 @@ Let $a = \inf \{f(x) : x \in S\}$ and $b = \inf \{g(x) : x \in S\}$. By definiti
 ## $M(cf, [t_{k-1}, t_k]) = c \cdot M(f, [t_{k-1}, t_k])$
 
 $$\begin{align*}
-M(cf, [t_{k-1}, t_k]) &= \sup \{cf(x) : x \in [t_{k-1}, t_k]\}\\
-&= c \cdot \sup \{f(x) : x \in [t_{k-1}, t_k]\}, \quad \text{by Lemma 1.2},\\
+M(cf, [t_{k-1}, t_k]) &= \sup \{cf(x) : x \in [t_{k-1}, t_k]\}\\\\\\
+&= c \cdot \sup \{f(x) : x \in [t_{k-1}, t_k]\}, \quad \text{by Lemma 1.2},\\\\\\
 &= c \cdot M(f, [t_{k-1}, t_k])
 \end{align*}$$
