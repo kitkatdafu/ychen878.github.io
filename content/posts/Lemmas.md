@@ -80,19 +80,19 @@ For an ordered set $A$, let $A(i)$ denote the $i^\text{th}$ element of the set i
 Let $j$ and $k$ denote the index of $c$ and $d$ in $\hat{P}$.
 Observe that
 $$
-\begin{align}
+\begin{align*}
 U(g, \hat{P}) - L(g, \hat{ P}) &= \sum^{|\hat{P}| - 1}_{i=1} \{M(g, [\hat{P}(i), \hat{P}(i +1)]) -m(g, [\hat{P}(i), \hat{P}(i +1)])\} \cdot (\hat{P}(i + 1) - \hat{P}(i)) \\\\
 &= \sum^{j - 1}_{i=1} \{M(g, [\hat{P}(i), \hat{P}(i +1)]) -m(g, [\hat{P}(i), \hat{P}(i +1)]) \} \cdot (\hat{P}(i + 1) - \hat{P}(i)) \\\\
 &+ \sum^{k - 1}_{i=j} \{M(g, [\hat{P}(i), \hat{P}(i +1)]) -m(g, [\hat{P}(i), \hat{P}(i +1)]) \}\cdot (\hat{P}(i + 1) - \hat{P}(i)) \\\\
 &+ \sum^{|\hat{P}| - 1}_{i=k} \{M(g, [\hat{P}(i), \hat{P}(i +1)]) -m(g, [\hat{P}(i), \hat{P}(i +1)]) \} \cdot (\hat{P}(i + 1) - \hat{P}(i)).
-\end{align}
+\end{align*}
 $$
 Since $g$ is non-negative, $M(g, S) = \sup \{ g(x) : x \in S \} \geq 0$ for any $S \in [a, b]$. Hence, the first and the third summation in the equation above are non-negative as well. Therefore,
 $$
-\begin{align}
+\begin{align*}
 U(g, \hat{P}) - L(g, \hat{P}) &\geq \sum^{k - 1}_{i=j} \{M(g, [\hat{P}(i), \hat{P}(i +1)])-m(g, [\hat{P}(i), \hat{P}(i +1)]) \} \cdot (\hat{P}(i + 1) - \hat{P}(i))  \\\\
 &= U(g, P^*) - L(g, P^*).
-\end{align}
+\end{align*}
 $$
 Hence, $g$ is integrable on $[c, d]$.
 
