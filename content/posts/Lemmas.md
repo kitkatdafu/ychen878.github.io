@@ -38,63 +38,6 @@ So, $\inf cA = c \cdot A$ if $c > 0$.
 
 Let $a = \inf \{f(x) : x \in S\}$ and $b = \inf \{g(x) : x \in S\}$. By definition, $a \le f(x)$ for all $x \in S$ and $b \le g(x)$ for all $x \in S$. Therefore, $a + b \le f(x_{1}) + g(x_{2})$ for all $(x_{1}, x_{2}) \in S \times S$. This means that $a + b \le f(x) + g(x), \forall x \in S$. So, $a + b$ is a lower bound of $\{f(x) + g(x) : x \in S\}$. It should be no greater than the greatest lower bound.
 
-# Sequences
-
-# Continuity
-
-# Sequences and Series of Functions
-
-# Differentiation
-
-# Integration
-
-## 6.1 $M(cf, [t_{k-1}, t_k]) = c \cdot M(f, [t_{k-1}, t_k])$
-
-$$\begin{align*}
-M(cf, [t_{k-1}, t_k]) &= \sup \{cf(x) : x \in [t_{k-1}, t_k]\}\\\\
-&= c \cdot \sup \{f(x) : x \in [t_{k-1}, t_k]\}, \quad \text{by Lemma 1.2},\\\\
-&= c \cdot M(f, [t_{k-1}, t_k])
-\end{align*}$$
-
-## 6.2 $M(|f|, S) - m(|f|, S) \le M(f, S) - m(f, S)$
-
-TODO
-
-## 6.3 Non-negative continuous integrable function integrable on subinterval
-
-Let $g$ be a non-negative function that is integrable on $[a, b]$. Let $[c, d] \subset [a, b]$ and $[c, d] \ne \emptyset$.
-Since $g$ is continuous on a closed interval, $g$ is bounded.
-Since $g$ is integrable on $[a, b]$, for $\epsilon > 0$ , there exists a partition $P$ of $[a, b]$ such that
-$$
-U(g, P) - L(g, P) < \epsilon.
-$$
-Let $\hat{P} = P \cup \{ c, d \}$, $P^* = \hat{P} \cap [c, d]$. Then, it is expected that
-$$
-U(g, \hat{P}) < U(g, P) \quad \text{and} \quad L(g, \hat{P}) >L(g, P).
-$$
-Hence,
-$$
-U(g, \hat{P}) - L(g, \hat{ P}) < U(g, P) - L(g, P) < \epsilon.
-$$
-For an ordered set $A$, let $A(i)$ denote the $i^\text{th}$ element of the set in the ascending order.
-Let $j$ and $k$ denote the index of $c$ and $d$ in $\hat{P}$.
-Observe that
-$$
-\begin{align*}
-U(g, \hat{P}) - L(g, \hat{ P}) &= \sum^{|\hat{P}| - 1}_{i=1} \{M(g, [\hat{P}(i), \hat{P}(i +1)]) -m(g, [\hat{P}(i), \hat{P}(i +1)])\} \cdot (\hat{P}(i + 1) - \hat{P}(i)) \\\\
-&= \sum^{j - 1}_{i=1} \{M(g, [\hat{P}(i), \hat{P}(i +1)]) -m(g, [\hat{P}(i), \hat{P}(i +1)]) \} \cdot (\hat{P}(i + 1) - \hat{P}(i)) \\\\
-&+ \sum^{k - 1}_{i=j} \{M(g, [\hat{P}(i), \hat{P}(i +1)]) -m(g, [\hat{P}(i), \hat{P}(i +1)]) \}\cdot (\hat{P}(i + 1) - \hat{P}(i)) \\\\
-&+ \sum^{|\hat{P}| - 1}_{i=k} \{M(g, [\hat{P}(i), \hat{P}(i +1)]) -m(g, [\hat{P}(i), \hat{P}(i +1)]) \} \cdot (\hat{P}(i + 1) - \hat{P}(i)).
-\end{align*}
-$$
-Since $g$ is non-negative, $M(g, S) = \sup \{ g(x) : x \in S \} \geq 0$ for any $S \in [a, b]$. Hence, the first and the third summation in the equation above are non-negative as well. Therefore,
-$$
-\begin{align*}
-U(g, \hat{P}) - L(g, \hat{P}) &\geq \sum^{k - 1}_{i=j} \{M(g, [\hat{P}(i), \hat{P}(i +1)])-m(g, [\hat{P}(i), \hat{P}(i +1)]) \} \cdot (\hat{P}(i + 1) - \hat{P}(i))  \\\\
-&= U(g, P^*) - L(g, P^*).
-\end{align*}
-$$
-Hence, $g$ is integrable on $[c, d]$.
 
 ## 6.4 Larger interval has larger integral for non-negative function
 
