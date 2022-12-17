@@ -1,3 +1,11 @@
+---
+category: notes
+date: 2022-10-8
+tags:
+- ml
+title: Clustering
+---
+
 In unsupervised learning, there are no labels associated with features. Generally speaking, the ultimate goal of unsupervised learning is to find patterns and structures that help us to better understand data. Sometimes, we also use unsupervised learning to model a distribution. But we generally will not make predictions.
 
 There are 3 types of clustering

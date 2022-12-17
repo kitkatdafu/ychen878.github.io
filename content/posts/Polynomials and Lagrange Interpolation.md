@@ -1,3 +1,11 @@
+---
+category: notes
+date: 2022-9-14
+tags:
+- ml
+title: Lagrange Interpolation
+---
+
 A special class of models is polynomial:
 $$
 h_\theta(x) = \theta_d x^d + \theta_{d - 1}x^{d - 1}  + \cdots + \theta_1x + \theta_0.

@@ -1,3 +1,11 @@
+---
+category: notes
+date: 2022-11-30
+tags:
+- ml
+title: Perceptron Learning Algorithm
+---
+
 Given a dataset $\mathcal{D} = \{(\vec{x}_1, y_1), \cdots, (\vec{x}_N, y_N)\}$ and a hypothesis set $\mathcal{H}$, our learning algorithm $\mathcal{A}$ tries to learn a function $g \in \mathcal{H}$ that approximates the underlying, true function $f: \mathcal{X} \to \mathcal{Y}$, which generates the points in $\mathcal{D}$.
 
 ## Credit Card Approve Problem
