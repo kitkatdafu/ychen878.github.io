@@ -1,6 +1,6 @@
 ---
 category: notes
-date: 2022-10-8
+date: 2022-10-08
 tags:
 - ml
 title: Clustering
