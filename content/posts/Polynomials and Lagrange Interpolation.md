@@ -1,6 +1,6 @@
 ---
 category: notes
-date: 2022-9-14
+date: 2022-09-14
 tags:
 - ml
 title: Lagrange Interpolation
