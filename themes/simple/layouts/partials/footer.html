@@ -1,13 +1,24 @@
-<p>Copyright (c) {{ now.Format "2006"}} Yi Chen</p>
+<footer>
+  <p>Copyleft (ↄ) {{ now.Format "2006"}} Yi Chen</p>
+  <p><a href="mailto: yi.chen@wisc.edu">yi.chen@wisc.edu</a></p>
+</footer>
+
 <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']]
-  },
-  svg: {
-    fontCache: 'global'
-  }
-};
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      macros: {
+        vec: ["\\mathbf{#1}", 1],
+        vx: "\\vec{x}",
+        vw: "\\vec{w}",
+        sign: "\\textrm{sign}",
+        norm: ["\\left\\lVert#1\\right\\rVert", 1]
+      }
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
 </script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

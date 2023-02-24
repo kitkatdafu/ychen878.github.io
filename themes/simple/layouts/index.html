@@ -1,15 +1,11 @@
 {{ define "main" }}
 <div>
 
-  <h1>{{ .Site.Title }}</h1>
-  <a href="mailto: yi.chen@wisc.edu">yi.chen@wisc.edu</a>
-  <a href="https://github.com/ychen878">[GitHub]</a>
-  <a href="https://archive.casouri.cc">[BHL0388]</a>
+  <span id="name">{{ .Site.Title }}</span>
   <br>
 
-  {{ $profileImage := resources.Get "images/profile-young.jpg" }}
-  {{ $profileImage := $profileImage.Resize "200x200" }}
-  <img src="{{ $profileImage.RelPermalink }}" width="{{ $profileImage.Width }}" height="{{ $profileImage.Height }}">
+  {{ $profileImage := resources.Get "images/profile-draw.svg" }}
+  <img id="profile-img" src="{{ $profileImage.RelPermalink }}">
 
   <section id="about">
     <h2>About Me</h2>
@@ -18,7 +14,8 @@
       advised by Professor <a href="https://ramyakv.github.io">Ramya Korlakai Vinayak</a>.
       I am interested in the application of machine learning algorithms.
       I received my B.A. in Computer Sciences and Mathematics with Honors from the University of
-      Wisconsin-Madison as well. I use Emacs, but with Vim key bindings. I guess I am evil.
+      Wisconsin-Madison as well. <span class="redacted">I use Emacs, but with Vim key bindings. I guess I am
+        evil.</span>
     </p>
   </section>
 
@@ -32,4 +29,5 @@
       {{ end }}
     </ul>
   </section>
-  {{ end }}
+</div>
+{{ end }}

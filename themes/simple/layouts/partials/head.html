@@ -3,5 +3,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ $title := print .Site.Title " | " .Title }}
     {{ if .IsHome }}{{ $title = .Site.Title }}{{ end }}
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>{{ $title }}</title>
 </head>

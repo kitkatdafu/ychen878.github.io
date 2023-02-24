@@ -1,10 +1,11 @@
-<div>
+<header>
     <nav>
         {{ range .Site.Menus.main }}
-        <a href="{{ .URL }}">
-        {{ $text := print .Name | safeHTML }}
-        {{ $text }}
-        </a>
+        {{ $text := print .Name| safeHTML }}
+        <a href="{{ .URL }}">[{{$text}}]</a>
         {{ end }}
+        <br>
+        <a href="https://github.com/ychen878">[GitHub]</a>
+        <a href="https://archive.casouri.cc">[BHL0388]</a>
     </nav>
-</div>
+</header>
