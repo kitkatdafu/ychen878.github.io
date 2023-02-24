@@ -87,7 +87,6 @@ a:active {
     position: fixed;
     border-style: dotted;
     overflow: scroll;
-    overflow-x: hidden;
 }
 
 #profile-img {
