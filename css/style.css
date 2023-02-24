@@ -22,7 +22,6 @@ li {
 header {
     background-color: white;
     max-width: 500px;
-    min-width: 500px;
     text-align: right;
     top: -20px;
     right: 0px;
@@ -78,7 +77,6 @@ a:active {
 
 #content {
     max-width: 500px;
-    min-width: 500px;
     max-height: 80%;
     transform: translate(-50%, -50%);
     top: 50%;
@@ -90,8 +88,8 @@ a:active {
 }
 
 #profile-img {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
 }
 
 .redacted {
