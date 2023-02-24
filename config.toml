@@ -1,0 +1,18 @@
+baseURL = 'https://www.reidy.icu/'
+languageCode = 'en-us'
+title = 'Yi Chen'
+theme = 'simple'
+
+[menu]
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+[[menu.main]]
+name = "Notes"
+url = "/notes/"
+weight = 2
+[[menu.main]]
+name = "Tags"
+url = "/tags/"
+weight = 3
