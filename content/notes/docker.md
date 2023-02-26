@@ -59,3 +59,20 @@ The Images and the Containers are going to be on your VM. The images are pulled 
 `ssh USER@VM -L localhost:5000:localhost:300`
 client side listens to port 5000
 sshd redirects data to port 300 on the server side.
+
+# Container Orchestration
+
+Orchestration lets you deploy many cooperating containers across a cluster of Docker workers. Kubernetes is the most well known. Docker compose is a simpler too that lets you deploy cooperating containers to a single worker.
+
+```yaml
+services:
+  jupyter:
+    image: myimg
+    deploy:
+      replicas: 3
+```
+
+1. `docker compose up`: compose containers using the yaml file in the current directory.
+2. `docker compose ps`: show the containers created withe the yaml config file in the current directory.
+3. `docker compose logs`: show the outputs of these containers.
+4. `docker compose down`: remove composed containers.
