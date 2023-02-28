@@ -1,6 +1,7 @@
 ---
 title: "Docker"
 date: 2023-02-25T22:49:32-06:00
+tags: ["big data"]
 ---
 
 # Virtualization
