@@ -22,7 +22,7 @@
   <section id="recent-publications">
     <h2>Recent Publications</h2>
     <ul class="recent-publication-list">
-      {{ range first  5 .Site.Data.publications.list }}
+      {{ range first  3 .Site.Data.publications.list }}
 
       <li class="publication-item">
         <strong><a href="{{ .url }}">{{ .title }}</a></strong> <br/>
