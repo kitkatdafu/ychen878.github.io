@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div>
+  <section id="projects">
+    <h2>Projects</h2>
+    <ul class="project-list">
+      {{ range .Site.Data.projects.list }}
+
+      <li class="project-item">
+        <a href="{{ .url }}">{{ .name }}</a>: {{ .desc | markdownify }}
+      </li>
+
+      {{ end }}
+    </ul>
+  </section>
+</div>
+{{ end }}

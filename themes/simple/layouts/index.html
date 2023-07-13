@@ -4,28 +4,32 @@
   <span id="name">{{ .Site.Title }}</span>
   <br>
 
-  {{ $profileImage := resources.Get "images/profile-draw.svg" }}
-  <img id="profile-img" src="{{ $profileImage.RelPermalink }}">
+  <!-- {{ $profileImage := resources.Get "images/profile-draw.svg" }} -->
+  <!-- <img id="profile-img" src="{{ $profileImage.RelPermalink }}"> -->
 
   <section id="about">
     <h2>About Me</h2>
     <p>
-      I am a graduate student in the ECE department at the University of Wisconsin-Madison,
+      I am a first year Ph.D. student in the ECE department at the University of Wisconsin-Madison,
       advised by Professor <a href="https://ramyakv.github.io">Ramya Korlakai Vinayak</a>.
-      I am interested in the application of machine learning algorithms.
+      I am interested in the application of machine learning algorithms and optimization solvers.
       I received my B.A. in Computer Sciences and Mathematics with Honors from the University of
       Wisconsin-Madison as well. <span class="redacted">I use Emacs, but with Vim key bindings. I guess I am
         evil.</span>
     </p>
   </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <ul class="project-list">
-      {{ range .Site.Data.projects.list }}
-      <li class="project-item">
-        <a href="{{ .url }}">{{ .name }}</a>: {{ .desc | markdownify }}
+  <section id="recent-publications">
+    <h2>Recent Publications</h2>
+    <ul class="recent-publication-list">
+      {{ range first  5 .Site.Data.publications.list }}
+
+      <li class="publication-item">
+        <strong><a href="{{ .url }}">{{ .title }}</a></strong> <br/>
+        {{ .author }} <br/>
+        <em>{{ .venue }}</em>
       </li>
+
       {{ end }}
     </ul>
   </section>

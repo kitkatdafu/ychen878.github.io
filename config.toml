@@ -13,6 +13,14 @@ name = "Notes"
 url = "/notes/"
 weight = 2
 [[menu.main]]
+name = "Publications"
+url = "/publications/"
+weight = 3
+[[menu.main]]
+name = "Projects"
+url = "/projects/"
+weight = 4
+[[menu.main]]
 name = "Tags"
 url = "/tags/"
-weight = 3
+weight = 5

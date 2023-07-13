@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <title>Yi Chen | K-means in Python</title>
+</head><body>
+    <div id="content"><header>
+    <nav>
+        
+        
+        <a href="/">[Home]</a>
+        
+        
+        <a href="/notes/">[Notes]</a>
+        
+        
+        <a href="/publications/">[Publications]</a>
+        
+        
+        <a href="/tags/">[Tags]</a>
+        
+        <br>
+        <a href="https://github.com/ychen878">[GitHub]</a>
+        <a href="https://archive.casouri.cc">[BHL0388]</a>
+    </nav>
+</header>
+<h1>K-means in Python</h1>
+
+
+<i></i>
+<time datetime="2021-10-19">Oct 19, 2021</time>
+
+<i></i>
+
+
+<a href="https://ychen878.github.io/tags/ml">ml</a>
+
+
+
+<br><br>
+
+<p>There are two major steps in the K-means algorithm. The first one is to
+calculate the representatives (centroids) of a given partition. The
+second one is to find the partition based on the representatives.</p>
+<div id="outline-container-inputs" class="outline-3">
+<h3 id="inputs">
+Inputs
+</h3>
+<div id="outline-text-inputs" class="outline-text-3">
+<p>Suppose we have a dataset looks like this:</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dataset <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>],
+</span></span><span style="display:flex;"><span>                    [<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">5</span>],
+</span></span><span style="display:flex;"><span>                    [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>],
+</span></span><span style="display:flex;"><span>                    [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>],
+</span></span><span style="display:flex;"><span>                    [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>]])</span></span></code></pre></div>
+</div>
+<p>
+Each row in this dataset matrix is an observation and each column in
+this matrix represents a feature. So, in this example, we have 5 points
+from a plane. And we define partition in the following way:</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>partition <span style="color:#f92672">=</span> [[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>], [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>]]</span></span></code></pre></div>
+</div>
+<p>
+Observe that <code class="verbatim">partition</code> has a length of 2, which implies that the $k$
+for the K-means algorithm is 2. Each list in <code class="verbatim">partition</code> represents a
+cluster. Elements within each list is the corresponding index of that
+observation in the dataset. So, with respect to this <code class="verbatim">partition</code>, the
+first cluster has 3 elements, namely <code class="verbatim">[5, 6], [1, 0], [3, 3]</code>, and the
+second cluster contains <code class="verbatim">[6, 5]</code> and <code class="verbatim">[0, 1]</code>.</p>
+</div>
+</div>
+<div id="outline-container-finding-the-centroids" class="outline-3">
+<h3 id="finding-the-centroids">
+Finding the centroids
+</h3>
+<div id="outline-text-finding-the-centroids" class="outline-text-3">
+<p>To calculate the centroids, we need information about the dataset and
+about the partition. The centroid for a cluster $C$ is the average of
+all observations in the cluster, namely
+$$
+\mu = \frac{1}{|C|}\sum_{i \in C} x_i
+$$, where $x_i$ is the
+$i^\text{th}$ observation in the dataset.</p>
+<p>
+All we need to do is to calculate the mean (using <code class="verbatim">np.mean()</code> with
+<code class="verbatim">axis</code> set to 0) for each partition.</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find_centroids</span>(dataset: np<span style="color:#f92672">.</span>ndarray, partition: list) <span style="color:#f92672">-&gt;</span> np<span style="color:#f92672">.</span>ndarray:
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    find the centroids of the given partition
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    u <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> indices <span style="color:#f92672">in</span> partition:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> len(indices) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            u<span style="color:#f92672">.</span>append(np<span style="color:#f92672">.</span>zeros((dataset<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>], )))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            u<span style="color:#f92672">.</span>append(np<span style="color:#f92672">.</span>mean(dataset[indices], axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>array(u)</span></span></code></pre></div>
+</div>
+<p>
+Each centroid is stored in the list $u$ (which is returned as an numpy
+array). Note that the length of $u$ should be equivalent to $k$.</p>
+</div>
+</div>
+<div id="outline-container-finding-the-partition" class="outline-3">
+<h3 id="finding-the-partition">
+Finding the partition
+</h3>
+<div id="outline-text-finding-the-partition" class="outline-text-3">
+<p>With the centroids calculated, we need to re-partition the dataset based
+on these (newly calculated) centroids. This process is observation-wise,
+which means for each observation in the dataset, we need to compare it
+to each of the centroids, which represent clusters in a one-to-one
+manner, and find to which centroid the observation is close. The
+observation will be assigned to the cluster that represented by the
+centroid.</p>
+<p>
+We could use the Euclidean distance, i.e. <code class="verbatim">np.linalg.norm()</code>, to find
+the distance between an obervation to all centroids at the same time.
+Then, use the <code class="verbatim">np.argmin()</code> function to select the index of the least
+distance. This index will be the cluster index for this observation.</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">new_partition</span>(dataset: np<span style="color:#f92672">.</span>ndarray, u: np<span style="color:#f92672">.</span>ndarray) <span style="color:#f92672">-&gt;</span> list:
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    find the new partition based on u
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    partition <span style="color:#f92672">=</span> [[] <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(u<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>])]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i, point <span style="color:#f92672">in</span> enumerate(dataset):
+</span></span><span style="display:flex;"><span>        argmin <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>argmin(np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(point <span style="color:#f92672">-</span> u, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>        partition[argmin]<span style="color:#f92672">.</span>append(i)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> partition</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-putting-everything-together" class="outline-3">
+<h3 id="putting-everything-together">
+Putting everything together
+</h3>
+<div id="outline-text-putting-everything-together" class="outline-text-3">
+<p>K-means is an iterative algorithm. All we need to do is to put the first
+step and the second step in a for loop. Here, we hard code the epoch
+number to 3. And we hard code the initial partition. One, instead, can
+randomize the initial partition and run the algorithm to see which
+convergence has the best result. And one can check whether the loss of a
+new partition is improved significantly or not to determine if the
+algorithm should halt or not.</p>
+<div class="src src-python">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">kmeans</span>(dataset: np<span style="color:#f92672">.</span>ndarray, partition: list):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    K-means algorithm, k can be inferred from the shape of partition
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    epoch <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    losses <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;epoch&#34;</span>: [], <span style="color:#e6db74">&#34;loss&#34;</span>: []}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> epoch <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span>:
+</span></span><span style="display:flex;"><span>        epoch <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        u <span style="color:#f92672">=</span> find_centroids(dataset, partition)
+</span></span><span style="display:flex;"><span>        partition <span style="color:#f92672">=</span> new_partition(dataset, u)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">Final Centroids:&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(u)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Final Partition:&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i, indices <span style="color:#f92672">in</span> enumerate(partition):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">cluster #</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">:&#34;</span><span style="color:#f92672">.</span>format(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>), {tuple(dataset[index])
+</span></span><span style="display:flex;"><span>                                               <span style="color:#66d9ef">for</span> index <span style="color:#f92672">in</span> indices})</span></span></code></pre></div>
+</div>
+</div>
+</div>
+
+
+    </div><footer>
+  <p>Copyleft (ↄ) 2023 Yi Chen</p>
+  <p><a href="mailto: yi.chen@wisc.edu">yi.chen@wisc.edu</a></p>
+</footer>
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      macros: {
+        vec: ["\\mathbf{#1}", 1],
+        vx: "\\vec{x}",
+        vw: "\\vec{w}",
+        sign: "\\textrm{sign}",
+        norm: ["\\left\\lVert#1\\right\\rVert", 1],
+        st: "\\textrm{subject to:}"
+      }
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+
+</html>

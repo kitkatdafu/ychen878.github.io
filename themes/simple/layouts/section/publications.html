@@ -1,0 +1,18 @@
+{{ define "main" }}
+<div>
+  <section id="publications">
+    <h2>Publications</h2>
+    <ul class="publication-list">
+      {{ range .Site.Data.publications.list }}
+
+      <li class="publication-item">
+        <strong><a href="{{ .url }}">{{ .title }}</a></strong> <br/>
+        {{ .author }} <br/>
+        <em>{{ .venue }}</em>
+      </li>
+
+      {{ end }}
+    </ul>
+  </section>
+</div>
+{{ end }}
