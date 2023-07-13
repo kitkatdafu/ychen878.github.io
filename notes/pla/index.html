@@ -1,6 +1,8 @@
 <!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><link rel=icon type=image/x-icon href=/images/favicon.ico><title>Yi Chen | Perceptron Learning Algorithm</title></head><body><div id=content><header><nav><a href=/>[Home]</a>
 <a href=/notes/>[Notes]</a>
-<a href=/tags/>[Tags]</a><br><a href=https://github.com/ychen878>[GitHub]</a>
+<a href=/publications/>[Publications]</a>
+<a href=/projects/>[Projects]</a>
+<a href=/tags/>[Tags]</a><br><a href=https://github.com/kitkatdafu>[GitHub]</a>
 <a href=https://archive.casouri.cc>[BHL0388]</a></nav></header><h1>Perceptron Learning Algorithm</h1><i></i>
 <time datetime=2022-11-30>Nov 30, 2022</time>
 <i></i>
@@ -88,30 +90,25 @@ y_i\vw^T_f\vx_i \ge \min_ny_n\vw^T_f\vx_n > 0.
 step \(T\), we can use the inner product. The larger the inner product,
 the closer the two vectors are. The following derivation shows that we
 the algorithm runs from one iteration to the next, our learned line is
-getting closer and closer to the true one. \[
-\begin{align*}
+getting closer and closer to the true one. \[</p>\begin{align*}
 \vw_f\vw_T &= \vw_f(\vw_{T-1} + y_{n(t)}\vx_{n(t)})\\
 &= \vw_f\vx_{T-1} + y_{n(t)}\vw_f\vx_{n(t)} \\
 &> \vw_f\vw_{T-1}
-\end{align*}
-\] If you are careful enough, you would say that the magnitude of inner
+\end{align*}<p>\] If you are careful enough, you would say that the magnitude of inner
 product also depends on the magnitude of the vector. This is true, we
-would want \(\vec{w}_T\) to not grow too large as \(T\) goes large. \[
-\begin{align*}
+would want \(\vec{w}_T\) to not grow too large as \(T\) goes large. \[</p>\begin{align*}
 \norm{\vw_T}^2 &= \norm{\vw_{T-1} + y_{n(t)}\vx_{n(t)}}^2 \\
 &= \norm{\vw_{T-1}}^2 + 2y_{n(t)}\vw_{T-1}^T\vx_{n(t)} + \norm{y_{n(t)}\vx_{n(t)}}^2\\
 &\le \norm{\vw_{T-1}}^2 + \norm{y_{n(t)}\vx_{n(t)}}^2\\
 &= \norm{\vw_{T-1}}^2 + \norm{\vx_{n(t)}}^2\\
 &\le \norm{\vw_{T-1}}^2 + \max_n\norm{\vx_n}^2\\
-\end{align*}
-\] With this bound, suppose our \(\vw_0\) is the zero vector, then \[
+\end{align*}<p>\] With this bound, suppose our \(\vw_0\) is the zero vector, then \[
 \norm{\vw_T}^2 \le \norm{\vw_0}^2 + TR^2 = TR^2
 \] where \(R^2 = \max_n \norm{\vx_n}^2\) (Consider \(R\) as the radius
 of the dataset). Let
 \(\rho = \min_n y_n \frac{\vw_f^T}{\norm{\vw_f}}\vx_n\) (closet distance
 between \(\vx\) and \(\vw_f\), or margin) Hence, the normalized inner
-product has the following property: \[
-\begin{align*}
+product has the following property: \[</p>\begin{align*}
 \frac{\vw^T_f}{\norm{\vw_f}}\frac{\vw_T}{\norm{\vw_T}} &\ge \frac{\vw^T_f}{\norm{\vw_f}}\frac{\vw_T}{\sqrt{TR^2}}\\
 &= \frac{\vw^T_f}{\norm{\vw_f}}\frac{\vw_T}{\sqrt{T}R}\\
 &= \frac{1}{\sqrt{T}R}\frac{\vw^T_f}{\norm{\vw_f}}\vw_T\\
@@ -119,8 +116,7 @@ product has the following property: \[
 &= \frac{1}{\sqrt{T}R}\frac{\vw^T_f}{\norm{\vw_f}}(y_{n(0)}\vx_{n(0)} + y_{n(1)}\vx_{n(1)} + \cdots + y_{n(T-1)}\vx_{n(T-1)})\\
 &\ge \frac{1}{\sqrt{T}R}T\rho\\
 &= \frac{\sqrt{T}\rho}{R}.\\
-\end{align*}
-\] When normalized \(\vw_T\) is equivalent as the normalized \(\vw_f\),
+\end{align*}<p>\] When normalized \(\vw_T\) is equivalent as the normalized \(\vw_f\),
 their inner product would be 1, So, \[
 1 \ge \frac{\sqrt{T}\rho}{R}.
 \] Hence, \[
