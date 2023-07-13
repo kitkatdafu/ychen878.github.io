@@ -3,7 +3,7 @@
     {
       "title": "Learning Preference Distributions From Pairwise Comparisons",
       "author": "Gokcan Tatli, Yi Chen, Ramya Korlakai Vinayak",
-      "url": "publications/pdfs/cosmoc23.pdf",
+      "url": "https://www.deepneural.network/publications/pdfs/cosmoc23.pdf",
       "venue": "9th International Workshop on Computational Social Choice (COMSOC 2023)"
     },
     {
@@ -21,13 +21,13 @@
     {
       "title": "GANnima",
       "author": "Yi Chen",
-      "url": "publications/pdfs/gannima.pdf",
+      "url": "https://www.deepneural.network/publications/pdfs/gannima.pdf",
       "venue": "0th Conference on Meme Information Processing Systems (MemeIPS)"
     },
     {
       "title": "Trust Me Bro",
       "author": "Yi Chen",
-      "url": "publications/pdfs/trust_me_bro.pdf",
+      "url": "https://www.deepneural.network/publications/pdfs/trust_me_bro.pdf",
       "venue": "0th Conference on Meme Information Processing Systems (MemeIPS)"
     }
   ]
