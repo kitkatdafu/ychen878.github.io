@@ -13,16 +13,16 @@
       "venue": "9th International Workshop on Computational Social Choice (COMSOC 2023)"
     },
     {
-      "title": "Crowdsourced Clustering via Active Querying: Practical Algorithm with Theoretical Guarantees",
-      "author": "Yi Chen, Ramya Korlakai Vinayak, Babak Hassibi",
-      "url": "",
-      "venue": "AI & HCI Workshop at the 40th International Conference on Machine Learning (ICML 2023)"
-    },
-    {
       "title": "Learning Populations of Preferences via Pairwise Comparison Queries",
       "author": "Gokcan Tatli, Yi Chen, Ramya Korlakai Vinayak",
       "url": "",
       "venue": "MFPL Workshop at the 40th International Conference on Machine Learning (ICML 2023)"
+    },
+    {
+      "title": "Crowdsourced Clustering via Active Querying: Practical Algorithm with Theoretical Guarantees",
+      "author": "Yi Chen, Ramya Korlakai Vinayak, Babak Hassibi",
+      "url": "",
+      "venue": "AI & HCI Workshop at the 40th International Conference on Machine Learning (ICML 2023)"
     },
     {
       "title": "GANnima",
