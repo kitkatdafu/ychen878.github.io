@@ -1,6 +1,12 @@
 {
   "list": [
     {
+      "title": "Learning Populations of Preferences via Pairwise Comparison Queries",
+      "author": "Gokcan Tatli, Yi Chen, Ramya Korlakai Vinayak",
+      "url": "https://www.deepneural.network/publications/pdfs/aistats24.pdf",
+      "venue": "The 27th International Conference on Artificial Intelligence and Statistics (AISTATS 2024)"
+    },
+    {
       "title": "Crowdsourced Clustering via Active Querying: Practical Algorithm with Theoretical Guarantees",
       "author": "Yi Chen, Ramya Korlakai Vinayak, Babak Hassibi",
       "url": "https://www.deepneural.network/publications/pdfs/hcomp23.pdf",
