@@ -1,0 +1,145 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><link rel=icon type=image/x-icon href=/images/favicon.ico><title>Yi Chen | Nuclear Norm via SDP</title></head><body><div id=content><header><nav><a href=/>[Home]</a>
+<a href=/notes/>[Notes]</a>
+<a href=/publications/>[Publications]</a>
+<a href=/projects/>[Projects]</a>
+<a href=/tags/>[Tags]</a><br><a href=https://github.com/kitkatdafu>[GitHub]</a>
+<a href=https://archive.casouri.cc>[BHL0388]</a></nav></header><h1>Nuclear Norm via SDP</h1><i></i>
+<time datetime=2023-03-02>Mar 2, 2023</time>
+<i></i>
+<a href=https://ychen878.github.io/tags/ml>ml</a><br><br><p>:PROPERTIES:
+:CUSTOM_ID: matrix-norm
+:END:</p><h1 id=matrix-norms>Matrix norms</h1><p>Given a matrix $X \in \mathbb{R}^{m \times n}$, $\sigma_{i}(X)$ denotes the $i$-th largest singular value of $X$ and is equal to the square root of the $i$-th largest eigenvalue of $XX&rsquo;$. The rank of $X$, denoted as $\mathrm{rank}(X) = r$ is the number of non-zero singular values.</p><h2 id=inner-product>Inner Product</h2><p>Given $X, Y \in \mathbb{R}^{m \times n}$, the inner product between $X$ and $Y$, denoted by $\langle X, Y\rangle$, is defined as
+$$
+\langle X, Y \rangle := \mathrm{Tr}(X&rsquo;Y) = \sum_{i=1}^m \sum_{j=1}^n X_{ij}Y_{ij} = \mathrm{Tr}(Y&rsquo;X).
+$$</p><h2 id=frobenius-norm>Frobenius Norm</h2><p>The norm associated with the inner product is called Frobenius norm:
+$$
+\norm{X}<em>{F} := \sqrt{ \langle X, X \rangle } = \sqrt{ \mathrm{Tr}(X&rsquo;X) } = \sqrt{ \sum</em>{i=1}^m \sum_{j=1}^n X^2_{ij} }.
+$$
+The Frobenius norm of a matrix $X$ is also equal to the square root of the sum of the squares of the singular values of $X$:
+$$
+\begin{align}
+\norm{X}<em>{F} &= \sqrt{ \mathrm{Tr}(X&rsquo;X) } \
+&= \sqrt{ Tr(UDV&rsquo;VD&rsquo;U) } \
+&= \sqrt{ \mathrm{Tr}(UDD&rsquo;U&rsquo;) } \
+&= \sqrt{ \mathrm{Tr}(DD&rsquo;U&rsquo;U) } \
+&= \norm{D}</em>{F} \
+&= \sqrt{ \sum_{i=1}^r \sum_{j=1}^r D_{ij}^2} \
+&= \sqrt{ \sum_{i=1}^r \sigma_{i}(X)^2}.
+\end{align}
+$$</p><h2 id=operator-norm-induced-2-norm-spectral-norm>Operator Norm, Induced 2-norm, Spectral Norm</h2><p>The operator norm of a matrix is the largest singular value
+$$
+\norm{X} := \sigma_{1}(X).
+$$</p><h2 id=nuclear-norm>Nuclear Norm</h2><p>The nuclear norm of a matrix is the sum of its singular values:
+$$
+\norm{X}<em>{*} := \sum</em>{i=1}^r \sigma_{i}(X).
+$$</p><h1 id=dual-norms>Dual Norms</h1><p>For any given norm $\norm{}<em>{?}$ in an inner product space, there exists a dual norm $\norm{}</em>{d}$ defined as
+$$
+\norm{X}<em>{d} := \sup { \mathrm{Tr}(X&rsquo;Y) : \norm{Y} \leq 1 }.
+$$
+Moreover, the dual norm of the operator norm/induced 2-norm/spectral norm is the nuclear norm. That is,
+$$
+\norm{X}</em>{*} = \sup { \mathrm{Tr}(X&rsquo;Y) : \norm{Y} \leq 1}.
+$$</p><h3 id=proof>Proof</h3><p>We first use the fact that given a matrix $X \in \mathbb{R}^{m \times n}$ and $t > 0$,
+$$
+\norm{X} \leq t \iff t^2I_{m} - XX&rsquo; \succeq 0.
+$$
+This is because
+$$
+\norm{X}^2 \leq t^2 \iff \sigma_{1}(X)^2 = \lambda_{1}(XX&rsquo;) \leq t^2 \iff 0 \leq \lambda_{i}(XX&rsquo;) \leq t^2 \iff t^2I_{m} - XX&rsquo; \succeq 0.
+$$
+Using Schur&rsquo;s complement,
+$$
+\norm{X} \leq t \iff t^2I_{m} - XX&rsquo; \succeq 0 \iff \begin{bmatrix}
+tI_{m} & X \
+X&rsquo; & tI_{n}
+\end{bmatrix} \succeq 0.
+$$
+This mean that we find the value of $\norm{X}$ via optimization (SDP):
+$$
+\norm{X} = \inf { t : \begin{bmatrix}
+tI_{m} & X \
+X&rsquo; & tI_{n}
+\end{bmatrix} \succeq 0 }.
+$$
+We can rewrite the definition of dual norm
+$$
+\norm{X}<em>{d} := \sup { \mathrm{Tr}(X&rsquo;Y) : \norm{Y} \leq 1}
+$$
+as
+$$
+\begin{align}
+\norm{X}</em>{d} := \sup_{Y} &\quad \mathrm{Tr}(X&rsquo;Y) \
+\mathrm{s.t.} &\quad \norm{Y} \leq 1.
+\end{align}
+$$
+Now, let $X = UDV&rsquo;$ be the singular value decomposition of $X$ whose rank is $r$. By definition
+$$
+U \in \mathbb{R}^{m \times r}, D \in \mathbb{R}^{r \times r}, V \in \mathbb{R}^{n \times r}.
+$$
+Let $Y := UV&rsquo;$. Then,
+$$
+\norm{Y} = \norm{UV&rsquo;} = \norm{U I_{r} V&rsquo;} = 1
+$$
+and
+$$
+\mathrm{Tr}(XY&rsquo;) = \mathrm{Tr}(UDV&rsquo;VU&rsquo;) = \mathrm{Tr}(UDU&rsquo;) = \mathrm{Tr}(D) = \norm{X}<em>{*}.
+$$
+This means that $Y := UV&rsquo;$ is feasible for the optimization model above. If $Y := UV&rsquo;$ is the optimal solution, then $\norm{X}</em>{d} = \norm{X}<em>{*}$. If $Y := UV&rsquo;$ is not the optimal solution, then there exist other $Y$ such that $\mathrm{Tr}(X&rsquo;Y) > \norm{X}</em>{<em>}$. Hence,
+$$
+\norm{X}<em>d \geq \norm{X}</em>{</em>}.
+$$
+We now need to show that
+$$
+\norm{X}<em>{d} \leq \norm{X}</em>{<em>}.
+$$
+We first re-write the definition of dual form into a semi-definite program:
+$$
+\begin{align}
+\norm{X}<em>{d} := \sup</em>{Y} &\quad \mathrm{Tr}(X&rsquo;Y) \
+\mathrm{s.t.} &\quad \begin{bmatrix}
+I_{m} & X \
+X&rsquo; & I_{n}
+\end{bmatrix} \succeq 0.
+\end{align}
+$$
+The following program is the dual of the semi-definite program above:
+$$
+\begin{align}
+\inf_{W_{1}, W_{2}} &\quad\frac{1}{2} (\mathrm{Tr}(W_{1}) + \mathrm{Tr}(W_{2})) \ \
+\mathrm{s.t.} &\quad \begin{bmatrix}
+W_{1} & X \
+X&rsquo; & W_{2}
+\end{bmatrix} \succeq 0.
+\end{align}
+$$
+If $W_{1} := UDU&rsquo;$ and $W_{2} := VDV&rsquo;$. Then, $(W_{1}, W_{2})$ is feasible for the dual, since
+$$
+\begin{bmatrix}
+W_{1} & X \
+X&rsquo; & W_{2}
+\end{bmatrix} = \begin{bmatrix}
+U \
+V
+\end{bmatrix} D \begin{bmatrix}
+U \
+V
+\end{bmatrix}&rsquo; \succeq 0.
+$$
+Moreover,
+$$
+\mathrm{Tr}(W_{1}) = \mathrm{Tr}(W_{2}) = \mathrm{Tr}(D).
+$$
+Thus, the objective is
+$$
+\frac{1}{2}(\mathrm{Tr}(D) + \mathrm{Tr}(D)) = \mathrm{Tr}(D) = \norm{X}_{</em>}.
+$$
+Weather or not $(X, W_{1}, X_{2})$ is the optimal solution, we showed that
+$$
+\norm{X}<em>{*} \geq \norm{X}</em>{d}.
+$$
+Hence,
+$$
+\norm{X}<em>{*} = \norm{X}</em>{d}.
+$$
+This result shows that we can compute the nuclear norm via SDP.</p><h1 id=references>References</h1><pre tabindex=0><code>Recht, Benjamin, Maryam Fazel, and Pablo A. Parrilo. &#34;Guaranteed minimum-rank solutions of linear matrix equations via nuclear norm minimization.&#34; _SIAM review_ 52.3 (2010): 471-501.
+</code></pre></div><footer><p>Copyleft (ↄ) 2024 Yi Chen</p><p><a href="mailto: yi.chen@wisc.edu">yi.chen@wisc.edu</a></p></footer><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:[`\\left\\lVert#1\\right\\rVert`,1],st:"\\textrm{subject to:}"}},svg:{fontCache:"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>
