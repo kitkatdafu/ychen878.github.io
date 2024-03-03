@@ -1,3 +1,12 @@
+#+title: Nuclear Norm via SDP
+#+date: 2023-03-02
+#+category: notes
+#+tags: ml
+
+:PROPERTIES:
+:CUSTOM_ID: matrix-norm
+:END:
+
 # Matrix norms
 
 Given a matrix $X \in \mathbb{R}^{m \times n}$, $\sigma_{i}(X)$ denotes the $i$-th largest singular value of $X$ and is equal to the square root of the $i$-th largest eigenvalue of $XX'$. The rank of $X$, denoted as $\mathrm{rank}(X) = r$ is the number of non-zero singular values.
