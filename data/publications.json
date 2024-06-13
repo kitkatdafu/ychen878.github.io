@@ -1,18 +1,6 @@
 {
   "list": [
     {
-      "title": "PAL: Pluralistic Alignment Framework for Learning from Heterogeneous Preferences",
-      "author": "Daiwei Chen, Yi Chen, Aniket Rege, Ramya Korlakai Vinayak",
-      "url": "https://arxiv.org/pdf/2406.08469",
-      "venue": "arXiv preprint"
-    },
-    {
-      "title": "Pearls from Pebbles: Improved Confidence Functions for Auto-labeling",
-      "author": "Harit Vishwakarma, Yi Chen, Sui Jiet Tay, Satya Sai Srinath Namburi, Frederic Sala, Ramya Korlakai Vinayak",
-      "url": "https://arxiv.org/pdf/2404.16188",
-      "venue": "arXiv preprint"
-    },
-    {
       "title": "Learning Populations of Preferences via Pairwise Comparison Queries",
       "author": "Gokcan Tatli, Yi Chen, Ramya Korlakai Vinayak",
       "url": "https://www.deepneural.network/publications/pdfs/aistats24.pdf",
