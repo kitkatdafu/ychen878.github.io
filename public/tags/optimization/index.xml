@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Optimization on Yi Chen</title>
-    <link>http://localhost:1313/tags/optimization/</link>
-    <description>Recent content in Optimization on Yi Chen</description>
+    <title>optimization on Yi Chen</title>
+    <link>https://ychen878.github.io/tags/optimization/</link>
+    <description>Recent content in optimization on Yi Chen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Feb 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/optimization/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ychen878.github.io/tags/optimization/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>LP Duality</title>
-      <link>http://localhost:1313/notes/lp-duality/</link>
+      <link>https://ychen878.github.io/notes/lp-duality/</link>
       <pubDate>Tue, 28 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/lp-duality/</guid>
+      
+      <guid>https://ychen878.github.io/notes/lp-duality/</guid>
       <description>Estimating LP bounds Given an optimization problem $$ \begin{align} \max_{f, s} &amp;amp;\quad 12f + 9s \ \st &amp;amp;\quad 4f + 2s \leq 4800 \ &amp;amp;\quad f + s \leq 1750 \ &amp;amp;\quad 0 \leq f \leq 1000 \ &amp;amp;\quad 0 \leq s \leq 1500 \ \end{align} $$ Suppose the maximum profit is $p^\star$. How can we bound $p^\star$? The lower bound of $p^\star$ can be found by picking any feasible point (since maximization).</description>
     </item>
+    
   </channel>
 </rss>

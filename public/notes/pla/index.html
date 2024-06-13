@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<html><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -22,17 +22,13 @@
         <a href="/publications/">[Publications]</a>
         
         
-        <a href="/projects/">[Projects]</a>
-        
-        
         <a href="/tags/">[Tags]</a>
         
         <br>
-        <a href="https://github.com/kitkatdafu">[GitHub]</a>
+        <a href="https://github.com/ychen878">[GitHub]</a>
         <a href="https://archive.casouri.cc">[BHL0388]</a>
     </nav>
 </header>
-
 <h1>Perceptron Learning Algorithm</h1>
 
 
@@ -41,7 +37,9 @@
 
 <i></i>
 
-<a href="http://localhost:1313/tags/ml">ml</a>
+
+<a href="https://ychen878.github.io/tags/ml">ml</a>
+
 
 
 <br><br>
@@ -186,15 +184,15 @@ y_i\vw^T_f\vx_i \ge \min_ny_n\vw^T_f\vx_n &gt; 0.
 step \(T\), we can use the inner product. The larger the inner product,
 the closer the two vectors are. The following derivation shows that we
 the algorithm runs from one iteration to the next, our learned line is
-getting closer and closer to the true one. \[</p>
+getting closer and closer to the true one. \[
 \begin{align*}
 \vw_f\vw_T &amp;= \vw_f(\vw_{T-1} + y_{n(t)}\vx_{n(t)})\\
 &amp;= \vw_f\vx_{T-1} + y_{n(t)}\vw_f\vx_{n(t)} \\
 &amp;&gt; \vw_f\vw_{T-1}
 \end{align*}
-<p>\] If you are careful enough, you would say that the magnitude of inner
+\] If you are careful enough, you would say that the magnitude of inner
 product also depends on the magnitude of the vector. This is true, we
-would want \(\vec{w}_T\) to not grow too large as \(T\) goes large. \[</p>
+would want \(\vec{w}_T\) to not grow too large as \(T\) goes large. \[
 \begin{align*}
 \norm{\vw_T}^2 &amp;= \norm{\vw_{T-1} + y_{n(t)}\vx_{n(t)}}^2 \\
 &amp;= \norm{\vw_{T-1}}^2 + 2y_{n(t)}\vw_{T-1}^T\vx_{n(t)} + \norm{y_{n(t)}\vx_{n(t)}}^2\\
@@ -202,13 +200,13 @@ would want \(\vec{w}_T\) to not grow too large as \(T\) goes large. \[</p>
 &amp;= \norm{\vw_{T-1}}^2 + \norm{\vx_{n(t)}}^2\\
 &amp;\le \norm{\vw_{T-1}}^2 + \max_n\norm{\vx_n}^2\\
 \end{align*}
-<p>\] With this bound, suppose our \(\vw_0\) is the zero vector, then \[
+\] With this bound, suppose our \(\vw_0\) is the zero vector, then \[
 \norm{\vw_T}^2 \le \norm{\vw_0}^2 + TR^2 = TR^2
 \] where \(R^2 = \max_n \norm{\vx_n}^2\) (Consider \(R\) as the radius
 of the dataset). Let
 \(\rho = \min_n y_n \frac{\vw_f^T}{\norm{\vw_f}}\vx_n\) (closet distance
 between \(\vx\) and \(\vw_f\), or margin) Hence, the normalized inner
-product has the following property: \[</p>
+product has the following property: \[
 \begin{align*}
 \frac{\vw^T_f}{\norm{\vw_f}}\frac{\vw_T}{\norm{\vw_T}} &amp;\ge \frac{\vw^T_f}{\norm{\vw_f}}\frac{\vw_T}{\sqrt{TR^2}}\\
 &amp;= \frac{\vw^T_f}{\norm{\vw_f}}\frac{\vw_T}{\sqrt{T}R}\\
@@ -218,7 +216,7 @@ product has the following property: \[</p>
 &amp;\ge \frac{1}{\sqrt{T}R}T\rho\\
 &amp;= \frac{\sqrt{T}\rho}{R}.\\
 \end{align*}
-<p>\] When normalized \(\vw_T\) is equivalent as the normalized \(\vw_f\),
+\] When normalized \(\vw_T\) is equivalent as the normalized \(\vw_f\),
 their inner product would be 1, So, \[
 1 \ge \frac{\sqrt{T}\rho}{R}.
 \] Hence, \[
@@ -279,7 +277,7 @@ For \(t = 0, 1, \ldots\) 1. Find a (random) mistake of \(\vw_t\) called
 
 
     </div><footer>
-  <p>Copyleft (ↄ) 2024 Yi Chen</p>
+  <p>Copyleft (ↄ) 2023 Yi Chen</p>
   <p><a href="mailto: yi.chen@wisc.edu">yi.chen@wisc.edu</a></p>
 </footer>
 
