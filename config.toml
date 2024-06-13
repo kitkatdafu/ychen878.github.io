@@ -20,7 +20,3 @@ weight = 3
 name = "Projects"
 url = "/projects/"
 weight = 4
-[[menu.main]]
-name = "Tags"
-url = "/tags/"
-weight = 5
