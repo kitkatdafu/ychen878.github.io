@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>big data on Yi Chen</title>
-    <link>https://ychen878.github.io/tags/big-data/</link>
-    <description>Recent content in big data on Yi Chen</description>
+    <title>Big Data on Yi Chen</title>
+    <link>http://localhost:1313/tags/big-data/</link>
+    <description>Recent content in Big Data on Yi Chen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Feb 2023 22:51:15 -0600</lastBuildDate><atom:link href="https://ychen878.github.io/tags/big-data/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Feb 2023 22:51:15 -0600</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/big-data/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>RPC</title>
-      <link>https://ychen878.github.io/notes/rpc/</link>
+      <link>http://localhost:1313/notes/rpc/</link>
       <pubDate>Sat, 25 Feb 2023 22:51:15 -0600</pubDate>
-      
-      <guid>https://ychen878.github.io/notes/rpc/</guid>
-      <description>Networks Network Interface Controllers (NICs) can connect a computer to different physical mediums, such as Ethernet and Wi-Fi. Every NIC in the world has a unique MAC (media access control) address. It consists of 48 bits. Therefore, there are 28 trillion possible MAC addresses. Some devices randomly change their MAC address for privacy.
-You can use command ifconfig to check you network interface controller and its corresponding MAC address. There exists virtual interfaces as well.</description>
+      <guid>http://localhost:1313/notes/rpc/</guid>
+      <description>Networks Network Interface Controllers (NICs) can connect a computer to different physical mediums, such as Ethernet and Wi-Fi. Every NIC in the world has a unique MAC (media access control) address. It consists of 48 bits. Therefore, there are 28 trillion possible MAC addresses. Some devices randomly change their MAC address for privacy.&#xA;You can use command ifconfig to check you network interface controller and its corresponding MAC address. There exists virtual interfaces as well.</description>
     </item>
-    
     <item>
       <title>Docker</title>
-      <link>https://ychen878.github.io/notes/docker/</link>
+      <link>http://localhost:1313/notes/docker/</link>
       <pubDate>Sat, 25 Feb 2023 22:49:32 -0600</pubDate>
-      
-      <guid>https://ychen878.github.io/notes/docker/</guid>
-      <description>Virtualization Virtualization is the illusion of private resources, provided by the software. We have virtual memory, virtual machine (hardware), virtual machine (languages), virtual operating system (container).
-Each process using a virtual address space is not aware of other processes using memory (illusion of private memory). Virtualized resources include CPU, RAM, disks, network devices, etc. VMs rarely use all their allocated resources, so overbooking is possible. If each program is deployed to a different VM, operating system overheads dominate.</description>
+      <guid>http://localhost:1313/notes/docker/</guid>
+      <description>Virtualization Virtualization is the illusion of private resources, provided by the software. We have virtual memory, virtual machine (hardware), virtual machine (languages), virtual operating system (container).&#xA;Each process using a virtual address space is not aware of other processes using memory (illusion of private memory). Virtualized resources include CPU, RAM, disks, network devices, etc. VMs rarely use all their allocated resources, so overbooking is possible. If each program is deployed to a different VM, operating system overheads dominate.</description>
     </item>
-    
   </channel>
 </rss>
