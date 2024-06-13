@@ -1,12 +1,11 @@
 <!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><link rel=icon type=image/x-icon href=/images/favicon.ico><title>Yi Chen | K-means in Python</title></head><body><div id=content><header><nav><a href=/>[Home]</a>
 <a href=/notes/>[Notes]</a>
 <a href=/publications/>[Publications]</a>
-<a href=/projects/>[Projects]</a>
-<a href=/tags/>[Tags]</a><br><a href=https://github.com/kitkatdafu>[GitHub]</a>
+<a href=/projects/>[Projects]</a><br><a href=https://github.com/kitkatdafu>[GitHub]</a>
 <a href=https://archive.casouri.cc>[BHL0388]</a></nav></header><h1>K-means in Python</h1><i></i>
 <time datetime=2021-10-19>Oct 19, 2021</time>
 <i></i>
-<a href=https://ychen878.github.io/tags/ml>ml</a><br><br><p>There are two major steps in the K-means algorithm. The first one is to
+<a href=https://ychen878.github.io/tags/>ml</a><br><br><p>There are two major steps in the K-means algorithm. The first one is to
 calculate the representatives (centroids) of a given partition. The
 second one is to find the partition based on the representatives.</p><div id=outline-container-inputs class=outline-3><h3 id=inputs>Inputs</h3><div id=outline-text-inputs class=outline-text-3><p>Suppose we have a dataset looks like this:</p><div class="src src-python"><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>dataset <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>array([[<span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>6</span>],
 </span></span><span style=display:flex><span>                    [<span style=color:#ae81ff>6</span>, <span style=color:#ae81ff>5</span>],
