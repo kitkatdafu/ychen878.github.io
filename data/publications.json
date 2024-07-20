@@ -1,6 +1,18 @@
 {
   "list": [
     {
+      "title": "PabLO: Improving Semi-Supervised Learning with Pseudolabeling Optimization",
+      "author": "Harit Vishwakarma, Yi Chen, Satya Sai Srinath Namburi GNVV, Sui Jiet Tay, Ramya Korlakai Vinayak, Frederic Sala",
+      "url": "https://openreview.net/pdf?id=2Nd3qXcAnJ",
+      "venue": "ICML 2024 Workshop on Data-Centric Machine Learning Research"
+    },
+    {
+      "title": "Query Design for Crowdsourced Clustering: Effect of Cognitive Overload and Contextual Bias",
+      "author": "Yi Chen, Ramya Korlakai Vinayak",
+      "url": "https://openreview.net/pdf?id=0yvQsZQumt",
+      "venue": "ICML 2024 Workshop on Models of Human Feedback for AI Alignment"
+    },
+    {
       "title": "PAL: Pluralistic Alignment Framework for Learning from Heterogeneous Preferences",
       "author": "Daiwei Chen, Yi Chen, Aniket Rege, Ramya Korlakai Vinayak",
       "url": "https://arxiv.org/pdf/2406.08469",
