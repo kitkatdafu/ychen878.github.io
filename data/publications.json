@@ -1,6 +1,12 @@
 {
   "list": [
     {
+      "title": "Query Design for Crowdsourced Clustering: Effect of Cognitive Overload and Contextual Bias",
+      "author": "Yi Chen and Ramya Korlakai Vinayak",
+      "url": ".",
+      "venue": "The Web Conference 2025"
+    },
+    {
       "title": "Pearls from Pebbles: Improved Confidence Functions for Auto-labeling",
       "author": "Harit Vishwakarma, Yi Chen, Sui Jiet Tay, Satya Sai Srinath Namburi, Frederic Sala, Ramya Korlakai Vinayak",
       "url": "https://arxiv.org/pdf/2404.16188",
