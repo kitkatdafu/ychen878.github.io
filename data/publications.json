@@ -1,6 +1,12 @@
 {
   "list": [
     {
+      "title": "PAL: Pluralistic Alignment Framework for Learning from Heterogeneous Preferences",
+      "author": "Daiwei Chen, Yi Chen, Aniket Rege, Ramya Korlakai Vinayak",
+      "url": "https://arxiv.org/pdf/2406.08469",
+      "venue": "The Thirteenth International Conference on Learning Representations (ICLR 2025)"
+    },
+    {
       "title": "Query Design for Crowdsourced Clustering: Effect of Cognitive Overload and Contextual Bias",
       "author": "Yi Chen and Ramya Korlakai Vinayak",
       "url": ".",
@@ -23,12 +29,6 @@
       "author": "Yi Chen, Ramya Korlakai Vinayak",
       "url": "https://openreview.net/pdf?id=0yvQsZQumt",
       "venue": "ICML 2024 Workshop on Models of Human Feedback for AI Alignment"
-    },
-    {
-      "title": "PAL: Pluralistic Alignment Framework for Learning from Heterogeneous Preferences",
-      "author": "Daiwei Chen, Yi Chen, Aniket Rege, Ramya Korlakai Vinayak",
-      "url": "https://arxiv.org/pdf/2406.08469",
-      "venue": "The Thirteenth International Conference on Learning Representations (ICLR 2025)"
     },
     {
       "title": "Learning Populations of Preferences via Pairwise Comparison Queries",
