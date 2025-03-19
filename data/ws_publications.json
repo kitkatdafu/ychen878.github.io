@@ -1,0 +1,34 @@
+{
+  "list": [
+    {
+      "title": "PabLO: Improving Semi-Supervised Learning with Pseudolabeling Optimization",
+      "author": "Harit Vishwakarma, Yi Chen, Satya Sai Srinath Namburi GNVV, Sui Jiet Tay, Ramya Korlakai Vinayak, Frederic Sala",
+      "url": "https://openreview.net/pdf?id=2Nd3qXcAnJ",
+      "venue": "ICML 2024 Workshop on Data-Centric Machine Learning Research"
+    },
+    {
+      "title": "Query Design for Crowdsourced Clustering: Effect of Cognitive Overload and Contextual Bias",
+      "author": "Yi Chen, Ramya Korlakai Vinayak",
+      "url": "https://openreview.net/pdf?id=0yvQsZQumt",
+      "venue": "ICML 2024 Workshop on Models of Human Feedback for AI Alignment"
+    },
+    {
+      "title": "Learning Preference Distributions From Pairwise Comparisons",
+      "author": "Gokcan Tatli, Yi Chen, Ramya Korlakai Vinayak",
+      "url": "https://www.deepneural.network/publications/pdfs/comsoc23.pdf",
+      "venue": "9th International Workshop on Computational Social Choice (COMSOC 2023)"
+    },
+    {
+      "title": "Learning Populations of Preferences via Pairwise Comparison Queries",
+      "author": "Gokcan Tatli, Yi Chen, Ramya Korlakai Vinayak",
+      "url": "https://www.deepneural.network/publications/pdfs/mfpl23.pdf",
+      "venue": "MFPL Workshop at the 40th International Conference on Machine Learning (ICML 2023)"
+    },
+    {
+      "title": "Crowdsourced Clustering via Active Querying: Practical Algorithm with Theoretical Guarantees",
+      "author": "Yi Chen, Ramya Korlakai Vinayak, Babak Hassibi",
+      "url": "https://www.deepneural.network/publications/pdfs/aihci23.pdf",
+      "venue": "AI & HCI Workshop at the 40th International Conference on Machine Learning (ICML 2023)"
+    }
+  ]
+}

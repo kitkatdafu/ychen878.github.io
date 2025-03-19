@@ -1,0 +1,34 @@
+{
+  "list": [
+    {
+      "title": "Query Design for Crowdsourced Clustering: Effect of Cognitive Overload and Contextual Bias",
+      "author": "Yi Chen and Ramya Korlakai Vinayak",
+      "url": ".",
+      "venue": "The Web Conference 2025 (WWW2025), Oral"
+    },
+    {
+      "title": "PAL: Pluralistic Alignment Framework for Learning from Heterogeneous Preferences",
+      "author": "Daiwei Chen, Yi Chen, Aniket Rege, Ramya Korlakai Vinayak",
+      "url": "https://arxiv.org/pdf/2406.08469",
+      "venue": "The Thirteenth International Conference on Learning Representations (ICLR 2025)"
+    },
+    {
+      "title": "Pearls from Pebbles: Improved Confidence Functions for Auto-labeling",
+      "author": "Harit Vishwakarma, Yi Chen, Sui Jiet Tay, Satya Sai Srinath Namburi, Frederic Sala, Ramya Korlakai Vinayak",
+      "url": "https://arxiv.org/pdf/2404.16188",
+      "venue": "The Thirty-Eighth Annual Conference on Neural Information Processing Systems (NeurIPS 2024)"
+    },
+    {
+      "title": "Learning Populations of Preferences via Pairwise Comparison Queries",
+      "author": "Gokcan Tatli, Yi Chen, Ramya Korlakai Vinayak",
+      "url": "https://www.deepneural.network/publications/pdfs/aistats24.pdf",
+      "venue": "The 27th International Conference on Artificial Intelligence and Statistics (AISTATS 2024)"
+    },
+    {
+      "title": "Crowdsourced Clustering via Active Querying: Practical Algorithm with Theoretical Guarantees",
+      "author": "Yi Chen, Ramya Korlakai Vinayak, Babak Hassibi",
+      "url": "https://www.deepneural.network/publications/pdfs/hcomp23.pdf",
+      "venue": "The Eleventh AAAI Conference on Human Computation and Crowdsourcing (HCOMP 2023)"
+    }
+  ]
+}
