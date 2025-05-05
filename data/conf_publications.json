@@ -1,9 +1,15 @@
 {
   "list": [
     {
+      "title": "Rethinking Confidence and Thresholds in Pseudolabeling-based SSL",
+      "author": "Harit Vishwakarma, Yi Chen, Satya Sai Srinath Namburi, Sui Jiet Tay, Ramya Korlakai Vinayak, Frederic Sala",
+      "url": ".",
+      "venue": "The Forty-second International Conference on Machine Learning (ICML 2025)"
+    },
+    {
       "title": "Query Design for Crowdsourced Clustering: Effect of Cognitive Overload and Contextual Bias",
       "author": "Yi Chen and Ramya Korlakai Vinayak",
-      "url": ".",
+      "url": "https://dl.acm.org/doi/pdf/10.1145/3696410.3714587",
       "venue": "The Web Conference 2025 (WWW2025), Oral"
     },
     {
