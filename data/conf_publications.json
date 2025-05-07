@@ -1,6 +1,12 @@
 {
   "list": [
     {
+      "title": "Metric Learning in an RKHS",
+      "author": "Gokcan Tatli, Yi Chen, Blake Mason, Robert D Nowak, Ramya Korlakai Vinayak",
+      "url": ".",
+      "venue": "The 41st Conference on Uncertainty in Artificial Intelligence (UAI 2025)"
+    },
+    {
       "title": "Rethinking Confidence and Thresholds in Pseudolabeling-based SSL",
       "author": "Harit Vishwakarma, Yi Chen, Satya Sai Srinath Namburi, Sui Jiet Tay, Ramya Korlakai Vinayak, Frederic Sala",
       "url": ".",
