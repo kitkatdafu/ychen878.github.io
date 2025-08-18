@@ -96,4 +96,578 @@ Inputs
 &lt;p>
 Each row in this dataset matrix is an observation and each column in
 this matrix represents a feature. So, in this example, we have 5 points
-from a plane. And we define partition in the following way:&lt;/p></description></item></channel></rss>
+from a plane. And we define partition in the following way:&lt;/p></description></item><item><title/><link>https://ychen878.github.io/projects/archive/frontend/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/projects/archive/frontend/</guid><description>&lt;!DOCTYPE html>
+&lt;html lang="en">
+&lt;head>
+ &lt;meta charset="UTF-8">
+ &lt;meta name="viewport" content="width=device-width, initial-scale=1.0">
+ &lt;title>TTS WebSocket Test Client&lt;/title>
+ &lt;style>
+ body {
+ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ max-width: 800px;
+ margin: 0 auto;
+ padding: 20px;
+ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+ min-height: 100vh;
+ color: white;
+ }
+ 
+ .container {
+ background: rgba(255, 255, 255, 0.1);
+ backdrop-filter: blur(10px);
+ border-radius: 20px;
+ padding: 30px;
+ box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+ border: 1px solid rgba(255, 255, 255, 0.18);
+ }
+ 
+ h1 {
+ text-align: center;
+ margin-bottom: 30px;
+ background: linear-gradient(45deg, #fff, #f0f0f0);
+ -webkit-background-clip: text;
+ -webkit-text-fill-color: transparent;
+ font-size: 2.5em;
+ }
+ 
+ .input-group {
+ margin: 20px 0;
+ }
+ 
+ label {
+ display: block;
+ margin-bottom: 8px;
+ font-weight: 600;
+ }
+ 
+ input, textarea, select {
+ width: 100%;
+ padding: 12px;
+ border: none;
+ border-radius: 10px;
+ background: rgba(255, 255, 255, 0.2);
+ color: white;
+ font-size: 16px;
+ }
+ 
+ input::placeholder, textarea::placeholder {
+ color: rgba(255, 255, 255, 0.7);
+ }
+ 
+ textarea {
+ height: 120px;
+ resize: vertical;
+ }
+ 
+ .button-group {
+ display: flex;
+ gap: 15px;
+ margin: 20px 0;
+ }
+ 
+ button {
+ flex: 1;
+ padding: 12px 24px;
+ border: none;
+ border-radius: 10px;
+ font-size: 16px;
+ font-weight: 600;
+ cursor: pointer;
+ transition: all 0.3s ease;
+ }
+ 
+ button:hover {
+ transform: translateY(-2px);
+ }
+ 
+ .connect-btn {
+ background: linear-gradient(45deg, #4CAF50, #45a049);
+ color: white;
+ }
+ 
+ .disconnect-btn {
+ background: linear-gradient(45deg, #f44336, #da190b);
+ color: white;
+ }
+ 
+ .speak-btn {
+ background: linear-gradient(45deg, #2196F3, #0b7dda);
+ color: white;
+ }
+ 
+ .stop-btn {
+ background: linear-gradient(45deg, #FF9800, #e68900);
+ color: white;
+ }
+ 
+ .status {
+ padding: 15px;
+ margin: 20px 0;
+ border-radius: 10px;
+ text-align: center;
+ font-weight: 600;
+ }
+ 
+ .status.connected {
+ background: rgba(76, 175, 80, 0.3);
+ border: 2px solid #4CAF50;
+ }
+ 
+ .status.disconnected {
+ background: rgba(244, 67, 54, 0.3);
+ border: 2px solid #f44336;
+ }
+ 
+ .status.speaking {
+ background: rgba(33, 150, 243, 0.3);
+ border: 2px solid #2196F3;
+ animation: pulse 2s infinite;
+ }
+ 
+ @keyframes pulse {
+ 0%, 100% { opacity: 1; }
+ 50% { opacity: 0.7; }
+ }
+ 
+ .captions {
+ background: rgba(0, 0, 0, 0.5);
+ padding: 20px;
+ border-radius: 10px;
+ min-height: 100px;
+ max-height: 200px;
+ margin: 20px 0;
+ font-family: 'Courier New', monospace;
+ font-size: 18px;
+ line-height: 1.5;
+ overflow-y: auto;
+ overflow-x: hidden;
+ word-wrap: break-word;
+ word-break: break-word;
+ white-space: pre-wrap;
+ position: relative;
+ }
+ 
+ .current-char {
+ background: #FFD700;
+ color: #000;
+ padding: 2px 4px;
+ border-radius: 3px;
+ animation: highlight 0.5s ease;
+ display: inline;
+ }
+ 
+ @keyframes highlight {
+ from { background: #FF6B6B; }
+ to { background: #FFD700; }
+ }
+ 
+ .caption-char {
+ display: inline;
+ }
+ 
+ .log {
+ background: rgba(0, 0, 0, 0.3);
+ padding: 15px;
+ border-radius: 10px;
+ max-height: 200px;
+ overflow-y: auto;
+ font-family: 'Courier New', monospace;
+ font-size: 14px;
+ }
+ 
+ .log-entry {
+ margin: 5px 0;
+ padding: 5px;
+ border-left: 3px solid #2196F3;
+ padding-left: 10px;
+ }
+ &lt;/style>
+&lt;/head>
+&lt;body>
+ &lt;div class="container">
+ &lt;h1>🎤 TTS WebSocket Test Client&lt;/h1>
+ 
+ &lt;div class="input-group">
+ &lt;label for="serverUrl">WebSocket Server URL:&lt;/label>
+ &lt;input type="text" id="serverUrl" value="ws://localhost:8765" placeholder="ws://localhost:8765">
+ &lt;/div>
+ 
+ &lt;div class="button-group">
+ &lt;button id="connectBtn" class="connect-btn">Connect&lt;/button>
+ &lt;button id="disconnectBtn" class="disconnect-btn" disabled>Disconnect&lt;/button>
+ &lt;/div>
+ 
+ &lt;div id="status" class="status disconnected">Disconnected&lt;/div>
+ 
+ &lt;div class="input-group">
+ &lt;label for="textInput">Text to Speak:&lt;/label>
+ &lt;textarea id="textInput" placeholder="Enter text here... Try: 'Hello, this is a test of the text-to-speech system!'">&lt;/textarea>
+ &lt;/div>
+ 
+ &lt;div class="button-group">
+ &lt;button id="speakBtn" class="speak-btn" disabled>Speak Text&lt;/button>
+ &lt;button id="stopBtn" class="stop-btn" disabled>Stop&lt;/button>
+ &lt;/div>
+ 
+ &lt;div class="input-group">
+ &lt;label>Real-time Captions:&lt;/label>
+ &lt;div id="captions" class="captions">Captions will appear here...&lt;/div>
+ &lt;/div>
+ 
+ &lt;div class="input-group">
+ &lt;label>Debug Log:&lt;/label>
+ &lt;div id="log" class="log">&lt;/div>
+ &lt;/div>
+ &lt;/div>
+
+ &lt;script>
+ class TTSWebSocketClient {
+ constructor() {
+ this.socket = null;
+ this.audioContext = null;
+ this.isConnected = false;
+ this.isSpeaking = false;
+ this.currentAudio = null;
+ this.audioQueue = [];
+ this.isPlayingQueue = false;
+ this.currentCharIndex = 0;
+ this.currentText = '';
+ this.totalCaptionText = '';
+ this.captionOffset = 0;
+ 
+ this.initUI();
+ this.initAudioContext();
+ }
+ 
+ initUI() {
+ this.connectBtn = document.getElementById('connectBtn');
+ this.disconnectBtn = document.getElementById('disconnectBtn');
+ this.speakBtn = document.getElementById('speakBtn');
+ this.stopBtn = document.getElementById('stopBtn');
+ this.status = document.getElementById('status');
+ this.captions = document.getElementById('captions');
+ this.log = document.getElementById('log');
+ this.textInput = document.getElementById('textInput');
+ this.serverUrl = document.getElementById('serverUrl');
+ 
+ this.connectBtn.addEventListener('click', () => this.connect());
+ this.disconnectBtn.addEventListener('click', () => this.disconnect());
+ this.speakBtn.addEventListener('click', () => this.speakText());
+ this.stopBtn.addEventListener('click', () => this.stopSpeaking());
+ }
+ 
+ async initAudioContext() {
+ try {
+ this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+ this.logMessage('Audio context initialized');
+ } catch (error) {
+ this.logMessage('Error initializing audio context: ' + error.message);
+ }
+ }
+ 
+ connect() {
+ const url = this.serverUrl.value;
+ this.logMessage('Connecting to: ' + url);
+ 
+ try {
+ this.socket = new WebSocket(url);
+ 
+ this.socket.onopen = () => {
+ this.isConnected = true;
+ this.updateStatus('connected', 'Connected');
+ this.logMessage('Connected to WebSocket server');
+ 
+ // Send initialization message
+ this.socket.send(JSON.stringify({ text: ' ', flush: false }));
+ };
+ 
+ this.socket.onmessage = (event) => {
+ this.handleMessage(event.data);
+ };
+ 
+ this.socket.onclose = () => {
+ this.isConnected = false;
+ this.updateStatus('disconnected', 'Disconnected');
+ this.logMessage('Disconnected from server');
+ };
+ 
+ this.socket.onerror = (error) => {
+ this.logMessage('WebSocket error: ' + error);
+ };
+ 
+ } catch (error) {
+ this.logMessage('Connection error: ' + error.message);
+ }
+ }
+ 
+ disconnect() {
+ if (this.socket) {
+ this.socket.send(JSON.stringify({ text: '', flush: false }));
+ this.socket.close();
+ }
+ this.stopSpeaking();
+ }
+ 
+ async handleMessage(data) {
+ try {
+ const message = JSON.parse(data);
+ 
+ if (message.audio &amp;&amp; message.alignment) {
+ this.logMessage('Received audio chunk with alignment data');
+ // Add to queue instead of playing immediately
+ this.audioQueue.push({
+ audio: message.audio,
+ alignment: message.alignment
+ });
+ 
+ // Start playing queue if not already playing
+ if (!this.isPlayingQueue) {
+ this.playNextInQueue();
+ }
+ }
+ 
+ } catch (error) {
+ this.logMessage('Error handling message: ' + error.message);
+ }
+ }
+ 
+ async playNextInQueue() {
+ if (this.audioQueue.length === 0) {
+ this.isPlayingQueue = false;
+ this.updateStatus('connected', 'Connected');
+ this.isSpeaking = false;
+ return;
+ }
+ 
+ this.isPlayingQueue = true;
+ const audioItem = this.audioQueue.shift(); // Remove first item from queue
+ await this.playAudio(audioItem.audio, audioItem.alignment);
+ }
+ 
+ async playAudio(audioBase64, alignment) {
+ try {
+ // Stop any currently playing audio
+ if (this.currentAudio) {
+ this.currentAudio.stop();
+ this.currentAudio = null;
+ }
+ 
+ // Decode base64 audio
+ const binaryString = atob(audioBase64);
+ const bytes = new Uint8Array(binaryString.length);
+ for (let i = 0; i &lt; binaryString.length; i++) {
+ bytes[i] = binaryString.charCodeAt(i);
+ }
+ 
+ // Convert PCM16 to Float32Array for Web Audio API
+ const audioData = new Float32Array(bytes.length / 2);
+ const view = new DataView(bytes.buffer);
+ 
+ for (let i = 0; i &lt; audioData.length; i++) {
+ const sample = view.getInt16(i * 2, true); // little endian
+ audioData[i] = sample / 32768.0; // Convert to [-1, 1]
+ }
+ 
+ // Create audio buffer
+ const audioBuffer = this.audioContext.createBuffer(1, audioData.length, 44100);
+ audioBuffer.copyToChannel(audioData, 0);
+ 
+ // Create audio source
+ const source = this.audioContext.createBufferSource();
+ source.buffer = audioBuffer;
+ source.connect(this.audioContext.destination);
+ 
+ // Handle alignment for captions (adjust for cumulative text)
+ if (alignment.chars &amp;&amp; alignment.char_start_times_ms) {
+ this.showCaptions(alignment, this.captionOffset);
+ // Update caption offset for next chunk
+ this.captionOffset += alignment.chars.length;
+ }
+ 
+ // Set up audio completion handler BEFORE starting
+ source.onended = () => {
+ this.currentAudio = null;
+ // Play next item in queue after current finishes
+ setTimeout(() => {
+ this.playNextInQueue();
+ }, 50); // Small delay to prevent audio glitches
+ };
+ 
+ // Start playing
+ source.start();
+ this.currentAudio = source;
+ 
+ this.logMessage(`Playing audio chunk (${audioData.length} samples, ${alignment.chars ? alignment.chars.length : 0} chars)`);
+ 
+ } catch (error) {
+ this.logMessage('Error playing audio: ' + error.message);
+ // Continue with next item even if this one failed
+ setTimeout(() => {
+ this.playNextInQueue();
+ }, 100);
+ }
+ }
+ 
+ showCaptions(alignment, offset = 0) {
+ const chars = alignment.chars;
+ const startTimes = alignment.char_start_times_ms;
+ 
+ if (!chars || !startTimes) return;
+ 
+ // Build cumulative caption text
+ this.totalCaptionText += chars.join('');
+ 
+ // Create HTML for all caption text so far
+ let captionHTML = '';
+ for (let i = 0; i &lt; this.totalCaptionText.length; i++) {
+ const char = this.totalCaptionText[i];
+ // Handle different character types properly
+ if (char === ' ') {
+ captionHTML += `&lt;span id="char-${i}" class="caption-char">&amp;nbsp;&lt;/span>`;
+ } else if (char === '\n') {
+ captionHTML += `&lt;span id="char-${i}" class="caption-char">&lt;br>&lt;/span>`;
+ } else {
+ const escapedChar = char.replace(/[&lt;>&amp;"]/g, function(match) {
+ switch(match) {
+ case '&lt;': return '&amp;lt;';
+ case '>': return '&amp;gt;';
+ case '&amp;': return '&amp;amp;';
+ case '"': return '&amp;quot;';
+ default: return match;
+ }
+ });
+ captionHTML += `&lt;span id="char-${i}" class="caption-char">${escapedChar}&lt;/span>`;
+ }
+ }
+ 
+ this.captions.innerHTML = captionHTML;
+ 
+ // Animate character highlighting for this chunk only
+ startTimes.forEach((startTime, index) => {
+ setTimeout(() => {
+ const globalCharIndex = offset + index;
+ const charElement = document.getElementById(`char-${globalCharIndex}`);
+ if (charElement) {
+ // Remove previous highlighting
+ document.querySelectorAll('.current-char').forEach(el => {
+ el.classList.remove('current-char');
+ });
+ 
+ // Add current highlighting
+ charElement.classList.add('current-char');
+ 
+ // Scroll to keep current character visible within the captions box
+ const captionsBox = this.captions;
+ const charRect = charElement.getBoundingClientRect();
+ const boxRect = captionsBox.getBoundingClientRect();
+ 
+ // Check if character is outside visible area
+ if (charRect.bottom > boxRect.bottom || charRect.top &lt; boxRect.top) {
+ charElement.scrollIntoView({ 
+ behavior: 'smooth', 
+ block: 'center'
+ });
+ }
+ }
+ }, startTime);
+ });
+ }
+ 
+ speakText() {
+ const text = this.textInput.value.trim();
+ if (!text || !this.isConnected) return;
+ 
+ // Clear previous session state
+ this.stopSpeaking();
+ this.totalCaptionText = '';
+ this.captionOffset = 0;
+ this.audioQueue = [];
+ 
+ this.currentText = text;
+ this.isSpeaking = true;
+ this.updateStatus('speaking', 'Speaking...');
+ this.logMessage('Speaking: ' + text.substring(0, 50) + (text.length > 50 ? '...' : ''));
+ 
+ // Resume audio context if suspended
+ if (this.audioContext.state === 'suspended') {
+ this.audioContext.resume();
+ }
+ 
+ // Send text in chunks for streaming
+ const chunkSize = 50;
+ for (let i = 0; i &lt; text.length; i += chunkSize) {
+ const chunk = text.substring(i, i + chunkSize);
+ const isLast = i + chunkSize >= text.length;
+ 
+ setTimeout(() => {
+ if (this.socket &amp;&amp; this.isConnected) {
+ this.socket.send(JSON.stringify({
+ text: chunk,
+ flush: isLast
+ }));
+ }
+ }, i / chunkSize * 100); // Small delay between chunks
+ }
+ }
+ 
+ stopSpeaking() {
+ // Stop current audio
+ if (this.currentAudio) {
+ this.currentAudio.stop();
+ this.currentAudio = null;
+ }
+ 
+ // Clear audio queue
+ this.audioQueue = [];
+ this.isPlayingQueue = false;
+ this.isSpeaking = false;
+ 
+ // Reset caption state
+ this.totalCaptionText = '';
+ this.captionOffset = 0;
+ 
+ if (this.isConnected) {
+ this.updateStatus('connected', 'Connected');
+ } else {
+ this.updateStatus('disconnected', 'Disconnected');
+ }
+ 
+ this.captions.innerHTML = 'Captions will appear here...';
+ this.logMessage('Speech stopped');
+ }
+ 
+ updateStatus(type, message) {
+ this.status.className = `status ${type}`;
+ this.status.textContent = message;
+ 
+ // Update button states
+ this.connectBtn.disabled = this.isConnected;
+ this.disconnectBtn.disabled = !this.isConnected;
+ this.speakBtn.disabled = !this.isConnected || this.isSpeaking;
+ this.stopBtn.disabled = !this.isSpeaking;
+ }
+ 
+ logMessage(message) {
+ const timestamp = new Date().toLocaleTimeString();
+ const logEntry = document.createElement('div');
+ logEntry.className = 'log-entry';
+ logEntry.textContent = `[${timestamp}] ${message}`;
+ 
+ this.log.appendChild(logEntry);
+ this.log.scrollTop = this.log.scrollHeight;
+ 
+ // Keep only last 50 log entries
+ while (this.log.children.length > 50) {
+ this.log.removeChild(this.log.firstChild);
+ }
+ }
+ }
+ 
+ // Initialize client when page loads
+ window.addEventListener('load', () => {
+ const client = new TTSWebSocketClient();
+ });
+ &lt;/script>
+&lt;/body>
+&lt;/html></description></item></channel></rss>
