@@ -184,6 +184,16 @@
  border-left: 3px solid #2196F3;
  padding-left: 10px;
  }
+ 
+ .log-entry.timing {
+ border-left-color: #FF9800;
+ color: #FFD700;
+ }
+ 
+ .log-entry.performance {
+ border-left-color: #4CAF50;
+ color: #90EE90;
+ }
  &lt;/style>
 &lt;/head>
 &lt;body>
@@ -237,6 +247,12 @@
  this.currentText = '';
  this.totalCaptionText = '';
  this.captionOffset = 0;
+ 
+ // Timing tracking
+ this.firstChunkReceived = false;
+ this.chunkTimings = [];
+ this.totalChunks = 0;
+ this.chunksReceived = 0;
  
  this.initUI();
  this.initAudioContext();
@@ -313,14 +329,39 @@
  
  async handleMessage(data) {
  try {
+ const receiveTime = performance.now();
  const message = JSON.parse(data);
  
  if (message.audio &amp;&amp; message.alignment) {
- this.logMessage('Received audio chunk with alignment data');
+ // Track timing for first chunk
+ if (!this.firstChunkReceived) {
+ this.logTimingMessage(`First audio chunk received`, 'timing');
+ this.firstChunkReceived = true;
+ }
+ 
+ // Track individual chunk timing
+ this.chunksReceived++;
+ const chunkTiming = {
+ chunkNumber: this.chunksReceived,
+ receivedAt: receiveTime,
+ audioLength: message.audio.length,
+ charCount: message.alignment.chars ? message.alignment.chars.length : 0,
+ serverLatency: message.latency || null
+ };
+ this.chunkTimings.push(chunkTiming);
+ 
+ // Log chunk info with server latency if available
+ let chunkInfo = `Chunk ${this.chunksReceived}: ${chunkTiming.charCount} chars, ${(chunkTiming.audioLength / 1024).toFixed(1)}KB audio`;
+ if (message.latency !== undefined) {
+ chunkInfo += `, ${message.latency.toFixed(1)}ms server latency`;
+ }
+ this.logTimingMessage(chunkInfo, 'timing');
+ 
  // Add to queue instead of playing immediately
  this.audioQueue.push({
  audio: message.audio,
- alignment: message.alignment
+ alignment: message.alignment,
+ receivedAt: receiveTime
  });
  
  // Start playing queue if not already playing
@@ -339,6 +380,9 @@
  this.isPlayingQueue = false;
  this.updateStatus('connected', 'Connected');
  this.isSpeaking = false;
+ 
+ // Log final performance statistics
+ this.logPerformanceStats();
  return;
  }
  
@@ -349,6 +393,8 @@
  
  async playAudio(audioBase64, alignment) {
  try {
+ const playStartTime = performance.now();
+ 
  // Stop any currently playing audio
  if (this.currentAudio) {
  this.currentAudio.stop();
@@ -387,6 +433,10 @@
  this.captionOffset += alignment.chars.length;
  }
  
+ // Calculate audio processing time
+ const processingTime = performance.now() - playStartTime;
+ const audioDurationMs = (audioData.length / 44100) * 1000;
+ 
  // Set up audio completion handler BEFORE starting
  source.onended = () => {
  this.currentAudio = null;
@@ -400,7 +450,7 @@
  source.start();
  this.currentAudio = source;
  
- this.logMessage(`Playing audio chunk (${audioData.length} samples, ${alignment.chars ? alignment.chars.length : 0} chars)`);
+ this.logTimingMessage(`Audio decoded and started (${processingTime.toFixed(1)}ms processing, ${audioDurationMs.toFixed(0)}ms duration)`, 'performance');
  
  } catch (error) {
  this.logMessage('Error playing audio: ' + error.message);
@@ -409,6 +459,35 @@
  this.playNextInQueue();
  }, 100);
  }
+ }
+ 
+ logPerformanceStats() {
+ if (this.chunkTimings.length === 0) return;
+ 
+ const totalChars = this.chunkTimings.reduce((sum, chunk) => sum + chunk.charCount, 0);
+ const avgChunkSize = this.chunkTimings.reduce((sum, chunk) => sum + chunk.audioLength, 0) / this.chunkTimings.length;
+ 
+ // Calculate average server latency if available
+ const chunksWithLatency = this.chunkTimings.filter(chunk => chunk.serverLatency !== null);
+ const avgServerLatency = chunksWithLatency.length > 0 
+ ? chunksWithLatency.reduce((sum, chunk) => sum + chunk.serverLatency, 0) / chunksWithLatency.length
+ : null;
+ 
+ this.logTimingMessage(`🎯 PERFORMANCE SUMMARY:`, 'performance');
+ this.logTimingMessage(` Chunks received: ${this.chunkTimings.length}`, 'performance');
+ this.logTimingMessage(` Total characters: ${totalChars}`, 'performance');
+ this.logTimingMessage(` Avg chunk size: ${(avgChunkSize / 1024).toFixed(1)}KB`, 'performance');
+ 
+ if (avgServerLatency !== null) {
+ this.logTimingMessage(` Avg server latency: ${avgServerLatency.toFixed(1)}ms`, 'performance');
+ this.logTimingMessage(` Server generation rate: ${(totalChars / (avgServerLatency * this.chunkTimings.length / 1000)).toFixed(1)} chars/sec`, 'performance');
+ }
+ 
+ // Reset timing data for next request
+ this.chunkTimings = [];
+ this.chunksReceived = 0;
+ this.firstChunkReceived = false;
+ this.requestStartTime = null;
  }
  
  showCaptions(alignment, offset = 0) {
@@ -486,10 +565,15 @@
  this.captionOffset = 0;
  this.audioQueue = [];
  
+ // Reset timing tracking
+ this.firstChunkReceived = false;
+ this.chunkTimings = [];
+ this.chunksReceived = 0;
+ 
  this.currentText = text;
  this.isSpeaking = true;
  this.updateStatus('speaking', 'Speaking...');
- this.logMessage('Speaking: ' + text.substring(0, 50) + (text.length > 50 ? '...' : ''));
+ this.logMessage(`📤 Starting TTS request: "${text.substring(0, 50)}${text.length > 50 ? '...' : ''}" (${text.length} chars)`);
  
  // Resume audio context if suspended
  if (this.audioContext.state === 'suspended') {
@@ -498,6 +582,11 @@
  
  // Send text in chunks for streaming
  const chunkSize = 50;
+ const totalChunks = Math.ceil(text.length / chunkSize);
+ this.totalChunks = totalChunks;
+ 
+ this.logTimingMessage(`Sending ${totalChunks} text chunks to server...`, 'timing');
+ 
  for (let i = 0; i &lt; text.length; i += chunkSize) {
  const chunk = text.substring(i, i + chunkSize);
  const isLast = i + chunkSize >= text.length;
@@ -529,6 +618,11 @@
  this.totalCaptionText = '';
  this.captionOffset = 0;
  
+ // Reset timing data
+ this.chunkTimings = [];
+ this.chunksReceived = 0;
+ this.firstChunkReceived = false;
+ 
  if (this.isConnected) {
  this.updateStatus('connected', 'Connected');
  } else {
@@ -536,7 +630,7 @@
  }
  
  this.captions.innerHTML = 'Captions will appear here...';
- this.logMessage('Speech stopped');
+ this.logMessage('🛑 Speech stopped');
  }
  
  updateStatus(type, message) {
@@ -550,19 +644,23 @@
  this.stopBtn.disabled = !this.isSpeaking;
  }
  
- logMessage(message) {
+ logMessage(message, type = 'normal') {
  const timestamp = new Date().toLocaleTimeString();
  const logEntry = document.createElement('div');
- logEntry.className = 'log-entry';
+ logEntry.className = `log-entry ${type}`;
  logEntry.textContent = `[${timestamp}] ${message}`;
  
  this.log.appendChild(logEntry);
  this.log.scrollTop = this.log.scrollHeight;
  
- // Keep only last 50 log entries
- while (this.log.children.length > 50) {
+ // Keep only last 100 log entries
+ while (this.log.children.length > 100) {
  this.log.removeChild(this.log.firstChild);
  }
+ }
+ 
+ logTimingMessage(message, type = 'timing') {
+ this.logMessage(`⏱️ ${message}`, type);
  }
  }
  
