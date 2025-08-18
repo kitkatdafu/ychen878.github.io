@@ -197,7 +197,7 @@ class TTSWebSocketServer:
             "✅ Successfully loaded Edge TTS with native word boundary alignment!"
         )
 
-    async def handle_client(self, websocket, path):
+    async def handle_client(self, websocket):
         """Handle individual WebSocket client connections"""
         logger.info(f"New client connected from {websocket.remote_address}")
 
