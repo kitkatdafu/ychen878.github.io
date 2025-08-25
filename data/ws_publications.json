@@ -1,6 +1,12 @@
 {
   "list": [
     {
+      "title": "On the Scoring Functions for RAG-based Conformal Factuality",
+      "author": "Yi Chen, Caitlyn Heqi Yin, Sukrut Madhav Chikodikar, Ramya Korlakai Vinayak",
+      "url": "https://openreview.net/pdf?id=BYVo4s8AcE",
+      "venue": "ICML 2025 Workshop on Reliable and Responsible Foundation Models"
+    },
+    {
       "title": "PabLO: Improving Semi-Supervised Learning with Pseudolabeling Optimization",
       "author": "Harit Vishwakarma, Yi Chen, Satya Sai Srinath Namburi GNVV, Sui Jiet Tay, Ramya Korlakai Vinayak, Frederic Sala",
       "url": "https://openreview.net/pdf?id=2Nd3qXcAnJ",
