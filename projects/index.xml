@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Yi Chen</title><link>https://ychen878.github.io/projects/</link><description>Recent content on Yi Chen</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://ychen878.github.io/projects/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://ychen878.github.io/projects/archive/frontend/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/projects/archive/frontend/</guid><description>&lt;!DOCTYPE html>
-&lt;html lang="en">
-&lt;head>
- &lt;meta charset="UTF-8">
- &lt;meta name="viewport" content="width=device-width, initial-scale=1.0">
- &lt;title>TTS WebSocket Test Client&lt;/title>
- &lt;style>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Yi Chen</title><link>https://ychen878.github.io/projects/</link><description>Recent content on Yi Chen</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://ychen878.github.io/projects/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://ychen878.github.io/projects/archive/frontend/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/projects/archive/frontend/</guid><description>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+ &lt;meta charset="UTF-8"&gt;
+ &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+ &lt;title&gt;TTS WebSocket Test Client&lt;/title&gt;
+ &lt;style&gt;
  body {
  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
  max-width: 800px;
@@ -194,46 +194,46 @@
  border-left-color: #4CAF50;
  color: #90EE90;
  }
- &lt;/style>
-&lt;/head>
-&lt;body>
- &lt;div class="container">
- &lt;h1>🎤 TTS WebSocket Test Client&lt;/h1>
+ &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ &lt;div class="container"&gt;
+ &lt;h1&gt;🎤 TTS WebSocket Test Client&lt;/h1&gt;
  
- &lt;div class="input-group">
- &lt;label for="serverUrl">WebSocket Server URL:&lt;/label>
- &lt;input type="text" id="serverUrl" value="ws://localhost:8765" placeholder="ws://localhost:8765">
- &lt;/div>
+ &lt;div class="input-group"&gt;
+ &lt;label for="serverUrl"&gt;WebSocket Server URL:&lt;/label&gt;
+ &lt;input type="text" id="serverUrl" value="ws://localhost:8765" placeholder="ws://localhost:8765"&gt;
+ &lt;/div&gt;
  
- &lt;div class="button-group">
- &lt;button id="connectBtn" class="connect-btn">Connect&lt;/button>
- &lt;button id="disconnectBtn" class="disconnect-btn" disabled>Disconnect&lt;/button>
- &lt;/div>
+ &lt;div class="button-group"&gt;
+ &lt;button id="connectBtn" class="connect-btn"&gt;Connect&lt;/button&gt;
+ &lt;button id="disconnectBtn" class="disconnect-btn" disabled&gt;Disconnect&lt;/button&gt;
+ &lt;/div&gt;
  
- &lt;div id="status" class="status disconnected">Disconnected&lt;/div>
+ &lt;div id="status" class="status disconnected"&gt;Disconnected&lt;/div&gt;
  
- &lt;div class="input-group">
- &lt;label for="textInput">Text to Speak:&lt;/label>
- &lt;textarea id="textInput" placeholder="Enter text here... Try: 'Hello, this is a test of the text-to-speech system!'">&lt;/textarea>
- &lt;/div>
+ &lt;div class="input-group"&gt;
+ &lt;label for="textInput"&gt;Text to Speak:&lt;/label&gt;
+ &lt;textarea id="textInput" placeholder="Enter text here... Try: 'Hello, this is a test of the text-to-speech system!'"&gt;&lt;/textarea&gt;
+ &lt;/div&gt;
  
- &lt;div class="button-group">
- &lt;button id="speakBtn" class="speak-btn" disabled>Speak Text&lt;/button>
- &lt;button id="stopBtn" class="stop-btn" disabled>Stop&lt;/button>
- &lt;/div>
+ &lt;div class="button-group"&gt;
+ &lt;button id="speakBtn" class="speak-btn" disabled&gt;Speak Text&lt;/button&gt;
+ &lt;button id="stopBtn" class="stop-btn" disabled&gt;Stop&lt;/button&gt;
+ &lt;/div&gt;
  
- &lt;div class="input-group">
- &lt;label>Real-time Captions:&lt;/label>
- &lt;div id="captions" class="captions">Captions will appear here...&lt;/div>
- &lt;/div>
+ &lt;div class="input-group"&gt;
+ &lt;label&gt;Real-time Captions:&lt;/label&gt;
+ &lt;div id="captions" class="captions"&gt;Captions will appear here...&lt;/div&gt;
+ &lt;/div&gt;
  
- &lt;div class="input-group">
- &lt;label>Debug Log:&lt;/label>
- &lt;div id="log" class="log">&lt;/div>
- &lt;/div>
- &lt;/div>
+ &lt;div class="input-group"&gt;
+ &lt;label&gt;Debug Log:&lt;/label&gt;
+ &lt;div id="log" class="log"&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;
 
- &lt;script>
+ &lt;script&gt;
  class TTSWebSocketClient {
  constructor() {
  this.socket = null;
@@ -269,10 +269,10 @@
  this.textInput = document.getElementById('textInput');
  this.serverUrl = document.getElementById('serverUrl');
  
- this.connectBtn.addEventListener('click', () => this.connect());
- this.disconnectBtn.addEventListener('click', () => this.disconnect());
- this.speakBtn.addEventListener('click', () => this.speakText());
- this.stopBtn.addEventListener('click', () => this.stopSpeaking());
+ this.connectBtn.addEventListener('click', () =&gt; this.connect());
+ this.disconnectBtn.addEventListener('click', () =&gt; this.disconnect());
+ this.speakBtn.addEventListener('click', () =&gt; this.speakText());
+ this.stopBtn.addEventListener('click', () =&gt; this.stopSpeaking());
  }
  
  async initAudioContext() {
@@ -291,7 +291,7 @@
  try {
  this.socket = new WebSocket(url);
  
- this.socket.onopen = () => {
+ this.socket.onopen = () =&gt; {
  this.isConnected = true;
  this.updateStatus('connected', 'Connected');
  this.logMessage('Connected to WebSocket server');
@@ -300,17 +300,17 @@
  this.socket.send(JSON.stringify({ text: ' ', flush: false }));
  };
  
- this.socket.onmessage = (event) => {
+ this.socket.onmessage = (event) =&gt; {
  this.handleMessage(event.data);
  };
  
- this.socket.onclose = () => {
+ this.socket.onclose = () =&gt; {
  this.isConnected = false;
  this.updateStatus('disconnected', 'Disconnected');
  this.logMessage('Disconnected from server');
  };
  
- this.socket.onerror = (error) => {
+ this.socket.onerror = (error) =&gt; {
  this.logMessage('WebSocket error: ' + error);
  };
  
@@ -438,10 +438,10 @@
  const audioDurationMs = (audioData.length / 44100) * 1000;
  
  // Set up audio completion handler BEFORE starting
- source.onended = () => {
+ source.onended = () =&gt; {
  this.currentAudio = null;
  // Play next item in queue after current finishes
- setTimeout(() => {
+ setTimeout(() =&gt; {
  this.playNextInQueue();
  }, 50); // Small delay to prevent audio glitches
  };
@@ -455,7 +455,7 @@
  } catch (error) {
  this.logMessage('Error playing audio: ' + error.message);
  // Continue with next item even if this one failed
- setTimeout(() => {
+ setTimeout(() =&gt; {
  this.playNextInQueue();
  }, 100);
  }
@@ -464,13 +464,13 @@
  logPerformanceStats() {
  if (this.chunkTimings.length === 0) return;
  
- const totalChars = this.chunkTimings.reduce((sum, chunk) => sum + chunk.charCount, 0);
- const avgChunkSize = this.chunkTimings.reduce((sum, chunk) => sum + chunk.audioLength, 0) / this.chunkTimings.length;
+ const totalChars = this.chunkTimings.reduce((sum, chunk) =&gt; sum + chunk.charCount, 0);
+ const avgChunkSize = this.chunkTimings.reduce((sum, chunk) =&gt; sum + chunk.audioLength, 0) / this.chunkTimings.length;
  
  // Calculate average server latency if available
- const chunksWithLatency = this.chunkTimings.filter(chunk => chunk.serverLatency !== null);
- const avgServerLatency = chunksWithLatency.length > 0 
- ? chunksWithLatency.reduce((sum, chunk) => sum + chunk.serverLatency, 0) / chunksWithLatency.length
+ const chunksWithLatency = this.chunkTimings.filter(chunk =&gt; chunk.serverLatency !== null);
+ const avgServerLatency = chunksWithLatency.length &gt; 0 
+ ? chunksWithLatency.reduce((sum, chunk) =&gt; sum + chunk.serverLatency, 0) / chunksWithLatency.length
  : null;
  
  this.logTimingMessage(`🎯 PERFORMANCE SUMMARY:`, 'performance');
@@ -505,33 +505,33 @@
  const char = this.totalCaptionText[i];
  // Handle different character types properly
  if (char === ' ') {
- captionHTML += `&lt;span id="char-${i}" class="caption-char">&amp;nbsp;&lt;/span>`;
+ captionHTML += `&lt;span id="char-${i}" class="caption-char"&gt;&amp;nbsp;&lt;/span&gt;`;
  } else if (char === '\n') {
- captionHTML += `&lt;span id="char-${i}" class="caption-char">&lt;br>&lt;/span>`;
+ captionHTML += `&lt;span id="char-${i}" class="caption-char"&gt;&lt;br&gt;&lt;/span&gt;`;
  } else {
- const escapedChar = char.replace(/[&lt;>&amp;"]/g, function(match) {
+ const escapedChar = char.replace(/[&lt;&gt;&amp;"]/g, function(match) {
  switch(match) {
  case '&lt;': return '&amp;lt;';
- case '>': return '&amp;gt;';
+ case '&gt;': return '&amp;gt;';
  case '&amp;': return '&amp;amp;';
  case '"': return '&amp;quot;';
  default: return match;
  }
  });
- captionHTML += `&lt;span id="char-${i}" class="caption-char">${escapedChar}&lt;/span>`;
+ captionHTML += `&lt;span id="char-${i}" class="caption-char"&gt;${escapedChar}&lt;/span&gt;`;
  }
  }
  
  this.captions.innerHTML = captionHTML;
  
  // Animate character highlighting for this chunk only
- startTimes.forEach((startTime, index) => {
- setTimeout(() => {
+ startTimes.forEach((startTime, index) =&gt; {
+ setTimeout(() =&gt; {
  const globalCharIndex = offset + index;
  const charElement = document.getElementById(`char-${globalCharIndex}`);
  if (charElement) {
  // Remove previous highlighting
- document.querySelectorAll('.current-char').forEach(el => {
+ document.querySelectorAll('.current-char').forEach(el =&gt; {
  el.classList.remove('current-char');
  });
  
@@ -544,7 +544,7 @@
  const boxRect = captionsBox.getBoundingClientRect();
  
  // Check if character is outside visible area
- if (charRect.bottom > boxRect.bottom || charRect.top &lt; boxRect.top) {
+ if (charRect.bottom &gt; boxRect.bottom || charRect.top &lt; boxRect.top) {
  charElement.scrollIntoView({ 
  behavior: 'smooth', 
  block: 'center'
@@ -573,7 +573,7 @@
  this.currentText = text;
  this.isSpeaking = true;
  this.updateStatus('speaking', 'Speaking...');
- this.logMessage(`📤 Starting TTS request: "${text.substring(0, 50)}${text.length > 50 ? '...' : ''}" (${text.length} chars)`);
+ this.logMessage(`📤 Starting TTS request: "${text.substring(0, 50)}${text.length &gt; 50 ? '...' : ''}" (${text.length} chars)`);
  
  // Resume audio context if suspended
  if (this.audioContext.state === 'suspended') {
@@ -589,9 +589,9 @@
  
  for (let i = 0; i &lt; text.length; i += chunkSize) {
  const chunk = text.substring(i, i + chunkSize);
- const isLast = i + chunkSize >= text.length;
+ const isLast = i + chunkSize &gt;= text.length;
  
- setTimeout(() => {
+ setTimeout(() =&gt; {
  if (this.socket &amp;&amp; this.isConnected) {
  this.socket.send(JSON.stringify({
  text: chunk,
@@ -654,7 +654,7 @@
  this.log.scrollTop = this.log.scrollHeight;
  
  // Keep only last 100 log entries
- while (this.log.children.length > 100) {
+ while (this.log.children.length &gt; 100) {
  this.log.removeChild(this.log.firstChild);
  }
  }
@@ -665,9 +665,9 @@
  }
  
  // Initialize client when page loads
- window.addEventListener('load', () => {
+ window.addEventListener('load', () =&gt; {
  const client = new TTSWebSocketClient();
  });
- &lt;/script>
-&lt;/body>
-&lt;/html></description></item></channel></rss>
+ &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</description></item></channel></rss>

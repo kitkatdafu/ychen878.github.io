@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Yi Chen</title><link>https://ychen878.github.io/</link><description>Recent content on Yi Chen</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 02 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ychen878.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Nuclear Norm via SDP</title><link>https://ychen878.github.io/notes/nuclear-norm-sdp/</link><pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/notes/nuclear-norm-sdp/</guid><description>&lt;p>:PROPERTIES:
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Yi Chen</title><link>https://ychen878.github.io/</link><description>Recent content on Yi Chen</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 02 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ychen878.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Nuclear Norm via SDP</title><link>https://ychen878.github.io/notes/nuclear-norm-sdp/</link><pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/notes/nuclear-norm-sdp/</guid><description>&lt;p&gt;:PROPERTIES:
 :CUSTOM_ID: matrix-norm
-:END:&lt;/p>
-&lt;h1 id="matrix-norms">Matrix norms&lt;/h1>
-&lt;p>Given a matrix $X \in \mathbb{R}^{m \times n}$, $\sigma_{i}(X)$ denotes the $i$-th largest singular value of $X$ and is equal to the square root of the $i$-th largest eigenvalue of $XX&amp;rsquo;$. The rank of $X$, denoted as $\mathrm{rank}(X) = r$ is the number of non-zero singular values.&lt;/p>
-&lt;h2 id="inner-product">Inner Product&lt;/h2>
-&lt;p>Given $X, Y \in \mathbb{R}^{m \times n}$, the inner product between $X$ and $Y$, denoted by $\langle X, Y\rangle$, is defined as
+:END:&lt;/p&gt;
+&lt;h1 id="matrix-norms"&gt;Matrix norms&lt;/h1&gt;
+&lt;p&gt;Given a matrix $X \in \mathbb{R}^{m \times n}$, $\sigma_{i}(X)$ denotes the $i$-th largest singular value of $X$ and is equal to the square root of the $i$-th largest eigenvalue of $XX&amp;rsquo;$. The rank of $X$, denoted as $\mathrm{rank}(X) = r$ is the number of non-zero singular values.&lt;/p&gt;
+&lt;h2 id="inner-product"&gt;Inner Product&lt;/h2&gt;
+&lt;p&gt;Given $X, Y \in \mathbb{R}^{m \times n}$, the inner product between $X$ and $Y$, denoted by $\langle X, Y\rangle$, is defined as
 $$
 \langle X, Y \rangle := \mathrm{Tr}(X&amp;rsquo;Y) = \sum_{i=1}^m \sum_{j=1}^n X_{ij}Y_{ij} = \mathrm{Tr}(Y&amp;rsquo;X).
-$$&lt;/p></description></item><item><title>LP Duality</title><link>https://ychen878.github.io/notes/lp-duality/</link><pubDate>Tue, 28 Feb 2023 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/notes/lp-duality/</guid><description>&lt;h1 id="estimating-lp-bounds">Estimating LP bounds&lt;/h1>
-&lt;p>Given an optimization problem
+$$&lt;/p&gt;</description></item><item><title>LP Duality</title><link>https://ychen878.github.io/notes/lp-duality/</link><pubDate>Tue, 28 Feb 2023 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/notes/lp-duality/</guid><description>&lt;h1 id="estimating-lp-bounds"&gt;Estimating LP bounds&lt;/h1&gt;
+&lt;p&gt;Given an optimization problem
 $$
 \begin{align}
 \max_{f, s} &amp;amp;\quad 12f + 9s \
@@ -19,29 +19,29 @@ $$
 \end{align}
 $$
 Suppose the maximum profit is $p^\star$. How can we bound $p^\star$? The lower bound of $p^\star$ can be found by picking any feasible point (since maximization). For example,
-${f=0, s=0}$ is feasible. Therefore, $p^\star \geq 12f + 9s = 0$. Since any feasible point yields a lower bound of $p^\star$ and $p^\star$ itself is yielded by an feasible point, then finding the largest lower bound of $p^\star$ is equivalent to solving the LP.&lt;/p></description></item><item><title>RPC</title><link>https://ychen878.github.io/notes/rpc/</link><pubDate>Sat, 25 Feb 2023 22:51:15 -0600</pubDate><guid>https://ychen878.github.io/notes/rpc/</guid><description>&lt;h1 id="networks">Networks&lt;/h1>
-&lt;p>Network Interface Controllers (NICs) can connect a computer to different physical mediums, such as Ethernet and Wi-Fi. Every NIC in the world has a unique MAC (media access control) address. It consists of 48 bits. Therefore, there are 28 trillion possible MAC addresses. Some devices randomly change their MAC address for privacy.&lt;/p>
-&lt;p>You can use command &lt;code>ifconfig&lt;/code> to check you network interface controller and its corresponding MAC address. There exists virtual interfaces as well. For example, &lt;code>lo&lt;/code>, the loopback device, is a virtual interface. It connects your computer to a mini network containing just your computer.&lt;/p></description></item><item><title>Docker</title><link>https://ychen878.github.io/notes/docker/</link><pubDate>Sat, 25 Feb 2023 22:49:32 -0600</pubDate><guid>https://ychen878.github.io/notes/docker/</guid><description>&lt;h1 id="virtualization">Virtualization&lt;/h1>
-&lt;p>Virtualization is the illusion of private resources, provided by the software. We have virtual memory, virtual machine (hardware), virtual machine (languages), virtual operating system (container).&lt;/p>
-&lt;ul>
-&lt;li>Each process using a virtual address space is not aware of other processes using memory (illusion of private memory).&lt;/li>
-&lt;li>Virtualized resources include CPU, RAM, disks, network devices, etc. VMs rarely use all their allocated resources, so overbooking is possible. If each program is deployed to a different VM, operating system overheads dominate.&lt;/li>
-&lt;li>JVM or PVM runs Java Bytecode and Python Bytecode. Programs written in Java and Python are compiled to their corresponding byte code instead of a specific machine code.&lt;/li>
-&lt;li>Virtual operating systems, or a containers, are run on a some flavor of Linux. You can have a container of Ubuntu and a container on Debian (but not Windows, since they are running on top of Linux). Containers are more efficient than virtual machines, but less flexible.&lt;/li>
-&lt;/ul>
-&lt;p>Containers and Virtual Machines are Sandboxes.&lt;/p></description></item><item><title>Perceptron Learning Algorithm</title><link>https://ychen878.github.io/notes/pla/</link><pubDate>Wed, 30 Nov 2022 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/notes/pla/</guid><description>&lt;p>
+${f=0, s=0}$ is feasible. Therefore, $p^\star \geq 12f + 9s = 0$. Since any feasible point yields a lower bound of $p^\star$ and $p^\star$ itself is yielded by an feasible point, then finding the largest lower bound of $p^\star$ is equivalent to solving the LP.&lt;/p&gt;</description></item><item><title>RPC</title><link>https://ychen878.github.io/notes/rpc/</link><pubDate>Sat, 25 Feb 2023 22:51:15 -0600</pubDate><guid>https://ychen878.github.io/notes/rpc/</guid><description>&lt;h1 id="networks"&gt;Networks&lt;/h1&gt;
+&lt;p&gt;Network Interface Controllers (NICs) can connect a computer to different physical mediums, such as Ethernet and Wi-Fi. Every NIC in the world has a unique MAC (media access control) address. It consists of 48 bits. Therefore, there are 28 trillion possible MAC addresses. Some devices randomly change their MAC address for privacy.&lt;/p&gt;
+&lt;p&gt;You can use command &lt;code&gt;ifconfig&lt;/code&gt; to check you network interface controller and its corresponding MAC address. There exists virtual interfaces as well. For example, &lt;code&gt;lo&lt;/code&gt;, the loopback device, is a virtual interface. It connects your computer to a mini network containing just your computer.&lt;/p&gt;</description></item><item><title>Docker</title><link>https://ychen878.github.io/notes/docker/</link><pubDate>Sat, 25 Feb 2023 22:49:32 -0600</pubDate><guid>https://ychen878.github.io/notes/docker/</guid><description>&lt;h1 id="virtualization"&gt;Virtualization&lt;/h1&gt;
+&lt;p&gt;Virtualization is the illusion of private resources, provided by the software. We have virtual memory, virtual machine (hardware), virtual machine (languages), virtual operating system (container).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Each process using a virtual address space is not aware of other processes using memory (illusion of private memory).&lt;/li&gt;
+&lt;li&gt;Virtualized resources include CPU, RAM, disks, network devices, etc. VMs rarely use all their allocated resources, so overbooking is possible. If each program is deployed to a different VM, operating system overheads dominate.&lt;/li&gt;
+&lt;li&gt;JVM or PVM runs Java Bytecode and Python Bytecode. Programs written in Java and Python are compiled to their corresponding byte code instead of a specific machine code.&lt;/li&gt;
+&lt;li&gt;Virtual operating systems, or a containers, are run on a some flavor of Linux. You can have a container of Ubuntu and a container on Debian (but not Windows, since they are running on top of Linux). Containers are more efficient than virtual machines, but less flexible.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Containers and Virtual Machines are Sandboxes.&lt;/p&gt;</description></item><item><title>Perceptron Learning Algorithm</title><link>https://ychen878.github.io/notes/pla/</link><pubDate>Wed, 30 Nov 2022 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/notes/pla/</guid><description>&lt;p&gt;
 Given a dataset
 \(\mathcal{D} = \{(\vec{x}_1, y_1), \cdots, (\vec{x}_N, y_N)\}\) and a
 hypothesis set \(\mathcal{H}\), our learning algorithm \(\mathcal{A}\)
 tries to learn a function \(g \in \mathcal{H}\) that approximates the
 underlying, true function \(f: \mathcal{X} \to \mathcal{Y}\), which
-generates the points in \(\mathcal{D}\).&lt;/p>
-&lt;div id="outline-container-credit-card-approve-problem" class="outline-3">
-&lt;h3 id="credit-card-approve-problem">
+generates the points in \(\mathcal{D}\).&lt;/p&gt;
+&lt;div id="outline-container-credit-card-approve-problem" class="outline-3"&gt;
+&lt;h3 id="credit-card-approve-problem"&gt;
 Credit Card Approve Problem
-&lt;/h3>
-&lt;div id="outline-text-credit-card-approve-problem" class="outline-text-3">
-&lt;p>Given a customer who is applying for a credit card, we want to build a
+&lt;/h3&gt;
+&lt;div id="outline-text-credit-card-approve-problem" class="outline-text-3"&gt;
+&lt;p&gt;Given a customer who is applying for a credit card, we want to build a
 system that determines if we should grant the application or not based
 on the customer&amp;#39;s information such as age, annual salary, year in job,
 etc. The bank&amp;#39;s historical credit approval data can be seen as a dataset
@@ -53,56 +53,56 @@ vector where each component is a feature (age, for example). Our
 learning algorithm \(\mathcal{A}\) considers a hypothesis class
 \(\mathcal{H}\) and takes the dataset \(\mathcal{D}\) and tries to give
 a function \(g \in \mathcal{H}\) so that \(g\) performs similar to
-\(f\). We will use \(g\) as our system of approving credit card.&lt;/p></description></item><item><title>Clustering</title><link>https://ychen878.github.io/notes/clustering/</link><pubDate>Sat, 08 Oct 2022 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/notes/clustering/</guid><description>&lt;p>
+\(f\). We will use \(g\) as our system of approving credit card.&lt;/p&gt;</description></item><item><title>Clustering</title><link>https://ychen878.github.io/notes/clustering/</link><pubDate>Sat, 08 Oct 2022 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/notes/clustering/</guid><description>&lt;p&gt;
 In unsupervised learning, there are no labels associated with features.
 Generally speaking, the ultimate goal of unsupervised learning is to
 find patterns and structures that help us to better understand data.
 Sometimes, we also use unsupervised learning to model a distribution.
-But we generally will not make predictions.&lt;/p>
-&lt;p>
+But we generally will not make predictions.&lt;/p&gt;
+&lt;p&gt;
 There are 3 types of clustering 1. Partitional (centroid,
 graph-theoretic, spectral) 1. Hierarchical (agglomerative, divisive) 2.
-Bayesian (decision-based, non-parametric)&lt;/p>
-&lt;div id="outline-container-partitional-clustering" class="outline-3">
-&lt;h3 id="partitional-clustering">
+Bayesian (decision-based, non-parametric)&lt;/p&gt;
+&lt;div id="outline-container-partitional-clustering" class="outline-3"&gt;
+&lt;h3 id="partitional-clustering"&gt;
 Partitional Clustering
-&lt;/h3>
-&lt;div id="outline-text-partitional-clustering" class="outline-text-3">
-&lt;div id="outline-container-k-means" class="outline-4">
-&lt;h4 id="k-means">
+&lt;/h3&gt;
+&lt;div id="outline-text-partitional-clustering" class="outline-text-3"&gt;
+&lt;div id="outline-container-k-means" class="outline-4"&gt;
+&lt;h4 id="k-means"&gt;
 \(k\)-means
-&lt;/h4>
-&lt;div id="outline-text-k-means" class="outline-text-4">
-&lt;p>\(k\)-means is a type of partitional centroid-based clustering
+&lt;/h4&gt;
+&lt;div id="outline-text-k-means" class="outline-text-4"&gt;
+&lt;p&gt;\(k\)-means is a type of partitional centroid-based clustering
 algorithm. The algorithm is described as follows: 1. Randomly pick \(k\)
 cluster centers; 2. Find the closest center for each point; 3. Update
 cluster centers by computing centroids; 4. While not converging, jump to
-step 2.&lt;/p></description></item><item><title>K-means in Python</title><link>https://ychen878.github.io/notes/k-means/</link><pubDate>Tue, 19 Oct 2021 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/notes/k-means/</guid><description>&lt;p>There are two major steps in the K-means algorithm. The first one is to
+step 2.&lt;/p&gt;</description></item><item><title>K-means in Python</title><link>https://ychen878.github.io/notes/k-means/</link><pubDate>Tue, 19 Oct 2021 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/notes/k-means/</guid><description>&lt;p&gt;There are two major steps in the K-means algorithm. The first one is to
 calculate the representatives (centroids) of a given partition. The
-second one is to find the partition based on the representatives.&lt;/p>
-&lt;div id="outline-container-inputs" class="outline-3">
-&lt;h3 id="inputs">
+second one is to find the partition based on the representatives.&lt;/p&gt;
+&lt;div id="outline-container-inputs" class="outline-3"&gt;
+&lt;h3 id="inputs"&gt;
 Inputs
-&lt;/h3>
-&lt;div id="outline-text-inputs" class="outline-text-3">
-&lt;p>Suppose we have a dataset looks like this:&lt;/p>
-&lt;div class="src src-python">
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>dataset &lt;span style="color:#f92672">=&lt;/span> np&lt;span style="color:#f92672">.&lt;/span>array([[&lt;span style="color:#ae81ff">5&lt;/span>, &lt;span style="color:#ae81ff">6&lt;/span>],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [&lt;span style="color:#ae81ff">6&lt;/span>, &lt;span style="color:#ae81ff">5&lt;/span>],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">1&lt;/span>],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [&lt;span style="color:#ae81ff">3&lt;/span>, &lt;span style="color:#ae81ff">3&lt;/span>]])&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
-&lt;/div>
-&lt;p>
+&lt;/h3&gt;
+&lt;div id="outline-text-inputs" class="outline-text-3"&gt;
+&lt;p&gt;Suppose we have a dataset looks like this:&lt;/p&gt;
+&lt;div class="src src-python"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dataset &lt;span style="color:#f92672"&gt;=&lt;/span&gt; np&lt;span style="color:#f92672"&gt;.&lt;/span&gt;array([[&lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;6&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; [&lt;span style="color:#ae81ff"&gt;6&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; [&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; [&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;],
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; [&lt;span style="color:#ae81ff"&gt;3&lt;/span&gt;, &lt;span style="color:#ae81ff"&gt;3&lt;/span&gt;]])&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
 Each row in this dataset matrix is an observation and each column in
 this matrix represents a feature. So, in this example, we have 5 points
-from a plane. And we define partition in the following way:&lt;/p></description></item><item><title/><link>https://ychen878.github.io/projects/archive/frontend/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/projects/archive/frontend/</guid><description>&lt;!DOCTYPE html>
-&lt;html lang="en">
-&lt;head>
- &lt;meta charset="UTF-8">
- &lt;meta name="viewport" content="width=device-width, initial-scale=1.0">
- &lt;title>TTS WebSocket Test Client&lt;/title>
- &lt;style>
+from a plane. And we define partition in the following way:&lt;/p&gt;</description></item><item><title/><link>https://ychen878.github.io/projects/archive/frontend/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/projects/archive/frontend/</guid><description>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+ &lt;meta charset="UTF-8"&gt;
+ &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+ &lt;title&gt;TTS WebSocket Test Client&lt;/title&gt;
+ &lt;style&gt;
  body {
  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
  max-width: 800px;
@@ -292,46 +292,46 @@ from a plane. And we define partition in the following way:&lt;/p></description>
  border-left-color: #4CAF50;
  color: #90EE90;
  }
- &lt;/style>
-&lt;/head>
-&lt;body>
- &lt;div class="container">
- &lt;h1>🎤 TTS WebSocket Test Client&lt;/h1>
+ &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ &lt;div class="container"&gt;
+ &lt;h1&gt;🎤 TTS WebSocket Test Client&lt;/h1&gt;
  
- &lt;div class="input-group">
- &lt;label for="serverUrl">WebSocket Server URL:&lt;/label>
- &lt;input type="text" id="serverUrl" value="ws://localhost:8765" placeholder="ws://localhost:8765">
- &lt;/div>
+ &lt;div class="input-group"&gt;
+ &lt;label for="serverUrl"&gt;WebSocket Server URL:&lt;/label&gt;
+ &lt;input type="text" id="serverUrl" value="ws://localhost:8765" placeholder="ws://localhost:8765"&gt;
+ &lt;/div&gt;
  
- &lt;div class="button-group">
- &lt;button id="connectBtn" class="connect-btn">Connect&lt;/button>
- &lt;button id="disconnectBtn" class="disconnect-btn" disabled>Disconnect&lt;/button>
- &lt;/div>
+ &lt;div class="button-group"&gt;
+ &lt;button id="connectBtn" class="connect-btn"&gt;Connect&lt;/button&gt;
+ &lt;button id="disconnectBtn" class="disconnect-btn" disabled&gt;Disconnect&lt;/button&gt;
+ &lt;/div&gt;
  
- &lt;div id="status" class="status disconnected">Disconnected&lt;/div>
+ &lt;div id="status" class="status disconnected"&gt;Disconnected&lt;/div&gt;
  
- &lt;div class="input-group">
- &lt;label for="textInput">Text to Speak:&lt;/label>
- &lt;textarea id="textInput" placeholder="Enter text here... Try: 'Hello, this is a test of the text-to-speech system!'">&lt;/textarea>
- &lt;/div>
+ &lt;div class="input-group"&gt;
+ &lt;label for="textInput"&gt;Text to Speak:&lt;/label&gt;
+ &lt;textarea id="textInput" placeholder="Enter text here... Try: 'Hello, this is a test of the text-to-speech system!'"&gt;&lt;/textarea&gt;
+ &lt;/div&gt;
  
- &lt;div class="button-group">
- &lt;button id="speakBtn" class="speak-btn" disabled>Speak Text&lt;/button>
- &lt;button id="stopBtn" class="stop-btn" disabled>Stop&lt;/button>
- &lt;/div>
+ &lt;div class="button-group"&gt;
+ &lt;button id="speakBtn" class="speak-btn" disabled&gt;Speak Text&lt;/button&gt;
+ &lt;button id="stopBtn" class="stop-btn" disabled&gt;Stop&lt;/button&gt;
+ &lt;/div&gt;
  
- &lt;div class="input-group">
- &lt;label>Real-time Captions:&lt;/label>
- &lt;div id="captions" class="captions">Captions will appear here...&lt;/div>
- &lt;/div>
+ &lt;div class="input-group"&gt;
+ &lt;label&gt;Real-time Captions:&lt;/label&gt;
+ &lt;div id="captions" class="captions"&gt;Captions will appear here...&lt;/div&gt;
+ &lt;/div&gt;
  
- &lt;div class="input-group">
- &lt;label>Debug Log:&lt;/label>
- &lt;div id="log" class="log">&lt;/div>
- &lt;/div>
- &lt;/div>
+ &lt;div class="input-group"&gt;
+ &lt;label&gt;Debug Log:&lt;/label&gt;
+ &lt;div id="log" class="log"&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;
 
- &lt;script>
+ &lt;script&gt;
  class TTSWebSocketClient {
  constructor() {
  this.socket = null;
@@ -367,10 +367,10 @@ from a plane. And we define partition in the following way:&lt;/p></description>
  this.textInput = document.getElementById('textInput');
  this.serverUrl = document.getElementById('serverUrl');
  
- this.connectBtn.addEventListener('click', () => this.connect());
- this.disconnectBtn.addEventListener('click', () => this.disconnect());
- this.speakBtn.addEventListener('click', () => this.speakText());
- this.stopBtn.addEventListener('click', () => this.stopSpeaking());
+ this.connectBtn.addEventListener('click', () =&gt; this.connect());
+ this.disconnectBtn.addEventListener('click', () =&gt; this.disconnect());
+ this.speakBtn.addEventListener('click', () =&gt; this.speakText());
+ this.stopBtn.addEventListener('click', () =&gt; this.stopSpeaking());
  }
  
  async initAudioContext() {
@@ -389,7 +389,7 @@ from a plane. And we define partition in the following way:&lt;/p></description>
  try {
  this.socket = new WebSocket(url);
  
- this.socket.onopen = () => {
+ this.socket.onopen = () =&gt; {
  this.isConnected = true;
  this.updateStatus('connected', 'Connected');
  this.logMessage('Connected to WebSocket server');
@@ -398,17 +398,17 @@ from a plane. And we define partition in the following way:&lt;/p></description>
  this.socket.send(JSON.stringify({ text: ' ', flush: false }));
  };
  
- this.socket.onmessage = (event) => {
+ this.socket.onmessage = (event) =&gt; {
  this.handleMessage(event.data);
  };
  
- this.socket.onclose = () => {
+ this.socket.onclose = () =&gt; {
  this.isConnected = false;
  this.updateStatus('disconnected', 'Disconnected');
  this.logMessage('Disconnected from server');
  };
  
- this.socket.onerror = (error) => {
+ this.socket.onerror = (error) =&gt; {
  this.logMessage('WebSocket error: ' + error);
  };
  
@@ -536,10 +536,10 @@ from a plane. And we define partition in the following way:&lt;/p></description>
  const audioDurationMs = (audioData.length / 44100) * 1000;
  
  // Set up audio completion handler BEFORE starting
- source.onended = () => {
+ source.onended = () =&gt; {
  this.currentAudio = null;
  // Play next item in queue after current finishes
- setTimeout(() => {
+ setTimeout(() =&gt; {
  this.playNextInQueue();
  }, 50); // Small delay to prevent audio glitches
  };
@@ -553,7 +553,7 @@ from a plane. And we define partition in the following way:&lt;/p></description>
  } catch (error) {
  this.logMessage('Error playing audio: ' + error.message);
  // Continue with next item even if this one failed
- setTimeout(() => {
+ setTimeout(() =&gt; {
  this.playNextInQueue();
  }, 100);
  }
@@ -562,13 +562,13 @@ from a plane. And we define partition in the following way:&lt;/p></description>
  logPerformanceStats() {
  if (this.chunkTimings.length === 0) return;
  
- const totalChars = this.chunkTimings.reduce((sum, chunk) => sum + chunk.charCount, 0);
- const avgChunkSize = this.chunkTimings.reduce((sum, chunk) => sum + chunk.audioLength, 0) / this.chunkTimings.length;
+ const totalChars = this.chunkTimings.reduce((sum, chunk) =&gt; sum + chunk.charCount, 0);
+ const avgChunkSize = this.chunkTimings.reduce((sum, chunk) =&gt; sum + chunk.audioLength, 0) / this.chunkTimings.length;
  
  // Calculate average server latency if available
- const chunksWithLatency = this.chunkTimings.filter(chunk => chunk.serverLatency !== null);
- const avgServerLatency = chunksWithLatency.length > 0 
- ? chunksWithLatency.reduce((sum, chunk) => sum + chunk.serverLatency, 0) / chunksWithLatency.length
+ const chunksWithLatency = this.chunkTimings.filter(chunk =&gt; chunk.serverLatency !== null);
+ const avgServerLatency = chunksWithLatency.length &gt; 0 
+ ? chunksWithLatency.reduce((sum, chunk) =&gt; sum + chunk.serverLatency, 0) / chunksWithLatency.length
  : null;
  
  this.logTimingMessage(`🎯 PERFORMANCE SUMMARY:`, 'performance');
@@ -603,33 +603,33 @@ from a plane. And we define partition in the following way:&lt;/p></description>
  const char = this.totalCaptionText[i];
  // Handle different character types properly
  if (char === ' ') {
- captionHTML += `&lt;span id="char-${i}" class="caption-char">&amp;nbsp;&lt;/span>`;
+ captionHTML += `&lt;span id="char-${i}" class="caption-char"&gt;&amp;nbsp;&lt;/span&gt;`;
  } else if (char === '\n') {
- captionHTML += `&lt;span id="char-${i}" class="caption-char">&lt;br>&lt;/span>`;
+ captionHTML += `&lt;span id="char-${i}" class="caption-char"&gt;&lt;br&gt;&lt;/span&gt;`;
  } else {
- const escapedChar = char.replace(/[&lt;>&amp;"]/g, function(match) {
+ const escapedChar = char.replace(/[&lt;&gt;&amp;"]/g, function(match) {
  switch(match) {
  case '&lt;': return '&amp;lt;';
- case '>': return '&amp;gt;';
+ case '&gt;': return '&amp;gt;';
  case '&amp;': return '&amp;amp;';
  case '"': return '&amp;quot;';
  default: return match;
  }
  });
- captionHTML += `&lt;span id="char-${i}" class="caption-char">${escapedChar}&lt;/span>`;
+ captionHTML += `&lt;span id="char-${i}" class="caption-char"&gt;${escapedChar}&lt;/span&gt;`;
  }
  }
  
  this.captions.innerHTML = captionHTML;
  
  // Animate character highlighting for this chunk only
- startTimes.forEach((startTime, index) => {
- setTimeout(() => {
+ startTimes.forEach((startTime, index) =&gt; {
+ setTimeout(() =&gt; {
  const globalCharIndex = offset + index;
  const charElement = document.getElementById(`char-${globalCharIndex}`);
  if (charElement) {
  // Remove previous highlighting
- document.querySelectorAll('.current-char').forEach(el => {
+ document.querySelectorAll('.current-char').forEach(el =&gt; {
  el.classList.remove('current-char');
  });
  
@@ -642,7 +642,7 @@ from a plane. And we define partition in the following way:&lt;/p></description>
  const boxRect = captionsBox.getBoundingClientRect();
  
  // Check if character is outside visible area
- if (charRect.bottom > boxRect.bottom || charRect.top &lt; boxRect.top) {
+ if (charRect.bottom &gt; boxRect.bottom || charRect.top &lt; boxRect.top) {
  charElement.scrollIntoView({ 
  behavior: 'smooth', 
  block: 'center'
@@ -671,7 +671,7 @@ from a plane. And we define partition in the following way:&lt;/p></description>
  this.currentText = text;
  this.isSpeaking = true;
  this.updateStatus('speaking', 'Speaking...');
- this.logMessage(`📤 Starting TTS request: "${text.substring(0, 50)}${text.length > 50 ? '...' : ''}" (${text.length} chars)`);
+ this.logMessage(`📤 Starting TTS request: "${text.substring(0, 50)}${text.length &gt; 50 ? '...' : ''}" (${text.length} chars)`);
  
  // Resume audio context if suspended
  if (this.audioContext.state === 'suspended') {
@@ -687,9 +687,9 @@ from a plane. And we define partition in the following way:&lt;/p></description>
  
  for (let i = 0; i &lt; text.length; i += chunkSize) {
  const chunk = text.substring(i, i + chunkSize);
- const isLast = i + chunkSize >= text.length;
+ const isLast = i + chunkSize &gt;= text.length;
  
- setTimeout(() => {
+ setTimeout(() =&gt; {
  if (this.socket &amp;&amp; this.isConnected) {
  this.socket.send(JSON.stringify({
  text: chunk,
@@ -752,7 +752,7 @@ from a plane. And we define partition in the following way:&lt;/p></description>
  this.log.scrollTop = this.log.scrollHeight;
  
  // Keep only last 100 log entries
- while (this.log.children.length > 100) {
+ while (this.log.children.length &gt; 100) {
  this.log.removeChild(this.log.firstChild);
  }
  }
@@ -763,9 +763,9 @@ from a plane. And we define partition in the following way:&lt;/p></description>
  }
  
  // Initialize client when page loads
- window.addEventListener('load', () => {
+ window.addEventListener('load', () =&gt; {
  const client = new TTSWebSocketClient();
  });
- &lt;/script>
-&lt;/body>
-&lt;/html></description></item></channel></rss>
+ &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</description></item></channel></rss>

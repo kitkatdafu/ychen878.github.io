@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Optimization on Yi Chen</title><link>https://ychen878.github.io/tags/optimization/</link><description>Recent content in Optimization on Yi Chen</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 28 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ychen878.github.io/tags/optimization/index.xml" rel="self" type="application/rss+xml"/><item><title>LP Duality</title><link>https://ychen878.github.io/notes/lp-duality/</link><pubDate>Tue, 28 Feb 2023 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/notes/lp-duality/</guid><description>&lt;h1 id="estimating-lp-bounds">Estimating LP bounds&lt;/h1>
-&lt;p>Given an optimization problem
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Optimization on Yi Chen</title><link>https://ychen878.github.io/tags/optimization/</link><description>Recent content in Optimization on Yi Chen</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 28 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ychen878.github.io/tags/optimization/index.xml" rel="self" type="application/rss+xml"/><item><title>LP Duality</title><link>https://ychen878.github.io/notes/lp-duality/</link><pubDate>Tue, 28 Feb 2023 00:00:00 +0000</pubDate><guid>https://ychen878.github.io/notes/lp-duality/</guid><description>&lt;h1 id="estimating-lp-bounds"&gt;Estimating LP bounds&lt;/h1&gt;
+&lt;p&gt;Given an optimization problem
 $$
 \begin{align}
 \max_{f, s} &amp;amp;\quad 12f + 9s \
@@ -10,4 +10,4 @@ $$
 \end{align}
 $$
 Suppose the maximum profit is $p^\star$. How can we bound $p^\star$? The lower bound of $p^\star$ can be found by picking any feasible point (since maximization). For example,
-${f=0, s=0}$ is feasible. Therefore, $p^\star \geq 12f + 9s = 0$. Since any feasible point yields a lower bound of $p^\star$ and $p^\star$ itself is yielded by an feasible point, then finding the largest lower bound of $p^\star$ is equivalent to solving the LP.&lt;/p></description></item></channel></rss>
+${f=0, s=0}$ is feasible. Therefore, $p^\star \geq 12f + 9s = 0$. Since any feasible point yields a lower bound of $p^\star$ and $p^\star$ itself is yielded by an feasible point, then finding the largest lower bound of $p^\star$ is equivalent to solving the LP.&lt;/p&gt;</description></item></channel></rss>
