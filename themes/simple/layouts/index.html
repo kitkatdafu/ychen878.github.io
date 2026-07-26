@@ -23,7 +23,7 @@
   <section id="recent-publications">
     <h2>Recent Conference Publications</h2>
     <ul class="recent-publication-list">
-      {{ range first 3 .Site.Data.conf_publications.list }}
+      {{ range first 5 .Site.Data.conf_publications.list }}
 
       <li class="publication-item">
         <strong><a href="{{ .url }}">{{ .title }}</a></strong> <br />
