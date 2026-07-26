@@ -3,6 +3,9 @@ languageCode = 'en-us'
 title = 'Yi Chen'
 theme = 'simple'
 
+[security]
+allowContent = ['^text/.*$']
+
 [menu]
 [[menu.main]]
 name = "Home"
