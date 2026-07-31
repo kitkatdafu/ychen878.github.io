@@ -20,14 +20,14 @@
     </p>
   </section>
 
-  <section id="recent-publications">
-    <h2>Recent Conference Publications</h2>
+  <section id="selected-publications">
+    <h2>Selected Publications</h2>
     <ul class="recent-publication-list">
-      {{ range first 5 .Site.Data.conf_publications.list }}
+      {{ range .Site.Data.selected_publications.list }}
 
       <li class="publication-item">
         <strong><a href="{{ .url }}">{{ .title }}</a></strong> <br />
-        {{ .author }} <br />
+        {{ replace .author "Yi Chen" "<strong>Yi Chen</strong>" | safeHTML }} <br />
         <em>{{ .venue }}</em>
       </li>
 
