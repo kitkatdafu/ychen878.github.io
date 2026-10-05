@@ -1,0 +1,122 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><link rel=icon type=image/x-icon href=/images/favicon.ico><title>Yi Chen | Depth-First Search and Backtracking</title></head><body class=page><div id=content><header><nav><a href=/>[Home]</a>
+<a href=/notes/>[Notes]</a>
+<a href=/categories/algorithms/>[Algorithms]</a>
+<a href=/publications/>[Publications]</a>
+<a href=/projects/>[Projects]</a><br><a href=https://github.com/kitkatdafu>[GitHub]</a>
+<a href=https://archive.casouri.cc>[BHL0388]</a></nav></header><article class=note><header class=note__header><h1>Depth-First Search and Backtracking</h1><div class=metadata><time datetime=2026-05-17>May 17, 2026</time>
+<a class=metadata__category href=/categories/algorithms/>Algorithms</a>
+<a class=metadata__tag href=/tags/algorithms/>#Algorithms</a>
+<a class=metadata__tag href=/tags/search/>#Search</a>
+<a class=metadata__tag href=/tags/depth-first-search/>#Depth-First Search</a>
+<a class=metadata__tag href=/tags/backtracking/>#Backtracking</a></div></header><div class=note__body><h2 id=introduction-to-dfs-depth-first-search>Introduction to DFS (Depth-First Search)</h2><h3 id=what-is-a-search-algorithm>What is a Search Algorithm?</h3><p>A search algorithm exhaustively explores part or all of the solution space of a problem to find its solution.</p><h3 id=depth-first-search-dfs>Depth-First Search (DFS)</h3><ul><li><strong>Essence:</strong> DFS is essentially brute-force enumeration.</li><li><strong>&ldquo;Depth-first&rdquo; principle:</strong> Go as far down one path as possible; only backtrack when no further progress can be made.</li></ul><h3 id=example-finding-a-path-from-node-1-to-node-8>Example: Finding a Path from Node 1 to Node 8</h3><p>Starting from node 1, always move to an unvisited node if one exists; otherwise, backtrack.</p><p>Following this rule, a valid path can always be found from 1 to 8, for example:</p><p><code>1 → 3 → 7 → A → 7 → 9 → 3 → 5 → 6 → 8</code></p><p>The portions shown in red (e.g., the second <code>7</code> and second <code>3</code>) represent backtracking steps.</p><p>By modeling problems as graphs, DFS can be used to brute-force solve a wide variety of problems.</p><hr><h2 id=backtracking>Backtracking</h2><h3 id=definition>Definition</h3><p>Backtracking is a form of DFS used to search for solutions. When the current state is found to no longer satisfy the solution conditions, we &ldquo;backtrack&rdquo; and try a different path.</p><h3 id=key-characteristics>Key Characteristics</h3><ul><li><strong>Backtracking emphasizes:</strong> When one path fails, try another; visited paths must be marked.</li><li>Backtracking generally builds on DFS by adding pruning strategies.</li></ul><hr><h2 id=backtracking-trees>Backtracking Trees</h2><h3 id=subset-tree>Subset Tree</h3><p>For a subset problem, each element has two choices: <strong>include (1)</strong> or <strong>exclude (0)</strong>. This produces a binary tree structure where each level corresponds to a decision about one element.</p><h3 id=permutation-tree>Permutation Tree</h3><p>For a permutation problem with elements {1, 2, 3}, the root branches into each possible first choice (1, 2, or 3). At each subsequent level, the remaining unused numbers branch out, forming a tree of all possible orderings.</p><hr><h2 id=pruning>Pruning</h2><h3 id=why-prune>Why Prune?</h3><p>During the search process, exhaustively traversing all possibilities can be very time-consuming. If at some state we can determine that no valid solution lies further down that branch, we don&rsquo;t need to continue searching that subtree.</p><p><strong>Example:</strong> Given N positive integers, count how many subsets have a sum ≤ K. During the search, if the current sum already exceeds K, we can stop exploring that branch.</p><h3 id=types-of-pruning>Types of Pruning</h3><ol><li><p><strong>Feasibility Pruning:</strong> If the current state already violates the problem constraints and all subsequent states will also violate them, prune this branch.</p></li><li><p><strong>Optimality Pruning:</strong> If the current state can no longer improve upon the best solution found so far, prune this branch.</p></li></ol><hr><h2 id=dfs-and-n-nested-loops>DFS and N-Nested Loops</h2><h3 id=motivating-problem>Motivating Problem</h3><p>Given a number <code>x</code>, split it into 3 positive integers where each subsequent integer is greater than or equal to the previous one. Output all valid partitions.</p><ul><li><strong>Simplest approach:</strong> Triple nested loop, brute-force search.</li><li><strong>What if we need to split into 4 positive integers?</strong></li><li><strong>What about n positive integers?</strong><ul><li>We would need to implement an n-nested loop.</li><li><strong>An n-nested loop is equivalent to a specific tree structure, which can be implemented via DFS.</strong></li></ul></li></ul><h3 id=visualization-x--6-split-into-3-integers>Visualization (x = 6, split into 3 integers)</h3><ul><li><strong>Level 1:</strong> Choose first integer from {1, 2, 3, 4, 5, 6}</li><li><strong>Level 2:</strong> Choose second integer (≥ first)</li><li><strong>Level 3:</strong> Choose third integer (≥ second), with total sum = 6</li></ul><p>This forms a tree where DFS traces a valid path from top to bottom — the path must be non-decreasing, length n, and sum to x.</p><h3 id=generic-dfs-template-for-n-nested-loops>Generic DFS Template for N-Nested Loops</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>dfs</span>(depth):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    :param depth: current loop level
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    :return:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> depth <span style=color:#f92672>==</span> N:
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Code executed at the innermost loop</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Enumeration/selection at each loop level</span>
+</span></span></code></pre></div><h3 id=implementation-without-pruning>Implementation (Without Pruning)</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span>x, n <span style=color:#f92672>=</span> map(int, input()<span style=color:#f92672>.</span>split())
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Record the number chosen at each level</span>
+</span></span><span style=display:flex><span>a <span style=color:#f92672>=</span> [<span style=color:#ae81ff>0</span>] <span style=color:#f92672>*</span> n
+</span></span><span style=display:flex><span><span style=color:#75715e># Counter for number of computations</span>
+</span></span><span style=display:flex><span>cnt <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>dfs</span>(depth):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    :param depth: current loop level
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>global</span> cnt
+</span></span><span style=display:flex><span>    cnt <span style=color:#f92672>=</span> cnt <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Levels 0 through n-1 have all been chosen; now check the answer</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> depth <span style=color:#f92672>==</span> n:
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Condition 1: numbers must be non-decreasing</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>1</span>, n):
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> a[i] <span style=color:#f92672>&gt;=</span> a[i <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>]:
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>continue</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Condition 2: sum must equal x</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> sum(a) <span style=color:#f92672>!=</span> x:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># This is a valid answer</span>
+</span></span><span style=display:flex><span>        print(a)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Enumerate the number at level `depth` from [1, x]</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>1</span>, x <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>):
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Choose the number at level `depth`</span>
+</span></span><span style=display:flex><span>        a[depth] <span style=color:#f92672>=</span> i
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Recurse into the next level</span>
+</span></span><span style=display:flex><span>        dfs(depth <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>dfs(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;Total computations = </span><span style=color:#e6db74>{}</span><span style=color:#e6db74>&#34;</span><span style=color:#f92672>.</span>format(cnt))
+</span></span></code></pre></div><h3 id=implementation-with-pruning>Implementation (With Pruning)</h3><p>By checking conditions during enumeration rather than only at the leaves, we can dramatically reduce computation:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>dfs</span>(depth, last_val):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    :param depth: current loop level
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>global</span> cnt
+</span></span><span style=display:flex><span>    cnt <span style=color:#f92672>=</span> cnt <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># All n levels have chosen numbers; check answer</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> depth <span style=color:#f92672>==</span> n:
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Condition 2: sum must equal x</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> sum(a) <span style=color:#f92672>!=</span> x:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># This is a valid answer</span>
+</span></span><span style=display:flex><span>        print(a)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># At level `depth`, enumerate numbers in [last_val, x]</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Condition 1: numbers must be non-decreasing (enforced via loop range)</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(last_val, x <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>):
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Choose the number at level `depth`</span>
+</span></span><span style=display:flex><span>        a[depth] <span style=color:#f92672>=</span> i
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Recurse into the next level</span>
+</span></span><span style=display:flex><span>        dfs(depth <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, i)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>dfs(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>)
+</span></span></code></pre></div><p><strong>Key insight:</strong> Placing conditions inside the enumeration loop (rather than only checking at the leaves) reduces computation — <strong>this is pruning.</strong></p><hr><h2 id=backtracking-template--permutations>Backtracking Template — Permutations</h2><h3 id=problem>Problem</h3><p>Generate all permutations of N distinct numbers.</p><h3 id=key-requirements>Key Requirements</h3><ul><li><strong>No repeated numbers in a permutation</strong> → mark each chosen number using a <code>vis</code> (visited) array.</li><li><strong>Output the current permutation</strong> → record the current path using a <code>path</code> array.</li><li><strong>Backtracking pattern:</strong> mark → record path → recurse to next level → return to previous level → clear mark.</li></ul><h3 id=implementation>Implementation</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>dfs</span>(depth):
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Currently at the depth-th position; positions 0 to depth-1 are set</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> depth <span style=color:#f92672>==</span> n:
+</span></span><span style=display:flex><span>        print(path)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Enumerate the number at position `depth`</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>1</span>, n <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>):
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Number i must not have been chosen before</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> vis[i] <span style=color:#f92672>is</span> <span style=color:#66d9ef>False</span>:
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Mark current state</span>
+</span></span><span style=display:flex><span>            vis[i] <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Record current path</span>
+</span></span><span style=display:flex><span>            path<span style=color:#f92672>.</span>append(i)
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Recurse into the next level</span>
+</span></span><span style=display:flex><span>            dfs(depth <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Clear mark (backtrack)</span>
+</span></span><span style=display:flex><span>            vis[i] <span style=color:#f92672>=</span> <span style=color:#66d9ef>False</span>
+</span></span><span style=display:flex><span>            path<span style=color:#f92672>.</span>pop(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>n <span style=color:#f92672>=</span> int(input())
+</span></span><span style=display:flex><span>path <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>vis <span style=color:#f92672>=</span> [<span style=color:#66d9ef>False</span>] <span style=color:#f92672>*</span> (n <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>dfs(<span style=color:#ae81ff>0</span>)
+</span></span></code></pre></div><hr><h2 id=backtracking-template--subsets>Backtracking Template — Subsets</h2><h3 id=problem-1>Problem</h3><p>Given N numbers, generate all possible subsets.</p><h3 id=approach>Approach</h3><p>At each level, we have a binary choice for each number: <strong>include (Y)</strong> or <strong>exclude (N)</strong>. This creates a binary tree of depth N.</p><h3 id=implementation-1>Implementation</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span>n <span style=color:#f92672>=</span> int(input())
+</span></span><span style=display:flex><span>a <span style=color:#f92672>=</span> list(map(int, input()<span style=color:#f92672>.</span>split()))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>path <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>dfs</span>(depth):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> depth <span style=color:#f92672>==</span> n:
+</span></span><span style=display:flex><span>        print(path)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Include a[depth]</span>
+</span></span><span style=display:flex><span>    path<span style=color:#f92672>.</span>append(a[depth])
+</span></span><span style=display:flex><span>    dfs(depth <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>    path<span style=color:#f92672>.</span>pop(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Exclude a[depth]</span>
+</span></span><span style=display:flex><span>    dfs(depth <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>dfs(<span style=color:#ae81ff>0</span>)
+</span></span></code></pre></div><hr><h2 id=summary>Summary</h2><table><thead><tr><th>Concept</th><th>Key Idea</th></tr></thead><tbody><tr><td><strong>DFS</strong></td><td>Brute-force enumeration that goes as deep as possible before backtracking</td></tr><tr><td><strong>Backtracking</strong></td><td>DFS variant that marks visited states and reverts on failure</td></tr><tr><td><strong>Pruning</strong></td><td>Skip branches that cannot lead to valid or improved solutions</td></tr><tr><td><strong>N-nested loops</strong></td><td>Equivalent to a tree of depth N, implementable via DFS</td></tr><tr><td><strong>Subset tree</strong></td><td>Binary tree: include or exclude each element</td></tr><tr><td><strong>Permutation tree</strong></td><td>Multi-way tree where each level chooses an unused number</td></tr></tbody></table><p>The general backtracking pattern is:</p><ol><li><strong>Mark</strong> the current choice</li><li><strong>Record</strong> the path</li><li><strong>Recurse</strong> to the next level</li><li><strong>Return</strong> to the previous level</li><li><strong>Clear</strong> the mark</li></ol></div></article></div><footer><p>Copyleft (ↄ) 2026 Yi Chen</p><p><a href=mailto:yi.chen@wisc.edu>yi.chen@wisc.edu</a></p></footer><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:!0,macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:["\\left\\lVert#1\\right\\rVert",1],st:"\\textrm{subject to:}"}},chtml:{adaptiveCSS:!0}}</script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>

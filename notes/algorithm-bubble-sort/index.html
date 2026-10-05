@@ -1,0 +1,40 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><link rel=icon type=image/x-icon href=/images/favicon.ico><title>Yi Chen | Bubble Sort</title></head><body class=page><div id=content><header><nav><a href=/>[Home]</a>
+<a href=/notes/>[Notes]</a>
+<a href=/categories/algorithms/>[Algorithms]</a>
+<a href=/publications/>[Publications]</a>
+<a href=/projects/>[Projects]</a><br><a href=https://github.com/kitkatdafu>[GitHub]</a>
+<a href=https://archive.casouri.cc>[BHL0388]</a></nav></header><article class=note><header class=note__header><h1>Bubble Sort</h1><div class=metadata><time datetime=2025-10-31>Oct 31, 2025</time>
+<a class=metadata__category href=/categories/algorithms/>Algorithms</a>
+<a class=metadata__tag href=/tags/algorithms/>#Algorithms</a>
+<a class=metadata__tag href=/tags/sorting/>#Sorting</a></div></header><div class=note__body><ol><li><strong>Make a &ldquo;pass&rdquo;</strong> through the unsorted part of the list, comparing every pair of adjacent items (from the beginning to the end of the unsorted section).</li><li>For each pair, if the item on the left is greater than the item on the right, <strong>swap them</strong>. This moves the larger element one position to the right.</li><li>After the first full pass, the <strong>largest element</strong> in the list will have &ldquo;bubbled up&rdquo; to the very last position.</li><li><strong>Repeat</strong> the process for the remaining unsorted portion of the list (i.e., from the beginning up to the now-sorted end), making one less comparison each time. Continue until no more swaps are needed.</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>bubble_sort</span>(arr):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Sorts a list in ascending order using the bubble sort algorithm.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    n <span style=color:#f92672>=</span> len(arr)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Outer loop for the number of passes</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(n):
+</span></span><span style=display:flex><span>        <span style=color:#75715e># A flag to optimize if the list becomes sorted early</span>
+</span></span><span style=display:flex><span>        swapped <span style=color:#f92672>=</span> <span style=color:#66d9ef>False</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Inner loop for comparing adjacent elements</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># The range is (n-i-1) because the last &#39;i&#39; elements are already in place</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>0</span>, n <span style=color:#f92672>-</span> i <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>):
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Compare adjacent elements</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> arr[j] <span style=color:#f92672>&gt;</span> arr[j <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>]:
+</span></span><span style=display:flex><span>                <span style=color:#75715e># Swap them if the first is greater than the second</span>
+</span></span><span style=display:flex><span>                arr[j], arr[j <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>] <span style=color:#f92672>=</span> arr[j <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>], arr[j]
+</span></span><span style=display:flex><span>                swapped <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># If no swaps occurred in a full pass, the list is sorted</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>not</span> swapped:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>break</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># --- Example Usage ---</span>
+</span></span><span style=display:flex><span>my_list <span style=color:#f92672>=</span> [<span style=color:#ae81ff>64</span>, <span style=color:#ae81ff>34</span>, <span style=color:#ae81ff>25</span>, <span style=color:#ae81ff>12</span>, <span style=color:#ae81ff>22</span>, <span style=color:#ae81ff>11</span>, <span style=color:#ae81ff>90</span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Original list: </span><span style=color:#e6db74>{</span>my_list<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>bubble_sort(my_list)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Sorted list:   </span><span style=color:#e6db74>{</span>my_list<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div></div></article></div><footer><p>Copyleft (ↄ) 2026 Yi Chen</p><p><a href=mailto:yi.chen@wisc.edu>yi.chen@wisc.edu</a></p></footer><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:!0,macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:["\\left\\lVert#1\\right\\rVert",1],st:"\\textrm{subject to:}"}},chtml:{adaptiveCSS:!0}}</script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>

@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><link rel=icon type=image/x-icon href=/images/favicon.ico><title>Yi Chen | Difference Arrays</title></head><body class=page><div id=content><header><nav><a href=/>[Home]</a>
+<a href=/notes/>[Notes]</a>
+<a href=/categories/algorithms/>[Algorithms]</a>
+<a href=/publications/>[Publications]</a>
+<a href=/projects/>[Projects]</a><br><a href=https://github.com/kitkatdafu>[GitHub]</a>
+<a href=https://archive.casouri.cc>[BHL0388]</a></nav></header><article class=note><header class=note__header><h1>Difference Arrays</h1><div class=metadata><time datetime=2025-11-24>Nov 24, 2025</time>
+<a class=metadata__category href=/categories/algorithms/>Algorithms</a>
+<a class=metadata__tag href=/tags/algorithms/>#Algorithms</a>
+<a class=metadata__tag href=/tags/arrays/>#Arrays</a>
+<a class=metadata__tag href=/tags/prefix-sums/>#Prefix Sums</a>
+<a class=metadata__tag href=/tags/range-queries/>#Range Queries</a></div></header><div class=note__body><h2 id=difference-arrays>Difference Arrays</h2><ol><li>For an array $a$, the difference array $\mathrm{diff}$ is defined as:
+$$
+\mathrm{diff}[i] = a[i] - a[i - 1], \quad \text{where } a[0] = 0.
+$$</li><li>Computing the prefix sums of the difference array restores the original array:
+$$
+\mathrm{diff}[1] + \mathrm{diff}[2] + \dots + \mathrm{diff}[i] = a[1] + (a[2] - a[1]) + \dots + (a[i] - a[i - 1]) = a[i].
+$$</li><li>To perform range addition on the original array (adding $x$ to all elements in the interval $[l, r]$), the operations on the difference array are:
+$$
+\mathrm{diff}[l] \mathrel{+}= x, \quad \mathrm{diff}[r + 1] \mathrel{-}= x.
+$$</li></ol><h3 id=two-dimensional-difference-arrays>Two-dimensional Difference Arrays</h3>$$
+\mathrm{diff}_{i, j} = a_{i, j} - a_{i - 1, j} - a_{i, j - 1} + a_{i - 1, j - 1}
+$$<p>To perform range addition between $(x_{1}, y_{1})$ and $(x_{2}, y_{2})$, do</p>$$
+\mathrm{diff}[x_{1}][y_{1}] \mathrel{+}= x
+$$<p></p>$$
+\mathrm{diff}[x_{1}][y_{2} + 1] \mathrel{-}= x
+$$<p></p>$$
+\mathrm{diff}[x_{2} + 1][y_{1}] \mathrel{-}= x
+$$<p></p>$$
+\mathrm{diff}[x_{2} + 1][y_{2} + 1] \mathrel{+}= x
+$$</div></article></div><footer><p>Copyleft (ↄ) 2026 Yi Chen</p><p><a href=mailto:yi.chen@wisc.edu>yi.chen@wisc.edu</a></p></footer><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:!0,macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:["\\left\\lVert#1\\right\\rVert",1],st:"\\textrm{subject to:}"}},chtml:{adaptiveCSS:!0}}</script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>

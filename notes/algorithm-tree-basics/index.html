@@ -1,0 +1,97 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><link rel=icon type=image/x-icon href=/images/favicon.ico><title>Yi Chen | Tree Basics</title></head><body class=page><div id=content><header><nav><a href=/>[Home]</a>
+<a href=/notes/>[Notes]</a>
+<a href=/categories/algorithms/>[Algorithms]</a>
+<a href=/publications/>[Publications]</a>
+<a href=/projects/>[Projects]</a><br><a href=https://github.com/kitkatdafu>[GitHub]</a>
+<a href=https://archive.casouri.cc>[BHL0388]</a></nav></header><article class=note><header class=note__header><h1>Tree Basics</h1><div class=metadata><time datetime=2026-04-13>Apr 13, 2026</time>
+<a class=metadata__category href=/categories/algorithms/>Algorithms</a>
+<a class=metadata__tag href=/tags/algorithms/>#Algorithms</a>
+<a class=metadata__tag href=/tags/data-structures/>#Data Structures</a>
+<a class=metadata__tag href=/tags/trees/>#Trees</a></div></header><div class=note__body><h2 id=what-is-a-tree>What is a Tree?</h2><h3 id=concept-a-non-linear-hierarchical-structure>Concept: A Non-Linear Hierarchical Structure</h3><ul><li><strong>Tree</strong> is an abstract data type used to simulate data with <strong>hierarchical relationships</strong>. It consists of <em>n</em> (<em>n</em> ≥ 0) finite nodes.</li><li>It is a <strong>non-linear</strong> data structure, in contrast to the linear structures we studied earlier such as lists, stacks, and queues.</li><li>In a tree structure, there is a special node called the <strong>Root</strong>. The remaining nodes can be divided into <em>m</em> (<em>m</em> ≥ 0) disjoint sets <em>T₁, T₂, &mldr;, Tₘ</em>, each of which is itself a tree, referred to as a <strong>Subtree</strong> of the root.</li></ul><h3 id=real-life-examples>Real-Life Examples</h3><ul><li><strong>Book table of contents</strong>: The book is the root node, chapters are intermediate nodes, and sections are leaf nodes.</li><li><strong>File system</strong>: The root directory is the root node, subdirectories at each level are intermediate nodes, and files are leaf nodes.</li></ul><hr><h2 id=key-terminology>Key Terminology</h2><p><em>(Based on the tree diagram with nodes A, B, C, D, E, F, G, H, I, K)</em></p><ul><li><strong>Root</strong>: The topmost node of the tree (A).</li><li><strong>Child</strong>: The direct successor of a node (B, C, D are children of A).</li><li><strong>Parent</strong>: The direct predecessor of a node (A is the parent of B, C, D).</li><li><strong>Sibling</strong>: Nodes that share the same parent (B, C, D are siblings of each other).</li><li><strong>Leaf</strong>: A node with no children (E, K, C, G, H, I).</li><li><strong>Internal Node</strong>: A non-leaf node (A, B, F, D).</li><li><strong>Degree</strong>: The number of subtrees a node has (A has degree 3).</li><li><strong>Depth</strong>: The path length from the root to a given node (depth of F is 2).</li><li><strong>Height</strong>: The maximum depth among all nodes in the tree.</li></ul><hr><h2 id=rooted-tree-vs-unrooted-tree>Rooted Tree vs. Unrooted Tree</h2><h3 id=rooted-tree>Rooted Tree</h3><ul><li>All concepts discussed previously — parent, child, depth, etc. — are based on <strong>rooted trees</strong>.</li><li>A rooted tree has an explicitly designated <strong>root node</strong>, which establishes the hierarchical structure and direction of the entire tree.</li><li>In a problem, if the input directly provides directed &ldquo;parent–child&rdquo; relationships, then it describes a rooted tree.</li></ul><h3 id=unrooted-tree>Unrooted Tree</h3><ul><li>In algorithm competitions, problems often provide only a set of &ldquo;edges&rdquo; connecting nodes without specifying a root. This describes an <strong>unrooted tree</strong>.</li><li>An unrooted tree is a <strong>connected acyclic graph</strong>. It has no inherent hierarchical direction.</li><li>We can choose <strong>any node as the root</strong> to convert an unrooted tree into a rooted tree for processing. Different choices of root produce structurally different rooted trees.</li></ul><hr><h2 id=properties-of-trees>Properties of Trees</h2><h3 id=a-tree-with-n-nodes-has-the-following-properties>A Tree with N Nodes Has the Following Properties</h3><ul><li><strong>Edges</strong>: A tree has exactly <em>N</em> − 1 edges. This is a key characteristic that distinguishes trees from general graphs.</li><li><strong>Connectivity</strong>: There is exactly <strong>one</strong> unique simple path between any two nodes in a tree.</li><li><strong>Acyclicity</strong>: A tree contains no cycles.</li><li><strong>Corollaries</strong>:<ul><li>Adding any one edge to a tree will necessarily create a cycle.</li><li>Removing any one edge from a tree will necessarily split it into two disconnected trees.</li></ul></li><li>In graph theory, a graph with <em>N</em> nodes is a tree if and only if any <strong>two</strong> of the following three conditions hold:<ul><li>The graph is connected.</li><li>The graph is acyclic.</li><li>The graph has <em>N</em> − 1 edges.</li></ul></li></ul><hr><h2 id=special-trees--binary-tree>Special Trees — Binary Tree</h2><h3 id=definition>Definition</h3><p>A <strong>Binary Tree</strong> is a special type of tree where each node has <strong>at most two children</strong>, referred to as the <strong>Left Child</strong> and the <strong>Right Child</strong>.</p><ul><li>The positions of the two children are <strong>ordered</strong> and cannot be swapped arbitrarily.</li><li>A node may have only a left child, or only a right child.</li></ul><h3 id=full-binary-tree>Full Binary Tree</h3><p>Every non-leaf node has exactly <strong>degree 2</strong> (i.e., exactly two children).</p><pre tabindex=0><code>        1
+       / \
+      2   3
+     / \ / \
+    4  5 6  7
+</code></pre><h3 id=complete-binary-tree>Complete Binary Tree</h3><p>Every level, except possibly the last, is completely filled. All nodes in the last level are <strong>as far left as possible</strong>.</p><pre tabindex=0><code>        1
+       / \
+      2   3
+     /\ /
+    4 5 6
+</code></pre><blockquote><p>Note: The <strong>heap</strong> data structure we studied previously is a type of complete binary tree.</p></blockquote><hr><h2 id=representation-1--node-class-object-oriented>Representation (1) — Node Class (Object-Oriented)</h2><h3 id=concept>Concept</h3><p>The most intuitive approach is to define a <code>TreeNode</code> class. Each object represents a node, containing the node&rsquo;s value and a list of references to all its child nodes.</p><h3 id=code-implementation>Code Implementation</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Define tree node</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TreeNode</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, val, children<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>val <span style=color:#f92672>=</span> val
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> children <span style=color:#f92672>is</span> <span style=color:#66d9ef>None</span>:
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>children <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>            self<span style=color:#f92672>.</span>children <span style=color:#f92672>=</span> children
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>root <span style=color:#f92672>=</span> TreeNode(<span style=color:#e6db74>&#39;A&#39;</span>, [        <span style=color:#75715e># Manually construct a tree:</span>
+</span></span><span style=display:flex><span>    TreeNode(<span style=color:#e6db74>&#39;B&#39;</span>, [           <span style=color:#75715e>#         A</span>
+</span></span><span style=display:flex><span>        TreeNode(<span style=color:#e6db74>&#39;E&#39;</span>),        <span style=color:#75715e>#       / | \</span>
+</span></span><span style=display:flex><span>        TreeNode(<span style=color:#e6db74>&#39;F&#39;</span>)         <span style=color:#75715e>#      B  C  D</span>
+</span></span><span style=display:flex><span>    ]),                       <span style=color:#75715e>#     / \</span>
+</span></span><span style=display:flex><span>    TreeNode(<span style=color:#e6db74>&#39;C&#39;</span>),            <span style=color:#75715e>#    E   F</span>
+</span></span><span style=display:flex><span>    TreeNode(<span style=color:#e6db74>&#39;D&#39;</span>)
+</span></span><span style=display:flex><span>])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Root&#39;s value: </span><span style=color:#e6db74>{</span>root<span style=color:#f92672>.</span>val<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Number of children: </span><span style=color:#e6db74>{</span>len(root<span style=color:#f92672>.</span>children)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;First child&#39;s value: </span><span style=color:#e6db74>{</span>root<span style=color:#f92672>.</span>children[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>val<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><h3 id=output>Output</h3><pre tabindex=0><code>Root&#39;s value: A
+Number of children: 3
+First child&#39;s value: B
+</code></pre><h3 id=pros-and-cons>Pros and Cons</h3><ul><li><strong>Pros</strong>: Clear structure; very well-suited to object-oriented thinking.</li><li><strong>Cons</strong>: Not flexible enough for scenarios requiring frequent structural modifications or graph-based applications; not commonly used in the standard input format of algorithm competitions.</li></ul><hr><h2 id=representation-2--adjacency-list>Representation (2) — Adjacency List</h2><h3 id=concept-1>Concept</h3><p>This is the <strong>most commonly used</strong> representation in graph theory and algorithm competitions. We use a dictionary or an array of lists to store the tree&rsquo;s structure. This method can flexibly represent both rooted and unrooted trees.</p><h3 id=rooted-tree-1>Rooted Tree</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Input as (parent, child) pairs</span>
+</span></span><span style=display:flex><span>N <span style=color:#f92672>=</span> <span style=color:#ae81ff>6</span>
+</span></span><span style=display:flex><span>edges <span style=color:#f92672>=</span> [(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>), (<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>2</span>), (<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>3</span>), (<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>4</span>), (<span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>5</span>)]
+</span></span><span style=display:flex><span>tree <span style=color:#f92672>=</span> [[] <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(N)]
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> parent, child <span style=color:#f92672>in</span> edges:
+</span></span><span style=display:flex><span>    tree[parent]<span style=color:#f92672>.</span>append(child)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Print results</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(N):
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Node </span><span style=color:#e6db74>{</span>i<span style=color:#e6db74>}</span><span style=color:#e6db74> children: </span><span style=color:#e6db74>{</span>tree[i]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p><strong>Output:</strong></p><pre tabindex=0><code>Node 0 children: [1, 2]
+Node 1 children: [3, 4]
+Node 2 children: [5]
+Node 3 children: []
+Node 4 children: []
+Node 5 children: []
+</code></pre><h3 id=unrooted-tree-1>Unrooted Tree</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Input as undirected edges</span>
+</span></span><span style=display:flex><span>N <span style=color:#f92672>=</span> <span style=color:#ae81ff>6</span>
+</span></span><span style=display:flex><span>edges <span style=color:#f92672>=</span> [(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>), (<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>2</span>), (<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>3</span>), (<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>4</span>), (<span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>5</span>)]
+</span></span><span style=display:flex><span>adj <span style=color:#f92672>=</span> [[] <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(N)]
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> u, v <span style=color:#f92672>in</span> edges:
+</span></span><span style=display:flex><span>    adj[u]<span style=color:#f92672>.</span>append(v)
+</span></span><span style=display:flex><span>    adj[v]<span style=color:#f92672>.</span>append(u)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Print results</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(N):
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Node </span><span style=color:#e6db74>{</span>i<span style=color:#e6db74>}</span><span style=color:#e6db74> neighbors: </span><span style=color:#e6db74>{</span>adj[i]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p><strong>Output:</strong></p><pre tabindex=0><code>Node 0 neighbors: [1, 2]
+Node 1 neighbors: [0, 3, 4]
+Node 2 neighbors: [0, 5]
+Node 3 neighbors: [1]
+Node 4 neighbors: [1]
+Node 5 neighbors: [2]
+</code></pre><hr><h2 id=representation-3--parent-pointer>Representation (3) — Parent Pointer</h2><h3 id=concept-2>Concept</h3><p>This method is specifically used for rooted trees. It uses an array <code>parent</code> to store the parent of each node. Specifically, <code>parent[i]</code> holds the index of node <code>i</code>&rsquo;s parent node. For the root node, a special value (e.g., -1) is used to indicate it has no parent.</p><h3 id=code-implementation-1>Code Implementation</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Assume N nodes, numbered 0 to N-1</span>
+</span></span><span style=display:flex><span>N <span style=color:#f92672>=</span> <span style=color:#ae81ff>6</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># parent[i] stores the parent of node i</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Assume root is 0, its parent is -1</span>
+</span></span><span style=display:flex><span>parent <span style=color:#f92672>=</span> [<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>*</span> N
+</span></span><span style=display:flex><span><span style=color:#75715e># edges describe parent-child relationships</span>
+</span></span><span style=display:flex><span>edges <span style=color:#f92672>=</span> [(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>), (<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>2</span>), (<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>3</span>), (<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>4</span>), (<span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>5</span>)]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> p, c <span style=color:#f92672>in</span> edges:
+</span></span><span style=display:flex><span>    parent[c] <span style=color:#f92672>=</span> p
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Print each node&#39;s parent</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(N):
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Node </span><span style=color:#e6db74>{</span>i<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;s parent: </span><span style=color:#e6db74>{</span>parent[i]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><h3 id=output-1>Output</h3><pre tabindex=0><code>Node 0&#39;s parent: -1
+Node 1&#39;s parent: 0
+Node 2&#39;s parent: 0
+Node 3&#39;s parent: 1
+Node 4&#39;s parent: 1
+Node 5&#39;s parent: 2
+</code></pre><h3 id=pros-and-cons-1>Pros and Cons</h3><ul><li><strong>Pros</strong>: Quickly find the parent of any node; well-suited for algorithms that need to trace upward (e.g., Union-Find / Disjoint Set Union).</li><li><strong>Cons</strong>: Cannot directly find all children of a node; requires traversing the entire array.</li></ul></div></article></div><footer><p>Copyleft (ↄ) 2026 Yi Chen</p><p><a href=mailto:yi.chen@wisc.edu>yi.chen@wisc.edu</a></p></footer><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:!0,macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:["\\left\\lVert#1\\right\\rVert",1],st:"\\textrm{subject to:}"}},chtml:{adaptiveCSS:!0}}</script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>

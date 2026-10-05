@@ -1,11 +1,10 @@
-<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><link rel=icon type=image/x-icon href=/images/favicon.ico><title>Yi Chen | K-means in Python</title></head><body><div id=content><header><nav><a href=/>[Home]</a>
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><link rel=icon type=image/x-icon href=/images/favicon.ico><title>Yi Chen | K-means in Python</title></head><body class=page><div id=content><header><nav><a href=/>[Home]</a>
 <a href=/notes/>[Notes]</a>
+<a href=/categories/algorithms/>[Algorithms]</a>
 <a href=/publications/>[Publications]</a>
 <a href=/projects/>[Projects]</a><br><a href=https://github.com/kitkatdafu>[GitHub]</a>
-<a href=https://archive.casouri.cc>[BHL0388]</a></nav></header><h1>K-means in Python</h1><i></i>
-<time datetime=2021-10-19>Oct 19, 2021</time>
-<i></i>
-<a href=https://ychen878.github.io/tags/>ml</a><br><br><p>There are two major steps in the K-means algorithm. The first one is to
+<a href=https://archive.casouri.cc>[BHL0388]</a></nav></header><article class=note><header class=note__header><h1>K-means in Python</h1><div class=metadata><time datetime=2021-10-19>Oct 19, 2021</time>
+<a class=metadata__tag href=/tags/ml/>#Ml</a></div></header><div class=note__body><p>There are two major steps in the K-means algorithm. The first one is to
 calculate the representatives (centroids) of a given partition. The
 second one is to find the partition based on the representatives.</p><div id=outline-container-inputs class=outline-3><h3 id=inputs>Inputs</h3><div id=outline-text-inputs class=outline-text-3><p>Suppose we have a dataset looks like this:</p><div class="src src-python"><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span>dataset <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>array([[<span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>6</span>],
 </span></span><span style=display:flex><span>                    [<span style=color:#ae81ff>6</span>, <span style=color:#ae81ff>5</span>],
@@ -23,7 +22,7 @@ about the partition. The centroid for a cluster $C$ is the average of
 all observations in the cluster, namely
 $$
 \mu = \frac{1}{|C|}\sum_{i \in C} x_i
-$$, where $x_i$ is the
+$$</p><p>where $x_i$ is the
 $i^\text{th}$ observation in the dataset.</p><p>All we need to do is to calculate the mean (using <code class=verbatim>np.mean()</code> with
 <code class=verbatim>axis</code> set to 0) for each partition.</p><div class="src src-python"><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>find_centroids</span>(dataset: np<span style=color:#f92672>.</span>ndarray, partition: list) <span style=color:#f92672>-&gt;</span> np<span style=color:#f92672>.</span>ndarray:
 </span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
@@ -71,10 +70,10 @@ algorithm should halt or not.</p><div class="src src-python"><div class=highligh
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>        u <span style=color:#f92672>=</span> find_centroids(dataset, partition)
 </span></span><span style=display:flex><span>        partition <span style=color:#f92672>=</span> new_partition(dataset, u)
-</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n\n</span><span style=color:#e6db74>Final Centroids:&#34;</span>)
 </span></span><span style=display:flex><span>    print(u)
 </span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#34;Final Partition:&#34;</span>)
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i, indices <span style=color:#f92672>in</span> enumerate(partition):
 </span></span><span style=display:flex><span>        print(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\t</span><span style=color:#e6db74>cluster #</span><span style=color:#e6db74>{}</span><span style=color:#e6db74>:&#34;</span><span style=color:#f92672>.</span>format(i <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>), {tuple(dataset[index])
-</span></span><span style=display:flex><span>                                               <span style=color:#66d9ef>for</span> index <span style=color:#f92672>in</span> indices})</span></span></code></pre></div></div></div></div></div><footer><p>Copyleft (ↄ) 2026 Yi Chen</p><p><a href="mailto: yi.chen@wisc.edu">yi.chen@wisc.edu</a></p></footer><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:["\\left\\lVert#1\\right\\rVert",1],st:"\\textrm{subject to:}"}},svg:{fontCache:"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>
+</span></span><span style=display:flex><span>                                               <span style=color:#66d9ef>for</span> index <span style=color:#f92672>in</span> indices})</span></span></code></pre></div></div></div></div></div></article></div><footer><p>Copyleft (ↄ) 2026 Yi Chen</p><p><a href=mailto:yi.chen@wisc.edu>yi.chen@wisc.edu</a></p></footer><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:!0,macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:["\\left\\lVert#1\\right\\rVert",1],st:"\\textrm{subject to:}"}},chtml:{adaptiveCSS:!0}}</script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>

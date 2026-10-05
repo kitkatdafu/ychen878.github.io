@@ -1,0 +1,38 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><link rel=icon type=image/x-icon href=/images/favicon.ico><title>Yi Chen | Selection Sort</title></head><body class=page><div id=content><header><nav><a href=/>[Home]</a>
+<a href=/notes/>[Notes]</a>
+<a href=/categories/algorithms/>[Algorithms]</a>
+<a href=/publications/>[Publications]</a>
+<a href=/projects/>[Projects]</a><br><a href=https://github.com/kitkatdafu>[GitHub]</a>
+<a href=https://archive.casouri.cc>[BHL0388]</a></nav></header><article class=note><header class=note__header><h1>Selection Sort</h1><div class=metadata><time datetime=2025-10-31>Oct 31, 2025</time>
+<a class=metadata__category href=/categories/algorithms/>Algorithms</a>
+<a class=metadata__tag href=/tags/algorithms/>#Algorithms</a>
+<a class=metadata__tag href=/tags/sorting/>#Sorting</a></div></header><div class=note__body><p>Selection sort works by conceptually dividing the list into two parts:</p><ol><li>A <strong>sorted</strong> subarray, which is built up from left to right at the beginning.</li><li>An <strong>unsorted</strong> subarray, which makes up the rest of the list.
+The algorithm iterates through the list, and at each step $i$ (from $i = 0$ to $n-1$):</li><li><strong>Find:</strong> It finds the smallest element in the <strong>unsorted</strong> subarray (i.e., from index $i$ to the end).</li><li><strong>Swap:</strong> It swaps that smallest element with the element at the <em>first position</em> of the unsorted subarray (which is index $i$).</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>selection_sort</span>(arr):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Sorts a list in ascending order using the selection sort algorithm.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    n <span style=color:#f92672>=</span> len(arr)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Outer loop: Move the boundary of the sorted subarray</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># This corresponds to your &#34;i-th position&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(n):
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Step 1: Find the index of the smallest element in the</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># remaining unsorted part (from index i to n-1)</span>
+</span></span><span style=display:flex><span>        min_index <span style=color:#f92672>=</span> i
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> range(i <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, n):
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> arr[j] <span style=color:#f92672>&lt;</span> arr[min_index]:
+</span></span><span style=display:flex><span>                min_index <span style=color:#f92672>=</span> j
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Step 2: Swap the found smallest element with the</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># element at the i-th position</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># This &#34;puts the smallest element&#34; into its final sorted place</span>
+</span></span><span style=display:flex><span>        arr[i], arr[min_index] <span style=color:#f92672>=</span> arr[min_index], arr[i]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># --- Example Usage ---</span>
+</span></span><span style=display:flex><span>my_list <span style=color:#f92672>=</span> [<span style=color:#ae81ff>64</span>, <span style=color:#ae81ff>25</span>, <span style=color:#ae81ff>12</span>, <span style=color:#ae81ff>22</span>, <span style=color:#ae81ff>11</span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Original list: </span><span style=color:#e6db74>{</span>my_list<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>selection_sort(my_list)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Sorted list:   </span><span style=color:#e6db74>{</span>my_list<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div></div></article></div><footer><p>Copyleft (ↄ) 2026 Yi Chen</p><p><a href=mailto:yi.chen@wisc.edu>yi.chen@wisc.edu</a></p></footer><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:!0,macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:["\\left\\lVert#1\\right\\rVert",1],st:"\\textrm{subject to:}"}},chtml:{adaptiveCSS:!0}}</script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>

@@ -1,0 +1,117 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><link rel=icon type=image/x-icon href=/images/favicon.ico><title>Yi Chen | Difference on Trees</title></head><body class=page><div id=content><header><nav><a href=/>[Home]</a>
+<a href=/notes/>[Notes]</a>
+<a href=/categories/algorithms/>[Algorithms]</a>
+<a href=/publications/>[Publications]</a>
+<a href=/projects/>[Projects]</a><br><a href=https://github.com/kitkatdafu>[GitHub]</a>
+<a href=https://archive.casouri.cc>[BHL0388]</a></nav></header><article class=note><header class=note__header><h1>Difference on Trees</h1><div class=metadata><time datetime=2026-08-08>Aug 8, 2026</time>
+<a class=metadata__category href=/categories/algorithms/>Algorithms</a>
+<a class=metadata__tag href=/tags/algorithms/>#Algorithms</a>
+<a class=metadata__tag href=/tags/trees/>#Trees</a>
+<a class=metadata__tag href=/tags/prefix-sums/>#Prefix Sums</a>
+<a class=metadata__tag href=/tags/lowest-common-ancestor/>#Lowest Common Ancestor</a></div></header><div class=note__body><h2 id=difference-on-trees>Difference on Trees</h2><h3 id=1-concept>1. Concept</h3><p><strong>Tree difference</strong> means applying the difference-array technique to a tree structure instead of a linear array. It is almost always used together with <strong>LCA</strong> (lowest common ancestor).</p><p>On an array, <em>prefix sum</em> and <em>difference</em> are inverse operations:</p><pre tabindex=0><code>prefix sum  &lt;----- inverse -----&gt;  difference
+</code></pre><p>On a tree, the analogue of &ldquo;prefix sum&rdquo; is the <strong>subtree sum</strong>: after all marks have been placed, the true value at node <code>u</code> equals the sum of the difference values over the whole subtree rooted at <code>u</code>. That aggregation is done with a single post-order DFS.</p><h4 id=example-tree-used-throughout>Example tree used throughout</h4><pre tabindex=0><code>                1
+              /   \
+             2     3
+           / | \   / \
+         11  4  5 6   7
+                      |
+                      8
+                     / \
+                    9   10
+</code></pre><hr><h3 id=2-problem-1--add-1-to-every-node-on-a-path>2. Problem 1 — Add 1 to every <strong>node</strong> on a path</h3><blockquote><p>Given a tree, each query adds 1 to <strong>all nodes</strong> on some path. After all queries, report the final value of every node.</p></blockquote><p>Example: add 1 to every node on the path 6 → 10, i.e. nodes <strong>6, 3, 7, 8, 10</strong>.</p><p>Doing this by walking the path costs O(path length) per query. With difference + LCA it costs O(1) marks per query (plus the LCA lookup).</p><h4 id=marking-rule>Marking rule</h4><p>For a query on path <code>(x, y)</code> with <code>l = LCA(x, y)</code>:</p><ol><li>Mark <code>+1</code> at the start <code>x</code> and at the end <code>y</code>.</li><li>Mark <code>-1</code> at <code>l</code>.</li><li>Mark <code>-1</code> at <code>parent(l)</code>.</li></ol><pre tabindex=0><code>c[x]           += 1
+c[y]           += 1
+c[l]           -= 1
+c[parent(l)]   -= 1
+</code></pre><p>For the example (x = 6, y = 10, LCA = 3, parent = 1):</p><pre tabindex=0><code>node 1 : -1
+node 3 : -1
+node 6 : +1
+node 10: +1
+</code></pre><p>Then <strong>the answer at each node is the sum of the difference values in its subtree</strong>.</p><h4 id=why-it-works>Why it works</h4><p><code>+1</code> at <code>x</code> propagates up to every ancestor of <code>x</code> when subtree sums are taken, and likewise for <code>y</code>. Everything strictly above <code>l</code> would be counted twice (once from each branch), so <code>-1</code> at <code>l</code> and <code>-1</code> at <code>parent(l)</code> cancel it: the <code>-1</code> at <code>l</code> removes one of the two counts at <code>l</code> itself and above, and the <code>-1</code> at <code>parent(l)</code> removes the remaining count for all strict ancestors of <code>l</code>, leaving <code>l</code> correctly counted once.</p><hr><h3 id=3-problem-2--add-1-to-every-edge-on-a-path>3. Problem 2 — Add 1 to every <strong>edge</strong> on a path</h3><blockquote><p>Given a tree, each query adds 1 to <strong>all edges</strong> on some path. After all queries, report the final weight of every edge.</p></blockquote><p>Example: add 1 to every edge on the path 6 → 10, i.e. edges (3,6), (3,7), (7,8), (8,10).</p><h4 id=marking-rule-1>Marking rule</h4><ol><li><strong>Push each edge&rsquo;s weight down onto its lower endpoint</strong> — an edge <code>(parent, child)</code> is represented by the node <code>child</code>. Every node except the root then corresponds to exactly one edge.</li><li>Mark <code>+1</code> at the start <code>x</code> and at the end <code>y</code>.</li><li>Mark <code>-2</code> at <code>l = LCA(x, y)</code>.</li></ol><pre tabindex=0><code>c[x] += 1
+c[y] += 1
+c[l] -= 2
+</code></pre><p>For the example (x = 6, y = 10, LCA = 3):</p><pre tabindex=0><code>node 3 : -2
+node 6 : +1
+node 10: +1
+</code></pre><p>No <code>parent(LCA)</code> term this time: the edge above the LCA is <em>not</em> on the path, so both upward contributions must be killed at <code>l</code> itself, hence <code>-2</code> instead of two separate <code>-1</code>s.</p><h4 id=node-vs-edge-difference-at-a-glance>Node vs. edge difference at a glance</h4><table><thead><tr><th></th><th>Node version</th><th>Edge version</th></tr></thead><tbody><tr><td>Marks</td><td><code>+1</code> at <code>x</code>, <code>+1</code> at <code>y</code>, <code>-1</code> at <code>l</code>, <code>-1</code> at <code>parent(l)</code></td><td><code>+1</code> at <code>x</code>, <code>+1</code> at <code>y</code>, <code>-2</code> at <code>l</code></td></tr><tr><td>Meaning of <code>c[u]</code> after subtree sum</td><td>value of node <code>u</code></td><td>value of the edge <code>(parent(u), u)</code></td></tr><tr><td>Root</td><td>included if on the path</td><td>meaningless (no edge above it)</td></tr></tbody></table><hr><h3 id=4-reference-implementation>4. Reference implementation</h3><p>Binary-lifting LCA template plus node-version tree difference. The final line prints the maximum node value over all <code>k</code> path-increment operations.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> sys
+</span></span><span style=display:flex><span>sys<span style=color:#f92672>.</span>setrecursionlimit(<span style=color:#ae81ff>100000</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>input <span style=color:#f92672>=</span> sys<span style=color:#f92672>.</span>stdin<span style=color:#f92672>.</span>readline
+</span></span><span style=display:flex><span>n, k <span style=color:#f92672>=</span> map(int, input()<span style=color:#f92672>.</span>split())
+</span></span><span style=display:flex><span>G <span style=color:#f92672>=</span> [[] <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(n <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>)]
+</span></span><span style=display:flex><span><span style=color:#75715e># deep[u] is the depth of node u</span>
+</span></span><span style=display:flex><span>deep <span style=color:#f92672>=</span> [<span style=color:#ae81ff>0</span>] <span style=color:#f92672>*</span> (n <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e># p[u][i] is the node reached by moving 2^i steps up from u</span>
+</span></span><span style=display:flex><span>p <span style=color:#f92672>=</span> [[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>*</span> <span style=color:#ae81ff>21</span> <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(n <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>)]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(n <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>):
+</span></span><span style=display:flex><span>    u, v <span style=color:#f92672>=</span> map(int, input()<span style=color:#f92672>.</span>split())
+</span></span><span style=display:flex><span>    G[u]<span style=color:#f92672>.</span>append(v)
+</span></span><span style=display:flex><span>    G[v]<span style=color:#f92672>.</span>append(u)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>dfs</span>(u, fa):
+</span></span><span style=display:flex><span>    <span style=color:#75715e># preprocessing</span>
+</span></span><span style=display:flex><span>    deep[u] <span style=color:#f92672>=</span> deep[fa] <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    p[u][<span style=color:#ae81ff>0</span>] <span style=color:#f92672>=</span> fa
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>21</span>):
+</span></span><span style=display:flex><span>        p[u][i] <span style=color:#f92672>=</span> p[p[u][i <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>]][i <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>]
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> v <span style=color:#f92672>in</span> G[u]:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> v <span style=color:#f92672>==</span> fa:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>continue</span>
+</span></span><span style=display:flex><span>        dfs(v, u)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>lca</span>(x, y):
+</span></span><span style=display:flex><span>    <span style=color:#75715e># make sure x is the deeper node</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> deep[x] <span style=color:#f92672>&lt;</span> deep[y]:
+</span></span><span style=display:flex><span>        x, y <span style=color:#f92672>=</span> y, x
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># lift x with binary lifting until deep[x] == deep[y];</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># enumerate step sizes 2^i from large to small.</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># A step is allowed if the node reached, p[x][i],</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># is still at depth &gt;= deep[y].</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>20</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> deep[p[x][i]] <span style=color:#f92672>&gt;=</span> deep[y]:
+</span></span><span style=display:flex><span>            x <span style=color:#f92672>=</span> p[x][i]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># now deep[x] == deep[y]</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> x <span style=color:#f92672>==</span> y:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> x
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># lift both together: if a 2^i step lands them on the same</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># ancestor, the step is too big; otherwise take it</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>20</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> p[x][i] <span style=color:#f92672>!=</span> p[y][i]:
+</span></span><span style=display:flex><span>            x, y <span style=color:#f92672>=</span> p[x][i], p[y][i]
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> p[x][<span style=color:#ae81ff>0</span>]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>dfs(<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># ---- tree difference ----</span>
+</span></span><span style=display:flex><span>c <span style=color:#f92672>=</span> [<span style=color:#ae81ff>0</span>] <span style=color:#f92672>*</span> (n <span style=color:#f92672>+</span> <span style=color:#ae81ff>10</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(k):
+</span></span><span style=display:flex><span>    x, y <span style=color:#f92672>=</span> map(int, input()<span style=color:#f92672>.</span>split())
+</span></span><span style=display:flex><span>    c[x] <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    c[y] <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    c[lca(x, y)] <span style=color:#f92672>-=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    c[p[lca(x, y)][<span style=color:#ae81ff>0</span>]] <span style=color:#f92672>-=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>dfs2</span>(u, fa):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> v <span style=color:#f92672>in</span> G[u]:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> v <span style=color:#f92672>==</span> fa:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>continue</span>
+</span></span><span style=display:flex><span>        dfs2(v, u)
+</span></span><span style=display:flex><span>        c[u] <span style=color:#f92672>+=</span> c[v]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>dfs2(<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>print(max(c))
+</span></span></code></pre></div><p>For the <strong>edge</strong> version, replace the marking block with:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(k):
+</span></span><span style=display:flex><span>    x, y <span style=color:#f92672>=</span> map(int, input()<span style=color:#f92672>.</span>split())
+</span></span><span style=display:flex><span>    l <span style=color:#f92672>=</span> lca(x, y)
+</span></span><span style=display:flex><span>    c[x] <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    c[y] <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    c[l] <span style=color:#f92672>-=</span> <span style=color:#ae81ff>2</span>
+</span></span></code></pre></div><p>and remember that after <code>dfs2</code>, <code>c[u]</code> is the weight of the edge between <code>u</code> and its parent (<code>c[root]</code> is meaningless).</p><hr><h3 id=5-complexity>5. Complexity</h3><table><thead><tr><th>Step</th><th>Cost</th></tr></thead><tbody><tr><td>Binary-lifting preprocessing (<code>dfs</code>)</td><td>O(n log n)</td></tr><tr><td>Each query (LCA + O(1) marks)</td><td>O(log n)</td></tr><tr><td>Final subtree accumulation (<code>dfs2</code>)</td><td>O(n)</td></tr><tr><td><strong>Total</strong></td><td><strong>O((n + k) log n)</strong></td></tr></tbody></table><p>Compare with the naive approach of walking every path, which is O(nk) in the worst case.</p></div></article></div><footer><p>Copyleft (ↄ) 2026 Yi Chen</p><p><a href=mailto:yi.chen@wisc.edu>yi.chen@wisc.edu</a></p></footer><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:!0,macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:["\\left\\lVert#1\\right\\rVert",1],st:"\\textrm{subject to:}"}},chtml:{adaptiveCSS:!0}}</script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>

@@ -1,0 +1,54 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><link rel=icon type=image/x-icon href=/images/favicon.ico><title>Yi Chen | Quicksort</title></head><body class=page><div id=content><header><nav><a href=/>[Home]</a>
+<a href=/notes/>[Notes]</a>
+<a href=/categories/algorithms/>[Algorithms]</a>
+<a href=/publications/>[Publications]</a>
+<a href=/projects/>[Projects]</a><br><a href=https://github.com/kitkatdafu>[GitHub]</a>
+<a href=https://archive.casouri.cc>[BHL0388]</a></nav></header><article class=note><header class=note__header><h1>Quicksort</h1><div class=metadata><time datetime=2025-11-10>Nov 10, 2025</time>
+<a class=metadata__category href=/categories/algorithms/>Algorithms</a>
+<a class=metadata__tag href=/tags/algorithms/>#Algorithms</a>
+<a class=metadata__tag href=/tags/sorting/>#Sorting</a>
+<a class=metadata__tag href=/tags/divide-and-conquer/>#Divide and Conquer</a></div></header><div class=note__body><p>Quicksort is a <strong>Divide and Conquer</strong> algorithm.</p><ol><li><strong>Divide (Pick Pivot):</strong> Choose one element from the array to be the <strong>pivot</strong>.</li><li><strong>Conquer (Partition):</strong> Rearrange the array so that the pivot is in its final sorted position. All elements <strong>smaller</strong> than the pivot are placed to its left, and all elements <strong>greater</strong> than the pivot are placed to its right. (Elements equal to the pivot can go on either side, depending on the scheme).</li><li><strong>Combine (Recurse):</strong> Recursively apply the same strategy to the two smaller subarrays—the one to the left of the pivot&rsquo;s new position and the one to the right. The &ldquo;combine&rdquo; step is trivial as the sorting happens in place.</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>partition</span>(a, left, right):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Partitions the subarray a[left...right] using the Lomuto scheme
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    with a[left] as the pivot.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Returns the final index of the pivot.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># The pivot is the first element</span>
+</span></span><span style=display:flex><span>    pivot_value <span style=color:#f92672>=</span> a[left]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># &#39;idx&#39; will track the boundary of the &#39;less-than-or-equal-to&#39; partition.</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># All elements at indices [left+1 ... idx-1] will be &lt;= pivot.</span>
+</span></span><span style=display:flex><span>    idx <span style=color:#f92672>=</span> left <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Iterate through the array to partition it</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(left <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, right <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>):
+</span></span><span style=display:flex><span>        <span style=color:#75715e># If current element is smaller or equal to the pivot</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> a[i] <span style=color:#f92672>&lt;=</span> pivot_value:
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Move it to the &#39;less-than&#39; partition</span>
+</span></span><span style=display:flex><span>            a[idx], a[i] <span style=color:#f92672>=</span> a[i], a[idx]
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Expand the &#39;less-than&#39; partition</span>
+</span></span><span style=display:flex><span>            idx <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># At the end, swap the pivot (originally at a[left]) with</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># the last element of the &#39;less-than&#39; partition (at a[idx - 1])</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># to put the pivot in its final sorted position.</span>
+</span></span><span style=display:flex><span>    pivot_final_index <span style=color:#f92672>=</span> idx <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    a[left], a[pivot_final_index] <span style=color:#f92672>=</span> a[pivot_final_index], a[left]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> pivot_final_index
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>quicksort</span>(a, left, right):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Sorts the array &#39;a&#39; in-place from index &#39;left&#39; to &#39;right&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    using the quicksort algorithm.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> left <span style=color:#f92672>&lt;</span> right:
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Partition the array and get the pivot&#39;s final index</span>
+</span></span><span style=display:flex><span>        pivot_index <span style=color:#f92672>=</span> partition(a, left, right)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Recursively sort the two subarrays</span>
+</span></span><span style=display:flex><span>        quicksort(a, left, pivot_index <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>)  <span style=color:#75715e># Subarray to the left of pivot</span>
+</span></span><span style=display:flex><span>        quicksort(a, pivot_index <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, right) <span style=color:#75715e># Subarray to the right of pivot</span>
+</span></span></code></pre></div></div></article></div><footer><p>Copyleft (ↄ) 2026 Yi Chen</p><p><a href=mailto:yi.chen@wisc.edu>yi.chen@wisc.edu</a></p></footer><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:!0,macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:["\\left\\lVert#1\\right\\rVert",1],st:"\\textrm{subject to:}"}},chtml:{adaptiveCSS:!0}}</script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>

@@ -1,0 +1,116 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><link rel=icon type=image/x-icon href=/images/favicon.ico><title>Yi Chen | Linked Lists</title></head><body class=page><div id=content><header><nav><a href=/>[Home]</a>
+<a href=/notes/>[Notes]</a>
+<a href=/categories/algorithms/>[Algorithms]</a>
+<a href=/publications/>[Publications]</a>
+<a href=/projects/>[Projects]</a><br><a href=https://github.com/kitkatdafu>[GitHub]</a>
+<a href=https://archive.casouri.cc>[BHL0388]</a></nav></header><article class=note><header class=note__header><h1>Linked Lists</h1><div class=metadata><time datetime=2026-04-11>Apr 11, 2026</time>
+<a class=metadata__category href=/categories/algorithms/>Algorithms</a>
+<a class=metadata__tag href=/tags/algorithms/>#Algorithms</a>
+<a class=metadata__tag href=/tags/data-structures/>#Data Structures</a>
+<a class=metadata__tag href=/tags/linked-lists/>#Linked Lists</a></div></header><div class=note__body><h2 id=what-is-a-linked-list>What is a Linked List?</h2><h3 id=concept-a-dynamic-data-structure>Concept: A Dynamic Data Structure</h3><ul><li>A <strong>Linked List</strong> is a linear data structure, but its elements are <strong>not stored contiguously in memory</strong>.</li><li>It is composed of a series of <strong>Nodes</strong>, where each node contains two parts:<ul><li><strong>Data field</strong>: stores the element&rsquo;s data.</li><li><strong>Pointer field</strong>: stores the memory address of the next node.</li></ul></li><li>This structure — discrete memory blocks chained together via pointers — makes linked lists very efficient for insertion and deletion operations.</li></ul><h3 id=comparison-with-arrays>Comparison with Arrays</h3><table><thead><tr><th></th><th>Array</th><th>Linked List</th></tr></thead><tbody><tr><td>Memory</td><td>Contiguous</td><td>Non-contiguous</td></tr><tr><td>Access</td><td>Fast — O(1)</td><td>Slow — O(n)</td></tr><tr><td>Insert/Delete</td><td>Slow — O(n)</td><td>Fast — O(1)</td></tr></tbody></table><hr><h2 id=structure-nodes-and-pointers>Structure: Nodes and Pointers</h2><h3 id=singly-linked-list>Singly Linked List</h3><p>The simplest type of linked list. Each node has exactly one pointer pointing to its successor node.</p><pre tabindex=0><code>[ 12 | • ] ──→ [ 99 | • ] ──→ [ 37 | Null ]
+  Node 1          Node 2          Node 3
+</code></pre><h3 id=key-terminology>Key Terminology</h3><ul><li><strong>Head</strong>: The first node of the linked list.</li><li><strong>Tail</strong>: The last node of the linked list; its pointer field points to <strong>Null</strong>.</li></ul><hr><h2 id=implementing-a-linked-list-in-python>Implementing a Linked List in Python</h2><h3 id=defining-the-listnode-class>Defining the <code>ListNode</code> Class</h3><p>In Python, we typically define a node using a class that holds data and a reference to the next node.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Define the linked list node</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ListNode</span>:
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>__init__</span>(self, val<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>, next<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>):
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>val <span style=color:#f92672>=</span> val    <span style=color:#75715e># node&#39;s data value</span>
+</span></span><span style=display:flex><span>        self<span style=color:#f92672>.</span>next <span style=color:#f92672>=</span> next  <span style=color:#75715e># reference to the next node</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Create a simple linked list: 1 -&gt; 2 -&gt; 3</span>
+</span></span><span style=display:flex><span>node3 <span style=color:#f92672>=</span> ListNode(<span style=color:#ae81ff>3</span>)
+</span></span><span style=display:flex><span>node2 <span style=color:#f92672>=</span> ListNode(<span style=color:#ae81ff>2</span>, node3)
+</span></span><span style=display:flex><span>head  <span style=color:#f92672>=</span> ListNode(<span style=color:#ae81ff>1</span>, node2)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Traverse the list</span>
+</span></span><span style=display:flex><span>current <span style=color:#f92672>=</span> head
+</span></span><span style=display:flex><span><span style=color:#66d9ef>while</span> current:
+</span></span><span style=display:flex><span>    print(current<span style=color:#f92672>.</span>val, end<span style=color:#f92672>=</span><span style=color:#e6db74>&#34; -&gt; &#34;</span>)
+</span></span><span style=display:flex><span>    current <span style=color:#f92672>=</span> current<span style=color:#f92672>.</span>next
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;None&#34;</span>)
+</span></span></code></pre></div><p><strong>Output:</strong> <code>1 -> 2 -> 3 -> None</code></p><h3 id=dummy-head-node>Dummy Head Node</h3><p>When solving linked list problems, we often create a <strong>dummy head node</strong> whose <code>next</code> pointer points to the true head node.</p><p>The advantage is that it <strong>unifies operations on all nodes</strong>, avoiding special-casing the head node (e.g., inserting or deleting at the front). This makes the code cleaner and less error-prone.</p><hr><h2 id=core-operation-1-insert>Core Operation (1): Insert</h2><h3 id=process-insert-new-node-x-after-node-a>Process: Insert New Node X After Node A</h3><ol><li>Find node A.</li><li>Set new node X&rsquo;s <code>next</code> pointer to A&rsquo;s current successor node.</li><li>Set node A&rsquo;s <code>next</code> pointer to the new node X.</li></ol><pre tabindex=0><code>Step 1:  X.next = A.next   (X now points to B)
+Step 2:  A.next = X        (A now points to X)
+
+Before: A ──→ B
+After:  A ──→ X ──→ B
+</code></pre><h3 id=code-implementation>Code Implementation</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Insert new_val after the node with value target_val</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>insert_after</span>(head, target_val, new_val):
+</span></span><span style=display:flex><span>    curr <span style=color:#f92672>=</span> head
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 1. Find the target node</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> curr <span style=color:#f92672>and</span> curr<span style=color:#f92672>.</span>val <span style=color:#f92672>!=</span> target_val:
+</span></span><span style=display:flex><span>        curr <span style=color:#f92672>=</span> curr<span style=color:#f92672>.</span>next
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 2. If found, perform insertion</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> curr:
+</span></span><span style=display:flex><span>        new_node <span style=color:#f92672>=</span> ListNode(new_val)
+</span></span><span style=display:flex><span>        new_node<span style=color:#f92672>.</span>next <span style=color:#f92672>=</span> curr<span style=color:#f92672>.</span>next
+</span></span><span style=display:flex><span>        curr<span style=color:#f92672>.</span>next <span style=color:#f92672>=</span> new_node
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> head
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Example: list is 1 -&gt; 2 -&gt; 3</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># insert_after(head, 2, 99)</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Result: 1 -&gt; 2 -&gt; 99 -&gt; 3</span>
+</span></span></code></pre></div><hr><h2 id=core-operation-2-delete>Core Operation (2): Delete</h2><h3 id=process-delete-the-node-with-value-target_val>Process: Delete the Node with Value <code>target_val</code></h3><ol><li>Use a dummy head node to simplify edge cases.</li><li>Find the <strong>predecessor node</strong> <code>prev</code> of the node to be deleted.</li><li>Set <code>prev.next</code> to point directly to the node <strong>after</strong> the deleted node.</li></ol><pre tabindex=0><code>Before: A ──→ [B] ──→ C
+                       ↑
+        A.next = B.next (skip over B)
+After:  A ──────────→ C
+</code></pre><h3 id=code-implementation-1>Code Implementation</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Delete the first node with value target_val</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>delete_node</span>(head, target_val):
+</span></span><span style=display:flex><span>    dummy <span style=color:#f92672>=</span> ListNode(next<span style=color:#f92672>=</span>head)
+</span></span><span style=display:flex><span>    prev, curr <span style=color:#f92672>=</span> dummy, head
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> curr:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> curr<span style=color:#f92672>.</span>val <span style=color:#f92672>==</span> target_val:
+</span></span><span style=display:flex><span>            <span style=color:#75715e># Found it — bypass the current node</span>
+</span></span><span style=display:flex><span>            prev<span style=color:#f92672>.</span>next <span style=color:#f92672>=</span> curr<span style=color:#f92672>.</span>next
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>break</span>  <span style=color:#75715e># delete the first one, then exit</span>
+</span></span><span style=display:flex><span>        prev <span style=color:#f92672>=</span> curr
+</span></span><span style=display:flex><span>        curr <span style=color:#f92672>=</span> curr<span style=color:#f92672>.</span>next
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> dummy<span style=color:#f92672>.</span>next
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Example: list is 1 -&gt; 2 -&gt; 99 -&gt; 3</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># delete_node(head, 99)</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Result: 1 -&gt; 2 -&gt; 3</span>
+</span></span></code></pre></div><h3 id=how-is-memory-freed>How is Memory Freed?</h3><p>In Python, we don&rsquo;t need to manually free memory like in C++. When an object (such as the removed node) has no variables or pointers referencing it, Python&rsquo;s <strong>Garbage Collector</strong> automatically reclaims its memory. So the <code>prev.next = curr.next</code> operation simultaneously breaks the link <em>and</em> ensures the discarded node will eventually be reclaimed by the system.</p><hr><h2 id=classic-problem-josephus-problem>Classic Problem: Josephus Problem</h2><h3 id=problem-description>Problem Description</h3><p><em>n</em> people (numbered 1, 2, …, n) stand in a circle. Starting from person 1, every <em>m</em>-th person is eliminated. The next round restarts from the person after the one just eliminated, counting up to <em>m</em> again. This continues until everyone has been eliminated.</p><p><strong>Find the original number of the last person to be eliminated.</strong></p><h3 id=approach-simulate-with-a-circular-linked-list>Approach: Simulate with a Circular Linked List</h3><ol><li>This problem has an inherently circular structure — a <strong>circular linked list</strong> is a natural fit.</li><li>Create a circular linked list of <em>n</em> nodes representing the people.</li><li>Starting from the head, advance <em>m</em> − 1 steps each round to find the person to eliminate.</li><li>&ldquo;Delete&rdquo; that node (modify its predecessor&rsquo;s pointer) and record its value.</li><li>Repeat until only one node remains.</li></ol><h3 id=example-walkthrough-n--5-m--3>Example Walkthrough (<em>n</em> = 5, <em>m</em> = 3)</h3><ol><li><strong>Initial:</strong> 1 → 2 → 3 → 4 → 5 → (1)</li><li><strong>Round 1:</strong> Count 3 from 1 — <strong>3</strong> is eliminated. Remaining: 1 → 2 → 4 → 5 → (1)</li><li><strong>Round 2:</strong> Count 3 from 4 — <strong>1</strong> is eliminated. Remaining: 2 → 4 → 5 → (2)</li><li><strong>Round 3:</strong> Count 3 from 2 — <strong>5</strong> is eliminated. Remaining: 2 → 4 → (2)</li><li><strong>Round 4:</strong> Count 3 from 2 — <strong>2</strong> is eliminated. Remaining: 4</li><li><strong>Final:</strong> The last person is <strong>4</strong>.</li></ol><h3 id=code-implementation-circular-linked-list>Code Implementation (Circular Linked List)</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># (ListNode class defined previously)</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>josephus_linked_list</span>(n, m):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> n <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>0</span>:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 1. Build the circular linked list</span>
+</span></span><span style=display:flex><span>    head <span style=color:#f92672>=</span> ListNode(<span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>    curr <span style=color:#f92672>=</span> head
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>2</span>, n <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>):
+</span></span><span style=display:flex><span>        curr<span style=color:#f92672>.</span>next <span style=color:#f92672>=</span> ListNode(i)
+</span></span><span style=display:flex><span>        curr <span style=color:#f92672>=</span> curr<span style=color:#f92672>.</span>next
+</span></span><span style=display:flex><span>    curr<span style=color:#f92672>.</span>next <span style=color:#f92672>=</span> head  <span style=color:#75715e># close the circle</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 2. Find and delete nodes</span>
+</span></span><span style=display:flex><span>    prev <span style=color:#f92672>=</span> head       <span style=color:#75715e># prev points to the node just before head</span>
+</span></span><span style=display:flex><span>    curr <span style=color:#f92672>=</span> head
+</span></span><span style=display:flex><span>    count <span style=color:#f92672>=</span> n
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> count <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>1</span>:
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Advance m-1 steps to reach the node to eliminate</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(m <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>):
+</span></span><span style=display:flex><span>            prev <span style=color:#f92672>=</span> curr
+</span></span><span style=display:flex><span>            curr <span style=color:#f92672>=</span> curr<span style=color:#f92672>.</span>next
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Delete the current node</span>
+</span></span><span style=display:flex><span>        prev<span style=color:#f92672>.</span>next <span style=color:#f92672>=</span> curr<span style=color:#f92672>.</span>next
+</span></span><span style=display:flex><span>        curr <span style=color:#f92672>=</span> prev<span style=color:#f92672>.</span>next
+</span></span><span style=display:flex><span>        count <span style=color:#f92672>-=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> curr<span style=color:#f92672>.</span>val
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;n=5,  m=3 -&gt; Winner: </span><span style=color:#e6db74>{</span>josephus_linked_list(<span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>3</span>)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;n=10, m=4 -&gt; Winner: </span><span style=color:#e6db74>{</span>josephus_linked_list(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>4</span>)<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div><p><strong>Output:</strong></p><pre tabindex=0><code>n=5,  m=3 -&gt; Winner: 4
+n=10, m=4 -&gt; Winner: 5
+</code></pre><h3 id=complexity-analysis>Complexity Analysis</h3><p><strong>Time Complexity: O(n·m)</strong></p><ul><li>In the naive simulation, there are <em>n</em> − 1 elimination rounds.</li><li>Each round requires walking <em>m</em> − 1 steps from the current position.</li><li>Using a true circular linked list, finding the node to delete is O(m) and deletion is O(1), giving O(n·m) overall.</li><li>This complexity is acceptable when <em>m</em> ≪ <em>n</em>.</li></ul><p><strong>Space Complexity: O(n)</strong></p><ul><li>We need a data structure (the linked list) of size <em>n</em> to hold all people.</li></ul><h3 id=better-solution>Better Solution</h3><p>The Josephus problem has a well-known <strong>mathematical recurrence</strong> that reduces time complexity to O(n) and space complexity to O(1):</p>$$
+f(n, m) = \bigl(f(n-1, m) + m\bigr) \bmod n
+$$<p>where <em>f(n, m)</em> denotes the survivor&rsquo;s index among <em>n</em> people counting every <em>m</em>-th (0-indexed).</p><hr><h2 id=programming-exercise-reverse-a-linked-list>Programming Exercise: Reverse a Linked List</h2><h3 id=problem>Problem</h3><p>Write a function <code>reverse_list(head)</code> that takes the head node <code>head</code> of a singly linked list and returns the head node of the reversed list.</p><p><strong>Example:</strong></p><ul><li>Input: <code>1 -> 2 -> 3 -> 4 -> 5 -> None</code></li><li>Output: <code>5 -> 4 -> 3 -> 2 -> 1 -> None</code></li></ul><h3 id=solution>Solution</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>reverse_list</span>(head):
+</span></span><span style=display:flex><span>    prev <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>
+</span></span><span style=display:flex><span>    curr <span style=color:#f92672>=</span> head
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> curr:
+</span></span><span style=display:flex><span>        next_temp <span style=color:#f92672>=</span> curr<span style=color:#f92672>.</span>next  <span style=color:#75715e># temporarily save the next node</span>
+</span></span><span style=display:flex><span>        curr<span style=color:#f92672>.</span>next <span style=color:#f92672>=</span> prev       <span style=color:#75715e># point current node&#39;s next to the previous node</span>
+</span></span><span style=display:flex><span>        prev <span style=color:#f92672>=</span> curr            <span style=color:#75715e># advance prev and curr pointers</span>
+</span></span><span style=display:flex><span>        curr <span style=color:#f92672>=</span> next_temp
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> prev
+</span></span></code></pre></div></div></article></div><footer><p>Copyleft (ↄ) 2026 Yi Chen</p><p><a href=mailto:yi.chen@wisc.edu>yi.chen@wisc.edu</a></p></footer><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:!0,macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:["\\left\\lVert#1\\right\\rVert",1],st:"\\textrm{subject to:}"}},chtml:{adaptiveCSS:!0}}</script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>

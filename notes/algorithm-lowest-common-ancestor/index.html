@@ -1,0 +1,54 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><link rel=icon type=image/x-icon href=/images/favicon.ico><title>Yi Chen | Lowest Common Ancestor (LCA)</title></head><body class=page><div id=content><header><nav><a href=/>[Home]</a>
+<a href=/notes/>[Notes]</a>
+<a href=/categories/algorithms/>[Algorithms]</a>
+<a href=/publications/>[Publications]</a>
+<a href=/projects/>[Projects]</a><br><a href=https://github.com/kitkatdafu>[GitHub]</a>
+<a href=https://archive.casouri.cc>[BHL0388]</a></nav></header><article class=note><header class=note__header><h1>Lowest Common Ancestor (LCA)</h1><div class=metadata><time datetime=2026-06-16>Jun 16, 2026</time>
+<a class=metadata__category href=/categories/algorithms/>Algorithms</a>
+<a class=metadata__tag href=/tags/algorithms/>#Algorithms</a>
+<a class=metadata__tag href=/tags/trees/>#Trees</a>
+<a class=metadata__tag href=/tags/lowest-common-ancestor/>#Lowest Common Ancestor</a>
+<a class=metadata__tag href=/tags/binary-lifting/>#Binary Lifting</a></div></header><div class=note__body><h2 id=lowest-common-ancestor-lca>Lowest Common Ancestor (LCA)</h2><h3 id=1-definition>1. Definition</h3><p><strong>LCA (Lowest Common Ancestor)</strong> refers to finding, in a rooted tree, the nearest (deepest) common ancestor of two given nodes <code>x</code> and <code>y</code>.</p><p>Using the reference tree below as an example:</p><ul><li><code>LCA(5, 8) = 1</code></li><li><code>LCA(6, 10) = 3</code></li></ul><h4 id=reference-tree>Reference Tree</h4><pre tabindex=0><code>                1
+              /   \
+             2     3
+           / | \   | \
+         11  4  5  6  7
+                       |
+                       8
+                      / \
+                     9  10
+</code></pre><hr><h3 id=2-naive-solution>2. Naive Solution</h3><p><strong>Steps:</strong></p><ol><li>Preprocess the depth <code>dep</code> of every node.</li><li>To find the LCA of <code>x</code> and <code>y</code>:<ul><li>If <code>dep[x] > dep[y]</code>: climb <code>x</code> upward until <code>dep[x] == dep[y]</code>.</li><li>If <code>dep[x] &lt; dep[y]</code>: climb <code>y</code> upward until <code>dep[x] == dep[y]</code>.</li><li>If <code>dep[x] == dep[y]</code>: climb <code>x</code> and <code>y</code> upward together until <code>x == y</code>. At this point we have found the LCA.</li></ul></li></ol><p><strong>Drawback:</strong> This is essentially a brute-force approach. When the tree degenerates into a chain (linked-list shape), the time cost becomes too large.</p><hr><h3 id=3-speeding-up-with-binary-lifting>3. Speeding Up With Binary Lifting</h3><p>The naive approach moves up only <strong>1 step at a time</strong>. Can we move up faster?</p><p><strong>Idea — Binary Lifting:</strong> move up by <code>1</code>, <code>2</code>, <code>4</code>, <code>8</code>, &mldr; steps at once.</p><p>Similar to a <strong>Sparse Table (ST table)</strong>, we preprocess, for each node, its 1-step ancestor, 2-step ancestor, 4-step ancestor, and so on. Based on this table, the binary-lifting method finds the LCA in <code>O(log n)</code> time.</p><p><strong>Algorithm steps:</strong></p><ol><li>Preprocess the array <code>p[u][i]</code>, defined as the node reached by moving <code>u</code> upward by <code>2^i</code> steps.</li><li>Use the <code>p</code> array to optimize the naive algorithm.</li></ol><hr><h3 id=4-preprocessing-the-p-array>4. Preprocessing the <code>p</code> Array</h3><ul><li>Moving from node <code>fa</code> to node <code>u</code>: <code>p[u][0] = fa</code></li><li>Recurrence: <code>p[u][i] = p[p[u][i-1]][i-1]</code></li><li>Intuition: moving <code>u</code> up <code>2^i</code> steps = moving <code>u</code> up <code>2^(i-1)</code> steps to reach some node, then moving that node up another <code>2^(i-1)</code> steps.</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>dfs</span>(u, fa):
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Preprocessing</span>
+</span></span><span style=display:flex><span>    deep[u] <span style=color:#f92672>=</span> deep[fa] <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    p[u][<span style=color:#ae81ff>0</span>] <span style=color:#f92672>=</span> fa
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>21</span>):
+</span></span><span style=display:flex><span>        p[u][i] <span style=color:#f92672>=</span> p[p[u][i <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>]][i <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>]
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> v <span style=color:#f92672>in</span> G[u]:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> v <span style=color:#f92672>==</span> fa:
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>continue</span>
+</span></span><span style=display:flex><span>        dfs(v, u)
+</span></span></code></pre></div><hr><h3 id=5-solving-lcax-y>5. Solving <code>LCA(x, y)</code></h3><p>Assume <code>deep[x] > deep[y]</code>:</p><h4 id=step-1--bring-x-up-so-that-deepx--deepy>Step 1 — Bring <code>x</code> up so that <code>deep[x] == deep[y]</code></h4><p>Use binary lifting: enumerate <code>i</code> from large to small. Try moving <code>x</code> up <code>2^i</code> steps to a node <code>p</code>. If <code>deep[p] &lt; deep[y]</code> (the move would overshoot above <code>y</code>&rsquo;s level), <strong>do not move</strong>; otherwise, <strong>move</strong>.</p><h4 id=step-2--now-deepx--deepy>Step 2 — Now <code>deep[x] == deep[y]</code></h4><ul><li>If <code>x == y</code>, then the answer is <code>x</code>.</li><li>Otherwise, climb both up together. Enumerate <code>i</code> from large to small. Move <code>x</code> up <code>2^i</code> steps to <code>px</code>, and <code>y</code> up <code>2^i</code> steps to <code>py</code>:<ul><li>If <code>px == py</code>, they share a common ancestor, but we cannot guarantee it is the <em>lowest</em> common ancestor, so <strong>do not move</strong>.</li><li>If <code>px != py</code>, then <strong>move</strong>.</li></ul></li></ul><p>This eventually lands <code>x</code> and <code>y</code> on the first pair of nodes that are <strong>not</strong> the common ancestor (i.e., just below the LCA). The LCA is then <code>p[x][0]</code>.</p><hr><h3 id=6-implementation>6. Implementation</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>lca</span>(x, y):
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Ensure x is the deeper node</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> deep[x] <span style=color:#f92672>&lt;</span> deep[y]:
+</span></span><span style=display:flex><span>        x, y <span style=color:#f92672>=</span> y, x
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Use binary lifting to climb up so that deep[x] == deep[y].</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Enumerate the step size 2^i from large to small.</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># If the node reached after this move, p[x][i], still has</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># depth &gt;= deep[y], then the move is allowed.</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>20</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> deep[p[x][i]] <span style=color:#f92672>&gt;=</span> deep[y]:
+</span></span><span style=display:flex><span>            x <span style=color:#f92672>=</span> p[x][i]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># At this point deep[x] == deep[y]</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> x <span style=color:#f92672>==</span> y:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> x
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Climb up together: if moving 2^i steps makes both nodes share</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># the same ancestor, the move is not allowed; otherwise it is.</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>20</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>):
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> p[x][i] <span style=color:#f92672>!=</span> p[y][i]:
+</span></span><span style=display:flex><span>            x, y <span style=color:#f92672>=</span> p[x][i], p[y][i]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> p[x][<span style=color:#ae81ff>0</span>]
+</span></span></code></pre></div></div></article></div><footer><p>Copyleft (ↄ) 2026 Yi Chen</p><p><a href=mailto:yi.chen@wisc.edu>yi.chen@wisc.edu</a></p></footer><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:!0,macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:["\\left\\lVert#1\\right\\rVert",1],st:"\\textrm{subject to:}"}},chtml:{adaptiveCSS:!0}}</script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>

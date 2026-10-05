@@ -1,0 +1,53 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><link rel=icon type=image/x-icon href=/images/favicon.ico><title>Yi Chen | Memoization</title></head><body class=page><div id=content><header><nav><a href=/>[Home]</a>
+<a href=/notes/>[Notes]</a>
+<a href=/categories/algorithms/>[Algorithms]</a>
+<a href=/publications/>[Publications]</a>
+<a href=/projects/>[Projects]</a><br><a href=https://github.com/kitkatdafu>[GitHub]</a>
+<a href=https://archive.casouri.cc>[BHL0388]</a></nav></header><article class=note><header class=note__header><h1>Memoization</h1><div class=metadata><time datetime=2026-06-14>Jun 14, 2026</time>
+<a class=metadata__category href=/categories/algorithms/>Algorithms</a>
+<a class=metadata__tag href=/tags/algorithms/>#Algorithms</a>
+<a class=metadata__tag href=/tags/dynamic-programming/>#Dynamic Programming</a>
+<a class=metadata__tag href=/tags/memoization/>#Memoization</a></div></header><div class=note__body><h2 id=memoization>Memoization</h2><h3 id=1-what-is-memoization>1. What Is Memoization?</h3><p><strong>Memoization:</strong> a way of implementing a search that <strong>records information about states it has already visited</strong>, so that the same state is never traversed (recomputed) more than once.</p><p><strong>Memoization = DFS + an extra dictionary (cache)</strong></p><ul><li><strong>If the state has been searched before:</strong> look it up in the dictionary and return the stored result directly.</li><li><strong>If the state has not been searched before:</strong> keep searching, and finally record that state&rsquo;s result into the dictionary.</li></ul><hr><h3 id=2-worked-example--fibonacci-sequence>2. Worked Example — Fibonacci Sequence</h3><h4 id=problem>Problem</h4><p>Define the Fibonacci sequence as:</p>$$
+F[0] = 1,\quad F[1] = 1,\quad F[n] = F[n-1] + F[n-2]
+$$<p>Compute $F[n]$, giving the result modulo $10^9 + 7$.</p><p><strong>Constraints:</strong> <code>0 &lt;= n &lt;= 10000</code></p><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>Sample input</strong></td><td><code>5000</code></td></tr><tr><td><strong>Sample output</strong></td><td><code>976496506</code></td></tr></tbody></table><hr><h4 id=21-direct-recursion--lots-of-repeated-work>2.1 Direct Recursion — Lots of Repeated Work</h4><p>Solving by plain recursion produces <strong>a large number of repeated computations</strong>. Expanding <code>F(5)</code>:</p><pre tabindex=0><code>                       F(5)
+              ┌──────────┴──────────┐
+            F(3)                    F(4)
+         ┌───┴───┐            ┌──────┴──────┐
+       F(1)     F(2)        F(2)           F(3)
+              ┌──┴──┐     ┌──┴──┐       ┌───┴───┐
+            F(0)  F(1)   F(0)  F(1)    F(1)    F(2)
+                                              ┌──┴──┐
+                                            F(0)  F(1)
+</code></pre><p>The dashed regions in the original slide highlight identical subtrees that get evaluated again and again — e.g. <code>F(3)</code> is computed twice and <code>F(2)</code> three times. The number of redundant calls grows exponentially.</p><hr><h4 id=22-memoization--store-once-reuse-later>2.2 Memoization — Store Once, Reuse Later</h4><p>Each time a state is solved, <strong>record its answer in the dictionary</strong>; any later request for the same state <strong>returns the stored result immediately</strong> instead of recursing.</p><p>Annotating the same tree (<strong>store</strong> = save a newly computed value, <strong>retrieve</strong> = read a cached value):</p><pre tabindex=0><code>                       F(5)          store: F[5] = 8
+              ┌──────────┴──────────┐
+            F(3)                    F(4)         store: F[4] = 5
+   store: F[3] = 3              ┌────┴────┐
+         ┌───┴───┐            F(2)        F(3)
+       F(1)     F(2)        retrieve     retrieve
+   retrieve  store: F[2]=2    F[2]         F[3]
+     F[1]      ┌──┴──┐
+              F(0)  F(1)
+           retrieve retrieve
+             F[0]    F[1]
+</code></pre><p>Once <code>F[2]</code>, <code>F[3]</code>, and <code>F[4]</code> are cached on the left branch, the right branch&rsquo;s <code>F(2)</code>, <code>F(3)</code> resolve in O(1) by lookup — turning the exponential tree into a linear pass.</p><hr><h3 id=3-three-implementations-in-python>3. Three Implementations in Python</h3><h4 id=original-plain-recursion>Original (plain recursion)</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Original</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>f</span>(x):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> x <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> <span style=color:#f92672>or</span> x <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> f(x <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> f(x <span style=color:#f92672>-</span> <span style=color:#ae81ff>2</span>)
+</span></span></code></pre></div><h4 id=memoization-1--explicit-dictionary>Memoization 1 — explicit dictionary</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Memoization 1</span>
+</span></span><span style=display:flex><span>dic <span style=color:#f92672>=</span> {<span style=color:#ae81ff>0</span>: <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>: <span style=color:#ae81ff>1</span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>f</span>(x):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> x <span style=color:#f92672>in</span> dic<span style=color:#f92672>.</span>keys():
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> dic[x]
+</span></span><span style=display:flex><span>    dic[x] <span style=color:#f92672>=</span> f(x <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> f(x <span style=color:#f92672>-</span> <span style=color:#ae81ff>2</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> dic[x]
+</span></span></code></pre></div><h4 id=memoization-2--functoolslru_cache>Memoization 2 — <code>functools.lru_cache</code></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># Memoization 2</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> functools <span style=color:#f92672>import</span> lru_cache
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@lru_cache</span>(maxsize<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>f</span>(x):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> x <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> <span style=color:#f92672>or</span> x <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> f(x <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> f(x <span style=color:#f92672>-</span> <span style=color:#ae81ff>2</span>)
+</span></span></code></pre></div><blockquote><p>Note: To satisfy the <code>mod 1e9 + 7</code> requirement and the recursion depth at <code>n = 10000</code>, you&rsquo;d typically apply the modulus inside the addition and raise Python&rsquo;s recursion limit (<code>sys.setrecursionlimit</code>) — or convert the memoized recursion into a bottom-up loop.</p></blockquote></div></article></div><footer><p>Copyleft (ↄ) 2026 Yi Chen</p><p><a href=mailto:yi.chen@wisc.edu>yi.chen@wisc.edu</a></p></footer><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:!0,macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:["\\left\\lVert#1\\right\\rVert",1],st:"\\textrm{subject to:}"}},chtml:{adaptiveCSS:!0}}</script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>

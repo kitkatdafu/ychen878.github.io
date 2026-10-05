@@ -1,0 +1,64 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><link rel=icon type=image/x-icon href=/images/favicon.ico><title>Yi Chen | Bucket Sort</title></head><body class=page><div id=content><header><nav><a href=/>[Home]</a>
+<a href=/notes/>[Notes]</a>
+<a href=/categories/algorithms/>[Algorithms]</a>
+<a href=/publications/>[Publications]</a>
+<a href=/projects/>[Projects]</a><br><a href=https://github.com/kitkatdafu>[GitHub]</a>
+<a href=https://archive.casouri.cc>[BHL0388]</a></nav></header><article class=note><header class=note__header><h1>Bucket Sort</h1><div class=metadata><time datetime=2025-11-10>Nov 10, 2025</time>
+<a class=metadata__category href=/categories/algorithms/>Algorithms</a>
+<a class=metadata__tag href=/tags/algorithms/>#Algorithms</a>
+<a class=metadata__tag href=/tags/sorting/>#Sorting</a>
+<a class=metadata__tag href=/tags/non-comparison-sorting/>#Non-Comparison Sorting</a></div></header><div class=note__body><p>Bucket sort is a non-comparison sorting algorithm that works by distributing the elements of an array into a number of &ldquo;buckets.&rdquo; It is highly efficient when the input data is uniformly distributed (i.e., spread out evenly) across its range.</p><p>The algorithm follows these four main steps:</p><ol><li><strong>Initialize Buckets:</strong> First, create a fixed number of empty buckets (in your case, <code>bucket_count</code>).</li><li><strong>Scatter:</strong> Iterate through the input array. For each element, calculate its proper bucket index (based on its value relative to the min/max values) and place the element into that bucket.</li><li><strong>Sort Buckets:</strong> Go through each bucket, one by one, and sort the elements <em>within</em> it. This is typically done using another algorithm like insertion sort (or, in this case, Python&rsquo;s built-in <code>sort()</code>).</li><li><strong>Gather:</strong> Finally, concatenate the sorted buckets in order (from bucket 0 to the last bucket) to reassemble the full, sorted array.</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> itertools <span style=color:#f92672>import</span> chain
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>bucket_sort</span>(arr, bucket_count):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    Sorts a list in ascending order using the bucket sort algorithm.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 1. Edge case: Handle empty or single-element lists</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> len(arr) <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>1</span>:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> arr
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 2. Initialize Buckets &amp; Find Range</span>
+</span></span><span style=display:flex><span>    min_val, max_val <span style=color:#f92672>=</span> min(arr), max(arr)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Edge case: If all elements are the same, no sorting needed</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> min_val <span style=color:#f92672>==</span> max_val:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> arr
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Calculate the size of each bucket.</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># The &#39;+1&#39; ensures the range [min_val, max_val] is covered.</span>
+</span></span><span style=display:flex><span>    bucket_size <span style=color:#f92672>=</span> (max_val <span style=color:#f92672>-</span> min_val <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>//</span> bucket_count
+</span></span><span style=display:flex><span>    <span style=color:#75715e># Fix for bucket_size becoming 0 if bucket_count &gt; (max_val - min_val)</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> bucket_size <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>:
+</span></span><span style=display:flex><span>        bucket_size <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    buckets <span style=color:#f92672>=</span> [[] <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(bucket_count)]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 3. Scatter: Distribute elements into buckets</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> arr:
+</span></span><span style=display:flex><span>        <span style=color:#75715e># Calculate the bucket index for the element</span>
+</span></span><span style=display:flex><span>        idx <span style=color:#f92672>=</span> (x <span style=color:#f92672>-</span> min_val) <span style=color:#f92672>//</span> bucket_size
+</span></span><span style=display:flex><span>        <span style=color:#75715e># CRITICAL FIX: Ensure max_val lands in the last bucket</span>
+</span></span><span style=display:flex><span>        idx <span style=color:#f92672>=</span> min(idx, bucket_count <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>        buckets[idx]<span style=color:#f92672>.</span>append(x)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 4. Sort Buckets: Sort each individual bucket</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> bucket <span style=color:#f92672>in</span> buckets:
+</span></span><span style=display:flex><span>        bucket<span style=color:#f92672>.</span>sort() <span style=color:#75715e># Using built-in sort (Timsort)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># 5. Gather: Concatenate the sorted buckets</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> list(chain(<span style=color:#f92672>*</span>buckets))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># --- Example Usage ---</span>
+</span></span><span style=display:flex><span>my_list <span style=color:#f92672>=</span> [<span style=color:#ae81ff>0.42</span>, <span style=color:#ae81ff>0.32</span>, <span style=color:#ae81ff>0.33</span>, <span style=color:#ae81ff>0.52</span>, <span style=color:#ae81ff>0.37</span>, <span style=color:#ae81ff>0.47</span>, <span style=color:#ae81ff>0.51</span>]
+</span></span><span style=display:flex><span><span style=color:#75715e># Using bucket_count = 5</span>
+</span></span><span style=display:flex><span>sorted_list <span style=color:#f92672>=</span> bucket_sort(my_list, <span style=color:#ae81ff>5</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Original list: </span><span style=color:#e6db74>{</span>my_list<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Sorted list:   </span><span style=color:#e6db74>{</span>sorted_list<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>my_list_2 <span style=color:#f92672>=</span> [<span style=color:#ae81ff>29</span>, <span style=color:#ae81ff>25</span>, <span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>49</span>, <span style=color:#ae81ff>9</span>, <span style=color:#ae81ff>37</span>, <span style=color:#ae81ff>21</span>, <span style=color:#ae81ff>43</span>]
+</span></span><span style=display:flex><span><span style=color:#75715e># Using bucket_count = 4</span>
+</span></span><span style=display:flex><span>sorted_list_2 <span style=color:#f92672>=</span> bucket_sort(my_list_2, <span style=color:#ae81ff>4</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>Original list: </span><span style=color:#e6db74>{</span>my_list_2<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Sorted list:   </span><span style=color:#e6db74>{</span>sorted_list_2<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span></code></pre></div></div></article></div><footer><p>Copyleft (ↄ) 2026 Yi Chen</p><p><a href=mailto:yi.chen@wisc.edu>yi.chen@wisc.edu</a></p></footer><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],processEscapes:!0,macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:["\\left\\lVert#1\\right\\rVert",1],st:"\\textrm{subject to:}"}},chtml:{adaptiveCSS:!0}}</script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>
