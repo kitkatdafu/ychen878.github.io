@@ -1,0 +1,557 @@
+<!doctype html><html lang=en data-palette=night><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Yi Chen — machine learning researcher working on crowdsourcing, preference learning, and reliable AI."><meta name=theme-color content="#080b0a"><meta name=color-scheme content="dark"><title>Field Logs // Yi Chen // Future Interface</title><link rel=icon type=image/x-icon href=/images/favicon.ico><link rel=stylesheet href=/future/future.css><script>document.documentElement.classList.add("has-js")</script><script src=/future/future.js defer></script></head><body><a class=skip-link href=#main-content>Skip to content</a><div class=ambient-layer aria-hidden=true><canvas id=signal-field></canvas><div class=ambient-grid></div><div class=scanlines></div></div><div class=boot-screen data-boot-screen aria-hidden=true><div class=boot-screen__frame><p class=boot-screen__brand>YC_OS <span>8.8.8</span></p><div class=boot-screen__meter><span></span></div><div class=boot-screen__log aria-hidden=true><span>> resolving research node...</span>
+<span>> loading human signals...</span>
+<span>> interface ready.</span></div></div></div><div class="site-shell notes-reader-shell" id=top><header class=top-rail data-reveal><a class=wordmark href=/future/ aria-label="Return to Yi Chen future interface"><span class=wordmark__pixel aria-hidden=true>YC</span>
+<span>RESEARCH NODE / 878</span></a><div class=system-status aria-label="System status: online"><span class=status-light aria-hidden=true></span>
+<span>ARCHIVE ONLINE</span>
+<time data-local-time>--:-- CST</time></div><nav class=future-nav aria-label="Future interface navigation"><a href=/future/#research>Research</a>
+<a href=/future/#archive>Archive</a>
+<a href=/future/#projects>Projects</a>
+<a class=is-active href=#notes-index aria-current=page>Notes</a></nav><a class=classic-link href=/><span aria-hidden=true>←</span> Classic</a></header><div class=scroll-progress aria-hidden=true><span data-scroll-progress></span></div><main id=main-content class=reader-main><section class=reader-hero aria-labelledby=reader-title data-reveal><a class=reader-back href=/future/#notes>← Return to interface</a><p class=eyebrow><span>06</span> Decrypted working set</p><h1 id=reader-title>Field<br><em>logs.</em></h1><p>Working notes on machine learning, optimization, and systems.
+Select a record from the index and read it without leaving the future interface.</p></section><div class=reader-layout><aside class=reader-index id=notes-index data-reveal><p class=reader-index__label>Log index / 7 records</p><nav aria-label="Field log index"><a href=#note-nuclear-norm-sdp><span>N-01</span>
+<strong>Nuclear Norm via SDP</strong>
+<time datetime=2023-03-02>2023</time>
+</a><a href=#note-lp-duality><span>N-02</span>
+<strong>LP Duality</strong>
+<time datetime=2023-02-28>2023</time>
+</a><a href=#note-rpc><span>N-03</span>
+<strong>RPC</strong>
+<time datetime=2023-02-25>2023</time>
+</a><a href=#note-docker><span>N-04</span>
+<strong>Docker</strong>
+<time datetime=2023-02-25>2023</time>
+</a><a href=#note-pla><span>N-05</span>
+<strong>Perceptron Learning Algorithm</strong>
+<time datetime=2022-11-30>2022</time>
+</a><a href=#note-clustering><span>N-06</span>
+<strong>Clustering</strong>
+<time datetime=2022-10-08>2022</time>
+</a><a href=#note-k-means><span>N-07</span>
+<strong>K-means in Python</strong>
+<time datetime=2021-10-19>2021</time></a></nav></aside><section class=reader-documents aria-label="Field log documents"><article class=future-note id=note-nuclear-norm-sdp data-reveal><header class=future-note__header><div><p>LOG N-01</p><h2>Nuclear Norm via SDP</h2></div><div class=future-note__meta><time datetime=2023-03-02>2023.03.02</time></div></header><div class=future-prose><h3 id=note-nuclear-norm-sdp-matrix-norms>Matrix norms</h3><p>Given a matrix $X \in \mathbb{R}^{m \times n}$, $\sigma_{i}(X)$ denotes the $i$-th largest singular value of $X$ and is equal to the square root of the $i$-th largest eigenvalue of $XX&rsquo;$. The rank of $X$, denoted as $\mathrm{rank}(X) = r$ is the number of non-zero singular values.</p><h4 id=note-nuclear-norm-sdp-inner-product>Inner Product</h4><p>Given $X, Y \in \mathbb{R}^{m \times n}$, the inner product between $X$ and $Y$, denoted by $\langle X, Y\rangle$, is defined as
+$$
+\langle X, Y \rangle := \mathrm{Tr}(X&rsquo;Y) = \sum_{i=1}^m \sum_{j=1}^n X_{ij}Y_{ij} = \mathrm{Tr}(Y&rsquo;X).
+$$</p><h4 id=note-nuclear-norm-sdp-frobenius-norm>Frobenius Norm</h4><p>The norm associated with the inner product is called Frobenius norm:
+$$
+\norm{X}<em>{F} := \sqrt{ \langle X, X \rangle } = \sqrt{ \mathrm{Tr}(X&rsquo;X) } = \sqrt{ \sum</em>{i=1}^m \sum_{j=1}^n X^2_{ij} }.
+$$
+The Frobenius norm of a matrix $X$ is also equal to the square root of the sum of the squares of the singular values of $X$:
+$$
+\begin{align}
+\norm{X}<em>{F} &= \sqrt{ \mathrm{Tr}(X&rsquo;X) } \
+&= \sqrt{ Tr(UDV&rsquo;VD&rsquo;U) } \
+&= \sqrt{ \mathrm{Tr}(UDD&rsquo;U&rsquo;) } \
+&= \sqrt{ \mathrm{Tr}(DD&rsquo;U&rsquo;U) } \
+&= \norm{D}</em>{F} \
+&= \sqrt{ \sum_{i=1}^r \sum_{j=1}^r D_{ij}^2} \
+&= \sqrt{ \sum_{i=1}^r \sigma_{i}(X)^2}.
+\end{align}
+$$</p><h4 id=note-nuclear-norm-sdp-operator-norm-induced-2-norm-spectral-norm>Operator Norm, Induced 2-norm, Spectral Norm</h4><p>The operator norm of a matrix is the largest singular value
+$$
+\norm{X} := \sigma_{1}(X).
+$$</p><h4 id=note-nuclear-norm-sdp-nuclear-norm>Nuclear Norm</h4><p>The nuclear norm of a matrix is the sum of its singular values:
+$$
+\norm{X}<em>{*} := \sum</em>{i=1}^r \sigma_{i}(X).
+$$</p><h3 id=note-nuclear-norm-sdp-dual-norms>Dual Norms</h3><p>For any given norm $\norm{}<em>{?}$ in an inner product space, there exists a dual norm $\norm{}</em>{d}$ defined as
+$$
+\norm{X}<em>{d} := \sup { \mathrm{Tr}(X&rsquo;Y) : \norm{Y} \leq 1 }.
+$$
+Moreover, the dual norm of the operator norm/induced 2-norm/spectral norm is the nuclear norm. That is,
+$$
+\norm{X}</em>{*} = \sup { \mathrm{Tr}(X&rsquo;Y) : \norm{Y} \leq 1}.
+$$</p><h5 id=note-nuclear-norm-sdp-proof>Proof</h5><p>We first use the fact that given a matrix $X \in \mathbb{R}^{m \times n}$ and $t > 0$,
+$$
+\norm{X} \leq t \iff t^2I_{m} - XX&rsquo; \succeq 0.
+$$
+This is because
+$$
+\norm{X}^2 \leq t^2 \iff \sigma_{1}(X)^2 = \lambda_{1}(XX&rsquo;) \leq t^2 \iff 0 \leq \lambda_{i}(XX&rsquo;) \leq t^2 \iff t^2I_{m} - XX&rsquo; \succeq 0.
+$$
+Using Schur&rsquo;s complement,
+$$
+\norm{X} \leq t \iff t^2I_{m} - XX&rsquo; \succeq 0 \iff \begin{bmatrix}
+tI_{m} & X \
+X&rsquo; & tI_{n}
+\end{bmatrix} \succeq 0.
+$$
+This mean that we find the value of $\norm{X}$ via optimization (SDP):
+$$
+\norm{X} = \inf { t : \begin{bmatrix}
+tI_{m} & X \
+X&rsquo; & tI_{n}
+\end{bmatrix} \succeq 0 }.
+$$
+We can rewrite the definition of dual norm
+$$
+\norm{X}<em>{d} := \sup { \mathrm{Tr}(X&rsquo;Y) : \norm{Y} \leq 1}
+$$
+as
+$$
+\begin{align}
+\norm{X}</em>{d} := \sup_{Y} &\quad \mathrm{Tr}(X&rsquo;Y) \
+\mathrm{s.t.} &\quad \norm{Y} \leq 1.
+\end{align}
+$$
+Now, let $X = UDV&rsquo;$ be the singular value decomposition of $X$ whose rank is $r$. By definition
+$$
+U \in \mathbb{R}^{m \times r}, D \in \mathbb{R}^{r \times r}, V \in \mathbb{R}^{n \times r}.
+$$
+Let $Y := UV&rsquo;$. Then,
+$$
+\norm{Y} = \norm{UV&rsquo;} = \norm{U I_{r} V&rsquo;} = 1
+$$
+and
+$$
+\mathrm{Tr}(XY&rsquo;) = \mathrm{Tr}(UDV&rsquo;VU&rsquo;) = \mathrm{Tr}(UDU&rsquo;) = \mathrm{Tr}(D) = \norm{X}<em>{*}.
+$$
+This means that $Y := UV&rsquo;$ is feasible for the optimization model above. If $Y := UV&rsquo;$ is the optimal solution, then $\norm{X}</em>{d} = \norm{X}<em>{*}$. If $Y := UV&rsquo;$ is not the optimal solution, then there exist other $Y$ such that $\mathrm{Tr}(X&rsquo;Y) > \norm{X}</em>{<em>}$. Hence,
+$$
+\norm{X}<em>d \geq \norm{X}</em>{</em>}.
+$$
+We now need to show that
+$$
+\norm{X}<em>{d} \leq \norm{X}</em>{<em>}.
+$$
+We first re-write the definition of dual form into a semi-definite program:
+$$
+\begin{align}
+\norm{X}<em>{d} := \sup</em>{Y} &\quad \mathrm{Tr}(X&rsquo;Y) \
+\mathrm{s.t.} &\quad \begin{bmatrix}
+I_{m} & X \
+X&rsquo; & I_{n}
+\end{bmatrix} \succeq 0.
+\end{align}
+$$
+The following program is the dual of the semi-definite program above:
+$$
+\begin{align}
+\inf_{W_{1}, W_{2}} &\quad\frac{1}{2} (\mathrm{Tr}(W_{1}) + \mathrm{Tr}(W_{2})) \ \
+\mathrm{s.t.} &\quad \begin{bmatrix}
+W_{1} & X \
+X&rsquo; & W_{2}
+\end{bmatrix} \succeq 0.
+\end{align}
+$$
+If $W_{1} := UDU&rsquo;$ and $W_{2} := VDV&rsquo;$. Then, $(W_{1}, W_{2})$ is feasible for the dual, since
+$$
+\begin{bmatrix}
+W_{1} & X \
+X&rsquo; & W_{2}
+\end{bmatrix} = \begin{bmatrix}
+U \
+V
+\end{bmatrix} D \begin{bmatrix}
+U \
+V
+\end{bmatrix}&rsquo; \succeq 0.
+$$
+Moreover,
+$$
+\mathrm{Tr}(W_{1}) = \mathrm{Tr}(W_{2}) = \mathrm{Tr}(D).
+$$
+Thus, the objective is
+$$
+\frac{1}{2}(\mathrm{Tr}(D) + \mathrm{Tr}(D)) = \mathrm{Tr}(D) = \norm{X}_{</em>}.
+$$
+Weather or not $(X, W_{1}, X_{2})$ is the optimal solution, we showed that
+$$
+\norm{X}<em>{*} \geq \norm{X}</em>{d}.
+$$
+Hence,
+$$
+\norm{X}<em>{*} = \norm{X}</em>{d}.
+$$
+This result shows that we can compute the nuclear norm via SDP.</p><h3 id=note-nuclear-norm-sdp-references>References</h3><pre tabindex=0><code>Recht, Benjamin, Maryam Fazel, and Pablo A. Parrilo. &#34;Guaranteed minimum-rank solutions of linear matrix equations via nuclear norm minimization.&#34; _SIAM review_ 52.3 (2010): 471-501.
+</code></pre></div><a class=future-note__top href=#notes-index>Back to log index ↑</a></article><article class=future-note id=note-lp-duality data-reveal><header class=future-note__header><div><p>LOG N-02</p><h2>LP Duality</h2></div><div class=future-note__meta><time datetime=2023-02-28>2023.02.28</time></div></header><div class=future-prose><h3 id=note-lp-duality-estimating-lp-bounds>Estimating LP bounds</h3><p>Given an optimization problem
+$$
+\begin{align}
+\max_{f, s} &\quad 12f + 9s \
+\st &\quad 4f + 2s \leq 4800 \
+&\quad f + s \leq 1750 \
+&\quad 0 \leq f \leq 1000 \
+&\quad 0 \leq s \leq 1500 \
+\end{align}
+$$
+Suppose the maximum profit is $p^\star$. How can we bound $p^\star$? The lower bound of $p^\star$ can be found by picking any feasible point (since maximization). For example,
+${f=0, s=0}$ is feasible. Therefore, $p^\star \geq 12f + 9s = 0$. Since any feasible point yields a lower bound of $p^\star$ and $p^\star$ itself is yielded by an feasible point, then finding the largest lower bound of $p^\star$ is equivalent to solving the LP.</p><p>The upper bound of $p^\star$ can be found using the constraints. For example, since $f$ and $s$ need to be less than $1000$ and $1500$ respectively, $p^\star \leq 12 \cdot 1000 + 9 \cdot 1500 = 25500$. We can include more constraints and have $p^\star \leq f + (4f + 2s) + 7(f + s) \leq 1000 + 4800 + 7 \cdot 1750 = 18050$. There are many different ways to combine these constraints to yield an upper bound of $p^\star$. We need to find the best way of combining these constraints so that it yields the best upper bound. To achieve this goal, we can choose 4 multipliers $\lambda_{1}, \lambda_{2}, \lambda_{3}, \lambda_{4} \geq 0$ to be the multipliers of our 4 constraints. We want the 4 multipliers to satisfy the following inequality, for any feasible $f$ and $s$,
+$$
+12f + 9s \leq \lambda_{1}(4f + 2s) + \lambda_{2}(f + s) + \lambda_{3}f + \lambda_{4}s.
+$$
+Note that we can rearrange this inequality and obtain
+$$
+0 \leq (4\lambda_{1} + \lambda_{2} + \lambda_{3} - 12)f + (2\lambda_{1} + \lambda_{2} + \lambda_{4} - 9)s.
+$$
+Since the original problem is an LP, $f$ and $s$ have to be non-negative. Hence, to satisfy the inequality above, all we need to have is to satisfy
+$$
+4\lambda_{1} + \lambda_{2} + \lambda_{3} - 12 \geq 0
+$$
+and
+$$
+2\lambda_{1} + \lambda_{2} + \lambda_{4} - 9 \geq 0.
+$$
+The $\lambda$&rsquo;s that satisfy the constraints above yield an upper bound of $p^\star$
+$$
+p^\star \leq 4800 \lambda_{1} + 1750 \lambda_{2} + 1000 \lambda_{3} + 1500 \lambda_{4}.
+$$
+Finding the smallest upper bound would be yet another LP, i.e.
+$$
+\begin{align}
+\min_{\lambda_{1}, \lambda_{2}, \lambda_{3}, \lambda_{4}} &\quad 4800 \lambda_{1} + 1750 \lambda_{2} + 1000 \lambda_{3} + 1500 \lambda_{4}. \
+\st &\quad 4f + 2s \leq 4800 \
+&\quad 4\lambda_{1} + \lambda_{2} + \lambda_{3} - 12 \geq 0 \
+&\quad 2\lambda_{1} + \lambda_{2} + \lambda_{4} - 9 \geq 0 \
+&\quad \lambda_{1}, \lambda_{2}, \lambda_{3}, \lambda_{4} \geq 0 \
+\end{align}.
+$$</p><h3 id=note-lp-duality-primal-and-dual>Primal and Dual</h3><p>The first maximization problem is called the primal problem. The second minimization problem is called the dual problem. The $\lambda$&rsquo;s in the dual problem are called the dual variable, and there is a dual variable corresponding to each constraint in the primal problem. Similarly, each constraint in the dual problem corresponds to a primal variable as well. Let $p^\star$ and $d^\star$ denote the optimal for the primal and the dual respectively. Then, they should satisfy the following inequality
+$$
+(\text{any feasible primal point}) \leq p^\star \leq d^\star \leq (\text{any feasible dual point}).
+$$
+In general, a primal problem $(P)$ is stated as
+$$
+\begin{align}
+\max_{x} &\quad c^Tx \
+\st &\quad Ax \leq b \
+&\quad x \geq 0
+\end{align}
+$$
+and a dual problem $(D)$ is stated as
+$$
+\begin{align}
+\min &\quad b^T\lambda \
+\st &\quad A^T\lambda \geq c \
+&\quad \lambda \geq 0
+\end{align}.
+$$
+If $x$ and $\lambda$ are feasible points of $(P)$ and $(D)$, then
+$$
+c^Tx \leq p^\star \leq d^\star \leq b^T\lambda.
+$$
+If $p^\star$ and $d^\star$ exist and are finite, then $p^\star = d^\star$. This property is known as strong duality.</p><h3 id=note-lp-duality-properties-of-lp-duality>Properties of LP Duality</h3><ol><li>$(P)$ and $(D)$ are both feasible and bounded, and $p^\star = d^\star$</li><li>$(P)$ is unbounded and $(D)$ is infeasible, $p^\star = \infty$ and $d^\star = \infty$</li><li>$(P)$ is infeasible and $(D)$ is unbounded, $p^\star = -\infty$ and $d^\star = -\infty$</li><li>$(P)$ is infeasible and $(D)$ is infeasible, $p^\star = -\infty$ and $d^\star = \infty$</li><li>The dual of the dual is the primal</li></ol><h3 id=note-lp-duality-duality-and-sensitivity>Duality and Sensitivity</h3><p>Duality is related to the idea of sensitivity: how much each of your constraints affect the optimal cost.</p><h3 id=note-lp-duality-complementary-slackness>Complementary Slackness</h3><p>At the optimal point, some inequality constraints become tight. Some inequality constraints may remain loose, even at optimality. These constraints have slack. Either a primal constraint is tight or its dual variable is zero. Either a dual constraint is tight or its primal variable is zero. These properties are called complementary slackness. We can use complementary slackness to check if a proposed point is optimal or not.</p></div><a class=future-note__top href=#notes-index>Back to log index ↑</a></article><article class=future-note id=note-rpc data-reveal><header class=future-note__header><div><p>LOG N-03</p><h2>RPC</h2></div><div class=future-note__meta><time datetime=2023-02-25>2023.02.25</time></div></header><div class=future-prose><h3 id=note-rpc-networks>Networks</h3><p>Network Interface Controllers (NICs) can connect a computer to different physical mediums, such as Ethernet and Wi-Fi. Every NIC in the world has a unique MAC (media access control) address. It consists of 48 bits. Therefore, there are 28 trillion possible MAC addresses. Some devices randomly change their MAC address for privacy.</p><p>You can use command <code>ifconfig</code> to check you network interface controller and its corresponding MAC address. There exists virtual interfaces as well. For example, <code>lo</code>, the loopback device, is a virtual interface. It connects your computer to a mini network containing just your computer.</p><p>A network has nodes that send bytes to other nodes by MAC address. Nodes can be computers, switches, etc. The bytes are directed, or forwarded by switches. The whole network uses the same physical tech (Wi-Fi, Ethernet, etc.)</p><h3 id=note-rpc-internets-and-the-internet>Internets and the Internet</h3><p>Routers connect networks together to form internets. The global internet we all use is the Internet. Packets, which are some bytes with an address and other info, can be forwarded along a path from point A to point B. Routers contain forwarding tables that help them decide which direction to send along a packet. Those tables would be too big if a router had to know where every MAC address existed in the internet.</p><p>IP addresses are used to send packets across an internet. There are about 4 billion possible IP address (IPv4). Forwarding tables only need to know which way to send for a given network number, which is encoded in the IP address.</p><p>The challenge is that we don&rsquo;t have enough IPv4 addresses. We don&rsquo;t want every machine to be able to receive packets from anywhere. Private networks have private ranges. Different private networks can have the same IP address.</p><p>Network address translation (NAT) converts a public IP into a private IP. Only NAT knows the public address of a computer. The network interface of the computer does not know that.</p><p>Computers might be running multiple processes using the network. The IP address corresponds to a NIC, and the port number corresponds to a process.</p><h3 id=note-rpc-transport-protocols>Transport Protocols</h3><p>User Datagram Protocol (UDP)
+Transmission Controll Protocol (TCP)
+These two protocols both build on IP networking and both provide port numbers.</p><pre tabindex=0><code>sudo lsof -i tcp -P
+</code></pre><p>The difference between UDP and TCP is reliability. Packets may be dropped, reordered, and split. TCP saves+resembles packets in order to provide original message (when possible). For packet drop, it retries. UDP does not do this extra work.</p><h3 id=note-rpc-application-protocols>Application Protocols</h3><h4 id=note-rpc-http>HTTP</h4><p>Hypertext Transfer Protocol (HTTP): URL (domain/IP + port + resource)</p><p>HTTP messages between clients and servers:
+A client sends a request to a server. And the server sends a response back to the client. There are 4 common types of request: POST, PUT, GET, and DELETE.</p><h4 id=note-rpc-rpc>RPC</h4><p>Remote Procedure Calls (RPCs), helps us to call a function on the other computer. For example, a client can call a function on the server. (client application and server application do not need to write in the same programming language).</p><p>There are many tools to do RPCs (Thrift, gRPC). <code>gRPC</code> builds on HTTP. When every we make a call, we make an HTTP POST request. The return value is returned through an HTTP response.</p><h5 id=note-rpc-serializationdeserialization-protobufs>Serialization/Deserialization (Protobufs)</h5><p>How do we represent arguments and return values as bytes in a request/response body? Serialization is converting various types into bytes. Deserialization converts bytes to various types. The challenge is that every language has different types and we want cross-languages calls. gRPC uses Google&rsquo;s Protocol Buffers provide a uniform type system. The other challenge is that different CPUs order bytes differently. Some CPUs have big-endian, and some have little-endian. Protobufs help us to deal with this.</p><p>For computational efficiency, <code>int32</code> uses 4 bytes during computation. For space efficiency, smaller numbers in <code>int32</code> uses fewer bytes (4 bytes is max). This reduces network traffic. This is called variable-length encoding.</p><h3 id=note-rpc-grpc>gRPC</h3><p>Proto file:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-proto data-lang=proto><span style=display:flex><span><span style=color:#66d9ef>syntax</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;proto3&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>service</span> Calc {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>rpc</span> Mult(MultReq) <span style=color:#66d9ef>returns</span> (MultResp);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>message</span> <span style=color:#a6e22e>MultReq</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>int32</span> x <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>int32</span> y <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>message</span> <span style=color:#a6e22e>MultResp</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>int32</span> result <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Generate code</p><pre tabindex=0><code>python3 -m grpc_tools.protoc -I=. --python_out=. --grpc_python_out=. XXXX.proto
+</code></pre><p>Server file</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> grpc
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> concurrent <span style=color:#f92672>import</span> futures
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> math_pb2_grpc
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> math_pb2
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Calc</span>(math_pb2_grpc<span style=color:#f92672>.</span>CalcServicer):
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>Mult</span>(self, request, context):
+</span></span><span style=display:flex><span>        print(request)
+</span></span><span style=display:flex><span>        result <span style=color:#f92672>=</span> request<span style=color:#f92672>.</span>x <span style=color:#f92672>*</span> request<span style=color:#f92672>.</span>y
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> math_pb2<span style=color:#f92672>.</span>MultResp(result<span style=color:#f92672>=</span>result)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>server <span style=color:#f92672>=</span> grpc<span style=color:#f92672>.</span>server(futures<span style=color:#f92672>.</span>ThreadPoolExecutor(max_workers<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>), options<span style=color:#f92672>=</span>[(<span style=color:#e6db74>&#34;grpc.so_reuseport&#34;</span>, <span style=color:#ae81ff>0</span>)])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>math_pb2_grpc<span style=color:#f92672>.</span>add_CalcServicer_to_server(Calc(), server)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>server<span style=color:#f92672>.</span>add_insecure_port(<span style=color:#e6db74>&#39;localhost:5444&#39;</span>)
+</span></span><span style=display:flex><span>server<span style=color:#f92672>.</span>start()
+</span></span><span style=display:flex><span>print(<span style=color:#e6db74>&#34;Listening to port 5444...&#34;</span>)
+</span></span><span style=display:flex><span>server<span style=color:#f92672>.</span>wait_for_termination()
+</span></span></code></pre></div><p>Client file</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> grpc
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> math_pb2
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> math_pb2_grpc
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>channel <span style=color:#f92672>=</span> grpc<span style=color:#f92672>.</span>insecure_channel(<span style=color:#e6db74>&#34;localhost:5444&#34;</span>)
+</span></span><span style=display:flex><span>stub <span style=color:#f92672>=</span> math_pb2_grpc<span style=color:#f92672>.</span>CalcStub(channel)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>response <span style=color:#f92672>=</span> stub<span style=color:#f92672>.</span>Mult(math_pb2<span style=color:#f92672>.</span>MultReq(x<span style=color:#f92672>=</span><span style=color:#ae81ff>3</span>, y<span style=color:#f92672>=</span><span style=color:#ae81ff>4</span>))
+</span></span><span style=display:flex><span>print(response)
+</span></span></code></pre></div></div><a class=future-note__top href=#notes-index>Back to log index ↑</a></article><article class=future-note id=note-docker data-reveal><header class=future-note__header><div><p>LOG N-04</p><h2>Docker</h2></div><div class=future-note__meta><time datetime=2023-02-25>2023.02.25</time></div></header><div class=future-prose><h3 id=note-docker-virtualization>Virtualization</h3><p>Virtualization is the illusion of private resources, provided by the software. We have virtual memory, virtual machine (hardware), virtual machine (languages), virtual operating system (container).</p><ul><li>Each process using a virtual address space is not aware of other processes using memory (illusion of private memory).</li><li>Virtualized resources include CPU, RAM, disks, network devices, etc. VMs rarely use all their allocated resources, so overbooking is possible. If each program is deployed to a different VM, operating system overheads dominate.</li><li>JVM or PVM runs Java Bytecode and Python Bytecode. Programs written in Java and Python are compiled to their corresponding byte code instead of a specific machine code.</li><li>Virtual operating systems, or a containers, are run on a some flavor of Linux. You can have a container of Ubuntu and a container on Debian (but not Windows, since they are running on top of Linux). Containers are more efficient than virtual machines, but less flexible.</li></ul><p>Containers and Virtual Machines are Sandboxes.</p><h3 id=note-docker-docker-containers>Docker Containers</h3><p>Containers are lightweight alternative to virtual machines. Virtual machines form a cluster. Resources of the cluster are limited to those of a single VM that runs there containers.</p><h3 id=note-docker-registries-images-containers-and-dockerfiles>Registries, Images, Containers, and Dockerfiles</h3><p>The Images and the Containers are going to be on your VM. The images are pulled from the Registries (dockerhub, for example). Images are snapshots of installed software. From these images, we can run them to start a container. We can also build our own images and run them later.</p><h3 id=note-docker-docker-commands>Docker Commands</h3><ol><li><code>docker images</code>: to list all the images I currently have.</li><li><code>docker pull IMAGENAME</code>: to pull an image. If the image is not installed, it will try to pull it first.</li><li><code>docker tag IMAGE:TAG NEW_TAG</code>: to create a new tag for an existing image.</li><li><code>docker run TAG COMMAND</code>: to run a container and let the container runs the command.</li><li><code>docker run -it TAG COMMAND</code>: to run a container with the command interactively.</li><li><code>docker ps</code>: to show all running containers</li><li><code>docker ps -a</code>: to show all containers</li><li><code>docker ps -a -q</code>: to show containers with ID only</li><li><code>docker rm $(docker ps -a -q)</code>: to delete all containers</li><li><code>docker rmi IMAGE</code>: to remove an image</li><li><code>docker run -d IMAGE COMMADN</code>: to run a docker container in a deamon mode.</li><li><code>docker logs CONTAINER_ID</code>: to show the output of a container</li><li><code>docker exec [-it] CONTAINER_ID</code>: to jump into an existing running container</li><li><code>docker build DIRECTORY -t TAG</code>: make a container from the dockerfile (in the current directory) and save it into DIRECTORY with a TAG.</li><li><code>docker run -d -p 127.0.0.1:300:80 IMAGE</code>: redirect incoming data from port 300 to port 80</li></ol><h3 id=note-docker-dockerfile-instructions>Dockerfile instructions</h3><ol><li><code>FROM</code>: run which image</li><li><code>RUN</code>: run which command</li><li><code>COPY</code>: copy a program on my computer into the image</li><li><code>CMD</code>: default command you want to run</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-Dockerfile data-lang=Dockerfile><span style=display:flex><span> FROM ubuntu:22.10<span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span> RUN apt-get update<span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span> RUN apt-get install -y python3 python3-pip curl lsof<span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span> RUN pip3 install jupyterlab<span style=color:#f92672>==</span>3.4.5 MarkupSafe<span style=color:#f92672>==</span>2.0.1<span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span> CMD <span style=color:#f92672>[</span>python3, -m, jupyterlab, --no-browser, --ip<span style=color:#f92672>=</span>0.0.0.0, --port<span style=color:#f92672>=</span>80, --allow-root, --NotebookApp.token<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;&#39;</span><span style=color:#f92672>]</span><span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></div><h3 id=note-docker-ssh-port-forwarding>SSH port forwarding</h3><p><code>ssh USER@VM -L localhost:5000:localhost:300</code>
+client side listens to port 5000
+sshd redirects data to port 300 on the server side.</p><h3 id=note-docker-container-orchestration>Container Orchestration</h3><p>Orchestration lets you deploy many cooperating containers across a cluster of Docker workers. Kubernetes is the most well known. Docker compose is a simpler too that lets you deploy cooperating containers to a single worker.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>services</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>jupyter</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>image</span>: <span style=color:#ae81ff>myimg</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>deploy</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>replicas</span>: <span style=color:#ae81ff>3</span>
+</span></span></code></pre></div><ol><li><code>docker compose up</code>: compose containers using the yaml file in the current directory.</li><li><code>docker compose ps</code>: show the containers created withe the yaml config file in the current directory.</li><li><code>docker compose logs</code>: show the outputs of these containers.</li><li><code>docker compose down</code>: remove composed containers.</li></ol></div><a class=future-note__top href=#notes-index>Back to log index ↑</a></article><article class=future-note id=note-pla data-reveal><header class=future-note__header><div><p>LOG N-05</p><h2>Perceptron Learning Algorithm</h2></div><div class=future-note__meta><time datetime=2022-11-30>2022.11.30</time></div></header><div class=future-prose><p>Given a dataset
+\(\mathcal{D} = \{(\vec{x}_1, y_1), \cdots, (\vec{x}_N, y_N)\}\) and a
+hypothesis set \(\mathcal{H}\), our learning algorithm \(\mathcal{A}\)
+tries to learn a function \(g \in \mathcal{H}\) that approximates the
+underlying, true function \(f: \mathcal{X} \to \mathcal{Y}\), which
+generates the points in \(\mathcal{D}\).</p><div id=note-pla-outline-container-credit-card-approve-problem class=outline-3><h5 id=note-pla-credit-card-approve-problem>Credit Card Approve Problem</h5><div id=note-pla-outline-text-credit-card-approve-problem class=outline-text-3><p>Given a customer who is applying for a credit card, we want to build a
+system that determines if we should grant the application or not based
+on the customer's information such as age, annual salary, year in job,
+etc. The bank's historical credit approval data can be seen as a dataset
+\(\mathcal{D} = \{(\vec{x}_i, y_i)\}_{i=1}^N\)where each
+\(\vx_i \in \mathcal{X}\) and each represents a customer. There is a
+target function \(f: \mathcal{X} \to \mathcal{Y}\) that gives \(\vx\)'s
+credit behavior \(f(\vec{x}) = y\). Each \(\vx\) is a multidimensional
+vector where each component is a feature (age, for example). Our
+learning algorithm \(\mathcal{A}\) considers a hypothesis class
+\(\mathcal{H}\) and takes the dataset \(\mathcal{D}\) and tries to give
+a function \(g \in \mathcal{H}\) so that \(g\) performs similar to
+\(f\). We will use \(g\) as our system of approving credit card.</p></div></div><div id=note-pla-outline-container-perceptron-hypothesis class=outline-3><h5 id=note-pla-perceptron-hypothesis>Perceptron Hypothesis</h5><div id=note-pla-outline-text-perceptron-hypothesis class=outline-text-3><p>Let \(\vec{x} = (x_1, x_2, \cdots, x_d)\) be a customer, we compute a
+weighted score \(\sum^d_{i=1} w_ix_i\) such that if the weighted score
+is greater than a threshold \(t\), we approve the credit card, otherwise
+we don't. Furthermore, suppose \(\mathcal{Y} = \{+1, -1\}\) where \(+1\)
+means good credit and \(-1\) means bad credit, then
+\(h \in \mathcal{H}\) looks like \[
+h(\vec{x}) = \sign\left( \left( \sum^d_{i=1} w_ix_i \right) - t\right)
+\] The \(h\) here depends on, or is parametrized by \(\{w_i\}\) and
+\(t\). We call the set of all possible \(h\) (the set of all possible
+combination of \(\{w_i\}\) and t) is called perceptron.</p><p>Observe that we can move \(t\) into the summation by extending \(w_i\)
+and \(x_i\) so that \(w_0 = -t\) and \(x_0 = 1\). Then, we can write the
+summation as an inner product: \[
+h(\vx) = \sign(\vec{w}^T\vx).
+\] Essentially, this \(\vec{w}\) represents a hypothesis. We now assume
+that \(\vec{w}\) always includes the (negative) threshold \(t\).</p><div id=note-pla-outline-container-perceptron-in-mathbbr2 class=outline-4><h6 id=note-pla-perceptron-in-mathbbr2>Perceptron in \(\mathbb{R}^2\)</h6><div id=note-pla-outline-text-perceptron-in-mathbbr2 class=outline-text-4><p>In \(\mathbb{R}^2\), \(\vx = [x_1 \quad x_2]^T\), then, the hypothesis
+is \[
+h(\vx) = \sign(w_0 + w_1x_1 + w_2x_2.)
+\] We can plot all \(\vx\) in the dataset in a graph. Moreover, we use
+\(\circ\) to represent \(+1\) and \(\times\) to represent \(-1\).
+Besides, observe that \(w_0 + w_1x_1 + w_2x_2\) is a line.
+\(h(\vx) = +1\) if \(\vx\) lies on one side of the line, and \(-1\)
+otherwise on the other side. Since the perceptron is essentially using a
+line to make a decision, we also call such a hypothesis class linear
+binary classifier.</p></div></div></div></div><div id=note-pla-outline-container-perceptron-learning-algorithm class=outline-3><h5 id=note-pla-perceptron-learning-algorithm>Perceptron Learning Algorithm</h5><div id=note-pla-outline-text-perceptron-learning-algorithm class=outline-text-3><p>With \(\mathcal{H}\), all possible perceptron, how to we select the best
+of them, denoted as \(g\), such that \(g\) is close to \(f\), which we
+never know. How do we decide which \(h \in \mathcal{H}\) should be our
+\(g\), the best? Since \(\mathcal{D}\) is generated by \(f\), we ideally
+want \[
+g(\vx_i) = f(\vx_i) = y_i.
+\] We can focus on finding the \(g\) that has this property. However, it
+is difficult, since each \(h\) in \(\mathcal{H}\) is parametrized by a
+line, and there are infinitely (uncountable) many candidates for us to
+choose.</p><p>We can start from some \(g_0\), and iteratively corrects its mistakes on
+\(\mathcal{D}\). We use \(\vec{w}_0\) represents \(g_0\) and say
+\(\vec{w}_0 = \vec{0}\).</p><hr><p>Algorithm (Perceptron Learning Algorithm): For \(t = 0, 1, \ldots\) 1.
+Find a mistake of \(\vec{w}_t\), called \((\vx_{n(t)}, y_{n(t)})\). By
+mistake, we mean that \(\sign(\vec{w}^T_t\vx_{n(t)}) \ne y_{n(t)}\). 2.
+We try to correct the mistake by
+\(\vec{w}_{t + 1} \leftarrow \vec{w}_t + y_{n(t)}\vx_{n(t)}\). Until no
+more mistakes Return the last \(\vec{w}\), called \(\vec{w}_{PLA}\) as
+\(g\).</p><hr><p>Algorithm (Cyclic PLA): For \(t = 0, 1, \ldots\) 1. Find a mistake of
+\(\vec{w}_t\), called \((\vx_{n(t)}, y_{n(t)})\). By mistake, we mean
+that \(\sign(\vec{w}^T_t\vx_{n(t)}) \ne y_{n(t)}\). 2. We try to correct
+the mistake by
+\(\vec{w}_{t + 1} \leftarrow \vec{w}_t + y_{n(t)}\vx_{n(t)}\). Until a
+full cycle (of \(\mathcal{D}\)) not encountering mistakes. Return the
+last \(\vec{w}\), called \(\vec{w}_{PLA}\) as \(g\).</p><hr><p>Suppose there is a mistake at iteration \(t\), with instance \(\vx_n\).
+We observe that \[
+y_n\vec{w}^T_{t +1} \vx_n \ge y_n \vec{w}^T_t\vx_n
+\] is always true. This shows that the algorithm is indeed trying to
+correct the mistake. Why? Since it's a mistake,
+\(\sign(\vec{w}_t^T \vx_n) \ne y_n\). Therefore,
+\(y_n \vec{w}^T_t\vx_n\) is negative. \(y_n\vec{w}^T_{t +1} \vx_n\) is
+greater than that means that it is trying to be positive, which is
+correct.</p><p>We ponder, if the algorithm halts. If it halts, how does \(g\) perform
+on the instances outside \(\mathcal{D}\)?</p></div></div><div id=note-pla-outline-container-linear-separability class=outline-3><h5 id=note-pla-linear-separability>Linear Separability</h5><div id=note-pla-outline-text-linear-separability class=outline-text-3><p>If PLA halts, i.e. no more mistakes, then \(\mathcal{D}\) allows some
+\(\vw\) to make no mistakes. We call such \(\mathcal{D}\) linear
+separable. But given a linear separable \(\mathcal{D}\), will PLA halt?</p><p>\(\mathcal{D}\) is linear separable, is equivalent to there is an
+omniscient \(\vw_f\) such that \(y_n = \sign(\vw^T_f \vx_n)\), for all
+\(n\). In other word, \[
+\min_n y_n \vw^T_f \vx_n > 0.
+\] So, for any \(\vx_i\), \[
+y_i\vw^T_f\vx_i \ge \min_ny_n\vw^T_f\vx_n > 0.
+\] To measure the similarity between \(\vx_f\) and \(\vx_T\), learned at
+step \(T\), we can use the inner product. The larger the inner product,
+the closer the two vectors are. The following derivation shows that we
+the algorithm runs from one iteration to the next, our learned line is
+getting closer and closer to the true one. \[</p>\begin{align*}
+\vw_f\vw_T &= \vw_f(\vw_{T-1} + y_{n(t)}\vx_{n(t)})\\
+&= \vw_f\vx_{T-1} + y_{n(t)}\vw_f\vx_{n(t)} \\
+&> \vw_f\vw_{T-1}
+\end{align*}<p>\] If you are careful enough, you would say that the magnitude of inner
+product also depends on the magnitude of the vector. This is true, we
+would want \(\vec{w}_T\) to not grow too large as \(T\) goes large. \[</p>\begin{align*}
+\norm{\vw_T}^2 &= \norm{\vw_{T-1} + y_{n(t)}\vx_{n(t)}}^2 \\
+&= \norm{\vw_{T-1}}^2 + 2y_{n(t)}\vw_{T-1}^T\vx_{n(t)} + \norm{y_{n(t)}\vx_{n(t)}}^2\\
+&\le \norm{\vw_{T-1}}^2 + \norm{y_{n(t)}\vx_{n(t)}}^2\\
+&= \norm{\vw_{T-1}}^2 + \norm{\vx_{n(t)}}^2\\
+&\le \norm{\vw_{T-1}}^2 + \max_n\norm{\vx_n}^2\\
+\end{align*}<p>\] With this bound, suppose our \(\vw_0\) is the zero vector, then \[
+\norm{\vw_T}^2 \le \norm{\vw_0}^2 + TR^2 = TR^2
+\] where \(R^2 = \max_n \norm{\vx_n}^2\) (Consider \(R\) as the radius
+of the dataset). Let
+\(\rho = \min_n y_n \frac{\vw_f^T}{\norm{\vw_f}}\vx_n\) (closet distance
+between \(\vx\) and \(\vw_f\), or margin) Hence, the normalized inner
+product has the following property: \[</p>\begin{align*}
+\frac{\vw^T_f}{\norm{\vw_f}}\frac{\vw_T}{\norm{\vw_T}} &\ge \frac{\vw^T_f}{\norm{\vw_f}}\frac{\vw_T}{\sqrt{TR^2}}\\
+&= \frac{\vw^T_f}{\norm{\vw_f}}\frac{\vw_T}{\sqrt{T}R}\\
+&= \frac{1}{\sqrt{T}R}\frac{\vw^T_f}{\norm{\vw_f}}\vw_T\\
+&= \frac{1}{\sqrt{T}R}\frac{\vw^T_f}{\norm{\vw_f}}(\vw_0 + y_{n(0)}\vx_{n(0)} + y_{n(1)}\vx_{n(1)} + \cdots + y_{n(T-1)}\vx_{n(T-1)})\\
+&= \frac{1}{\sqrt{T}R}\frac{\vw^T_f}{\norm{\vw_f}}(y_{n(0)}\vx_{n(0)} + y_{n(1)}\vx_{n(1)} + \cdots + y_{n(T-1)}\vx_{n(T-1)})\\
+&\ge \frac{1}{\sqrt{T}R}T\rho\\
+&= \frac{\sqrt{T}\rho}{R}.\\
+\end{align*}<p>\] When normalized \(\vw_T\) is equivalent as the normalized \(\vw_f\),
+their inner product would be 1, So, \[
+1 \ge \frac{\sqrt{T}\rho}{R}.
+\] Hence, \[
+\sqrt{T} \le \frac{R}{\rho} \Longleftrightarrow T \le \frac{R^2}{\rho^2}.
+\] This means that the number of iterations we find \(\vw_f\) is bounded
+by \(R^2 /\rho^2\), which depends on the dataset and \(\vw_f\) itself
+only. So, as long as the dataset is linear separable, PLA halts.</p></div></div><div id=note-pla-outline-container-pros-and-cons-of-pla class=outline-3><h5 id=note-pla-pros-and-cons-of-pla>Pros and Cons of PLA</h5><div id=note-pla-outline-text-pros-and-cons-of-pla class=outline-text-3><p>Pros: It is simple to implement, fast, and works in any dimension \(d\).
+Cons: We assume \(\mathcal{D}\) is linear separable. But, in reality,
+this property is unknown in advance. Moreover, we are not fully sure how
+long does the halting take. This is because \(\rho\) depends on
+\(\vw_f\), which we never have access to in the first place. Therefore,
+we run the PLA and observe that it does not halt for a long time. We
+can't decide between if \(\mathcal{D}\) is not linear separable, or if
+the algorithm is talking a long time to halt.</p></div></div><div id=note-pla-outline-container-learning-with-noisy-data class=outline-3><h5 id=note-pla-learning-with-noisy-data>Learning with Noisy Data</h5><div id=note-pla-outline-text-learning-with-noisy-data class=outline-text-3><p>Taking a step back, we used to assume that \(\cal{Y}\) is generated by
+applying the target function \(f\) on \(\mathcal{X}\). However, in
+reality, there might be noises. So that
+\(\cal{Y} = f(\cal{X}) + \text{noises}\). This means that noisy
+\(\mathcal{D}\) could not linear separable, even though \(\cal{D}\) is.
+How do we learn a \(\vw\) in this case?</p><p>First, we assume that the noise is little (which is reasonable), i.e. \[
+y_n = f(\vx_n), \quad \text{usually}.
+\] Therefore, if \(g \approx f\), then \[
+y_n = g(\vx_n), \quad \text{usually}.
+\] We want to find a line (hyperplane) \(\vw_g\) such that the number of
+mistakes made on \(\mathcal{D}\) is minimized: \[
+\vw_g \leftarrow \arg \min_\vw \sum^N_{n=1} \mathbb{1}_{[y_n \ne \sign(\vw^T\vx_n)]}.
+\] Unfortunately, solving the optimization problem above is NP-hard.
+However, we can modify PLA to get an approximately good \(g\).</p><hr><p>Algorithm (Pocket Algorithm): Initialize pocket weights \(\hat{\vw}\)
+For \(t = 0, 1, \ldots\) 1. Find a (random) mistake of \(\vw_t\) called
+\(\vw_{n(t), y_{n(t)}}\) 2. (Try to) correct the mistake by
+\(\vw_{t + 1} \leftarrow \vw_t + y_{n(t)}\vw_{n(t)}\) 3. If
+\(\vw_{t + 1}\) makes fewer mistakes than \(\hat{\vw}\), replace
+\(\hat{\vw}\) by \(\vw_{t + 1}\) Until enough iterations. Return
+\(\hat{\vw}\) (called \(\vw_{POCKET}\)) as \(g\)</p><hr></div></div></div><a class=future-note__top href=#notes-index>Back to log index ↑</a></article><article class=future-note id=note-clustering data-reveal><header class=future-note__header><div><p>LOG N-06</p><h2>Clustering</h2></div><div class=future-note__meta><time datetime=2022-10-08>2022.10.08</time></div></header><div class=future-prose><p>In unsupervised learning, there are no labels associated with features.
+Generally speaking, the ultimate goal of unsupervised learning is to
+find patterns and structures that help us to better understand data.
+Sometimes, we also use unsupervised learning to model a distribution.
+But we generally will not make predictions.</p><p>There are 3 types of clustering 1. Partitional (centroid,
+graph-theoretic, spectral) 1. Hierarchical (agglomerative, divisive) 2.
+Bayesian (decision-based, non-parametric)</p><div id=note-clustering-outline-container-partitional-clustering class=outline-3><h5 id=note-clustering-partitional-clustering>Partitional Clustering</h5><div id=note-clustering-outline-text-partitional-clustering class=outline-text-3><div id=note-clustering-outline-container-k-means class=outline-4><h6 id=note-clustering-k-means>\(k\)-means</h6><div id=note-clustering-outline-text-k-means class=outline-text-4><p>\(k\)-means is a type of partitional centroid-based clustering
+algorithm. The algorithm is described as follows: 1. Randomly pick \(k\)
+cluster centers; 2. Find the closest center for each point; 3. Update
+cluster centers by computing centroids; 4. While not converging, jump to
+step 2.</p></div></div><div id=note-clustering-outline-container-graph-based class=outline-4><h6 id=note-clustering-graph-based>Graph-based</h6><div id=note-clustering-outline-text-graph-based class=outline-text-4><p>Let \(G = (V, E)\) has vertex set \(V\) and edge set \(E\). Each
+\(e \in E\) can be weighted or unweighted, and it encodes the similarity
+between data points.</p><p>If each vertex represents a data point, then finding a clustering
+amongst these points is isomorphic to partition \(V\) into \(V_1\) and
+\(V_2\) (when \(k = 2\)). The partition of \(V\) implies that we need to
+split the graph. We can define an objective function to determine the
+best way to split the edges of a graph. Then, we can optimize the
+objective function in order to find the optimal partition. Consider the
+objective function to be
+\(\text{Cut}(V_1, V_2) = \sum_{i \in V_1, j \in V_2} w_{ij}\), then we
+would like to have split \(V\) so that the \(\text{Cut}\) is minimized.
+Of course, such a greedy approach could lead to a less ideal solution:
+\(|V_1| &lt;&lt; |V_2| (|V_2| = |V| - 1)\). We want to balance the cardinality
+of \(V_1\) and \(V_2\). A way to balance it is to use "balanced" cut
+like: \[
+\text{Ratio Cut}(V_1, V_2) = \frac{\text{Cut}(V_1, V_2)}{|V_1|} + \frac{\text{Cut}(V_1, V_2)}{|V_2|},
+\] or \[
+\text{Normalized Cut}(V_1, V_2) = \frac{\text{Cut}(V_1, V_2)}{\sum_{i \in V_1} d_i} + \frac{\text{Cut}(V_1, V_2)}{\sum_{j \in V_2} d_j},
+\] where \(d_i = \sum_j w_{ij}\).</p><div id=note-clustering-outline-container-spectral-clustering class=outline-5><h6 id=note-clustering-spectral-clustering>Spectral Clustering</h6><div id=note-clustering-outline-text-spectral-clustering class=outline-text-5><p>We start with a similarity/adjacency matrix, \(A\), of a graph \(G\).
+Let \(D\) be diagonal matrix \(D\) such that the i-\(th\) diagonal entry
+is \(\sum^n_{k=1} w_{ik}\). Define graph Laplacian matrix \(L = D - A\).
+\(L\) has the 2 following properties: 1. L is symmetric 2. L is positive
+semi-definite The second properties implies that all eigenvalues of
+\(L\) are non-negative. Then, compute the \(k\) smallest eigenvectors
+and stack them as columns into a matrix \(V\). Finally, we run
+\(k\)-means on the rows of \(V\) to obtain the clustering result.</p></div></div></div></div></div></div><div id=note-clustering-outline-container-hierarchical-clustering class=outline-3><h5 id=note-clustering-hierarchical-clustering>Hierarchical Clustering</h5><div id=note-clustering-outline-text-hierarchical-clustering class=outline-text-3><p>The basic idea of hierarchical clustering is to build hierarchy amongst
+the data points, i.e. to form an arrangement of these points from
+specific to general. The advantage of such an algorithm is that there is
+no need for \(k\), the number of clusters. The output of this algorithm
+is a binary tree. There are two types of hierarchical clustering, which
+are described as follows: 1. Agglomerative clustering: A buttom-up
+approach, which initially treats each data point as its own singleton
+cluster and progressively merge clusters. 2. Divisive: A top-down
+approach, which initially treats all points as in a single cluster and
+progressively split clusters.</p><div id=note-clustering-outline-container-agglomerative-clustering class=outline-4><h6 id=note-clustering-agglomerative-clustering>Agglomerative Clustering</h6><div id=note-clustering-outline-text-agglomerative-clustering class=outline-text-4><ol><li>Every point is in its own cluster;</li><li>For all pair of clusters, select the closest pair and merge them;</li><li>Repeat step 2 until there is only 1 cluster left.</li></ol><p>In step 2, we need to calculate the distance between all pairs of
+clusters in order to select the closest one to merge. There are 3 ways
+to define the distance between two clusters \(A\) and \(B\): 1.
+single-linkage:
+\(d(A, B) = \min_{x_1 \in A, x_2 \in B} d(x_1, x_2)\); 2.
+complete-linkage:
+\(d(A, B) = \max_{x_1 \in A, x_2 \in B} d(x_1, x_2)\); 3.
+average-linkage:
+\(d(A, B) = \frac{1}{|A| |B|}\sum_{x_1 \in A, x_2 \in B} d(x_1 , x_2)\).</p></div></div></div></div></div><a class=future-note__top href=#notes-index>Back to log index ↑</a></article><article class=future-note id=note-k-means data-reveal><header class=future-note__header><div><p>LOG N-07</p><h2>K-means in Python</h2></div><div class=future-note__meta><time datetime=2021-10-19>2021.10.19</time></div></header><div class=future-prose><p>There are two major steps in the K-means algorithm. The first one is to
+calculate the representatives (centroids) of a given partition. The
+second one is to find the partition based on the representatives.</p><div id=note-k-means-outline-container-inputs class=outline-3><h5 id=note-k-means-inputs>Inputs</h5><div id=note-k-means-outline-text-inputs class=outline-text-3><p>Suppose we have a dataset looks like this:</p><div class="src src-python"><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span>dataset <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>array([[<span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>6</span>],
+</span></span><span style=display:flex><span>                    [<span style=color:#ae81ff>6</span>, <span style=color:#ae81ff>5</span>],
+</span></span><span style=display:flex><span>                    [<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>],
+</span></span><span style=display:flex><span>                    [<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>],
+</span></span><span style=display:flex><span>                    [<span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>3</span>]])</span></span></code></pre></div></div><p>Each row in this dataset matrix is an observation and each column in
+this matrix represents a feature. So, in this example, we have 5 points
+from a plane. And we define partition in the following way:</p><div class="src src-python"><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span>partition <span style=color:#f92672>=</span> [[<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>4</span>], [<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>2</span>]]</span></span></code></pre></div></div><p>Observe that <code class=verbatim>partition</code> has a length of 2, which implies that the $k$
+for the K-means algorithm is 2. Each list in <code class=verbatim>partition</code> represents a
+cluster. Elements within each list is the corresponding index of that
+observation in the dataset. So, with respect to this <code class=verbatim>partition</code>, the
+first cluster has 3 elements, namely <code class=verbatim>[5, 6], [1, 0], [3, 3]</code>, and the
+second cluster contains <code class=verbatim>[6, 5]</code> and <code class=verbatim>[0, 1]</code>.</p></div></div><div id=note-k-means-outline-container-finding-the-centroids class=outline-3><h5 id=note-k-means-finding-the-centroids>Finding the centroids</h5><div id=note-k-means-outline-text-finding-the-centroids class=outline-text-3><p>To calculate the centroids, we need information about the dataset and
+about the partition. The centroid for a cluster $C$ is the average of
+all observations in the cluster, namely
+$$
+\mu = \frac{1}{|C|}\sum_{i \in C} x_i
+$$, where $x_i$ is the
+$i^\text{th}$ observation in the dataset.</p><p>All we need to do is to calculate the mean (using <code class=verbatim>np.mean()</code> with
+<code class=verbatim>axis</code> set to 0) for each partition.</p><div class="src src-python"><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>find_centroids</span>(dataset: np<span style=color:#f92672>.</span>ndarray, partition: list) <span style=color:#f92672>-&gt;</span> np<span style=color:#f92672>.</span>ndarray:
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    find the centroids of the given partition
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    u <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> indices <span style=color:#f92672>in</span> partition:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> len(indices) <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>:
+</span></span><span style=display:flex><span>            u<span style=color:#f92672>.</span>append(np<span style=color:#f92672>.</span>zeros((dataset<span style=color:#f92672>.</span>shape[<span style=color:#ae81ff>1</span>], )))
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>:
+</span></span><span style=display:flex><span>            u<span style=color:#f92672>.</span>append(np<span style=color:#f92672>.</span>mean(dataset[indices], axis<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>))
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> np<span style=color:#f92672>.</span>array(u)</span></span></code></pre></div></div><p>Each centroid is stored in the list $u$ (which is returned as an numpy
+array). Note that the length of $u$ should be equivalent to $k$.</p></div></div><div id=note-k-means-outline-container-finding-the-partition class=outline-3><h5 id=note-k-means-finding-the-partition>Finding the partition</h5><div id=note-k-means-outline-text-finding-the-partition class=outline-text-3><p>With the centroids calculated, we need to re-partition the dataset based
+on these (newly calculated) centroids. This process is observation-wise,
+which means for each observation in the dataset, we need to compare it
+to each of the centroids, which represent clusters in a one-to-one
+manner, and find to which centroid the observation is close. The
+observation will be assigned to the cluster that represented by the
+centroid.</p><p>We could use the Euclidean distance, i.e. <code class=verbatim>np.linalg.norm()</code>, to find
+the distance between an obervation to all centroids at the same time.
+Then, use the <code class=verbatim>np.argmin()</code> function to select the index of the least
+distance. This index will be the cluster index for this observation.</p><div class="src src-python"><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>new_partition</span>(dataset: np<span style=color:#f92672>.</span>ndarray, u: np<span style=color:#f92672>.</span>ndarray) <span style=color:#f92672>-&gt;</span> list:
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    find the new partition based on u
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    partition <span style=color:#f92672>=</span> [[] <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(u<span style=color:#f92672>.</span>shape[<span style=color:#ae81ff>0</span>])]
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i, point <span style=color:#f92672>in</span> enumerate(dataset):
+</span></span><span style=display:flex><span>        argmin <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>argmin(np<span style=color:#f92672>.</span>linalg<span style=color:#f92672>.</span>norm(point <span style=color:#f92672>-</span> u, axis<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>))
+</span></span><span style=display:flex><span>        partition[argmin]<span style=color:#f92672>.</span>append(i)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> partition</span></span></code></pre></div></div></div></div><div id=note-k-means-outline-container-putting-everything-together class=outline-3><h5 id=note-k-means-putting-everything-together>Putting everything together</h5><div id=note-k-means-outline-text-putting-everything-together class=outline-text-3><p>K-means is an iterative algorithm. All we need to do is to put the first
+step and the second step in a for loop. Here, we hard code the epoch
+number to 3. And we hard code the initial partition. One, instead, can
+randomize the initial partition and run the algorithm to see which
+convergence has the best result. And one can check whether the loss of a
+new partition is improved significantly or not to determine if the
+algorithm should halt or not.</p><div class="src src-python"><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>kmeans</span>(dataset: np<span style=color:#f92672>.</span>ndarray, partition: list):
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    K-means algorithm, k can be inferred from the shape of partition
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    epoch <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>    losses <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;epoch&#34;</span>: [], <span style=color:#e6db74>&#34;loss&#34;</span>: []}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> epoch <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>3</span>:
+</span></span><span style=display:flex><span>        epoch <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        u <span style=color:#f92672>=</span> find_centroids(dataset, partition)
+</span></span><span style=display:flex><span>        partition <span style=color:#f92672>=</span> new_partition(dataset, u)
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n\n</span><span style=color:#e6db74>Final Centroids:&#34;</span>)
+</span></span><span style=display:flex><span>    print(u)
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>&#34;Final Partition:&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> i, indices <span style=color:#f92672>in</span> enumerate(partition):
+</span></span><span style=display:flex><span>        print(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\t</span><span style=color:#e6db74>cluster #</span><span style=color:#e6db74>{}</span><span style=color:#e6db74>:&#34;</span><span style=color:#f92672>.</span>format(i <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>), {tuple(dataset[index])
+</span></span><span style=display:flex><span>                                               <span style=color:#66d9ef>for</span> index <span style=color:#f92672>in</span> indices})</span></span></code></pre></div></div></div></div></div><a class=future-note__top href=#notes-index>Back to log index ↑</a></article></section></div></main><footer class="future-footer reader-footer" data-reveal><div><p class=future-footer__mark>YC<span>/</span>LOG</p><p>End of decrypted working set.</p></div><div class=future-footer__links><a href=/future/>Future interface</a>
+<a href=mailto:yi.chen@wisc.edu>yi.chen@wisc.edu</a>
+<a href=https://github.com/kitkatdafu>GitHub</a>
+<a href=/>Classic interface</a></div><p class=future-footer__copy>Copyleft (ↄ) 2026 Yi Chen</p></footer></div><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:["\\left\\lVert#1\\right\\rVert",1],st:"\\textrm{subject to:}"}},svg:{fontCache:"global"}}</script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>
