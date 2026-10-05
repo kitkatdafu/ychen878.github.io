@@ -55,7 +55,7 @@ vector where each component is a feature (age, for example). Our
 learning algorithm \(\mathcal{A}\) considers a hypothesis class
 \(\mathcal{H}\) and takes the dataset \(\mathcal{D}\) and tries to give
 a function \(g \in \mathcal{H}\) so that \(g\) performs similar to
-\(f\). We will use \(g\) as our system of approving credit card.</p></p></a></p><p><h3><a href=/notes/clustering/>Clustering</a></h3><i></i>
+\(f\). We will use \(g\) as our system of approving credit card.</p></div></div></p></a></p><p><h3><a href=/notes/clustering/>Clustering</a></h3><i></i>
 <time datetime=2022-10-08>Oct 8, 2022</time>
 <i></i>
 <a href=https://ychen878.github.io/tags/>ml</a>
@@ -69,7 +69,32 @@ Bayesian (decision-based, non-parametric)</p><div id=outline-container-partition
 algorithm. The algorithm is described as follows: 1. Randomly pick \(k\)
 cluster centers; 2. Find the closest center for each point; 3. Update
 cluster centers by computing centroids; 4. While not converging, jump to
-step 2.</p></p></a></p><p><h3><a href=/notes/k-means/>K-means in Python</a></h3><i></i>
+step 2.</p></div></div><div id=outline-container-graph-based class=outline-4><h4 id=graph-based>Graph-based</h4><div id=outline-text-graph-based class=outline-text-4><p>Let \(G = (V, E)\) has vertex set \(V\) and edge set \(E\). Each
+\(e \in E\) can be weighted or unweighted, and it encodes the similarity
+between data points.</p><p>If each vertex represents a data point, then finding a clustering
+amongst these points is isomorphic to partition \(V\) into \(V_1\) and
+\(V_2\) (when \(k = 2\)). The partition of \(V\) implies that we need to
+split the graph. We can define an objective function to determine the
+best way to split the edges of a graph. Then, we can optimize the
+objective function in order to find the optimal partition. Consider the
+objective function to be
+\(\text{Cut}(V_1, V_2) = \sum_{i \in V_1, j \in V_2} w_{ij}\), then we
+would like to have split \(V\) so that the \(\text{Cut}\) is minimized.
+Of course, such a greedy approach could lead to a less ideal solution:
+\(|V_1| &lt;&lt; |V_2| (|V_2| = |V| - 1)\). We want to balance the cardinality
+of \(V_1\) and \(V_2\). A way to balance it is to use "balanced" cut
+like: \[
+\text{Ratio Cut}(V_1, V_2) = \frac{\text{Cut}(V_1, V_2)}{|V_1|} + \frac{\text{Cut}(V_1, V_2)}{|V_2|},
+\] or \[
+\text{Normalized Cut}(V_1, V_2) = \frac{\text{Cut}(V_1, V_2)}{\sum_{i \in V_1} d_i} + \frac{\text{Cut}(V_1, V_2)}{\sum_{j \in V_2} d_j},
+\] where \(d_i = \sum_j w_{ij}\).</p><div id=outline-container-spectral-clustering class=outline-5><h5 id=spectral-clustering>Spectral Clustering</h5><div id=outline-text-spectral-clustering class=outline-text-5><p>We start with a similarity/adjacency matrix, \(A\), of a graph \(G\).
+Let \(D\) be diagonal matrix \(D\) such that the i-\(th\) diagonal entry
+is \(\sum^n_{k=1} w_{ik}\). Define graph Laplacian matrix \(L = D - A\).
+\(L\) has the 2 following properties: 1. L is symmetric 2. L is positive
+semi-definite The second properties implies that all eigenvalues of
+\(L\) are non-negative. Then, compute the \(k\) smallest eigenvectors
+and stack them as columns into a matrix \(V\). Finally, we run
+\(k\)-means on the rows of \(V\) to obtain the clustering result.</p></div></div></div></div></div></div></p></a></p><p><h3><a href=/notes/k-means/>K-means in Python</a></h3><i></i>
 <time datetime=2021-10-19>Oct 19, 2021</time>
 <i></i>
 <a href=https://ychen878.github.io/tags/>ml</a>
@@ -81,4 +106,9 @@ second one is to find the partition based on the representatives.</p><div id=out
 </span></span><span style=display:flex><span>                    [<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>],
 </span></span><span style=display:flex><span>                    [<span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>3</span>]])</span></span></code></pre></div></div><p>Each row in this dataset matrix is an observation and each column in
 this matrix represents a feature. So, in this example, we have 5 points
-from a plane. And we define partition in the following way:</p></p></a></p></div><footer><p>Copyleft (ↄ) 2026 Yi Chen</p><p><a href="mailto: yi.chen@wisc.edu">yi.chen@wisc.edu</a></p></footer><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:["\\left\\lVert#1\\right\\rVert",1],st:"\\textrm{subject to:}"}},svg:{fontCache:"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>
+from a plane. And we define partition in the following way:</p><div class="src src-python"><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span>partition <span style=color:#f92672>=</span> [[<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>4</span>], [<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>2</span>]]</span></span></code></pre></div></div><p>Observe that <code class=verbatim>partition</code> has a length of 2, which implies that the $k$
+for the K-means algorithm is 2. Each list in <code class=verbatim>partition</code> represents a
+cluster. Elements within each list is the corresponding index of that
+observation in the dataset. So, with respect to this <code class=verbatim>partition</code>, the
+first cluster has 3 elements, namely <code class=verbatim>[5, 6], [1, 0], [3, 3]</code>, and the
+second cluster contains <code class=verbatim>[6, 5]</code> and <code class=verbatim>[0, 1]</code>.</p></div></div></p></a></p></div><footer><p>Copyleft (ↄ) 2026 Yi Chen</p><p><a href="mailto: yi.chen@wisc.edu">yi.chen@wisc.edu</a></p></footer><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],macros:{vec:["\\mathbf{#1}",1],vx:"\\vec{x}",vw:"\\vec{w}",sign:"\\textrm{sign}",norm:["\\left\\lVert#1\\right\\rVert",1],st:"\\textrm{subject to:}"}},svg:{fontCache:"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></body></html>
