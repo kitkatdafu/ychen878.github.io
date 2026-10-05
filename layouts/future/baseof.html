@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" data-palette="night">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Yi Chen — machine learning researcher working on crowdsourcing, preference learning, and reliable AI."
+    >
+    <meta name="theme-color" content="#080b0a">
+    <meta name="color-scheme" content="dark">
+    <title>{{ if eq .Layout "notes" }}Field Logs // {{ end }}Yi Chen // Future Interface</title>
+
+    {{ $favicon := resources.Get "images/favicon.ico" }}
+    {{ with $favicon }}<link rel="icon" type="image/x-icon" href="{{ .RelPermalink }}">{{ end }}
+    <link rel="stylesheet" href="{{ "/future/future.css" | relURL }}">
+    <script>document.documentElement.classList.add("has-js");</script>
+    <script src="{{ "/future/future.js" | relURL }}" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <div class="ambient-layer" aria-hidden="true">
+      <canvas id="signal-field"></canvas>
+      <div class="ambient-grid"></div>
+      <div class="scanlines"></div>
+    </div>
+
+    <div class="boot-screen" data-boot-screen aria-hidden="true">
+      <div class="boot-screen__frame">
+        <p class="boot-screen__brand">YC_OS <span>8.8.8</span></p>
+        <div class="boot-screen__meter"><span></span></div>
+        <div class="boot-screen__log" aria-hidden="true">
+          <span>&gt; resolving research node...</span>
+          <span>&gt; loading human signals...</span>
+          <span>&gt; interface ready.</span>
+        </div>
+      </div>
+    </div>
+
+    {{ block "main" . }}{{ end }}
+
+    {{ if .Params.math }}
+      <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [["$", "$"], ["\\(", "\\)"]],
+            macros: {
+              vec: ["\\mathbf{#1}", 1],
+              vx: "\\vec{x}",
+              vw: "\\vec{w}",
+              sign: "\\textrm{sign}",
+              norm: ["\\left\\lVert#1\\right\\rVert", 1],
+              st: "\\textrm{subject to:}"
+            }
+          },
+          svg: { fontCache: "global" }
+        };
+      </script>
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    {{ end }}
+  </body>
+</html>

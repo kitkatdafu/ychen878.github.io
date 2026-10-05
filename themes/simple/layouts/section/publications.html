@@ -5,7 +5,7 @@
 
     <h2>Conference Publications</h2>
     <ul class="publication-list">
-      {{ range .Site.Data.conf_publications.list }}
+      {{ range hugo.Data.conf_publications.list }}
 
       <li class="publication-item">
         <strong><a href="{{ .url }}">{{ .title }}</a></strong> <br />
@@ -18,7 +18,7 @@
 
     <h2>Workshop Publications</h2>
     <ul class="publication-list">
-      {{ range .Site.Data.ws_publications.list }}
+      {{ range hugo.Data.ws_publications.list }}
 
       <li class="publication-item">
         <strong><a href="{{ .url }}">{{ .title }}</a></strong> <br />
@@ -30,7 +30,7 @@
 
     <h2>Preprints</h2>
     <ul class="publication-list">
-      {{ range .Site.Data.preprints.list }}
+      {{ range hugo.Data.preprints.list }}
 
       <li class="publication-item">
         <strong><a href="{{ .url }}">{{ .title }}</a></strong> <br />

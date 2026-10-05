@@ -1,0 +1,105 @@
+{{ define "main" }}
+  <div class="site-shell notes-reader-shell" id="top">
+    <header class="top-rail" data-reveal>
+      <a class="wordmark" href="{{ "/future/" | relURL }}" aria-label="Return to Yi Chen future interface">
+        <span class="wordmark__pixel" aria-hidden="true">YC</span>
+        <span>RESEARCH NODE / 878</span>
+      </a>
+
+      <div class="system-status" aria-label="System status: online">
+        <span class="status-light" aria-hidden="true"></span>
+        <span>ARCHIVE ONLINE</span>
+        <time data-local-time>--:-- CST</time>
+      </div>
+
+      <nav class="future-nav" aria-label="Future interface navigation">
+        <a href="{{ "/future/#research" | relURL }}">Research</a>
+        <a href="{{ "/future/#archive" | relURL }}">Archive</a>
+        <a href="{{ "/future/#projects" | relURL }}">Projects</a>
+        <a class="is-active" href="#notes-index" aria-current="page">Notes</a>
+      </nav>
+
+      <a class="classic-link" href="{{ "/" | relURL }}">
+        <span aria-hidden="true">←</span> Classic
+      </a>
+    </header>
+
+    <div class="scroll-progress" aria-hidden="true"><span data-scroll-progress></span></div>
+
+    <main id="main-content" class="reader-main">
+      <section class="reader-hero" aria-labelledby="reader-title" data-reveal>
+        <a class="reader-back" href="{{ "/future/#notes" | relURL }}">← Return to interface</a>
+        <p class="eyebrow"><span>06</span> Decrypted working set</p>
+        <h1 id="reader-title">Field<br><em>logs.</em></h1>
+        <p>
+          Working notes on machine learning, optimization, and systems.
+          Select a record from the index and read it without leaving the future interface.
+        </p>
+      </section>
+
+      {{ with .Site.GetPage "/notes" }}
+        <div class="reader-layout">
+          <aside class="reader-index" id="notes-index" data-reveal>
+            <p class="reader-index__label">Log index / {{ len .Pages }} records</p>
+            <nav aria-label="Field log index">
+              {{ range $index, $note := .Pages.ByDate.Reverse }}
+                <a href="#note-{{ $note.File.ContentBaseName }}">
+                  <span>N-{{ printf "%02d" (add $index 1) }}</span>
+                  <strong>{{ $note.Title }}</strong>
+                  <time datetime="{{ $note.Date.Format "2006-01-02" }}">{{ $note.Date.Format "2006" }}</time>
+                </a>
+              {{ end }}
+            </nav>
+          </aside>
+
+          <section class="reader-documents" aria-label="Field log documents">
+            {{ range $index, $note := .Pages.ByDate.Reverse }}
+              {{ $slug := $note.File.ContentBaseName }}
+              {{ $content := $note.Content }}
+              {{ $content = replaceRE `<p>:PROPERTIES:\s*:CUSTOM_ID:[^<]*:END:</p>` `` $content }}
+              {{ $content = replaceRE `id="([^"]+)"` (printf `id="note-%s-${1}"` $slug) $content }}
+              {{ $content = replaceRE `href="#([^"]+)"` (printf `href="#note-%s-${1}"` $slug) $content }}
+              {{ $content = replaceRE `<h5([^>]*)>` `<h6${1}>` $content }}
+              {{ $content = replaceRE `</h5>` `</h6>` $content }}
+              {{ $content = replaceRE `<h4([^>]*)>` `<h6${1}>` $content }}
+              {{ $content = replaceRE `</h4>` `</h6>` $content }}
+              {{ $content = replaceRE `<h3([^>]*)>` `<h5${1}>` $content }}
+              {{ $content = replaceRE `</h3>` `</h5>` $content }}
+              {{ $content = replaceRE `<h2([^>]*)>` `<h4${1}>` $content }}
+              {{ $content = replaceRE `</h2>` `</h4>` $content }}
+              {{ $content = replaceRE `<h1([^>]*)>` `<h3${1}>` $content }}
+              {{ $content = replaceRE `</h1>` `</h3>` $content }}
+              <article class="future-note" id="note-{{ $slug }}" data-reveal>
+                <header class="future-note__header">
+                  <div>
+                    <p>LOG N-{{ printf "%02d" (add $index 1) }}</p>
+                    <h2>{{ $note.Title }}</h2>
+                  </div>
+                  <div class="future-note__meta">
+                    <time datetime="{{ $note.Date.Format "2006-01-02" }}">{{ $note.Date.Format "2006.01.02" }}</time>
+                  </div>
+                </header>
+                <div class="future-prose">{{ $content | safeHTML }}</div>
+                <a class="future-note__top" href="#notes-index">Back to log index ↑</a>
+              </article>
+            {{ end }}
+          </section>
+        </div>
+      {{ end }}
+    </main>
+
+    <footer class="future-footer reader-footer" data-reveal>
+      <div>
+        <p class="future-footer__mark">YC<span>/</span>LOG</p>
+        <p>End of decrypted working set.</p>
+      </div>
+      <div class="future-footer__links">
+        <a href="{{ "/future/" | relURL }}">Future interface</a>
+        <a href="mailto:yi.chen@wisc.edu">yi.chen@wisc.edu</a>
+        <a href="https://github.com/kitkatdafu">GitHub</a>
+        <a href="{{ "/" | relURL }}">Classic interface</a>
+      </div>
+      <p class="future-footer__copy">Copyleft (ↄ) {{ now.Format "2006" }} Yi Chen</p>
+    </footer>
+  </div>
+{{ end }}

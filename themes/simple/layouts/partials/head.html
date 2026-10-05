@@ -5,6 +5,11 @@
     {{ if .IsHome }}{{ $title = .Site.Title }}{{ end }}
     {{ $faviconImage:= resources.Get "images/favicon.ico" }}
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    {{ if .IsHome }}
+    <link rel="stylesheet" type="text/css" href="{{ "/future/portal.css" | relURL }}">
+    <link rel="prefetch" href="{{ "/future/" | relURL }}">
+    <script src="{{ "/future/portal.js" | relURL }}" defer></script>
+    {{ end }}
     <link rel="icon" type="image/x-icon" href="{{$faviconImage.RelPermalink}}">
     <title>{{ $title }}</title>
 </head>
