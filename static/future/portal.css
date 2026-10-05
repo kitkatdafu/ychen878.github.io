@@ -2,7 +2,7 @@
   margin: 8px 0 22px;
   border: 1px dashed #000;
   padding: 9px;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .future-portal__status {
@@ -11,15 +11,16 @@
   gap: 7px;
   margin: 0 0 7px;
   font-size: 10px;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .future-portal__status span {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   background: #000;
-  animation: portal-status-blink 1.4s steps(2, end) infinite;
+  animation: coin-blink 1.1s steps(2, end) infinite;
 }
 
 #future-portal .future-portal__link,
@@ -29,33 +30,36 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 10px;
-  min-height: 48px;
-  border: 1px solid #000;
+  min-height: 52px;
+  border: 2px solid #000;
   padding: 8px 10px;
   color: #000;
   background: #fff;
   text-decoration: none;
   font-style: normal;
+  box-shadow: 4px 4px 0 #000;
 }
 
 #future-portal .future-portal__link:hover,
 #future-portal .future-portal__link:focus-visible {
   color: #fff;
   background: #000;
+  box-shadow: 1px 1px 0 #000;
+  transform: translate(3px, 3px);
 }
 
 .future-portal__link:focus-visible {
   outline: 2px solid #000;
-  outline-offset: 3px;
+  outline-offset: 4px;
 }
 
 .future-portal__icon {
   display: grid;
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   place-items: center;
-  border: 1px dotted currentColor;
-  font-size: 20px;
+  border: 2px solid currentColor;
+  font-size: 18px;
   line-height: 1;
 }
 
@@ -89,9 +93,19 @@
   overflow: hidden;
   visibility: hidden;
   pointer-events: none;
-  color: #e9f8ed;
-  background: #070a09;
-  clip-path: circle(0 at var(--portal-x) var(--portal-y));
+  color: #fff8df;
+  background: #05000d;
+  clip-path: inset(50% 0 50% 0);
+}
+
+.portal-transition::after {
+  position: absolute;
+  z-index: 8;
+  inset: 0;
+  content: "";
+  opacity: 0.22;
+  background: repeating-linear-gradient(to bottom, transparent 0 3px, #000 4px);
+  pointer-events: none;
 }
 
 .portal-transition__grid,
@@ -102,13 +116,13 @@
 }
 
 .portal-transition__grid {
-  inset: -15%;
+  inset: -20%;
   opacity: 0;
   background-image:
-    linear-gradient(rgba(124, 246, 179, 0.13) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(124, 246, 179, 0.13) 1px, transparent 1px);
+    linear-gradient(rgba(41, 247, 240, 0.22) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(41, 247, 240, 0.22) 2px, transparent 2px);
   background-size: 32px 32px;
-  transform: perspective(520px) rotateX(58deg) translateY(18%);
+  transform: perspective(420px) rotateX(65deg) translateY(28%);
   transform-origin: center bottom;
 }
 
@@ -116,55 +130,60 @@
   inset: 0;
   opacity: 0;
   background:
-    linear-gradient(90deg, transparent 0 14%, #7cf6b3 14% 16%, transparent 16% 79%, #ff6b5c 79% 80%, transparent 80%),
-    linear-gradient(0deg, transparent 0 21%, rgba(124, 246, 179, 0.5) 21% 22%, transparent 22% 67%, rgba(255, 107, 92, 0.5) 67% 69%, transparent 69%);
-  background-size: 160px 96px;
+    linear-gradient(90deg, transparent 0 12%, #ff3cac 12% 14%, transparent 14% 62%, #29f7f0 62% 64%, transparent 64% 88%, #ffe75c 88% 90%, transparent 90%),
+    linear-gradient(0deg, transparent 0 18%, #8cff3f 18% 20%, transparent 20% 70%, #ff3cac 70% 73%, transparent 73%);
+  background-size: 128px 96px;
   image-rendering: pixelated;
 }
 
 .portal-transition__ring {
   top: var(--portal-y);
   left: var(--portal-x);
-  width: 24px;
-  height: 24px;
-  border: 2px solid #7cf6b3;
+  width: 28px;
+  height: 28px;
+  border: 4px solid #ffe75c;
   box-shadow:
-    0 0 0 10px rgba(124, 246, 179, 0.08),
-    0 0 42px rgba(124, 246, 179, 0.55);
-  transform: translate(-50%, -50%) scale(0.2) rotate(45deg);
+    0 0 0 8px #ff3cac,
+    0 0 0 14px #29f7f0;
+  transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
   opacity: 0;
 }
 
 .portal-transition__boot {
   position: absolute;
+  z-index: 9;
   top: 50%;
   left: 50%;
-  width: min(82vw, 440px);
-  border: 1px solid rgba(124, 246, 179, 0.7);
-  padding: 18px;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  width: min(84vw, 500px);
+  border: 5px solid #29f7f0;
+  padding: 20px;
+  font-family: "Courier New", Courier, monospace;
   text-align: left;
-  transform: translate(-50%, -50%) scale(0.92);
+  transform: translate(-50%, -50%) scale(0.85);
   opacity: 0;
+  background: #16052f;
+  box-shadow:
+    9px 9px 0 #ff3cac,
+    14px 14px 0 #35106a;
 }
 
 .portal-transition__boot::before,
 .portal-transition__boot::after {
   position: absolute;
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   content: "";
-  background: #ff6b5c;
+  background: #ffe75c;
 }
 
 .portal-transition__boot::before {
-  top: -4px;
-  left: -4px;
+  top: -7px;
+  left: -7px;
 }
 
 .portal-transition__boot::after {
-  right: -4px;
-  bottom: -4px;
+  right: -7px;
+  bottom: -7px;
 }
 
 .portal-transition__boot span,
@@ -174,20 +193,25 @@
 }
 
 .portal-transition__boot span {
-  color: #7cf6b3;
-  font-size: 11px;
-  letter-spacing: 0.16em;
+  color: #29f7f0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
 }
 
 .portal-transition__boot strong {
-  margin: 22px 0 8px;
-  font-size: clamp(17px, 4vw, 28px);
-  letter-spacing: 0.06em;
+  margin: 24px 0 9px;
+  color: #ffe75c;
+  font-size: clamp(20px, 5vw, 34px);
+  letter-spacing: 0.04em;
+  text-shadow: 3px 3px 0 #ff3cac;
 }
 
 .portal-transition__boot small {
-  color: #a7b0aa;
-  font-size: 11px;
+  color: #8cff3f;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 body.portal-opening {
@@ -195,43 +219,43 @@ body.portal-opening {
 }
 
 body.portal-opening #content {
-  animation: legacy-window-collapse 900ms steps(8, end) forwards;
+  animation: legacy-crt-collapse 800ms steps(8, end) forwards;
 }
 
 body.portal-opening > footer {
-  animation: legacy-footer-fade 350ms ease forwards;
+  animation: legacy-footer-fade 260ms steps(2, end) forwards;
 }
 
 body.portal-opening .portal-transition {
   visibility: visible;
   pointer-events: auto;
-  animation: portal-aperture 1.15s cubic-bezier(0.78, 0, 0.2, 1) forwards;
+  animation: arcade-screen-open 1.16s steps(10, end) forwards;
 }
 
 body.portal-opening .portal-transition__grid {
-  animation: portal-grid-arrive 1s 160ms ease-out forwards;
+  animation: arcade-grid-arrive 900ms 180ms steps(8, end) forwards;
 }
 
 body.portal-opening .portal-transition__pixels {
-  animation: portal-pixels-arrive 700ms 260ms steps(7, end) forwards;
+  animation: arcade-pixels-arrive 650ms 250ms steps(6, end) forwards;
 }
 
 body.portal-opening .portal-transition__ring {
-  animation: portal-ring-expand 720ms cubic-bezier(0.15, 0.8, 0.2, 1) forwards;
+  animation: coin-burst 620ms steps(6, end) forwards;
 }
 
 body.portal-opening .portal-transition__boot {
-  animation: portal-boot-arrive 420ms 600ms steps(5, end) forwards;
+  animation: player-ready 360ms 650ms steps(5, end) forwards;
 }
 
-@keyframes portal-status-blink {
-  50% { opacity: 0.2; }
+@keyframes coin-blink {
+  50% { opacity: 0.15; }
 }
 
-@keyframes legacy-window-collapse {
+@keyframes legacy-crt-collapse {
   0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-  35% { opacity: 1; transform: translate(-50%, -50%) scaleX(1) scaleY(0.04); }
-  60% { opacity: 0.85; transform: translate(-50%, -50%) scaleX(0.04) scaleY(0.04); }
+  45% { opacity: 1; transform: translate(-50%, -50%) scaleX(1) scaleY(0.035); }
+  75% { opacity: 0.9; transform: translate(-50%, -50%) scaleX(0.08) scaleY(0.035); }
   100% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
 }
 
@@ -239,30 +263,31 @@ body.portal-opening .portal-transition__boot {
   to { opacity: 0; }
 }
 
-@keyframes portal-aperture {
-  0% { clip-path: circle(0 at var(--portal-x) var(--portal-y)); }
-  100% { clip-path: circle(160vmax at var(--portal-x) var(--portal-y)); }
+@keyframes arcade-screen-open {
+  0% { clip-path: inset(50% 0 50% 0); }
+  40% { clip-path: inset(46% 0 46% 0); }
+  100% { clip-path: inset(0 0 0 0); }
 }
 
-@keyframes portal-ring-expand {
-  0% { opacity: 1; transform: translate(-50%, -50%) scale(0.2) rotate(45deg); }
-  60% { opacity: 1; }
-  100% { opacity: 0; transform: translate(-50%, -50%) scale(36) rotate(135deg); }
+@keyframes coin-burst {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(0.2); }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(34) rotate(90deg); }
 }
 
-@keyframes portal-grid-arrive {
-  from { opacity: 0; transform: perspective(520px) rotateX(58deg) translateY(32%); }
-  to { opacity: 1; transform: perspective(520px) rotateX(58deg) translateY(18%); }
+@keyframes arcade-grid-arrive {
+  from { opacity: 0; transform: perspective(420px) rotateX(65deg) translateY(50%); }
+  to { opacity: 1; transform: perspective(420px) rotateX(65deg) translateY(28%); }
 }
 
-@keyframes portal-pixels-arrive {
-  0% { opacity: 0; transform: translateY(18px); }
-  35% { opacity: 0.5; }
-  100% { opacity: 0.12; transform: translateY(0); }
+@keyframes arcade-pixels-arrive {
+  0% { opacity: 0; transform: translateY(24px); }
+  45% { opacity: 0.6; }
+  100% { opacity: 0.2; transform: translateY(0); }
 }
 
-@keyframes portal-boot-arrive {
-  from { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
+@keyframes player-ready {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.85); }
   to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 

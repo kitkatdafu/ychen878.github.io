@@ -1,5 +1,5 @@
 ---
-title: "Future Interface"
+title: "Arcade Mode"
 type: "future"
 url: "/future/"
 build:

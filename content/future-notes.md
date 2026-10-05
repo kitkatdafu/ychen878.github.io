@@ -1,5 +1,5 @@
 ---
-title: "Field Logs"
+title: "Strategy Guides"
 type: "future"
 layout: "notes"
 url: "/future/notes/"

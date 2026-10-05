@@ -119,20 +119,45 @@
 
     let width = 0;
     let height = 0;
-    let nodes = [];
+    let stars = [];
     let frame = 0;
     let running = false;
+    let tick = 0;
     const pointer = { x: -1000, y: -1000 };
+    const palette = ["#29f7f0", "#ff3cac", "#ffe75c", "#8cff3f", "#fff8df"];
 
-    const makeNodes = () => {
-      const count = Math.min(62, Math.max(22, Math.floor((width * height) / 25_000)));
-      nodes = Array.from({ length: count }, () => ({
+    const invader = [
+      "00100100",
+      "00011000",
+      "00111100",
+      "01111110",
+      "11111111",
+      "10111101",
+      "10100101",
+      "00100100",
+    ];
+
+    const makeStars = () => {
+      const count = Math.min(92, Math.max(30, Math.floor((width * height) / 18_000)));
+      stars = Array.from({ length: count }, (_, index) => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.15,
-        vy: (Math.random() - 0.5) * 0.15,
-        size: Math.random() > 0.82 ? 1.8 : 1,
+        speed: 0.18 + Math.random() * 0.55,
+        size: Math.random() > 0.76 ? 3 : 2,
+        color: palette[index % palette.length],
+        phase: Math.floor(Math.random() * 8),
       }));
+    };
+
+    const drawSprite = (x, y, scale, color) => {
+      context.fillStyle = color;
+      invader.forEach((row, rowIndex) => {
+        [...row].forEach((pixel, columnIndex) => {
+          if (pixel === "1") {
+            context.fillRect(x + columnIndex * scale, y + rowIndex * scale, scale, scale);
+          }
+        });
+      });
     };
 
     const resize = () => {
@@ -144,45 +169,46 @@
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
-      makeNodes();
+      context.imageSmoothingEnabled = false;
+      makeStars();
       if (reducedMotion) draw(false);
     };
 
     const draw = (advance = true) => {
       context.clearRect(0, 0, width, height);
 
-      nodes.forEach((node, index) => {
+      stars.forEach((star, index) => {
         if (advance) {
-          node.x += node.vx;
-          node.y += node.vy;
-
-          const pointerDistance = Math.hypot(node.x - pointer.x, node.y - pointer.y);
-          if (pointerDistance < 130 && pointerDistance > 0) {
-            node.x += ((node.x - pointer.x) / pointerDistance) * 0.12;
-            node.y += ((node.y - pointer.y) / pointerDistance) * 0.12;
+          star.y += star.speed;
+          const pointerDistance = Math.hypot(star.x - pointer.x, star.y - pointer.y);
+          if (pointerDistance < 110 && pointerDistance > 0) {
+            star.x += ((star.x - pointer.x) / pointerDistance) * 0.6;
           }
-
-          if (node.x < -10) node.x = width + 10;
-          if (node.x > width + 10) node.x = -10;
-          if (node.y < -10) node.y = height + 10;
-          if (node.y > height + 10) node.y = -10;
+          if (star.x < -8) star.x = width + 8;
+          if (star.x > width + 8) star.x = -8;
+          if (star.y > height + 8) {
+            star.y = -8;
+            star.x = Math.random() * width;
+          }
         }
 
-        context.fillStyle = index % 9 === 0 ? "rgba(255,107,92,0.72)" : "rgba(124,246,179,0.62)";
-        context.fillRect(node.x, node.y, node.size, node.size);
-
-        for (let otherIndex = index + 1; otherIndex < nodes.length; otherIndex += 1) {
-          const other = nodes[otherIndex];
-          const distance = Math.hypot(node.x - other.x, node.y - other.y);
-          if (distance > 118) continue;
-          context.strokeStyle = `rgba(124,246,179,${0.11 * (1 - distance / 118)})`;
-          context.lineWidth = 0.5;
-          context.beginPath();
-          context.moveTo(node.x, node.y);
-          context.lineTo(other.x, other.y);
-          context.stroke();
+        const visible = reducedMotion || (tick + star.phase + index) % 8 > 1;
+        if (!visible) return;
+        context.globalAlpha = 0.3 + star.speed;
+        context.fillStyle = star.color;
+        context.fillRect(Math.round(star.x), Math.round(star.y), star.size, star.size);
+        if (star.size === 3) {
+          context.globalAlpha = 0.18;
+          context.fillRect(Math.round(star.x), Math.round(star.y - 8), star.size, 6);
         }
       });
+
+      context.globalAlpha = 0.12;
+      const march = reducedMotion ? 0 : (Math.floor(tick / 14) % 14) * 6;
+      drawSprite(28 + march, Math.max(90, height * 0.16), 3, palette[1]);
+      drawSprite(width - 110 - march, Math.max(190, height * 0.32), 2, palette[0]);
+      context.globalAlpha = 1;
+      if (advance) tick += 1;
     };
 
     const animate = () => {

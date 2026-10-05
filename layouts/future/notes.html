@@ -1,26 +1,26 @@
 {{ define "main" }}
   <div class="site-shell notes-reader-shell" id="top">
     <header class="top-rail" data-reveal>
-      <a class="wordmark" href="{{ "/future/" | relURL }}" aria-label="Return to Yi Chen future interface">
-        <span class="wordmark__pixel" aria-hidden="true">YC</span>
-        <span>RESEARCH NODE / 878</span>
+      <a class="wordmark" href="{{ "/future/" | relURL }}" aria-label="Return to Yi Chen arcade interface">
+        <span class="wordmark__pixel" aria-hidden="true">1UP</span>
+        <span>YC ARCADE / 878</span>
       </a>
 
-      <div class="system-status" aria-label="System status: online">
+      <div class="system-status" aria-label="Strategy guide archive status: ready">
         <span class="status-light" aria-hidden="true"></span>
-        <span>ARCHIVE ONLINE</span>
+        <span>GUIDES READY</span>
         <time data-local-time>--:-- CST</time>
       </div>
 
       <nav class="future-nav" aria-label="Future interface navigation">
-        <a href="{{ "/future/#research" | relURL }}">Research</a>
-        <a href="{{ "/future/#archive" | relURL }}">Archive</a>
-        <a href="{{ "/future/#projects" | relURL }}">Projects</a>
-        <a class="is-active" href="#notes-index" aria-current="page">Notes</a>
+        <a href="{{ "/future/#research" | relURL }}">Scores</a>
+        <a href="{{ "/future/#archive" | relURL }}">Papers</a>
+        <a href="{{ "/future/#projects" | relURL }}">Stages</a>
+        <a class="is-active" href="#notes-index" aria-current="page">Saves</a>
       </nav>
 
       <a class="classic-link" href="{{ "/" | relURL }}">
-        <span aria-hidden="true">←</span> Classic
+        <span aria-hidden="true">←</span> Exit game
       </a>
     </header>
 
@@ -28,20 +28,20 @@
 
     <main id="main-content" class="reader-main">
       <section class="reader-hero" aria-labelledby="reader-title" data-reveal>
-        <a class="reader-back" href="{{ "/future/#notes" | relURL }}">← Return to interface</a>
-        <p class="eyebrow"><span>06</span> Decrypted working set</p>
-        <h1 id="reader-title">Field<br><em>logs.</em></h1>
+        <a class="reader-back" href="{{ "/future/#notes" | relURL }}">← Return to stage select</a>
+        <p class="eyebrow"><span>EX</span> Bonus stage // Player manuals</p>
+        <h1 id="reader-title">Strategy<br><em>guides.</em></h1>
         <p>
           Working notes on machine learning, optimization, and systems.
-          Select a record from the index and read it without leaving the future interface.
+          Choose a save slot and read without leaving arcade mode.
         </p>
       </section>
 
       {{ with .Site.GetPage "/notes" }}
         <div class="reader-layout">
           <aside class="reader-index" id="notes-index" data-reveal>
-            <p class="reader-index__label">Log index / {{ len .Pages }} records</p>
-            <nav aria-label="Field log index">
+            <p class="reader-index__label">Save select / {{ len .Pages }} slots</p>
+            <nav aria-label="Strategy guide index">
               {{ range $index, $note := .Pages.ByDate.Reverse }}
                 <a href="#note-{{ $note.File.ContentBaseName }}">
                   <span>N-{{ printf "%02d" (add $index 1) }}</span>
@@ -52,7 +52,7 @@
             </nav>
           </aside>
 
-          <section class="reader-documents" aria-label="Field log documents">
+          <section class="reader-documents" aria-label="Strategy guide documents">
             {{ range $index, $note := .Pages.ByDate.Reverse }}
               {{ $slug := $note.File.ContentBaseName }}
               {{ $content := $note.Content }}
@@ -72,7 +72,7 @@
               <article class="future-note" id="note-{{ $slug }}" data-reveal>
                 <header class="future-note__header">
                   <div>
-                    <p>LOG N-{{ printf "%02d" (add $index 1) }}</p>
+                    <p>SAVE N-{{ printf "%02d" (add $index 1) }}</p>
                     <h2>{{ $note.Title }}</h2>
                   </div>
                   <div class="future-note__meta">
@@ -80,7 +80,7 @@
                   </div>
                 </header>
                 <div class="future-prose">{{ $content | safeHTML }}</div>
-                <a class="future-note__top" href="#notes-index">Back to log index ↑</a>
+                <a class="future-note__top" href="#notes-index">Back to save select ↑</a>
               </article>
             {{ end }}
           </section>
@@ -90,14 +90,14 @@
 
     <footer class="future-footer reader-footer" data-reveal>
       <div>
-        <p class="future-footer__mark">YC<span>/</span>LOG</p>
-        <p>End of decrypted working set.</p>
+        <p class="future-footer__mark">GAME<span>/</span>ON</p>
+        <p>Strategy guide complete. Continue?</p>
       </div>
       <div class="future-footer__links">
-        <a href="{{ "/future/" | relURL }}">Future interface</a>
+        <a href="{{ "/future/" | relURL }}">Arcade home</a>
         <a href="mailto:yi.chen@wisc.edu">yi.chen@wisc.edu</a>
         <a href="https://github.com/kitkatdafu">GitHub</a>
-        <a href="{{ "/" | relURL }}">Classic interface</a>
+        <a href="{{ "/" | relURL }}">Exit game</a>
       </div>
       <p class="future-footer__copy">Copyleft (ↄ) {{ now.Format "2006" }} Yi Chen</p>
     </footer>
