@@ -1,12 +1,13 @@
 <footer>
   <p>Copyleft (ↄ) {{ now.Format "2006"}} Yi Chen</p>
-  <p><a href="mailto: yi.chen@wisc.edu">yi.chen@wisc.edu</a></p>
+  <p><a href="mailto:yi.chen@wisc.edu">yi.chen@wisc.edu</a></p>
 </footer>
 
 <script>
   MathJax = {
     tex: {
       inlineMath: [['$', '$'], ['\\(', '\\)']],
+      processEscapes: true,
       macros: {
         vec: ["\\mathbf{#1}", 1],
         vx: "\\vec{x}",
@@ -16,10 +17,9 @@
         st: "\\textrm{subject to:}"
       }
     },
-    svg: {
-      fontCache: 'global'
+    chtml: {
+      adaptiveCSS: true
     }
   };
 </script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

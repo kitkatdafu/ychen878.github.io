@@ -6,6 +6,15 @@ theme = 'simple'
 [security]
 allowContent = ['^text/.*$']
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)'], ['$', '$']]
+
 [menu]
 [[menu.main]]
 name = "Home"
@@ -16,10 +25,14 @@ name = "Notes"
 url = "/notes/"
 weight = 2
 [[menu.main]]
+name = "Algorithms"
+url = "/categories/algorithms/"
+weight = 3
+[[menu.main]]
 name = "Publications"
 url = "/publications/"
-weight = 3
+weight = 4
 [[menu.main]]
 name = "Projects"
 url = "/projects/"
-weight = 4
+weight = 5

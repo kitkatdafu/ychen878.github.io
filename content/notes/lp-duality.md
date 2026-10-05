@@ -1,20 +1,21 @@
 ---
 title: "LP Duality"
 date: 2023-02-28
-tags: ["optimization"]
+categories: ["Optimization"]
+tags: ["optimization", "linear programming", "duality"]
 ---
 
-# Estimating LP bounds
+## Estimating LP bounds
 
 Given an optimization problem
 $$
-\begin{align}
+\begin{aligned}
 \max_{f, s} &\quad 12f + 9s \\
 \st &\quad 4f + 2s \leq 4800 \\
 &\quad f + s \leq 1750 \\
 &\quad 0 \leq f \leq 1000 \\
 &\quad 0 \leq s \leq 1500 \\
-\end{align}
+\end{aligned}
 $$
 Suppose the maximum profit is $p^\star$. How can we bound $p^\star$? The lower bound of $p^\star$ can be found by picking any feasible point (since maximization). For example,
 $\{f=0, s=0\}$ is feasible. Therefore, $p^\star \geq 12f + 9s = 0$. Since any feasible point yields a lower bound of $p^\star$ and $p^\star$ itself is yielded by an feasible point, then finding the largest lower bound of $p^\star$ is equivalent to solving the LP.
@@ -41,16 +42,15 @@ p^\star \leq 4800 \lambda_{1} + 1750 \lambda_{2} + 1000 \lambda_{3} + 1500 \lamb
 $$
 Finding the smallest upper bound would be yet another LP, i.e.
 $$
-\begin{align}
+\begin{aligned}
 \min_{\lambda_{1}, \lambda_{2}, \lambda_{3}, \lambda_{4}} &\quad 4800 \lambda_{1} + 1750 \lambda_{2} + 1000 \lambda_{3} + 1500 \lambda_{4}. \\
-\st &\quad 4f + 2s \leq 4800 \\
-&\quad 4\lambda_{1} + \lambda_{2} + \lambda_{3} - 12 \geq 0 \\
+\st &\quad 4\lambda_{1} + \lambda_{2} + \lambda_{3} - 12 \geq 0 \\
 &\quad 2\lambda_{1} + \lambda_{2} + \lambda_{4} - 9 \geq 0 \\
 &\quad \lambda_{1}, \lambda_{2}, \lambda_{3}, \lambda_{4} \geq 0 \\
-\end{align}.
+\end{aligned}.
 $$
 
-# Primal and Dual
+## Primal and Dual
 
 The first maximization problem is called the primal problem. The second minimization problem is called the dual problem. The $\lambda$'s in the dual problem are called the dual variable, and there is a dual variable corresponding to each constraint in the primal problem. Similarly, each constraint in the dual problem corresponds to a primal variable as well. Let $p^\star$ and $d^\star$ denote the optimal for the primal and the dual respectively. Then, they should satisfy the following inequality
 $$
@@ -58,19 +58,19 @@ $$
 $$
 In general, a primal problem $(P)$ is stated as
 $$
-\begin{align}
+\begin{aligned}
 \max_{x} &\quad c^Tx \\
 \st &\quad Ax \leq b \\
 &\quad x \geq 0
-\end{align}
+\end{aligned}
 $$
 and a dual problem $(D)$ is stated as
 $$
-\begin{align}
+\begin{aligned}
 \min &\quad b^T\lambda \\
 \st &\quad A^T\lambda \geq c \\
 &\quad \lambda \geq 0
-\end{align}.
+\end{aligned}.
 $$
 If $x$ and $\lambda$ are feasible points of $(P)$ and $(D)$, then
 $$
@@ -78,7 +78,7 @@ c^Tx \leq p^\star \leq d^\star \leq b^T\lambda.
 $$
 If $p^\star$ and $d^\star$ exist and are finite, then $p^\star = d^\star$. This property is known as strong duality.
 
-# Properties of LP Duality
+## Properties of LP Duality
 
 1. $(P)$ and $(D)$ are both feasible and bounded, and $p^\star = d^\star$
 2. $(P)$ is unbounded and $(D)$ is infeasible, $p^\star = \infty$ and $d^\star = \infty$
@@ -86,10 +86,10 @@ If $p^\star$ and $d^\star$ exist and are finite, then $p^\star = d^\star$. This 
 4. $(P)$ is infeasible and $(D)$ is infeasible, $p^\star = -\infty$ and $d^\star = \infty$
 5. The dual of the dual is the primal
 
-# Duality and Sensitivity
+## Duality and Sensitivity
 
 Duality is related to the idea of sensitivity: how much each of your constraints affect the optimal cost.
 
-# Complementary Slackness
+## Complementary Slackness
 
 At the optimal point, some inequality constraints become tight. Some inequality constraints may remain loose, even at optimality. These constraints have slack. Either a primal constraint is tight or its dual variable is zero. Either a dual constraint is tight or its primal variable is zero. These properties are called complementary slackness. We can use complementary slackness to check if a proposed point is optimal or not.

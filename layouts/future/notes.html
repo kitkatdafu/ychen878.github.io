@@ -59,16 +59,18 @@
               {{ $content = replaceRE `<p>:PROPERTIES:\s*:CUSTOM_ID:[^<]*:END:</p>` `` $content }}
               {{ $content = replaceRE `id="([^"]+)"` (printf `id="note-%s-${1}"` $slug) $content }}
               {{ $content = replaceRE `href="#([^"]+)"` (printf `href="#note-%s-${1}"` $slug) $content }}
-              {{ $content = replaceRE `<h5([^>]*)>` `<h6${1}>` $content }}
-              {{ $content = replaceRE `</h5>` `</h6>` $content }}
-              {{ $content = replaceRE `<h4([^>]*)>` `<h6${1}>` $content }}
-              {{ $content = replaceRE `</h4>` `</h6>` $content }}
-              {{ $content = replaceRE `<h3([^>]*)>` `<h5${1}>` $content }}
-              {{ $content = replaceRE `</h3>` `</h5>` $content }}
-              {{ $content = replaceRE `<h2([^>]*)>` `<h4${1}>` $content }}
-              {{ $content = replaceRE `</h2>` `</h4>` $content }}
-              {{ $content = replaceRE `<h1([^>]*)>` `<h3${1}>` $content }}
-              {{ $content = replaceRE `</h1>` `</h3>` $content }}
+              {{ if eq $note.File.Ext "md" }}
+                {{ $content = replaceRE `<h5([^>]*)>` `<h6${1}>` $content }}
+                {{ $content = replaceRE `</h5>` `</h6>` $content }}
+                {{ $content = replaceRE `<h4([^>]*)>` `<h5${1}>` $content }}
+                {{ $content = replaceRE `</h4>` `</h5>` $content }}
+                {{ $content = replaceRE `<h3([^>]*)>` `<h4${1}>` $content }}
+                {{ $content = replaceRE `</h3>` `</h4>` $content }}
+                {{ $content = replaceRE `<h2([^>]*)>` `<h3${1}>` $content }}
+                {{ $content = replaceRE `</h2>` `</h3>` $content }}
+                {{ $content = replaceRE `<h1([^>]*)>` `<h3${1}>` $content }}
+                {{ $content = replaceRE `</h1>` `</h3>` $content }}
+              {{ end }}
               <article class="future-note" id="note-{{ $slug }}" data-reveal>
                 <header class="future-note__header">
                   <div>

@@ -1,24 +1,22 @@
-#+title: Nuclear Norm via SDP
-#+date: 2023-03-02
-#+category: notes
-#+tags: ml
+---
+title: "Nuclear Norm via Semidefinite Programming"
+date: 2023-03-02
+categories: ["Machine Learning"]
+tags: ["machine learning", "optimization", "matrix analysis", "semidefinite programming"]
+---
 
-:PROPERTIES:
-:CUSTOM_ID: matrix-norm
-:END:
-
-# Matrix norms
+## Matrix norms
 
 Given a matrix $X \in \mathbb{R}^{m \times n}$, $\sigma_{i}(X)$ denotes the $i$-th largest singular value of $X$ and is equal to the square root of the $i$-th largest eigenvalue of $XX'$. The rank of $X$, denoted as $\mathrm{rank}(X) = r$ is the number of non-zero singular values.
 
-## Inner Product
+### Inner Product
 
 Given $X, Y \in \mathbb{R}^{m \times n}$, the inner product between $X$ and $Y$, denoted by $\langle X, Y\rangle$, is defined as
 $$
 \langle X, Y \rangle := \mathrm{Tr}(X'Y) = \sum_{i=1}^m \sum_{j=1}^n X_{ij}Y_{ij} = \mathrm{Tr}(Y'X).
 $$
 
-## Frobenius Norm
+### Frobenius Norm
 
 The norm associated with the inner product is called Frobenius norm:
 $$
@@ -26,7 +24,7 @@ $$
 $$
 The Frobenius norm of a matrix $X$ is also equal to the square root of the sum of the squares of the singular values of $X$:
 $$
-\begin{align}
+\begin{aligned}
 \norm{X}_{F} &= \sqrt{ \mathrm{Tr}(X'X) } \\
 &= \sqrt{ Tr(UDV'VD'U) }  \\
 &= \sqrt{ \mathrm{Tr}(UDD'U') }  \\
@@ -34,24 +32,24 @@ $$
 &= \norm{D}_{F} \\
 &= \sqrt{ \sum_{i=1}^r \sum_{j=1}^r D_{ij}^2} \\
 &= \sqrt{ \sum_{i=1}^r \sigma_{i}(X)^2}.
-\end{align}
+\end{aligned}
 $$
 
-## Operator Norm, Induced 2-norm, Spectral Norm
+### Operator Norm, Induced 2-norm, Spectral Norm
 
 The operator norm of a matrix is the largest singular value
 $$
 \norm{X} := \sigma_{1}(X).
 $$
 
-## Nuclear Norm
+### Nuclear Norm
 
 The nuclear norm of a matrix is the sum of its singular values:
 $$
 \norm{X}_{*} := \sum_{i=1}^r \sigma_{i}(X).
 $$
 
-# Dual Norms
+## Dual Norms
 
 For any given norm $\norm{}_{?}$ in an inner product space, there exists a dual norm $\norm{}_{d}$ defined as
 $$
@@ -61,7 +59,7 @@ Moreover, the dual norm of the operator norm/induced 2-norm/spectral norm is the
 $$
 \norm{X}_{*} = \sup \{ \mathrm{Tr}(X'Y) : \norm{Y} \leq 1\}.
 $$
-### Proof
+#### Proof
 
 We first use the fact that given a matrix $X \in \mathbb{R}^{m \times n}$ and $t > 0$,
 $$
@@ -78,11 +76,11 @@ tI_{m} & X \\
 X' & tI_{n}
 \end{bmatrix} \succeq 0.
 $$
-This mean that we find the value of $\norm{X}$ via optimization (SDP):
+This means that we can find the value of $\norm{X}$ via optimization (SDP):
 $$
 \norm{X} = \inf \{ t : \begin{bmatrix}
 tI_{m} & X \\
-X' & tI_{n} 
+X' & tI_{n}
 \end{bmatrix} \succeq 0 \}.
 $$
 We can rewrite the definition of dual norm
@@ -91,16 +89,16 @@ $$
 $$
 as
 $$
-\begin{align}
+\begin{aligned}
 \norm{X}_{d} := \sup_{Y} &\quad \mathrm{Tr}(X'Y) \\
 \mathrm{s.t.} &\quad \norm{Y} \leq 1.
-\end{align}
+\end{aligned}
 $$
 Now, let $X = UDV'$ be the singular value decomposition of  $X$ whose rank is $r$. By definition
 $$
 U \in \mathbb{R}^{m \times r}, D \in \mathbb{R}^{r \times r}, V \in \mathbb{R}^{n \times r}.
 $$
-Let $Y := UV'$. Then, 
+Let $Y := UV'$. Then,
 $$
 \norm{Y} = \norm{UV'} = \norm{U I_{r} V'} = 1
 $$
@@ -110,7 +108,7 @@ $$
 $$
 This means that $Y := UV'$ is feasible for the optimization model above. If $Y := UV'$ is the optimal solution, then $\norm{X}_{d} = \norm{X}_{*}$. If $Y := UV'$ is not the optimal solution, then there exist other $Y$ such that $\mathrm{Tr}(X'Y) > \norm{X}_{*}$. Hence,
 $$
-\norm{X}_d \geq \norm{X}_{*}.
+\norm{X}_{d} \geq \norm{X}_{*}.
 $$
 We now need to show that
 $$
@@ -118,23 +116,23 @@ $$
 $$
 We first re-write the definition of dual form into a semi-definite program:
 $$
-\begin{align}
+\begin{aligned}
 \norm{X}_{d} := \sup_{Y} &\quad \mathrm{Tr}(X'Y) \\
 \mathrm{s.t.} &\quad \begin{bmatrix}
-I_{m} & X \\
-X' & I_{n}
+I_{m} & Y \\
+Y' & I_{n}
 \end{bmatrix} \succeq 0.
-\end{align}
+\end{aligned}
 $$
 The following program is the dual of the semi-definite program above:
 $$
-\begin{align}
-\inf_{W_{1}, W_{2}} &\quad\frac{1}{2} (\mathrm{Tr}(W_{1}) + \mathrm{Tr}(W_{2})) \\ \\
+\begin{aligned}
+\inf_{W_{1}, W_{2}} &\quad\frac{1}{2} (\mathrm{Tr}(W_{1}) + \mathrm{Tr}(W_{2})) \\
 \mathrm{s.t.} &\quad \begin{bmatrix}
 W_{1} & X \\
 X' & W_{2}
 \end{bmatrix} \succeq 0.
-\end{align}
+\end{aligned}
 $$
 If $W_{1} := UDU'$ and $W_{2} := VDV'$. Then,  $(W_{1}, W_{2})$ is feasible for the dual, since
 $$
@@ -157,7 +155,7 @@ Thus, the objective is
 $$
 \frac{1}{2}(\mathrm{Tr}(D) + \mathrm{Tr}(D)) = \mathrm{Tr}(D) = \norm{X}_{*}.
 $$
-Weather or not $(X, W_{1}, X_{2})$ is the optimal solution, we showed that
+Whether or not $(W_{1}, W_{2})$ is the optimal solution, we showed that
 $$
 \norm{X}_{*} \geq \norm{X}_{d}.
 $$
@@ -167,7 +165,7 @@ $$
 $$
 This result shows that we can compute the nuclear norm via SDP.
 
-# References
+## References
 
 ```
 Recht, Benjamin, Maryam Fazel, and Pablo A. Parrilo. "Guaranteed minimum-rank solutions of linear matrix equations via nuclear norm minimization." _SIAM review_ 52.3 (2010): 471-501.

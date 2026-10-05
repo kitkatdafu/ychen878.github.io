@@ -253,10 +253,10 @@ body.portal-opening .portal-transition__boot {
 }
 
 @keyframes legacy-crt-collapse {
-  0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-  45% { opacity: 1; transform: translate(-50%, -50%) scaleX(1) scaleY(0.035); }
-  75% { opacity: 0.9; transform: translate(-50%, -50%) scaleX(0.08) scaleY(0.035); }
-  100% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+  0% { opacity: 1; transform: scale(1); }
+  45% { opacity: 1; transform: scaleX(1) scaleY(0.035); }
+  75% { opacity: 0.9; transform: scaleX(0.08) scaleY(0.035); }
+  100% { opacity: 0; transform: scale(0); }
 }
 
 @keyframes legacy-footer-fade {

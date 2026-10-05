@@ -48,6 +48,7 @@
         window.MathJax = {
           tex: {
             inlineMath: [["$", "$"], ["\\(", "\\)"]],
+            processEscapes: true,
             macros: {
               vec: ["\\mathbf{#1}", 1],
               vx: "\\vec{x}",
@@ -57,7 +58,7 @@
               st: "\\textrm{subject to:}"
             }
           },
-          svg: { fontCache: "global" }
+          chtml: { adaptiveCSS: true }
         };
       </script>
       <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

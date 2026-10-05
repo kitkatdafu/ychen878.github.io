@@ -1,12 +1,13 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
-{{ range .Pages.ByPublishDate.Reverse }}
-<p>
-    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-    {{ partial "metadata.html" . }}
-    <a href="{{ .RelPermalink }}">
-        <p>{{ .Summary }}</p>
-    </a>
-</p>
-{{ end }}
+<section class="page-list" aria-labelledby="page-list-title">
+    <h1 id="page-list-title">{{ .Title }}</h1>
+    {{ range .Pages.ByPublishDate.Reverse }}
+    <article class="page-list__item">
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        {{ partial "metadata.html" . }}
+        <p class="page-list__summary">{{ .Summary | plainify }}</p>
+        <a class="page-list__read" href="{{ .RelPermalink }}" aria-label="Read {{ .Title }}">Read note →</a>
+    </article>
+    {{ end }}
+</section>
 {{ end }}

@@ -48,7 +48,9 @@ about the partition. The centroid for a cluster $C$ is the average of
 all observations in the cluster, namely
 $$
 \mu = \frac{1}{|C|}\sum_{i \in C} x_i
-$$, where $x_i$ is the
+$$
+
+where $x_i$ is the
 $i^\text{th}$ observation in the dataset.
 
 All we need to do is to calculate the mean (using =np.mean()= with
@@ -125,7 +127,7 @@ def kmeans(dataset: np.ndarray, partition: list):
 
         u = find_centroids(dataset, partition)
         partition = new_partition(dataset, u)
-    
+
     print("\n\nFinal Centroids:")
     print(u)
     print("Final Partition:")

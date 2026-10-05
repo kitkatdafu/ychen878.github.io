@@ -45,13 +45,21 @@ objective function to be
 \(\text{Cut}(V_1, V_2) = \sum_{i \in V_1, j \in V_2} w_{ij}\), then we
 would like to have split \(V\) so that the \(\text{Cut}\) is minimized.
 Of course, such a greedy approach could lead to a less ideal solution:
-\(|V_1| << |V_2| (|V_2| = |V| - 1)\). We want to balance the cardinality
+\(|V_1| \ll |V_2| (|V_2| = |V| - 1)\). We want to balance the cardinality
 of \(V_1\) and \(V_2\). A way to balance it is to use "balanced" cut
-like: \[
+like:
+
+\[
 \text{Ratio Cut}(V_1, V_2) = \frac{\text{Cut}(V_1, V_2)}{|V_1|} + \frac{\text{Cut}(V_1, V_2)}{|V_2|},
-\] or \[
+\]
+
+or
+
+\[
 \text{Normalized Cut}(V_1, V_2) = \frac{\text{Cut}(V_1, V_2)}{\sum_{i \in V_1} d_i} + \frac{\text{Cut}(V_1, V_2)}{\sum_{j \in V_2} d_j},
-\] where \(d_i = \sum_j w_{ij}\).
+\]
+
+where \(d_i = \sum_j w_{ij}\).
 
 **** Spectral Clustering
 :PROPERTIES:
